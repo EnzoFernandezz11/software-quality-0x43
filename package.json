@@ -1,0 +1,10 @@
+{
+  "name": "sof-eng-2026-grupo-nueve",
+  "private": true,
+  "scripts": {
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "husky": "^9.1.0"
+  }
+}

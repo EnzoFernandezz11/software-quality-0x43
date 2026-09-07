@@ -1,0 +1,435 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-inter), "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono);
+  --font-heading: var(--font-jakarta), "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+:root {
+  --background: oklch(0.985 0.002 260);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.37 0.14 265);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.96 0.01 260);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.96 0.005 260);
+  --muted-foreground: oklch(0.50 0.02 260);
+  --accent: oklch(0.96 0.01 260);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.91 0.01 260);
+  --input: oklch(0.91 0.01 260);
+  --ring: oklch(0.55 0.12 265);
+  --chart-1: oklch(0.60 0.16 265);
+  --chart-2: oklch(0.65 0.18 160);
+  --chart-3: oklch(0.62 0.20 45);
+  --chart-4: oklch(0.55 0.22 310);
+  --chart-5: oklch(0.58 0.15 200);
+  --radius: 0.625rem;
+  --sidebar: oklch(0.975 0.005 260);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.37 0.14 265);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.96 0.01 260);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.91 0.01 260);
+  --sidebar-ring: oklch(0.55 0.12 265);
+
+  /* Chart semantic colors */
+  --color-chart-raw: oklch(0.65 0.18 60);
+  --color-chart-filtered: oklch(0.60 0.18 160);
+  --color-chart-motion: oklch(0.55 0.20 265);
+  --color-chart-alert: oklch(0.60 0.22 25);
+
+  /* Status colors */
+  --color-success-bg: oklch(0.95 0.05 155);
+  --color-success-fg: oklch(0.35 0.12 155);
+  --color-danger-bg: oklch(0.95 0.04 25);
+  --color-danger-fg: oklch(0.40 0.16 25);
+  --color-warning-bg: oklch(0.95 0.05 75);
+  --color-warning-fg: oklch(0.40 0.14 75);
+
+  /* Title accent gradient */
+  --title-accent-from: oklch(0.50 0.20 265);
+  --title-accent-to: oklch(0.55 0.25 290);
+}
+
+.dark {
+  --background: oklch(0.13 0.015 265);
+  --foreground: oklch(0.93 0.005 260);
+  --card: oklch(0.17 0.02 265);
+  --card-foreground: oklch(0.93 0.005 260);
+  --popover: oklch(0.17 0.02 265);
+  --popover-foreground: oklch(0.93 0.005 260);
+  --primary: oklch(0.65 0.18 265);
+  --primary-foreground: oklch(0.13 0.015 265);
+  --secondary: oklch(0.22 0.025 265);
+  --secondary-foreground: oklch(0.93 0.005 260);
+  --muted: oklch(0.22 0.02 265);
+  --muted-foreground: oklch(0.65 0.03 260);
+  --accent: oklch(0.22 0.025 265);
+  --accent-foreground: oklch(0.93 0.005 260);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.55 0.15 265);
+  --chart-1: oklch(0.65 0.18 265);
+  --chart-2: oklch(0.65 0.18 160);
+  --chart-3: oklch(0.62 0.20 45);
+  --chart-4: oklch(0.60 0.22 310);
+  --chart-5: oklch(0.58 0.15 200);
+  --sidebar: oklch(0.17 0.02 265);
+  --sidebar-foreground: oklch(0.93 0.005 260);
+  --sidebar-primary: oklch(0.65 0.18 265);
+  --sidebar-primary-foreground: oklch(0.93 0.005 260);
+  --sidebar-accent: oklch(0.22 0.025 265);
+  --sidebar-accent-foreground: oklch(0.93 0.005 260);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.55 0.15 265);
+
+  --color-chart-raw: oklch(0.72 0.16 60);
+  --color-chart-filtered: oklch(0.68 0.16 160);
+  --color-chart-motion: oklch(0.65 0.18 265);
+  --color-chart-alert: oklch(0.68 0.20 25);
+
+  --color-success-bg: oklch(0.25 0.06 155);
+  --color-success-fg: oklch(0.75 0.12 155);
+  --color-danger-bg: oklch(0.25 0.05 25);
+  --color-danger-fg: oklch(0.75 0.14 25);
+  --color-warning-bg: oklch(0.25 0.05 75);
+  --color-warning-fg: oklch(0.75 0.12 75);
+
+  --title-accent-from: oklch(0.65 0.22 265);
+  --title-accent-to: oklch(0.70 0.25 290);
+}
+
+/* ── Suppress Next.js dev-mode overlays ── */
+#__next-build-watcher,
+.__next-error-overlay {
+  display: none !important;
+}
+
+/* ══════════════════════════════════════════
+   Typography — Plus Jakarta Sans + Inter
+   ══════════════════════════════════════════ */
+
+/* Title with gradient accent on the second word */
+.dashboard-title {
+  font-family: var(--font-jakarta), "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 800;
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  color: var(--foreground);
+}
+
+.dashboard-title-accent {
+  background: linear-gradient(135deg, var(--title-accent-from), var(--title-accent-to));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Icon ring next to the title */
+.dashboard-icon-ring {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.75rem;
+  background: linear-gradient(135deg, var(--title-accent-from), var(--title-accent-to));
+  color: white;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px oklch(0.50 0.18 265 / 0.25);
+}
+
+.section-label {
+  font-family: var(--font-jakarta), "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted-foreground);
+}
+
+.card-title {
+  font-family: var(--font-jakarta), "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--foreground);
+}
+
+.pill-badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 9999px;
+  padding: 0.15rem 0.55rem;
+  font-family: var(--font-inter), "Inter", ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: var(--muted);
+  color: var(--muted-foreground);
+  border: 1px solid var(--border);
+}
+
+/* KPI values */
+.kpi-value {
+  font-family: var(--font-jakarta), "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 800;
+  font-size: 1.65rem;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: var(--foreground);
+}
+
+.kpi-detail {
+  font-family: var(--font-inter), "Inter", ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: var(--muted-foreground);
+  letter-spacing: 0.01em;
+}
+
+/* Sidebar brand */
+.brand-label {
+  font-family: var(--font-jakarta), "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 800;
+  font-size: 1.05rem;
+  letter-spacing: -0.02em;
+  color: var(--foreground);
+}
+
+.brand-sublabel {
+  font-family: var(--font-inter), "Inter", ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted-foreground);
+}
+
+/* History page title reuse */
+.dashboard-subtitle {
+  font-family: var(--font-inter), "Inter", ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: var(--muted-foreground);
+  letter-spacing: 0.01em;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-inter), "Inter", ui-sans-serif, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  html {
+    @apply font-sans;
+  }
+}
+
+/* ══════════════════════════════════════════
+   Access Notifications — Keypad events
+   ══════════════════════════════════════════ */
+
+/* ── Error toast: slide-in from right + shake ── */
+.access-toast-enter {
+  animation:
+    accessSlideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    accessShake 0.45s 0.4s ease-in-out;
+}
+
+.access-toast-exit {
+  animation: accessSlideOut 0.3s ease-in forwards;
+}
+
+@keyframes accessSlideIn {
+  from {
+    transform: translateX(120%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes accessSlideOut {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(120%);
+    opacity: 0;
+  }
+}
+
+@keyframes accessShake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  15%,
+  45%,
+  75% {
+    transform: translateX(-3px);
+  }
+  30%,
+  60%,
+  90% {
+    transform: translateX(3px);
+  }
+}
+
+/* ── Toast auto-dismiss progress bar ── */
+.access-toast-progress {
+  animation: accessProgress 4s linear forwards;
+}
+
+@keyframes accessProgress {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0%;
+  }
+}
+
+/* ── Modal overlay fade ── */
+.access-modal-enter {
+  animation: accessFadeIn 0.3s ease-out;
+}
+
+.access-modal-exit {
+  animation: accessFadeOut 0.35s ease-in forwards;
+}
+
+@keyframes accessFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes accessFadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/* ── Modal card scale-in ── */
+.access-modal-card-enter {
+  animation: accessScaleIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes accessScaleIn {
+  from {
+    transform: scale(0.88) translateY(12px);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+/* ── Success icon pulse glow ── */
+.access-success-icon {
+  animation: accessPulseGlow 2.2s ease-in-out infinite;
+}
+
+@keyframes accessPulseGlow {
+  0%,
+  100% {
+    box-shadow: 0 6px 20px oklch(0.50 0.18 265 / 0.35);
+  }
+  50% {
+    box-shadow: 0 6px 28px oklch(0.50 0.18 265 / 0.55);
+  }
+}
+
+/* ── Arrow bounce (mode transition) ── */
+.access-arrow-bounce {
+  animation: accessBounceRight 1.4s ease-in-out infinite;
+}
+
+@keyframes accessBounceRight {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+}
+
+/* ── Dismiss button hover ── */
+.access-dismiss-btn:hover {
+  filter: brightness(1.1);
+  box-shadow: 0 4px 18px oklch(0.50 0.18 265 / 0.4) !important;
+}
+
+.access-dismiss-btn:active {
+  transform: scale(0.97);
+}

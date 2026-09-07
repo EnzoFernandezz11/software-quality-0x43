@@ -1,0 +1,31 @@
+name: Backend CI
+
+on:
+  pull_request:
+    branches: [development]
+    paths:
+      - 'backend/flask/**'
+
+jobs:
+  build-and-test:
+    name: Flask – Lint & Test
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend/flask/final_project
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Lint (flake8)
+        run: flake8 app/ --count --show-source --statistics
+
+      - name: Run tests
+        run: pytest -v

@@ -1,0 +1,105 @@
+# Docker Compose configuration for the Software Engineering Final Project
+# This file defines all the services needed to run the application
+
+services:
+  # PostgreSQL Database Service
+  # Official PostgreSQL image from Docker Hub
+  postgres:
+    image: postgres:16-alpine
+    container_name: soft-eng-postgres
+    restart: unless-stopped
+    
+    # Environment variables loaded from root .env file
+    env_file:
+      - ../.env
+    # Host port 5433 avoids clashing with a local PostgreSQL on 5432.
+    # Keep POSTGRES_PORT in the repo root .env in sync (see .env.example).
+    ports:
+      - "5433:5432"
+    
+    # Volume for data persistence
+    # Database data will survive container restarts
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      # Optional: Add initialization scripts here
+      # - ./init-scripts:/docker-entrypoint-initdb.d
+    
+    # Health check to ensure database is ready
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    
+    # Network configuration
+    networks:
+      - soft-eng-network
+
+  # pgAdmin for database management (GUI tool)
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: soft-eng-pgadmin
+    restart: unless-stopped
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@softeng.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
+    networks:
+      - soft-eng-network
+    depends_on:
+      - postgres
+
+  # Flask Backend Service
+  flask-backend:
+    build:
+      context: ..
+      dockerfile: docker/flask.Dockerfile
+    container_name: soft-eng-flask
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    environment:
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+      - FLASK_APP=main:app
+      - FLASK_DEBUG=1
+      - FLASK_PORT=5000
+    env_file:
+      - ../.env
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - soft-eng-network
+
+  # Frontend Next.js Dashboard Service
+  frontend-dashboard:
+    build:
+      context: ..
+      dockerfile: docker/nextjs.Dockerfile
+      args:
+        - NEXT_PUBLIC_API_URL=http://localhost:5000/api
+    container_name: soft-eng-frontend
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:5000/api
+    env_file:
+      - ../.env
+    depends_on:
+      - flask-backend
+    networks:
+      - soft-eng-network
+
+# Named volumes for data persistence
+volumes:
+  postgres_data:
+    driver: local
+
+# Network configuration
+# All services will communicate through this network
+networks:
+  soft-eng-network:
+    driver: bridge
