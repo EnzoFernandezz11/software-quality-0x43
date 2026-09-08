@@ -1,4 +1,4 @@
-import { formatDateTime, formatChartTime, formatTemperature, formatBooleanStatus, formatMode, cn } from '../utils';
+import { formatDateTime, formatTemperature, formatBooleanStatus, formatMode, cn } from '../utils';
 
 describe('utils.ts', () => {
   describe('cn', () => {

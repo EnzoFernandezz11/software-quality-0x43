@@ -40,10 +40,14 @@ namespace
     //   Step 1 (pick strategy): 'A' = LocalMemory, 'B' = ExternalApi, confirm with '#'.
     //   Step 2 (enter PIN): digits are accumulated and validated with '#'.
     // '*' cancels at any point and restarts the flow from step 1.
-    enum class AuthStep { SelectStrategy, EnterPin };
+    enum class AuthStep
+    {
+        SelectStrategy,
+        EnterPin
+    };
 
     AuthStep authStep = AuthStep::SelectStrategy;
-    String selectedStrategy;  // empty until the user picks A or B
+    String selectedStrategy; // empty until the user picks A or B
     String pinBuffer;
 
     void resetAuthFlow()
@@ -57,38 +61,52 @@ namespace
     void handleKeypadTask()
     {
         const char key = sensorService.readKey();
-        if (key == '\0') return;
+        if (key == '\0')
+            return;
 
-        if (key == '*') {
+        if (key == '*')
+        {
             Serial.println("[Keypad] Flujo cancelado.");
             resetAuthFlow();
             return;
         }
 
-        if (authStep == AuthStep::SelectStrategy) {
-            if (key == 'A') {
+        if (authStep == AuthStep::SelectStrategy)
+        {
+            if (key == 'A')
+            {
                 selectedStrategy = "LocalMemoryAuthStrategy";
                 Serial.println("[Keypad] Estrategia: Local (A). Presione # para confirmar.");
-            } else if (key == 'B') {
+            }
+            else if (key == 'B')
+            {
                 selectedStrategy = "ExternalApiAuthStrategy";
                 Serial.println("[Keypad] Estrategia: External (B). Presione # para confirmar.");
-            } else if (key == '#') {
-                if (selectedStrategy.isEmpty()) {
+            }
+            else if (key == '#')
+            {
+                if (selectedStrategy.isEmpty())
+                {
                     Serial.println("[Keypad] Elija A o B antes de confirmar.");
                     return;
                 }
                 authStep = AuthStep::EnterPin;
                 Serial.println("[Keypad] Ingrese PIN y presione #.");
-            } else {
+            }
+            else
+            {
                 Serial.println("[Keypad] Opcion invalida. Use A (Local) o B (External).");
             }
             return;
         }
 
         // authStep == EnterPin
-        if (key == '#') {
-            if (pinBuffer.isEmpty()) return;
-            Serial.print("[Keypad] Validando PIN con estrategia "); Serial.println(selectedStrategy);
+        if (key == '#')
+        {
+            if (pinBuffer.isEmpty())
+                return;
+            Serial.print("[Keypad] Validando PIN con estrategia ");
+            Serial.println(selectedStrategy);
             const auto result = networkClient.validatePin(pinBuffer, selectedStrategy);
             Serial.println(result.authenticated ? "[Keypad] PIN correcto." : "[Keypad] PIN incorrecto.");
             resetAuthFlow();
@@ -96,10 +114,11 @@ namespace
         }
 
         pinBuffer += key;
-        Serial.print("[Keypad] Tecla: "); Serial.println(key);
+        Serial.print("[Keypad] Tecla: ");
+        Serial.println(key);
     }
 
-}  // namespace
+} // namespace
 
 void setup()
 {
@@ -116,7 +135,7 @@ void setup()
 
 void loop()
 {
-    sensorService.pollMotion();  // sample the PIR every ~100 ms so short pulses aren't missed
+    sensorService.pollMotion(); // sample the PIR every ~100 ms so short pulses aren't missed
     handleTelemetryTask();
     handleKeypadTask();
     delay(DELAY_BETWEEN_TASKS_MS);
