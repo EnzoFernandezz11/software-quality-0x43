@@ -8,22 +8,23 @@
 namespace sensors
 {
 
-// Physical sensor pin assignments
-namespace {
-    constexpr uint8_t PIN_LM35 = 36;  // ADC1_CH0, analog temperature sensor
-    constexpr uint8_t PIN_PIR  = 35;  // digital input, motion sensor
+    // Physical sensor pin assignments
+    namespace
+    {
+        constexpr uint8_t PIN_LM35 = 36; // ADC1_CH0, analog temperature sensor
+        constexpr uint8_t PIN_PIR = 35;  // digital input, motion sensor
 
-    // 4x4 matrix keypad wiring: row and column GPIOs
-    byte rowPins[4] = {12, 14, 27, 26};
-    byte colPins[4] = {25, 32, 19, 33};
-    char keymap[4][4] = {
-        {'1', '2', '3', 'A'},
-        {'4', '5', '6', 'B'},
-        {'7', '8', '9', 'C'},
-        {'*', '0', '#', 'D'},
-    };
-    Keypad teclado = Keypad(makeKeymap(keymap), rowPins, colPins, 4, 4);
-}  // namespace
+        // 4x4 matrix keypad wiring: row and column GPIOs
+        byte rowPins[4] = {12, 14, 27, 26};
+        byte colPins[4] = {25, 32, 19, 33};
+        char keymap[4][4] = {
+            {'1', '2', '3', 'A'},
+            {'4', '5', '6', 'B'},
+            {'7', '8', '9', 'C'},
+            {'*', '0', '#', 'D'},
+        };
+        Keypad teclado = Keypad(makeKeymap(keymap), rowPins, colPins, 4, 4);
+    } // namespace
 
     SensorService::SensorService(const app::AppConfig& config)
         : config_(config)
@@ -32,8 +33,8 @@ namespace {
 
     void SensorService::begin()
     {
-        pinMode(PIN_LM35, INPUT);  // ADC, GPIO 36
-        pinMode(PIN_PIR,  INPUT);  // Digital, GPIO 35
+        pinMode(PIN_LM35, INPUT); // ADC, GPIO 36
+        pinMode(PIN_PIR, INPUT);  // Digital, GPIO 35
     }
 
     void SensorService::pollMotion()
@@ -53,8 +54,8 @@ namespace {
         // LM35: analogReadMilliVolts() applies the ESP32 ADC factory calibration,
         // which corrects the non-linearity in the low range. The LM35 outputs
         // 10 mV per degree C, so temperature = mV / 10.
-        const uint32_t milliVolts  = analogReadMilliVolts(PIN_LM35);
-        const float    temperature = milliVolts / 10.0f;
+        const uint32_t milliVolts = analogReadMilliVolts(PIN_LM35);
+        const float temperature = milliVolts / 10.0f;
 
         // Report any motion latched during the interval and clear the latch for
         // the next one. The pollMotion() call also samples the PIR right now, so
