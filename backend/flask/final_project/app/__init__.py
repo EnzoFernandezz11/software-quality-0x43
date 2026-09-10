@@ -105,3 +105,4 @@ def create_app(config_overrides: dict | None = None) -> Flask:
 
     app.register_blueprint(sensors_bp, url_prefix="/sensors")
     return app
+def funcion_rompe_linter(
