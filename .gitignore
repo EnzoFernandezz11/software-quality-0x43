@@ -97,3 +97,9 @@ docker/volumes/
 
 openspec/
 skills-lock.json
+# =========================
+# Otros
+# =========================
+docs/resumen_tp.md
+npm_frontend_dashboard.md
+prueba.txt
