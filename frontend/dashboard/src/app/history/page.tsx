@@ -31,7 +31,13 @@ export default function HistoryPage() {
   }
 
   useEffect(() => {
-    void loadHistory();
+    const initialLoadId = window.setTimeout(() => {
+      void loadHistory();
+    }, 0);
+
+    return () => {
+      window.clearTimeout(initialLoadId);
+    };
     // The first load should run once with the initial filters.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
