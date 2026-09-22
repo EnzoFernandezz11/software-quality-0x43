@@ -11,7 +11,7 @@ Thumbs.db
 .env.local
 .env.production
 .horusec/
-horusec-results.sarif
+horusec-results.json
 
 # =========================
 # C++ / PlatformIO (ESP32)
