@@ -19,17 +19,17 @@ jobs:
           docker run --rm \
             -v /var/run/docker.sock:/var/run/docker.sock \
             -v "${GITHUB_WORKSPACE}:/src" \
-            horuszup/horusec-cli:v2.7.1 \
+            horuszup/horusec-cli:v2.9.0-beta.3 \
             horusec start \
               --project-path /src \
               --container-bind-project-path "${GITHUB_WORKSPACE}" \
-              --output-format sarif \
-              --json-output-file /src/horusec-results.sarif
+              --output-format json \
+              --json-output-file /src/horusec-results.json
 
-      - name: Upload Horusec SARIF report
+      - name: Upload Horusec JSON report
         uses: actions/upload-artifact@v4
         with:
-          name: horusec-sarif-${{ github.sha }}
-          path: horusec-results.sarif
+          name: horusec-json-${{ github.sha }}
+          path: horusec-results.json
           if-no-files-found: error
           retention-days: 14
