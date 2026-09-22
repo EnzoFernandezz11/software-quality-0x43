@@ -1,0 +1,485 @@
+{
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "HorusecEngine",
+          "informationUri": "https://docs.horusec.io/docs/cli/analysis-tools/overview/",
+          "rules": [
+            {
+              "id": "HS-LEAKS-25",
+              "shortDescription": {
+                "text": "(1/1) * Possible vulnerability detected: Potential Hard-coded credential\nThe software contains hard-coded credentials, such as a password or cryptographic key, which it uses for its own inbound authentication, outbound communication to external components, or encryption of internal data. For more information checkout the CWE-798 (https://cwe.mitre.org/data/definitions/798.html) advisory."
+              },
+              "fullDescription": {
+                "text": "(1/1) * Possible vulnerability detected: Potential Hard-coded credential\nThe software contains hard-coded credentials, such as a password or cryptographic key, which it uses for its own inbound authentication, outbound communication to external components, or encryption of internal data. For more information checkout the CWE-798 (https://cwe.mitre.org/data/definitions/798.html) advisory."
+              },
+              "helpUri": "https://docs.horusec.io/docs/cli/analysis-tools/overview/",
+              "name": "(1/1) * Possible vulnerability detected: Potential Hard-coded credential"
+            },
+            {
+              "id": "HS-LEAKS-27",
+              "shortDescription": {
+                "text": "(1/1) * Possible vulnerability detected: Password found in a hardcoded URL\nA password was found in a hardcoded URL, this can lead to not only the leak of this password but also a failure point to some more sophisticated CSRF and SSRF attacks. Check CWE-352 (https://cwe.mitre.org/data/definitions/352.html) and CWE-918 (https://cwe.mitre.org/data/definitions/918.html) for more details."
+              },
+              "fullDescription": {
+                "text": "(1/1) * Possible vulnerability detected: Password found in a hardcoded URL\nA password was found in a hardcoded URL, this can lead to not only the leak of this password but also a failure point to some more sophisticated CSRF and SSRF attacks. Check CWE-352 (https://cwe.mitre.org/data/definitions/352.html) and CWE-918 (https://cwe.mitre.org/data/definitions/918.html) for more details."
+              },
+              "helpUri": "https://docs.horusec.io/docs/cli/analysis-tools/overview/",
+              "name": "(1/1) * Possible vulnerability detected: Password found in a hardcoded URL"
+            },
+            {
+              "id": "HS-LEAKS-26",
+              "shortDescription": {
+                "text": "(1/1) * Possible vulnerability detected: Hard-coded password\nThe software contains hard-coded credentials, such as a password or cryptographic key, which it uses for its own inbound authentication, outbound communication to external components, or encryption of internal data. For more information checkout the CWE-798 (https://cwe.mitre.org/data/definitions/798.html) advisory."
+              },
+              "fullDescription": {
+                "text": "(1/1) * Possible vulnerability detected: Hard-coded password\nThe software contains hard-coded credentials, such as a password or cryptographic key, which it uses for its own inbound authentication, outbound communication to external components, or encryption of internal data. For more information checkout the CWE-798 (https://cwe.mitre.org/data/definitions/798.html) advisory."
+              },
+              "helpUri": "https://docs.horusec.io/docs/cli/analysis-tools/overview/",
+              "name": "(1/1) * Possible vulnerability detected: Hard-coded password"
+            },
+            {
+              "id": "HS-JAVASCRIPT-16",
+              "shortDescription": {
+                "text": "(1/1) * Possible vulnerability detected: Alert statements should not be used\nalert(...) as well as confirm(...) and prompt(...) can be useful for debugging during development, but in production mode this kind of pop-up could expose sensitive information to attackers, and should never be displayed. For more information checkout the CWE-489 (https://cwe.mitre.org/data/definitions/489.html) advisory."
+              },
+              "fullDescription": {
+                "text": "(1/1) * Possible vulnerability detected: Alert statements should not be used\nalert(...) as well as confirm(...) and prompt(...) can be useful for debugging during development, but in production mode this kind of pop-up could expose sensitive information to attackers, and should never be displayed. For more information checkout the CWE-489 (https://cwe.mitre.org/data/definitions/489.html) advisory."
+              },
+              "helpUri": "https://docs.horusec.io/docs/cli/analysis-tools/overview/",
+              "name": "(1/1) * Possible vulnerability detected: Alert statements should not be used"
+            },
+            {
+              "id": "HS-JAVASCRIPT-6",
+              "shortDescription": {
+                "text": "(1/1) * Possible vulnerability detected: No use weak random number generator\nWhen software generates predictable values in a context requiring unpredictability, it may be possible for an attacker to guess the next value that will be generated, and use this guess to impersonate another user or access sensitive information. As the Math.random() function relies on a weak pseudorandom number generator, this function should not be used for security-critical applications or for protecting sensitive data. In such context, a cryptographically strong pseudorandom number generator (CSPRNG) should be used instead. For more information checkout the CWE-338 (https://cwe.mitre.org/data/definitions/338.html) advisory."
+              },
+              "fullDescription": {
+                "text": "(1/1) * Possible vulnerability detected: No use weak random number generator\nWhen software generates predictable values in a context requiring unpredictability, it may be possible for an attacker to guess the next value that will be generated, and use this guess to impersonate another user or access sensitive information. As the Math.random() function relies on a weak pseudorandom number generator, this function should not be used for security-critical applications or for protecting sensitive data. In such context, a cryptographically strong pseudorandom number generator (CSPRNG) should be used instead. For more information checkout the CWE-338 (https://cwe.mitre.org/data/definitions/338.html) advisory."
+              },
+              "helpUri": "https://docs.horusec.io/docs/cli/analysis-tools/overview/",
+              "name": "(1/1) * Possible vulnerability detected: No use weak random number generator"
+            },
+            {
+              "id": "HS-JAVASCRIPT-14",
+              "shortDescription": {
+                "text": "(1/1) * Possible vulnerability detected: Local storage should not be used\nSession storage and local storage are HTML 5 features which allow developers to easily store megabytes of data client-side, as opposed to the 4Kb cookies can accommodate. While useful to speed applications up on the client side, it can be dangerous to store sensitive information this way because the data is not encrypted by default and any script on the page may access it. This rule raises an issue when the localStorage and sessionStorage API's are used. For more information checkout the OWSAP A3:2017 (https://owasp.org/www-project-top-ten/2017/A3_2017-Sensitive_Data_Exposure.html) advisory."
+              },
+              "fullDescription": {
+                "text": "(1/1) * Possible vulnerability detected: Local storage should not be used\nSession storage and local storage are HTML 5 features which allow developers to easily store megabytes of data client-side, as opposed to the 4Kb cookies can accommodate. While useful to speed applications up on the client side, it can be dangerous to store sensitive information this way because the data is not encrypted by default and any script on the page may access it. This rule raises an issue when the localStorage and sessionStorage API's are used. For more information checkout the OWSAP A3:2017 (https://owasp.org/www-project-top-ten/2017/A3_2017-Sensitive_Data_Exposure.html) advisory."
+              },
+              "helpUri": "https://docs.horusec.io/docs/cli/analysis-tools/overview/",
+              "name": "(1/1) * Possible vulnerability detected: Local storage should not be used"
+            }
+          ],
+          "version": "2.8.0"
+        }
+      },
+      "artifacts": [
+        {
+          "location": {
+            "uri": "frontend\\dashboard\\src\\hooks\\useSensorPolling.ts"
+          }
+        },
+        {
+          "location": {
+            "uri": "frontend\\dashboard\\src\\services\\mockData.ts"
+          }
+        },
+        {
+          "location": {
+            "uri": "backend\\flask\\final_project\\app\\__init__.py"
+          }
+        },
+        {
+          "location": {
+            "uri": ".env.example"
+          }
+        },
+        {
+          "location": {
+            "uri": "docker\\README.md"
+          }
+        },
+        {
+          "location": {
+            "uri": "firmware\\esp32\\.env.example"
+          }
+        }
+      ],
+      "results": [
+        {
+          "message": {
+            "text": "(1/1) * Possible vulnerability detected: Potential Hard-coded credential\nThe software contains hard-coded credentials, such as a password or cryptographic key, which it uses for its own inbound authentication, outbound communication to external components, or encryption of internal data. For more information checkout the CWE-798 (https://cwe.mitre.org/data/definitions/798.html) advisory."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "backend\\flask\\final_project\\app\\__init__.py"
+                },
+                "region": {
+                  "snippet": {
+                    "text": "app.config[\"SECRET_KEY\"] = os.getenv(\"FLASK_SECRET_KEY\", \"dev-change-me\")"
+                  },
+                  "startLine": 48,
+                  "startColumn": 16
+                }
+              }
+            }
+          ],
+          "ruleId": "HS-LEAKS-25"
+        },
+        {
+          "message": {
+            "text": "(1/1) * Possible vulnerability detected: Password found in a hardcoded URL\nA password was found in a hardcoded URL, this can lead to not only the leak of this password but also a failure point to some more sophisticated CSRF and SSRF attacks. Check CWE-352 (https://cwe.mitre.org/data/definitions/352.html) and CWE-918 (https://cwe.mitre.org/data/definitions/918.html) for more details."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": ".env.example"
+                },
+                "region": {
+                  "snippet": {
+                    "text": "postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}"
+                  },
+                  "startLine": 29,
+                  "startColumn": 13
+                }
+              }
+            }
+          ],
+          "ruleId": "HS-LEAKS-27"
+        },
+        {
+          "message": {
+            "text": "(1/1) * Possible vulnerability detected: Hard-coded password\nThe software contains hard-coded credentials, such as a password or cryptographic key, which it uses for its own inbound authentication, outbound communication to external components, or encryption of internal data. For more information checkout the CWE-798 (https://cwe.mitre.org/data/definitions/798.html) advisory."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docker\\README.md"
+                },
+                "region": {
+                  "snippet": {
+                    "text": "password: 'dev_password_2026',"
+                  },
+                  "startLine": 302,
+                  "startColumn": 2
+                }
+              }
+            }
+          ],
+          "ruleId": "HS-LEAKS-26"
+        },
+        {
+          "message": {
+            "text": "(1/1) * Possible vulnerability detected: Password found in a hardcoded URL\nA password was found in a hardcoded URL, this can lead to not only the leak of this password but also a failure point to some more sophisticated CSRF and SSRF attacks. Check CWE-352 (https://cwe.mitre.org/data/definitions/352.html) and CWE-918 (https://cwe.mitre.org/data/definitions/918.html) for more details."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "docker\\README.md"
+                },
+                "region": {
+                  "snippet": {
+                    "text": "postgresql://soft_eng_user:dev_password_2026@localhost:5433/soft_eng_db"
+                  },
+                  "startLine": 104,
+                  "startColumn": 1
+                }
+              }
+            }
+          ],
+          "ruleId": "HS-LEAKS-27"
+        },
+        {
+          "message": {
+            "text": "(1/1) * Possible vulnerability detected: Potential Hard-coded credential\nThe software contains hard-coded credentials, such as a password or cryptographic key, which it uses for its own inbound authentication, outbound communication to external components, or encryption of internal data. For more information checkout the CWE-798 (https://cwe.mitre.org/data/definitions/798.html) advisory."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "firmware\\esp32\\.env.example"
+                },
+                "region": {
+                  "snippet": {
+                    "text": "API_KEY=\"TU_TOKEN_DE_AUTENTICACION\""
+                  },
+                  "startLine": 10,
+                  "startColumn": 1
+                }
+              }
+            }
+          ],
+          "ruleId": "HS-LEAKS-25"
+        },
+        {
+          "message": {
+            "text": "(1/1) * Possible vulnerability detected: Hard-coded password\nThe software contains hard-coded credentials, such as a password or cryptographic key, which it uses for its own inbound authentication, outbound communication to external components, or encryption of internal data. For more information checkout the CWE-798 (https://cwe.mitre.org/data/definitions/798.html) advisory."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "firmware\\esp32\\.env.example"
+                },
+                "region": {
+                  "snippet": {
+                    "text": "WIFI_PASS=\"TU_PASSWORD_AQUI\""
+                  },
+                  "startLine": 3,
+                  "startColumn": 5
+                }
+              }
+            }
+          ],
+          "ruleId": "HS-LEAKS-26"
+        },
+        {
+          "message": {
+            "text": "(1/1) * Possible vulnerability detected: Alert statements should not be used\nalert(...) as well as confirm(...) and prompt(...) can be useful for debugging during development, but in production mode this kind of pop-up could expose sensitive information to attackers, and should never be displayed. For more information checkout the CWE-489 (https://cwe.mitre.org/data/definitions/489.html) advisory."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "frontend\\dashboard\\src\\hooks\\useSensorPolling.ts"
+                },
+                "region": {
+                  "snippet": {
+                    "text": "function deriveAlert(reading: SensorReading, tempLimit = DEFAULT_TEMP_LIMIT): Alert {"
+                  },
+                  "startLine": 11,
+                  "startColumn": 15
+                }
+              }
+            }
+          ],
+          "ruleId": "HS-JAVASCRIPT-16"
+        },
+        {
+          "message": {
+            "text": "(1/1) * Possible vulnerability detected: Alert statements should not be used\nalert(...) as well as confirm(...) and prompt(...) can be useful for debugging during development, but in production mode this kind of pop-up could expose sensitive information to attackers, and should never be displayed. For more information checkout the CWE-489 (https://cwe.mitre.org/data/definitions/489.html) advisory."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "frontend\\dashboard\\src\\hooks\\useSensorPolling.ts"
+                },
+                "region": {
+                  "snippet": {
+                    "text": ".map((reading) =\u003e deriveAlert(reading, tempLimit)),"
+                  },
+                  "startLine": 77,
+                  "startColumn": 34
+                }
+              }
+            }
+          ],
+          "ruleId": "HS-JAVASCRIPT-16"
+        },
+        {
+          "message": {
+            "text": "(1/1) * Possible vulnerability detected: No use weak random number generator\nWhen software generates predictable values in a context requiring unpredictability, it may be possible for an attacker to guess the next value that will be generated, and use this guess to impersonate another user or access sensitive information. As the Math.random() function relies on a weak pseudorandom number generator, this function should not be used for security-critical applications or for protecting sensitive data. In such context, a cryptographically strong pseudorandom number generator (CSPRNG) should be used instead. For more information checkout the CWE-338 (https://cwe.mitre.org/data/definitions/338.html) advisory."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "frontend\\dashboard\\src\\services\\mockData.ts"
+                },
+                "region": {
+                  "snippet": {
+                    "text": "const noise = (Math.random() - 0.5) * 0.5;"
+                  },
+                  "startLine": 45,
+                  "startColumn": 17
+                }
+              }
+            }
+          ],
+          "ruleId": "HS-JAVASCRIPT-6"
+        },
+        {
+          "message": {
+            "text": "(1/1) * Possible vulnerability detected: No use weak random number generator\nWhen software generates predictable values in a context requiring unpredictability, it may be possible for an attacker to guess the next value that will be generated, and use this guess to impersonate another user or access sensitive information. As the Math.random() function relies on a weak pseudorandom number generator, this function should not be used for security-critical applications or for protecting sensitive data. In such context, a cryptographically strong pseudorandom number generator (CSPRNG) should be used instead. For more information checkout the CWE-338 (https://cwe.mitre.org/data/definitions/338.html) advisory."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "frontend\\dashboard\\src\\services\\mockData.ts"
+                },
+                "region": {
+                  "snippet": {
+                    "text": "const raw = parseFloat((filtered + (Math.random() - 0.5) * 0.4).toFixed(2));"
+                  },
+                  "startLine": 112,
+                  "startColumn": 40
+                }
+              }
+            }
+          ],
+          "ruleId": "HS-JAVASCRIPT-6"
+        },
+        {
+          "message": {
+            "text": "(1/1) * Possible vulnerability detected: No use weak random number generator\nWhen software generates predictable values in a context requiring unpredictability, it may be possible for an attacker to guess the next value that will be generated, and use this guess to impersonate another user or access sensitive information. As the Math.random() function relies on a weak pseudorandom number generator, this function should not be used for security-critical applications or for protecting sensitive data. In such context, a cryptographically strong pseudorandom number generator (CSPRNG) should be used instead. For more information checkout the CWE-338 (https://cwe.mitre.org/data/definitions/338.html) advisory."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "frontend\\dashboard\\src\\services\\mockData.ts"
+                },
+                "region": {
+                  "snippet": {
+                    "text": "if (Date.now() - lastAuditTime \u003e 15000 \u0026\u0026 Math.random() \u003e 0.7) {"
+                  },
+                  "startLine": 179,
+                  "startColumn": 46
+                }
+              }
+            }
+          ],
+          "ruleId": "HS-JAVASCRIPT-6"
+        },
+        {
+          "message": {
+            "text": "(1/1) * Possible vulnerability detected: No use weak random number generator\nWhen software generates predictable values in a context requiring unpredictability, it may be possible for an attacker to guess the next value that will be generated, and use this guess to impersonate another user or access sensitive information. As the Math.random() function relies on a weak pseudorandom number generator, this function should not be used for security-critical applications or for protecting sensitive data. In such context, a cryptographically strong pseudorandom number generator (CSPRNG) should be used instead. For more information checkout the CWE-338 (https://cwe.mitre.org/data/definitions/338.html) advisory."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "frontend\\dashboard\\src\\services\\mockData.ts"
+                },
+                "region": {
+                  "snippet": {
+                    "text": "const isSuccess = Math.random() \u003e 0.3;"
+                  },
+                  "startLine": 180,
+                  "startColumn": 24
+                }
+              }
+            }
+          ],
+          "ruleId": "HS-JAVASCRIPT-6"
+        },
+        {
+          "message": {
+            "text": "(1/1) * Possible vulnerability detected: No use weak random number generator\nWhen software generates predictable values in a context requiring unpredictability, it may be possible for an attacker to guess the next value that will be generated, and use this guess to impersonate another user or access sensitive information. As the Math.random() function relies on a weak pseudorandom number generator, this function should not be used for security-critical applications or for protecting sensitive data. In such context, a cryptographically strong pseudorandom number generator (CSPRNG) should be used instead. For more information checkout the CWE-338 (https://cwe.mitre.org/data/definitions/338.html) advisory."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "frontend\\dashboard\\src\\services\\mockData.ts"
+                },
+                "region": {
+                  "snippet": {
+                    "text": "const strategy = Math.random() \u003e 0.5 ? \"RFID\" : \"PIN\";"
+                  },
+                  "startLine": 181,
+                  "startColumn": 23
+                }
+              }
+            }
+          ],
+          "ruleId": "HS-JAVASCRIPT-6"
+        },
+        {
+          "message": {
+            "text": "(1/1) * Possible vulnerability detected: No use weak random number generator\nWhen software generates predictable values in a context requiring unpredictability, it may be possible for an attacker to guess the next value that will be generated, and use this guess to impersonate another user or access sensitive information. As the Math.random() function relies on a weak pseudorandom number generator, this function should not be used for security-critical applications or for protecting sensitive data. In such context, a cryptographically strong pseudorandom number generator (CSPRNG) should be used instead. For more information checkout the CWE-338 (https://cwe.mitre.org/data/definitions/338.html) advisory."
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "frontend\\dashboard\\src\\services\\mockData.ts"
+                },
+                "region": {
+                  "snippet": {
+                    "text": "pin_entered: isSuccess ? \"****\" : Math.floor(1000 + Math.random() * 9000).toString(),"
+                  },
+                  "startLine": 185,
+                  "startColumn": 60
+                }
+              }
+            }
+          ],
+          "ruleId": "HS-JAVASCRIPT-6"
+        },
+        {
+          "message": {
+            "text": "(1/1) * Possible vulnerability detected: Local storage should not be used\nSession storage and local storage are HTML 5 features which allow developers to easily store megabytes of data client-side, as opposed to the 4Kb cookies can accommodate. While useful to speed applications up on the client side, it can be dangerous to store sensitive information this way because the data is not encrypted by default and any script on the page may access it. This rule raises an issue when the localStorage and sessionStorage API's are used. For more information checkout the OWSAP A3:2017 (https://owasp.org/www-project-top-ten/2017/A3_2017-Sensitive_Data_Exposure.html) advisory."
+          },
+          "level": "note",
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "frontend\\dashboard\\src\\services\\mockData.ts"
+                },
+                "region": {
+                  "snippet": {
+                    "text": "localStorage.setItem('mock_room_config', JSON.stringify(DEFAULT_MOCK_CONFIG));"
+                  },
+                  "startLine": 22,
+                  "startColumn": 2
+                }
+              }
+            }
+          ],
+          "ruleId": "HS-JAVASCRIPT-14"
+        },
+        {
+          "message": {
+            "text": "(1/1) * Possible vulnerability detected: Local storage should not be used\nSession storage and local storage are HTML 5 features which allow developers to easily store megabytes of data client-side, as opposed to the 4Kb cookies can accommodate. While useful to speed applications up on the client side, it can be dangerous to store sensitive information this way because the data is not encrypted by default and any script on the page may access it. This rule raises an issue when the localStorage and sessionStorage API's are used. For more information checkout the OWSAP A3:2017 (https://owasp.org/www-project-top-ten/2017/A3_2017-Sensitive_Data_Exposure.html) advisory."
+          },
+          "level": "note",
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "frontend\\dashboard\\src\\services\\mockData.ts"
+                },
+                "region": {
+                  "snippet": {
+                    "text": "localStorage.setItem('mock_room_config', JSON.stringify(updated));"
+                  },
+                  "startLine": 30,
+                  "startColumn": 4
+                }
+              }
+            }
+          ],
+          "ruleId": "HS-JAVASCRIPT-14"
+        }
+      ]
+    }
+  ],
+  "version": "2.1.0",
+  "$schema": "https://raw.githubusercontent.com/oasis-tcs/sarif-spec/master/Schemata/sarif-schema-2.1.0.json"
+}
