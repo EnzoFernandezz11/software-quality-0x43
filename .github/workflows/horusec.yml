@@ -1,0 +1,35 @@
+name: Horusec Security Scan
+
+on:
+  push:
+
+permissions:
+  contents: read
+
+jobs:
+  scan:
+    name: Scan repository
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run Horusec
+        run: |
+          docker run --rm \
+            -v /var/run/docker.sock:/var/run/docker.sock \
+            -v "${GITHUB_WORKSPACE}:/src" \
+            horuszup/horusec-cli:v2.7.1 \
+            horusec start \
+              --project-path /src \
+              --container-bind-project-path "${GITHUB_WORKSPACE}" \
+              --output-format sarif \
+              --json-output-file /src/horusec-results.sarif
+
+      - name: Upload Horusec SARIF report
+        uses: actions/upload-artifact@v4
+        with:
+          name: horusec-sarif-${{ github.sha }}
+          path: horusec-results.sarif
+          if-no-files-found: error
+          retention-days: 14
