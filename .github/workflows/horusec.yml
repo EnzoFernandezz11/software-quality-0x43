@@ -1,6 +1,7 @@
 name: Horusec Security Scan
 
 on:
+  pull_request:
   push:
 
 permissions:
