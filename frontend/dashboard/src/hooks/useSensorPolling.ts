@@ -86,10 +86,13 @@ export function useSensorPolling(
   }, [maxPoints, tempLimit]);
 
   useEffect(() => {
-    refresh();
+    const initialRefreshId = window.setTimeout(() => {
+      void refresh();
+    }, 0);
     const intervalId = window.setInterval(refresh, intervalMs);
 
     return () => {
+      window.clearTimeout(initialRefreshId);
       window.clearInterval(intervalId);
     };
   }, [intervalMs, refresh]);
