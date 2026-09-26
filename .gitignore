@@ -10,6 +10,8 @@ Thumbs.db
 .env
 .env.local
 .env.production
+.horusec/
+horusec-results.json
 
 # =========================
 # C++ / PlatformIO (ESP32)
@@ -101,3 +103,9 @@ docker/volumes/
 
 openspec/
 skills-lock.json
+# =========================
+# Otros
+# =========================
+docs/resumen_tp.md
+npm_frontend_dashboard.md
+prueba.txt
