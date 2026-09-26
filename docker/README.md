@@ -1,5 +1,9 @@
 # Docker Setup Guide
 
+> Para realizar análisis estático, consultar la
+> [guía de SonarQube](../docs/SONARQUBE.md). SonarQube utiliza un archivo de
+> Docker Compose separado para que no se inicie junto con la aplicación.
+
 This guide will help you set up and run the PostgreSQL database for the Software Engineering Final Project, and optionally build a production Docker image for the Next.js dashboard.
 
 ## Prerequisites

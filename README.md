@@ -6,3 +6,4 @@ Repositorio base del trabajo final: sistema IoT de punta a punta (ESP32, backend
 
 - **Documentación del proyecto (instalación, uso, stack):** [ABOUT.md](ABOUT.md)
 - **Consigna y criterios de evaluación:** [docs/CONSIGNA.md](docs/CONSIGNA.md)
+- **Análisis local con SonarQube:** [docs/SONARQUBE.md](docs/SONARQUBE.md)

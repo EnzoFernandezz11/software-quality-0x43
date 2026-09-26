@@ -1,5 +1,5 @@
 # =========================
-# General
+# Archivos generales
 # =========================
 .DS_Store
 Thumbs.db
@@ -58,6 +58,10 @@ build/
 *.egg-info/
 .eggs/
 .pytest_cache/
+.coverage
+coverage.xml
+coverage/
+.scannerwork/
 .mypy_cache/
 instance/
 *.sqlite3
@@ -86,7 +90,7 @@ docker/data/
 docker/volumes/
 
 # =========================
-# IDE / Editors
+# IDE / editores
 # =========================
 .vscode/
 .idea/
