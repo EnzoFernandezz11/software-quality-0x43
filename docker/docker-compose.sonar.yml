@@ -1,0 +1,6 @@
+# Archivo de compatibilidad para quienes ejecuten Compose desde `docker/`.
+# La configuración principal se encuentra en la raíz del repositorio.
+name: smart-office-sonarqube
+
+include:
+  - ../docker-compose.sonar.yml
