@@ -1,4 +1,4 @@
-# Keep `docker build` contexts small (builds use the repo root as context).
+# Mantener pequeños los contextos de `docker build` (usan la raíz del repositorio).
 
 .git
 .cursor
@@ -8,6 +8,9 @@
 **/dist
 **/build
 **/.turbo
+**/coverage
+**/coverage.xml
+**/.scannerwork
 
 **/__pycache__
 **/.venv

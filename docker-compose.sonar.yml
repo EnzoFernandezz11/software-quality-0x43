@@ -1,0 +1,44 @@
+name: smart-office-sonarqube
+
+services:
+  sonarqube:
+    image: sonarqube:community
+    container_name: smart-office-sonarqube
+    restart: unless-stopped
+    stop_grace_period: 1h
+    ports:
+      - "9000:9000"
+    environment:
+      # Configuración adecuada para este laboratorio local. No se debe usar la
+      # base H2 ni desactivar estas verificaciones en una instalación productiva.
+      SONAR_ES_BOOTSTRAP_CHECKS_DISABLE: "true"
+    volumes:
+      - sonarqube_data:/opt/sonarqube/data
+      - sonarqube_extensions:/opt/sonarqube/extensions
+      - sonarqube_logs:/opt/sonarqube/logs
+    networks:
+      - sonarqube-network
+
+  scanner:
+    image: sonarsource/sonar-scanner-cli:12
+    working_dir: /usr/src
+    environment:
+      SONAR_HOST_URL: http://sonarqube:9000
+      SONAR_TOKEN: ${SONAR_TOKEN:-}
+    volumes:
+      - ./:/usr/src
+      - sonar_scanner_cache:/opt/sonar-scanner/.sonar/cache
+    depends_on:
+      - sonarqube
+    networks:
+      - sonarqube-network
+
+volumes:
+  sonarqube_data:
+  sonarqube_extensions:
+  sonarqube_logs:
+  sonar_scanner_cache:
+
+networks:
+  sonarqube-network:
+    driver: bridge
