@@ -5,6 +5,28 @@ Esta configuración de desarrollo ejecuta los mismos cuatro servicios que
 Kubernetes administra los contenedores; Minikube usa Docker para ejecutar el nodo
 local. Se reutilizan los Dockerfiles existentes, sin publicar imágenes en un registry.
 
+## Inicio automático
+
+Con Docker y Minikube instalados, ejecutá desde la raíz del repo:
+
+```bash
+bash run_kubernetes.sh
+```
+
+El script crea `.env` si falta, inicia el clúster, construye las imágenes, despliega
+los cuatro servicios y espera a que estén listos. En cada ejecución reconstruye
+las imágenes y reinicia Flask y Next.js para tomar los cambios. Luego detiene
+los servicios de Docker Compose de este repo, conservando sus datos, y abre
+los puertos del dashboard (3000), Flask (5000) y pgAdmin (5050).
+
+Dejá la terminal abierta y entrá a http://localhost:3000 cuando aparezca
+`Forwarding from`. Ctrl+C cierra los puertos; el clúster sigue activo. Para
+apagarlo conservando la base, ejecutá `minikube stop -p soft-eng`.
+
+Si un puerto está ocupado por otra app o un túnel se interrumpe, el script termina
+con un error y cierra sus otros túneles. No instala herramientas ni libera espacio
+en disco. Para revisar los pasos o ejecutarlos a mano, seguí las instrucciones siguientes.
+
 ## 1. Verificar las herramientas
 
 ```bash
