@@ -49,8 +49,16 @@ echo "[2/6] Construyendo Flask (la salida del build aparece debajo)..."
 minikube -p soft-eng image build -t soft-eng-flask:local -f docker/flask.Dockerfile .
 echo "[3/6] Construyendo Next.js (la salida del build aparece debajo)..."
 minikube -p soft-eng image build -t soft-eng-dashboard:local \
-    -f docker/nextjs.Dockerfile \
-    --build-opt build-arg=NEXT_PUBLIC_API_URL=http://localhost:5000/api .
+    -f docker/nextjs.Dockerfile .
+
+# Minikube puede devolver éxito aunque el constructor interno haya fallado.
+images=$(minikube -p soft-eng image ls)
+for image in soft-eng-flask:local soft-eng-dashboard:local; do
+    if ! printf '%s\n' "$images" | grep -Eq "(^|/)$image$"; then
+        echo "No se generó la imagen $image. Revisá el error del build de arriba; se cancela el despliegue." >&2
+        exit 1
+    fi
+done
 
 echo "[4/6] Creando namespace, configuración y servicios..."
 k apply -f kubernetes/namespace.yaml

@@ -107,10 +107,10 @@ Desde la raíz del repo:
 ```bash
 minikube -p soft-eng image build -t soft-eng-flask:local -f docker/flask.Dockerfile .
 minikube -p soft-eng image build -t soft-eng-dashboard:local \
-  -f docker/nextjs.Dockerfile \
-  --build-opt build-arg=NEXT_PUBLIC_API_URL=http://localhost:5000/api .
+  -f docker/nextjs.Dockerfile .
 ```
 
+El Dockerfile usa por defecto `http://localhost:5000/api` para el frontend.
 El sufijo `/api` es necesario para las llamadas del dashboard. Next.js incorpora
 esta URL al compilar: cambiar una variable del pod después no modifica el bundle.
 `localhost` corresponde al navegador de tu computadora; en el paso 6 exponemos la API.

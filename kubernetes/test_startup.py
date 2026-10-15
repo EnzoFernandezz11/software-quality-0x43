@@ -19,8 +19,12 @@ with open(os.environ["CALLS"], "a") as log:
     log.write(json.dumps(entry) + "\n")
 if "apply" in sys.argv and sys.argv[-1] == "-":
     sys.stdin.read()
-if "image" in sys.argv and os.getenv("FAIL_BUILD"):
+if "build" in sys.argv and os.getenv("FAIL_BUILD"):
     sys.exit(1)
+if "image" in sys.argv and "ls" in sys.argv:
+    print("docker.io/library/soft-eng-flask:local")
+    if not os.getenv("MISSING_IMAGE"):
+        print("docker.io/library/soft-eng-dashboard:local")
 if "status" in sys.argv and os.getenv("FAIL_ROLLOUT"):
     sys.exit(1)
 if "port-forward" in sys.argv:
@@ -90,7 +94,8 @@ class StartupTest(unittest.TestCase):
         self.assertEqual((self.repo / ".env").read_text(), "POSTGRES_DB=existing\n")
         entries = self.entries()
         self.assertTrue(all(e["cwd"] == str(self.repo) for e in entries))
-        self.assertEqual(sum("image" in e["args"] for e in entries), 2)
+        self.assertEqual(sum("build" in e["args"] for e in entries), 2)
+        self.assertFalse(any("--build-opt" in e["args"] for e in entries))
         self.assertTrue(any("restart" in e["args"] for e in entries))
         self.assertTrue(any(e["tool"] == "docker" and "stop" in e["args"] for e in entries))
 
@@ -117,3 +122,10 @@ class StartupTest(unittest.TestCase):
         self.assertTrue(any("describe" in e["args"] for e in entries))
         self.assertTrue(any("logs" in e["args"] for e in entries))
         self.assertFalse(any("port-forward" in e["args"] for e in entries))
+
+    def test_missing_image_stops_before_deploy_even_when_build_returns_success(self):
+        process = self.start(MISSING_IMAGE="1")
+        output, _ = process.communicate(timeout=10)
+        self.assertEqual(process.returncode, 1, output)
+        self.assertIn("No se generó la imagen soft-eng-dashboard:local", output)
+        self.assertFalse(any("apply" in e["args"] for e in self.entries()))
