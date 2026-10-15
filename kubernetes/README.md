@@ -14,31 +14,31 @@ docker system df
 df -h /
 ```
 
-Minikube está instalado para este usuario en `~/.local/bin/minikube`. Si una
-terminal nueva no lo encuentra, ejecutá `export PATH="$HOME/.local/bin:$PATH"`.
+Instalá Docker y Minikube antes de continuar y asegurate de que ambos comandos
+estén disponibles en tu `PATH`.
 No hace falta instalar `kubectl` por separado: `minikube kubectl --` lo descarga
 y usa una versión compatible con el clúster.
 
-Si necesitás instalar Minikube en otra máquina Linux x86_64, seguí la
-[instalación oficial](https://minikube.sigs.k8s.io/docs/start/).
+Para instalar Minikube, seguí la
+[instalación oficial](https://minikube.sigs.k8s.io/docs/start/) correspondiente
+a tu sistema operativo y arquitectura.
 Si Docker falla por permisos en tu terminal habitual, revisá la
 [configuración del driver Docker](https://minikube.sigs.k8s.io/docs/drivers/docker/).
 Ejecutá Minikube con tu usuario, sin `sudo`.
 
-**Espacio en este equipo:** al preparar el entorno, la partición que contiene
-`/var/lib/docker` estaba al 97%, con unos 8 GB libres. Aunque el repo esté en
-`/mnt/datos`, Docker guarda las imágenes en esa otra partición. Antes de construir
-las imágenes, liberá espacio o trasladá el almacenamiento de Docker. La
+**Espacio disponible:** revisá el espacio del almacenamiento de Docker antes de
+construir las imágenes; puede estar en una partición distinta a la del repo. La
 [guía oficial de Minikube](https://minikube.sigs.k8s.io/docs/start/) pide al menos
 20 GB libres. `docker system df` permite ver el consumo; no borres volúmenes que
 contengan datos que quieras conservar.
 
 ## 2. Preparar las variables
 
-Desde la raíz del repo, en Bash o Zsh:
+Abrí una terminal Bash o Zsh en la carpeta donde clonaste el repositorio (la que
+contiene `README.md`, `.env.example`, `docker/` y `kubernetes/`). Todos los
+comandos siguientes se ejecutan desde esa raíz:
 
 ```bash
-cd /mnt/datos/facultad/calidad/software-quality-0x43
 # Copia únicamente si todavía no existe; no pisa tus valores.
 test -f .env || cp .env.example .env
 ```
