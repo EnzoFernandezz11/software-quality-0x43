@@ -19,6 +19,12 @@ las imágenes y reinicia Flask y Next.js para tomar los cambios. Luego detiene
 los servicios de Docker Compose de este repo, conservando sus datos, y abre
 los puertos del dashboard (3000), Flask (5000) y pgAdmin (5050).
 
+La consola muestra cada etapa y la salida de los builds. Mientras espera los
+servicios, muestra los pods y los eventos de advertencia cada 5 segundos. Si un
+servicio no arranca, imprime el detalle de sus pods y las últimas líneas de logs.
+`python3 -m unittest discover -s kubernetes` ejecuta solamente las pruebas
+simuladas del script; para iniciar la app usá `bash run_kubernetes.sh`.
+
 Dejá la terminal abierta y entrá a http://localhost:3000 cuando aparezca
 `Forwarding from`. Ctrl+C cierra los puertos; el clúster sigue activo. Para
 apagarlo conservando la base, ejecutá `minikube stop -p soft-eng`.

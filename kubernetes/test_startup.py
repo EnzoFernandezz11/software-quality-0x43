@@ -17,7 +17,11 @@ from pathlib import Path
 entry = {"tool": Path(sys.argv[0]).name, "args": sys.argv[1:], "cwd": os.getcwd()}
 with open(os.environ["CALLS"], "a") as log:
     log.write(json.dumps(entry) + "\n")
+if "apply" in sys.argv and sys.argv[-1] == "-":
+    sys.stdin.read()
 if "image" in sys.argv and os.getenv("FAIL_BUILD"):
+    sys.exit(1)
+if "status" in sys.argv and os.getenv("FAIL_ROLLOUT"):
     sys.exit(1)
 if "port-forward" in sys.argv:
     if os.getenv("FAIL_TUNNEL") and "service/flask-backend" in sys.argv:
@@ -81,6 +85,8 @@ class StartupTest(unittest.TestCase):
         output, _ = self.stop(process)
         self.assertEqual(process.returncode, 143, output)
         self.assertIn("Puertos cerrados", output)
+        self.assertIn("[5/6]", output)
+        self.assertIn("frontend-dashboard listo", output)
         self.assertEqual((self.repo / ".env").read_text(), "POSTGRES_DB=existing\n")
         entries = self.entries()
         self.assertTrue(all(e["cwd"] == str(self.repo) for e in entries))
@@ -101,3 +107,13 @@ class StartupTest(unittest.TestCase):
         self.assertEqual(process.returncode, 1, output)
         self.assertIn("Un port-forward terminó", output)
         self.assertIn("Puertos cerrados", output)
+
+    def test_failed_rollout_prints_diagnostics_without_opening_ports(self):
+        process = self.start(FAIL_ROLLOUT="1")
+        output, _ = process.communicate(timeout=10)
+        self.assertEqual(process.returncode, 1, output)
+        self.assertIn("Falló el arranque de postgres", output)
+        entries = self.entries()
+        self.assertTrue(any("describe" in e["args"] for e in entries))
+        self.assertTrue(any("logs" in e["args"] for e in entries))
+        self.assertFalse(any("port-forward" in e["args"] for e in entries))
