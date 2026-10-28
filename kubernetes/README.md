@@ -220,3 +220,21 @@ normalmente, usá `minikube stop`.
 
 Esto es un entorno local de desarrollo: Flask usa su servidor de desarrollo,
 hay una sola réplica del backend por su caché en memoria y no se configura HTTPS.
+
+## Prueba de carga con k6
+
+Con el despliegue iniciado y la terminal de `run_kubernetes.sh` abierta (el
+`port-forward` de Flask debe seguir activo), verificá la API y ejecutá la prueba
+desde otra terminal en la raíz del repositorio:
+
+```bash
+curl -f 'http://localhost:5000/api/dashboard/history?limit=1'
+k6 run kubernetes/load-test.js
+```
+
+El script aumenta gradualmente de 0 a 5 y luego a 20 usuarios virtuales, y
+finalmente vuelve a 0. Cada usuario consulta el historial de sensores y espera
+un segundo antes de repetir. Revisá `http_req_duration` (en especial p95),
+`http_req_failed`, `http_reqs` y el porcentaje de checks exitosos. Se puede
+cambiar la dirección de la API con `BASE_URL` si no se usa el puerto local 5000.
+Esta prueba mide la API; no configura escalado automático de Pods.
