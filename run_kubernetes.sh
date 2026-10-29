@@ -64,6 +64,17 @@ echo "[4/6] Creando namespace, configuración y servicios..."
 k apply -f kubernetes/namespace.yaml
 k -n soft-eng create secret generic app-env --from-env-file=.env \
     --dry-run=client -o yaml | k apply -f -
+# Start PostgreSQL and wait before running migrations once per deployment.
+sed "/name: flask-backend/,/selector:/ s/replicas: 2/replicas: 0/" kubernetes/app.yaml | k apply -f -
+if ! k -n soft-eng rollout status deployment/postgres --timeout=300s; then
+    echo "Falló el arranque de postgres" >&2
+    k -n soft-eng describe pods -l app=postgres || true
+    k -n soft-eng logs deployment/postgres --all-containers=true --tail=80 || true
+    exit 1
+fi
+k -n soft-eng delete job database-migrations --ignore-not-found --wait=true
+k apply -f kubernetes/migration.yaml
+k -n soft-eng wait --for=condition=complete job/database-migrations --timeout=300s
 k apply -f kubernetes/app.yaml
 
 # Las etiquetas locales se reutilizan; los pods deben recargar imágenes y Secret.

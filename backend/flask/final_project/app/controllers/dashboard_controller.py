@@ -10,7 +10,7 @@ from __future__ import annotations
 
 from datetime import datetime
 
-from flask import Blueprint, Response, current_app, jsonify, request
+from flask import Blueprint, Response, jsonify, request
 
 from app.models.schemas.telemetry_schema import TelemetryResponseSchema
 from app.repositories.config_repository import ConfigRepository
@@ -33,16 +33,13 @@ def live_metrics() -> tuple[Response, int]:
       200:
         description: Current live metrics
     """
-    cache_updater = current_app.config.get("CACHE_METRICS_UPDATER")
-
-    last_reading = {}
-    if cache_updater:
-        last_reading = cache_updater.last_reading
+    sensors_repo = SensorsRepository()
+    readings, _ = sensors_repo.find_paginated(limit=1)
+    last_reading = _response_schema.dump(readings[0]) if readings else {}
 
     config_repo = ConfigRepository()
     config = config_repo.get_or_create()
 
-    sensors_repo = SensorsRepository()
     no_motion_readings = sensors_repo.find_last_24h_no_motion()
     base_sleep_temp = calculate_base_sleep_temperature(no_motion_readings)
 

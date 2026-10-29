@@ -64,10 +64,7 @@ metadata:
   name: flask-backend
   namespace: soft-eng
 spec:
-  replicas: 1
-  # One process owns the live metrics cache and runs migrations at startup.
-  strategy:
-    type: Recreate
+  replicas: 2
   selector:
     matchLabels:
       app: flask-backend
@@ -84,6 +81,7 @@ spec:
         - name: flask-backend
           image: soft-eng-flask:local
           imagePullPolicy: Never
+          command: ["python", "main.py"]
           envFrom:
             - secretRef:
                 name: app-env
@@ -125,7 +123,7 @@ metadata:
   name: frontend-dashboard
   namespace: soft-eng
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: frontend-dashboard

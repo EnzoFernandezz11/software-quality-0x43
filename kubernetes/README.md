@@ -238,3 +238,28 @@ un segundo antes de repetir. Revisá `http_req_duration` (en especial p95),
 `http_req_failed`, `http_reqs` y el porcentaje de checks exitosos. Se puede
 cambiar la dirección de la API con `BASE_URL` si no se usa el puerto local 5000.
 Esta prueba mide la API; no configura escalado automático de Pods.
+
+## Perfiles k6 y Grafana local
+
+Después de iniciar `bash run_kubernetes.sh` y dejarlo abierto, ejecutá en otra terminal:
+
+```bash
+bash run_load_tests.sh all
+```
+
+También se puede ejecutar un solo perfil: `smoke`, `average`, `stress`, `soak`, `breakpoint` o `spike`, por ejemplo `bash run_load_tests.sh smoke`. El script instala Prometheus y Grafana y ejecuta cada perfil como Job de Kubernetes contra el Service de Flask. Las ejecuciones se identifican por perfil y fecha. La suite completa tarda más de 20 minutos.
+
+El script abre el acceso a Grafana automáticamente y muestra los resultados de k6 en la terminal. Al terminar, mantené la terminal abierta para seguir viendo los gráficos; Ctrl+C cierra el acceso que creó el script.
+
+Abrí http://localhost:3001/d/k6-local. Los gráficos de contenedores dependen del acceso de Prometheus a cAdvisor del nodo. Los datos de Prometheus son temporales y se pierden si se reemplaza su pod. El acceso anónimo a Grafana es solo para este entorno local.
+
+Para comparar una y dos réplicas de Flask, ejecutá el mismo perfil después de cada comando:
+
+```bash
+minikube -p soft-eng kubectl -- -n soft-eng scale deployment/flask-backend --replicas=1
+bash run_load_tests.sh average
+minikube -p soft-eng kubectl -- -n soft-eng scale deployment/flask-backend --replicas=2
+bash run_load_tests.sh average
+```
+
+Antes de cada prueba esperá a que las réplicas estén listas con `minikube -p soft-eng kubectl -- -n soft-eng rollout status deployment/flask-backend`. Las solicitudes de k6 cierran la conexión para favorecer el reparto entre pods, pero la distribución debe comprobarse mediante los logs de cada pod.

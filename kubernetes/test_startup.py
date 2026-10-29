@@ -46,6 +46,8 @@ class StartupTest(unittest.TestCase):
         self.repo = self.root / "repo con espacios"
         self.repo.mkdir()
         shutil.copy(Path(__file__).resolve().parents[1] / "run_kubernetes.sh", self.repo)
+        (self.repo / "kubernetes").mkdir()
+        shutil.copy(Path(__file__).resolve().parent / "app.yaml", self.repo / "kubernetes")
         (self.repo / ".env.example").write_text("POSTGRES_DB=example\n")
         self.calls = self.root / "calls.jsonl"
         tools = self.root / "bin"
