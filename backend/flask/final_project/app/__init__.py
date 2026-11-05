@@ -45,6 +45,9 @@ def create_app(config_overrides: dict | None = None) -> Flask:
     app = Flask(__name__)
     app.config["SQLALCHEMY_DATABASE_URI"] = _sqlalchemy_database_uri()
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+    # Validate pooled connections before use: after a PostgreSQL restart the
+    # pool holds dead connections and the first requests would fail with 500.
+    app.config["SQLALCHEMY_ENGINE_OPTIONS"] = {"pool_pre_ping": True}
     app.config["SECRET_KEY"] = os.getenv("FLASK_SECRET_KEY", "dev-change-me")
 
     # Allow test overrides (e.g. SQLite in-memory for pytest)
@@ -93,8 +96,10 @@ def create_app(config_overrides: dict | None = None) -> Flask:
     from app.controllers.auth_controller import auth_bp
     from app.controllers.config_controller import config_bp
     from app.controllers.dashboard_controller import dashboard_bp
+    from app.controllers.health_controller import health_bp
     from app.controllers.telemetry_controller import telemetry_bp
 
+    app.register_blueprint(health_bp, url_prefix="/health")
     app.register_blueprint(telemetry_bp, url_prefix="/api/telemetry")
     app.register_blueprint(auth_bp, url_prefix="/api/auth")
     app.register_blueprint(dashboard_bp, url_prefix="/api/dashboard")
