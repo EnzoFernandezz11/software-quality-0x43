@@ -1,0 +1,25 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: database-migrations
+  namespace: soft-eng
+spec:
+  backoffLimit: 1
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: migrate
+          image: soft-eng-flask:local
+          imagePullPolicy: Never
+          command: ["flask", "db", "upgrade"]
+          envFrom:
+            - secretRef:
+                name: app-env
+          env:
+            - name: POSTGRES_HOST
+              value: postgres
+            - name: POSTGRES_PORT
+              value: "5432"
+            - name: DATABASE_URL
+              value: ""

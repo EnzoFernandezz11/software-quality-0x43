@@ -23,7 +23,7 @@ FROM base AS builder
 COPY --from=deps /app/node_modules ./node_modules
 COPY frontend/dashboard/ ./
 
-ARG NEXT_PUBLIC_API_URL=http://localhost:3000
+ARG NEXT_PUBLIC_API_URL=http://localhost:5000/api
 ENV NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
 
 ENV NEXT_TELEMETRY_DISABLED=1
