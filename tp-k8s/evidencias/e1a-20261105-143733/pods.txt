@@ -1,0 +1,18 @@
+2026-11-05T14:37:34-03:00 NAME                    READY   STATUS    RESTARTS   AGE   IP            NODE         NOMINATED NODE   READINESS GATES
+2026-11-05T14:37:34-03:00 back-5f8f749ddf-2npbh   1/1     Running   0          34s   10.244.0.10   terrasense   <none>           <none>
+2026-11-05T14:37:34-03:00 back-5f8f749ddf-xdhbb   1/1     Running   0          34s   10.244.0.9    terrasense   <none>           <none>
+2026-11-05T14:37:55-03:00 back-5f8f749ddf-2npbh   1/1     Terminating   0          55s   10.244.0.10   terrasense   <none>           <none>
+2026-11-05T14:37:55-03:00 back-5f8f749ddf-fs4hx   0/1     Pending       0          0s    <none>        <none>       <none>           <none>
+2026-11-05T14:37:55-03:00 back-5f8f749ddf-2npbh   1/1     Terminating   0          55s   10.244.0.10   terrasense   <none>           <none>
+2026-11-05T14:37:55-03:00 back-5f8f749ddf-fs4hx   0/1     Pending       0          0s    <none>        terrasense   <none>           <none>
+2026-11-05T14:37:55-03:00 back-5f8f749ddf-fs4hx   0/1     Init:0/1      0          0s    <none>        terrasense   <none>           <none>
+2026-11-05T14:37:55-03:00 back-5f8f749ddf-fs4hx   0/1     Init:0/1      0          0s    <none>        terrasense   <none>           <none>
+2026-11-05T14:37:55-03:00 back-5f8f749ddf-fs4hx   0/1     Init:0/1      0          0s    10.244.0.12   terrasense   <none>           <none>
+2026-11-05T14:37:56-03:00 back-5f8f749ddf-fs4hx   0/1     PodInitializing   0          1s    10.244.0.12   terrasense   <none>           <none>
+2026-11-05T14:37:56-03:00 back-5f8f749ddf-fs4hx   0/1     Running           0          1s    10.244.0.12   terrasense   <none>           <none>
+2026-11-05T14:38:01-03:00 back-5f8f749ddf-2npbh   0/1     Completed         0          61s   10.244.0.10   terrasense   <none>           <none>
+2026-11-05T14:38:01-03:00 back-5f8f749ddf-2npbh   0/1     Completed         0          61s   10.244.0.10   terrasense   <none>           <none>
+2026-11-05T14:38:01-03:00 back-5f8f749ddf-2npbh   0/1     Completed         0          61s   10.244.0.10   terrasense   <none>           <none>
+2026-11-05T14:38:01-03:00 back-5f8f749ddf-2npbh   0/1     Completed         0          61s   10.244.0.10   terrasense   <none>           <none>
+2026-11-05T14:38:02-03:00 back-5f8f749ddf-fs4hx   1/1     Running           0          7s    10.244.0.12   terrasense   <none>           <none>
+2026-11-05T14:38:02-03:00 back-5f8f749ddf-fs4hx   1/1     Running           0          7s    10.244.0.12   terrasense   <none>           <none>
