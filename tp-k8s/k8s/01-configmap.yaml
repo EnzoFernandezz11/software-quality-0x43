@@ -1,0 +1,20 @@
+# Configuración NO sensible, compartida por la API, el Job de migraciones y la DB.
+# Lo sensible (usuario, contraseña, secret key) va en el Secret `terrasense-secrets`,
+# que deploy.sh crea a partir del .env (ver secret.example.yaml).
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: terrasense-config
+  namespace: terrasense
+data:
+  # Conexión a PostgreSQL: DNS interno del Service `db`
+  POSTGRES_HOST: db
+  POSTGRES_PORT: "5432"
+  POSTGRES_DB: terrasense
+  # Flask en modo producción
+  FLASK_APP: main:app
+  FLASK_DEBUG: "0"
+  FLASK_PORT: "5000"
+  # gunicorn lee esta variable al arrancar: se puede ajustar sin reconstruir la imagen
+  # (kubectl apply + rollout restart). 2 procesos x 4 hilos por pod.
+  GUNICORN_CMD_ARGS: "--workers=2 --threads=4 --timeout=30 --graceful-timeout=20 --access-logfile=-"

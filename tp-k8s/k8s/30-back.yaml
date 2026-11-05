@@ -1,0 +1,96 @@
+# API Flask servida con gunicorn. Es el Deployment que escala el HPA (#12).
+#
+# requests/limits: el HPA calcula el % de CPU sobre `requests.cpu`, por eso son
+# obligatorios. Valores de partida (perfil "nominal"); #12 los ajusta y documenta.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: back
+  namespace: terrasense
+  labels:
+    app: back
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: back
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: back
+    spec:
+      # Tiempo para que gunicorn termine los requests en curso tras el SIGTERM
+      terminationGracePeriodSeconds: 30
+      initContainers:
+        - name: wait-db
+          image: postgres:16-alpine
+          command: [sh, -c, 'until pg_isready -h "$POSTGRES_HOST" -p "$POSTGRES_PORT"; do sleep 2; done']
+          envFrom:
+            - configMapRef:
+                name: terrasense-config
+      containers:
+        - name: back
+          image: terrasense-back:local
+          imagePullPolicy: Never
+          # La config de workers/threads viene de GUNICORN_CMD_ARGS (ConfigMap)
+          command: ["gunicorn", "--bind=0.0.0.0:5000", "main:app"]
+          envFrom:
+            - configMapRef:
+                name: terrasense-config
+            - secretRef:
+                name: terrasense-secrets
+          ports:
+            - name: http
+              containerPort: 5000
+          # Ready = puede llegar a la DB. Si falla, sale del Service (no se reinicia).
+          readinessProbe:
+            httpGet:
+              path: /health/ready
+              port: http
+            periodSeconds: 5
+            timeoutSeconds: 2
+            failureThreshold: 2
+          # Alive = el proceso responde. NO consulta la DB, para no reiniciar
+          # todos los pods en cascada si PostgreSQL se pone lento.
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: http
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 2
+            failureThreshold: 3
+          lifecycle:
+            # Da tiempo a que el Ingress/Service saquen el pod de sus endpoints
+            # antes de que gunicorn deje de aceptar conexiones.
+            preStop:
+              exec:
+                command: ["sleep", "5"]
+          resources:
+            requests:
+              cpu: 100m
+              memory: 192Mi
+            limits:
+              cpu: 500m
+              memory: 384Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: back
+  namespace: terrasense
+  labels:
+    app: back
+spec:
+  type: ClusterIP
+  selector:
+    app: back
+  ports:
+    - name: http
+      port: 5000
+      targetPort: http
