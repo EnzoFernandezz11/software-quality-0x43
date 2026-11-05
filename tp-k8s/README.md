@@ -291,6 +291,11 @@ quedó listo no constituyen una caída del servicio. Evidencia:
 [pods](evidencias/e1a-20261105-143733/pods.txt) y
 [endpoints](evidencias/e1a-20261105-143733/endpoints.txt).
 
+E1a cumplió los SLOs con **5 POST/s**, una carga aproximadamente **13 veces menor**
+que el objetivo nominal de **67 req/s**. Este resultado demuestra continuidad del
+servicio ante la caída de un pod con carga reducida; no permite asegurar disponibilidad
+durante una caída a carga nominal. Esa capacidad deberá evaluarse en #13.
+
 **E1b:** se borraron ambos pods a las 14:39:10. El Service quedó sin endpoints
 listos hasta las 14:39:17. El primer POST con 503 terminó a las **14:39:14,373671**;
 el último, a las **14:39:20,174335**: diferencia **5,800664 s**. El primer 201
