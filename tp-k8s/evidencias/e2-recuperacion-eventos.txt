@@ -1,0 +1,39 @@
+LAST SEEN   TYPE      REASON                         OBJECT                         MESSAGE
+5m20s       Normal    ScalingReplicaSet              deployment/back                Scaled up replica set back-6f77b7f5bf from 0 to 1
+5m20s       Normal    SuccessfulCreate               replicaset/back-6f77b7f5bf     Created pod: back-6f77b7f5bf-dl9kl
+5m20s       Normal    Scheduled                      pod/back-6f77b7f5bf-dl9kl      Successfully assigned terrasense/back-6f77b7f5bf-dl9kl to terrasense
+5m19s       Normal    Pulled                         pod/back-6f77b7f5bf-dl9kl      Container image "postgres:16-alpine" already present on machine and can be accessed by the pod
+5m19s       Normal    Created                        pod/back-6f77b7f5bf-dl9kl      Container created
+5m19s       Normal    Started                        pod/back-6f77b7f5bf-dl9kl      Container started
+101s        Warning   Unhealthy                      pod/back-6f77b7f5bf-dl9kl      Readiness probe failed: Get "http://10.244.0.26:5000/health/ready": dial tcp 10.244.0.26:5000: connect: connection refused
+101s        Normal    Pulled                         pod/back-6f77b7f5bf-dl9kl      Container image "terrasense-back:local" already present on machine and can be accessed by the pod
+101s        Normal    Created                        pod/back-6f77b7f5bf-dl9kl      Container created
+101s        Normal    Started                        pod/back-6f77b7f5bf-dl9kl      Container started
+94s         Warning   Unhealthy                      pod/back-6f77b7f5bf-dl9kl      Readiness probe failed: Get "http://10.244.0.26:5000/health/ready": context deadline exceeded (Client.Timeout exceeded while awaiting headers)
+5m7s        Normal    Created                        pod/back-6f77b7f5bf-jtrst      Container created
+5m7s        Normal    SuccessfulCreate               replicaset/back-6f77b7f5bf     Created pod: back-6f77b7f5bf-jtrst
+5m7s        Normal    ScalingReplicaSet              deployment/back                Scaled up replica set back-6f77b7f5bf from 1 to 2
+5m7s        Normal    ScalingReplicaSet              deployment/back                Scaled down replica set back-5f8f749ddf from 2 to 1
+5m7s        Normal    Killing                        pod/back-5f8f749ddf-qh25j      Stopping container back
+5m7s        Normal    Scheduled                      pod/back-6f77b7f5bf-jtrst      Successfully assigned terrasense/back-6f77b7f5bf-jtrst to terrasense
+5m7s        Normal    Pulled                         pod/back-6f77b7f5bf-jtrst      Container image "postgres:16-alpine" already present on machine and can be accessed by the pod
+5m7s        Normal    SuccessfulDelete               replicaset/back-5f8f749ddf     Deleted pod: back-5f8f749ddf-qh25j
+5m7s        Normal    Started                        pod/back-6f77b7f5bf-jtrst      Container started
+99s         Normal    Pulled                         pod/back-6f77b7f5bf-jtrst      Container image "terrasense-back:local" already present on machine and can be accessed by the pod
+99s         Normal    Created                        pod/back-6f77b7f5bf-jtrst      Container created
+99s         Normal    Started                        pod/back-6f77b7f5bf-jtrst      Container started
+99s         Warning   Unhealthy                      pod/back-6f77b7f5bf-jtrst      Readiness probe failed: Get "http://10.244.0.27:5000/health/ready": dial tcp 10.244.0.27:5000: connect: connection refused
+92s         Warning   Unhealthy                      pod/back-6f77b7f5bf-jtrst      Readiness probe failed: Get "http://10.244.0.27:5000/health/ready": context deadline exceeded (Client.Timeout exceeded while awaiting headers)
+4m55s       Normal    Killing                        pod/back-5f8f749ddf-kj675      Stopping container back
+4m55s       Normal    SuccessfulDelete               replicaset/back-5f8f749ddf     Deleted pod: back-5f8f749ddf-kj675
+4m55s       Normal    ScalingReplicaSet              deployment/back                Scaled down replica set back-5f8f749ddf from 1 to 0
+4m26s       Warning   FailedGetResourceMetric        horizontalpodautoscaler/back   failed to get cpu utilization: unable to get metrics for resource cpu: no metrics returned from resource metrics API
+4m26s       Warning   FailedComputeMetricsReplicas   horizontalpodautoscaler/back   invalid metrics (1 invalid out of 1), first error is: failed to get cpu resource metric value: failed to get cpu utilization: unable to get metrics for resource cpu: no metrics returned from resource metrics API
+41s         Warning   FailedGetResourceMetric        horizontalpodautoscaler/back   failed to get cpu utilization: did not receive metrics for targeted pods (pods might be unready)
+56s         Warning   FailedComputeMetricsReplicas   horizontalpodautoscaler/back   invalid metrics (1 invalid out of 1), first error is: failed to get cpu resource metric value: failed to get cpu utilization: did not receive metrics for targeted pods (pods might be unready)
+2m7s        Warning   Unhealthy                      pod/back-6f77b7f5bf-dl9kl      Liveness probe failed: Get "http://10.244.0.26:5000/health": context deadline exceeded (Client.Timeout exceeded while awaiting headers)
+2m5s        Warning   Unhealthy                      pod/back-6f77b7f5bf-jtrst      Liveness probe failed: Get "http://10.244.0.27:5000/health": context deadline exceeded (Client.Timeout exceeded while awaiting headers)
+2m7s        Normal    Killing                        pod/back-6f77b7f5bf-dl9kl      Container back failed liveness probe, will be restarted
+2m5s        Normal    Killing                        pod/back-6f77b7f5bf-jtrst      Container back failed liveness probe, will be restarted
+102s        Warning   Unhealthy                      pod/back-6f77b7f5bf-dl9kl      Readiness probe failed: Get "http://10.244.0.26:5000/health/ready": read tcp 10.244.0.1:41780->10.244.0.26:5000: read: connection reset by peer
+100s        Warning   Unhealthy                      pod/back-6f77b7f5bf-jtrst      Readiness probe failed: Get "http://10.244.0.27:5000/health/ready": read tcp 10.244.0.1:33762->10.244.0.27:5000: read: connection reset by peer

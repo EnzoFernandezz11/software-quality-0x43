@@ -4,7 +4,7 @@
   "schemaVersion": 39,
   "refresh": "5s",
   "time": {
-    "from": "now-5m",
+    "from": "now-1h",
     "to": "now"
   },
   "panels": [
@@ -24,9 +24,9 @@
       },
       "targets": [
         {
-          "expr": "k6_vus",
+          "expr": "k6_vus{profile=~\"$profile\",run_id=~\"$run_id\"}",
           "refId": "A",
-          "legendFormat": "{{profile}} \u00b7 {{run_id}}"
+          "legendFormat": "{{profile}} · {{run_id}}"
         }
       ],
       "fieldConfig": {
@@ -44,7 +44,7 @@
           "mode": "multi"
         }
       },
-      "description": "Cada color representa una ejecuci\u00f3n. Las seis pruebas corren una despu\u00e9s de otra."
+      "description": "Filtrá por prueba y ejecución. Las métricas de pods reflejan el clúster, no una prueba específica."
     },
     {
       "id": 2,
@@ -62,9 +62,9 @@
       },
       "targets": [
         {
-          "expr": "sum by (profile, run_id) (rate(k6_http_reqs_total[1m]))",
+          "expr": "sum by (profile, run_id) (rate(k6_http_reqs_total{profile=~\"$profile\",run_id=~\"$run_id\"}[1m]))",
           "refId": "A",
-          "legendFormat": "{{profile}} \u00b7 {{run_id}}"
+          "legendFormat": "{{profile}} · {{run_id}}"
         }
       ],
       "fieldConfig": {
@@ -99,9 +99,9 @@
       },
       "targets": [
         {
-          "expr": "100 * k6_http_req_failed_rate",
+          "expr": "100 * k6_http_req_failed_rate{profile=~\"$profile\",run_id=~\"$run_id\"}",
           "refId": "A",
-          "legendFormat": "{{profile}} \u00b7 {{run_id}}"
+          "legendFormat": "{{profile}} · {{run_id}}"
         }
       ],
       "fieldConfig": {
@@ -138,9 +138,9 @@
       },
       "targets": [
         {
-          "expr": "k6_http_req_duration_p95",
+          "expr": "k6_http_req_duration_p95{profile=~\"$profile\",run_id=~\"$run_id\"}",
           "refId": "A",
-          "legendFormat": "{{profile}} \u00b7 {{run_id}}"
+          "legendFormat": "{{profile}} · {{run_id}}"
         }
       ],
       "fieldConfig": {
@@ -168,7 +168,7 @@
         "h": 10,
         "w": 12,
         "x": 0,
-        "y": 20
+        "y": 30
       },
       "datasource": {
         "type": "prometheus",
@@ -176,7 +176,7 @@
       },
       "targets": [
         {
-          "expr": "sum by (pod) (rate(container_cpu_usage_seconds_total{namespace=\"soft-eng\",container!=\"\",container!=\"POD\"}[1m]))",
+          "expr": "sum by (pod) (rate(container_cpu_usage_seconds_total{namespace=\"terrasense\",container!=\"\",container!=\"POD\"}[1m]))",
           "refId": "A",
           "legendFormat": "{{pod}}"
         }
@@ -213,7 +213,7 @@
       },
       "targets": [
         {
-          "expr": "sum by (pod) (container_memory_working_set_bytes{namespace=\"soft-eng\",container!=\"\",container!=\"POD\"})",
+          "expr": "sum by (pod) (container_memory_working_set_bytes{namespace=\"terrasense\",container!=\"\",container!=\"POD\"})",
           "refId": "A",
           "legendFormat": "{{pod}}"
         }
@@ -242,6 +242,54 @@
       "10s",
       "30s",
       "1m"
+    ]
+  },
+  "templating": {
+    "list": [
+      {
+        "name": "profile",
+        "label": "Prueba",
+        "type": "query",
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+        },
+        "query": {
+          "query": "label_values(k6_http_reqs_total, profile)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "definition": "label_values(k6_http_reqs_total, profile)",
+        "refresh": 1,
+        "includeAll": true,
+        "allValue": ".*",
+        "multi": false,
+        "current": {
+          "text": "All",
+          "value": "$__all"
+        }
+      },
+      {
+        "name": "run_id",
+        "label": "Ejecución",
+        "type": "query",
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+        },
+        "query": {
+          "query": "label_values(k6_http_reqs_total{profile=~\"$profile\"}, run_id)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "definition": "label_values(k6_http_reqs_total{profile=~\"$profile\"}, run_id)",
+        "refresh": 1,
+        "includeAll": true,
+        "allValue": ".*",
+        "multi": false,
+        "current": {
+          "text": "All",
+          "value": "$__all"
+        }
+      }
     ]
   }
 }
