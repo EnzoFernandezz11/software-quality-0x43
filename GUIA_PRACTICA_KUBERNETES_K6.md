@@ -1,5 +1,10 @@
 # Práctica paso a paso: Kubernetes y k6
 
+> **Guía histórica.** Describe la práctica previa en la rama `feat/pruebas-carga`.
+> En el TP4, `run_kubernetes.sh` y la carpeta `kubernetes/` se reemplazaron por
+> [`tp-k8s/`](tp-k8s/README.md) (`bash tp-k8s/deploy.sh`), así que los comandos de
+> abajo solo funcionan sobre esa rama.
+
 Esta guía permite levantar la aplicación en Minikube, comprobar sus Pods y medir
 la API Flask con k6. La rama de trabajo es **`feat/pruebas-carga`**, creada a
 partir de `feat/minikube`. Incluye `run_kubernetes.sh`, los manifiestos de

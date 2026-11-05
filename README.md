@@ -8,4 +8,4 @@ Repositorio base del trabajo final: sistema IoT de punta a punta (ESP32, backend
 - **Consigna y criterios de evaluación:** [docs/CONSIGNA.md](docs/CONSIGNA.md)
 - **Análisis local con SonarQube:** [docs/SONARQUBE.md](docs/SONARQUBE.md)
 - **Práctica de Kubernetes y k6:** [GUIA_PRACTICA_KUBERNETES_K6.md](GUIA_PRACTICA_KUBERNETES_K6.md)
-- **Ejecutar con Kubernetes local (Minikube):** [kubernetes/README.md](kubernetes/README.md)
+- **TP4 · Kubernetes, HPA y k6 (despliegue en Minikube):** [tp-k8s/README.md](tp-k8s/README.md)
