@@ -1,0 +1,7 @@
+TRUNCATE TABLE
+INSERT 0 50000
+ total_lecturas 
+----------------
+          50000
+(1 row)
+
