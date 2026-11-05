@@ -146,7 +146,15 @@ Si cambia la IP del nodo (por ejemplo, después de `minikube delete`), volvé a 
 
 > **Evidencia de #12:** [registro temporal del HPA y los pods](evidencias/hpa-experimento.txt), [salida de k6](evidencias/e2-recuperacion-k6.txt) y [estados durante el colapso](evidencias/e2-recuperacion-pods.txt). La falla observada fue la pérdida de readiness y el reinicio por liveness, no OOMKilled.
 >
-> **Capturas pendientes:** imágenes de la consola mostrando el escalado y el colapso (#12); `falla-ux.png` generada por k6/browser (#14). En el entorno de ejecución no hubo acceso a una interfaz de captura de pantalla.
+**HPA bajo carga:** 5 réplicas, CPU de 124 % frente al objetivo de 60 %, un pod no listo y un reinicio. k6 avisa que alcanzó el máximo de VUs y no puede generar toda la carga prevista.
+
+![HPA escalando durante la carga](evidencias/hpa-escalando.png)
+
+**Colapso E2:** durante el pico de 400 iteraciones/s, los dos pods aparecen `0/1` y el HPA muestra CPU desconocida. k6 vuelve a avisar que agotó los VUs disponibles; la captura no muestra el resumen final de respuestas.
+
+![Pods no listos durante el pico E2](evidencias/e2-pods-no-listos.png)
+
+> **Pendiente #14:** `falla-ux.png` generada por k6/browser.
 
 Los siguientes gráficos se generaron a partir de los registros anteriores; no son capturas de consola:
 
