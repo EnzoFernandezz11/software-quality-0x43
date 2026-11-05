@@ -1,0 +1,6 @@
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+2026-11-05T14:37:34-03:00 NAME   READY                    NOT_READY
+2026-11-05T14:37:34-03:00 back   10.244.0.10,10.244.0.9   <none>
+2026-11-05T14:37:55-03:00 back   10.244.0.9               <none>
+2026-11-05T14:37:55-03:00 back   10.244.0.9               10.244.0.12
+2026-11-05T14:38:02-03:00 back   10.244.0.12,10.244.0.9   <none>

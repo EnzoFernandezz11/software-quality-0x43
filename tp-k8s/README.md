@@ -143,11 +143,33 @@ Si cambia la IP del nodo (por ejemplo, después de `minikube delete`), volvé a 
 
 ![Dashboard vía Ingress](evidencias/a1-dashboard-via-ingress.png)
 
-> _Pendiente: #12 y #14. Guardar las capturas en `evidencias/`._
+> _Pendiente: capturas de #12._
 
 - [ ] `kubectl get hpa` escalando los pods bajo carga (#12)
 - [ ] Evidencia del colapso: `OOMKilled` o `CrashLoopBackOff` (#12)
-- [ ] `falla-ux.png` generada por `k6/browser` durante la caída de la API (#14)
+- [x] `falla-ux.png` generada por `k6/browser` durante la caída de la API (#14)
+
+**E1b (#14):** captura automática del 2026-11-05 a las 14:39:16 (UTC−3).
+El dashboard conserva las últimas lecturas y muestra «Failed to fetch» al perder la API.
+
+![Dashboard durante la caída de los pods de la API](evidencias/falla-ux.png)
+
+En [E1a](evidencias/e1a-20261105-143733/ux.png) el dashboard siguió funcionando.
+Las salidas de consola están en [E1a/k6.txt](evidencias/e1a-20261105-143733/k6.txt)
+y [E1b/k6.txt](evidencias/e1b-20261105-143848/k6.txt); el análisis está en la sección 5.
+
+**Consola E1a:** captura de la salida guardada de k6. Las 301 solicitudes
+respondieron 201, sin errores, y el p95 fue 24,58 ms. Se cumplieron ambos SLOs
+y el navegador no detectó degradación durante su observación.
+
+![Resultados de E1a: cero errores y SLOs cumplidos](evidencias/e1a-resultados.png)
+
+**Consola E1b:** captura de la salida guardada de k6. Fallaron 30 de 300
+solicitudes (10 %), incumpliendo el SLO de errores menor al 1 %. El p95 de
+34,01 ms cumplió el objetivo de latencia. `ux_degradada = 100 %` corresponde
+a la única observación del navegador, que detectó la falla.
+
+![Resultados de E1b: SLO de errores incumplido](evidencias/e1b-slo-errores.png)
 
 ---
 
@@ -167,7 +189,141 @@ SLOs: `http_req_failed < 1 %` y p95 de `POST /api/telemetry` < 300 ms.
 
 ## 5. Análisis de resiliencia (Actividad 4)
 
-> _Pendiente: #12 (E2) y #14 (E1)._
+### E1: caída de pods y experiencia del usuario (#14)
+
+`k6/e1-falla.js` ejecuta dos escenarios: una carga constante de **5 POST/s** a
+`/api/telemetry` por el Ingress y un VU de `k6/browser` que abre el dashboard al
+momento de la falla. La carga baja busca aislar el efecto del borrado de pods;
+no reemplaza el ensayo de capacidad de #13. Se conserva el perfil nominal de recursos.
+
+Con el despliegue de la sección 1 funcionando, DNS local configurado y Chromium/Chrome
+instalado (también se detecta Brave), ejecutar **una prueba por vez**:
+
+```bash
+bash tp-k8s/k6/e1.sh e1a  # borra un pod; exige al menos dos pods listos
+bash tp-k8s/k6/e1.sh e1b  # borra todos los pods actuales del backend
+```
+
+Cada ejecución dura 60 s e inyecta la falla a los 20 s desde el inicio de los escenarios
+de k6. El navegador tiene `startTime: 20s` y espera hasta 12 s por el mensaje de error
+de la SPA; captura la pantalla al detectarlo o al vencer esa espera. No intercepta
+requests ni altera la interfaz. En E1a, que la pantalla siga funcionando es un resultado
+válido. En E1b, si no aparece una degradación visible, la ejecución lo informa y no
+copia la captura a `evidencias/falla-ux.png`: se debe revisar el registro y repetir,
+sin presentar una pantalla sana como evidencia de caída.
+
+El orquestador usa `minikube -p terrasense kubectl -- --context=terrasense -n terrasense`.
+No crea clústeres, modifica `/etc/hosts`, cambia réplicas ni desactiva el HPA. Si #12
+ya está aplicada, registra su configuración; en E1b borra todos los pods encontrados
+en el momento de la falla, independientemente del número de réplicas. El Deployment
+los repone automáticamente. Se recomienda comprobar que el backend esté estable
+antes de la siguiente ejecución.
+
+Opciones para repetir el experimento:
+
+```bash
+RPS=5 DURATION_SECONDS=90 FAILURE_DELAY_SECONDS=20 UX_WAIT_SECONDS=12 \
+  bash tp-k8s/k6/e1.sh e1b
+# Si el navegador está fuera del PATH:
+K6_BROWSER_EXECUTABLE_PATH=/ruta/a/chromium bash tp-k8s/k6/e1.sh e1a
+# Con SKIP_HOSTS=1, resolver los dominios solo para curl/k6/navegador:
+INGRESS_IP=$(minikube -p terrasense ip) bash tp-k8s/k6/e1.sh e1b
+```
+
+También acepta `MINIKUBE_PROFILE`, `BASE_URL`, `FRONT_URL`, `RUN_ID`,
+`PRE_ALLOCATED_VUS` y `MAX_VUS`. Cambiar `BASE_URL` no cambia la URL de API que el
+frontend tiene compilada. Las corridas agregan telemetría a la DB de prueba.
+
+**Evidencias y medición.** Cada corrida crea un directorio nuevo
+`evidencias/e1a-<fecha-hora>/` o `evidencias/e1b-<fecha-hora>/` con:
+
+| Archivo | Contenido |
+|---|---|
+| `configuracion.txt`, `deployment.yaml`, `hpa.yaml` | Parámetros, versiones y configuración del backend/HPA |
+| `falla.txt`, `pods.txt`, `endpoints.txt` | Borrado, evolución de pods e IPs listas/no listas del Service con timestamps |
+| `k6.txt`, `requests.json`, `resumen-k6.json` | Consola, métricas por request y resumen de k6 |
+| `medicion.txt`, `medicion.json` | Primer/último error, ventana en segundos, primer éxito posterior, p95 y SLOs de los POST |
+| `ux.png` (E1a) / `falla-ux.png` (E1b) | Captura automática del dashboard |
+| `recuperacion.txt`, `eventos.txt` | Estado del backend al terminar y eventos de Kubernetes |
+
+La ventana pedida se calcula como **último error − primer error**, usando los timestamps
+de finalización de los POST de k6; no incluye las solicitudes del navegador. Un solo
+error produce una ventana de 0 s, no ausencia de falla. También se registra el primer
+POST exitoso posterior al último error. Si no hay errores, se informa «sin errores
+observados»; si no hay éxitos posteriores, la recuperación queda **sin observar** y la
+ventana es parcial. Los registros de endpoints permiten contrastar cuándo salió la IP
+del pod eliminado y cuándo apareció una IP lista de reemplazo; el Ingress puede tardar
+algo más en actualizar su ruteo. Los watches tienen resolución de 1 s.
+`dropped_iterations > 0` indica que no se mantuvo toda
+la carga prevista. Los thresholds de k6 y la tabla general evalúan los POST de toda
+la corrida: errores <1 % y p95 <300 ms. El análisis de E1b distingue además los
+resultados dentro de la ventana de falla. k6 devuelve 99 si incumple thresholds;
+las evidencias se conservan.
+
+**Readiness y cierre.** La readiness (`/health/ready`, cada 5 s, dos fallos para retirar
+un pod enfermo) evita enviar tráfico a pods que no llegan a la DB. En un borrado,
+Kubernetes además marca el endpoint como terminando y lo retira de los destinos listos.
+El `preStop: sleep 5` da tiempo a propagar ese cambio antes del SIGTERM; gunicorn tiene
+20 s de cierre graceful dentro de los 30 s de gracia del pod. Esto puede ocultar por
+completo E1a si el otro pod atiende las solicitudes. `e1.sh` usa `delete pod --wait=false`
+y conserva esa terminación normal: no equivale a cortar el proceso con SIGKILL. La
+estrategia `RollingUpdate/maxUnavailable: 0` regula despliegues, no garantiza disponibilidad
+cuando se borran manualmente todos los pods en E1b.
+
+**Resultados del 2026-11-05 (UTC−3).** Minikube v1.39.0, Kubernetes v1.37.0,
+nodo con 4 CPU / 6 GiB, k6 v2.3.0 y Brave 156.1.98.63 como Chromium headless.
+Dos réplicas iniciales, recursos nominales (`100m/192Mi` solicitados,
+`500m/384Mi` de límite), sin HPA en esta rama basada en #11. Ambas pruebas usaron
+5 POST/s durante 60 s, falla a los 20 s y cero iteraciones descartadas.
+Se ejecutaron consecutivamente contra la DB de prueba recién desplegada, sin precarga.
+
+| Prueba | Qué vio el usuario | Ventana de error (s) | Primer éxito posterior | Error (%) | p95 (ms) | ¿SLOs? |
+|---|---|---|---|---|---|---|
+| E1a | Dashboard operativo | Sin errores | No aplica | 0 (0/301) | 24,58 | Sí |
+| E1b | Banner «Failed to fetch» y datos anteriores | 5,801 | 14:39:20,410 | 10 (30/300) | 34,02 | No: errores ≥1 % |
+
+**E1a:** se borró `back-5f8f749ddf-2npbh` a las 14:37:54–55. Su IP
+`10.244.0.10` salió de los endpoints listos a las 14:37:55; `10.244.0.9` quedó
+atendiendo. El reemplazo (`10.244.0.12`) apareció listo a las 14:38:02. No hubo
+errores de escritura ni mensaje de error en la captura. Los 7 s hasta que el reemplazo
+quedó listo no constituyen una caída del servicio. Evidencia:
+[medición](evidencias/e1a-20261105-143733/medicion.txt),
+[pods](evidencias/e1a-20261105-143733/pods.txt) y
+[endpoints](evidencias/e1a-20261105-143733/endpoints.txt).
+
+**E1b:** se borraron ambos pods a las 14:39:10. El Service quedó sin endpoints
+listos hasta las 14:39:17. El primer POST con 503 terminó a las **14:39:14,373671**;
+el último, a las **14:39:20,174335**: diferencia **5,800664 s**. El primer 201
+posterior terminó a las **14:39:20,409672** (≈3,4 s después de la aparición de
+endpoints listos). La disponibilidad del Service y la recuperación observada por
+Ingress/k6 no fueron simultáneas. El navegador capturó el banner a las 14:39:16,646,
+dentro de esa ventana. El frontend no quedó en blanco: mantuvo las últimas lecturas,
+pero dejó visible el error de comunicación. La recuperación fue automática, sin
+escalado manual ni cambios de configuración. Se mantuvo el SLO de latencia, pero
+los 30 errores 503 incumplieron el de errores; las respuestas 503 rápidas también
+forman parte del p95, por lo que una latencia baja no demuestra disponibilidad.
+
+**SLOs durante la ventana de falla:** al seleccionar en `requests.json` los POST
+finalizados entre el primer y el último error (ambos incluidos), se obtienen
+**30 solicitudes y 30 errores 503: 100 % de errores**, con **p95 de 1,61 ms**.
+Dentro de esos **5,800664 s** se incumplió el SLO de errores y se cumplió el objetivo
+de latencia por tratarse de respuestas de error rápidas. El **10 % de errores y
+p95 de 34,02 ms** de la tabla corresponden a los **60 s completos**, que incluyen
+también las 270 respuestas 201. Son dos intervalos de análisis de la misma corrida.
+
+Evidencia: [medición](evidencias/e1b-20261105-143848/medicion.txt),
+[borrado](evidencias/e1b-20261105-143848/falla.txt),
+[endpoints](evidencias/e1b-20261105-143848/endpoints.txt) y
+[estado final](evidencias/e1b-20261105-143848/recuperacion.txt).
+
+Extracto de la salida real de E1b (`k6.txt`):
+
+```text
+http_req_failed................: 10.00%  30 out of 300
+http_req_duration..............: avg=19.57ms  med=19.22ms  p(95)=34.01ms  p(99)=53.65ms  max=108.4ms
+```
+
+> E2 sigue pendiente de #12 en esta rama.
 
 ---
 

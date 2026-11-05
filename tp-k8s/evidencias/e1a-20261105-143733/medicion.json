@@ -1,0 +1,17 @@
+{
+  "requests": 301,
+  "errores": 0,
+  "porcentaje_error": 0.0,
+  "estados_http": {
+    "201": 301
+  },
+  "primer_error": null,
+  "ultimo_error": null,
+  "ventana_error_s": null,
+  "primer_exito_posterior": null,
+  "recuperacion_observada": null,
+  "p95_ms": 24.581378,
+  "iteraciones_descartadas": 0,
+  "slo_error": true,
+  "slo_p95": true
+}
