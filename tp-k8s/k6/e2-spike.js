@@ -6,8 +6,10 @@ const rate = Number(__ENV.SPIKE_RPS || 400);
 const preAllocatedVUs = Number(__ENV.PRE_ALLOCATED_VUS || 200);
 const maxVUs = Number(__ENV.MAX_VUS || 1000);
 const errors502 = new Counter('telemetry_http_502');
+const errors503 = new Counter('telemetry_http_503');
 const errors504 = new Counter('telemetry_http_504');
 const transportErrors = new Counter('telemetry_transport_errors');
+const otherErrors = new Counter('telemetry_other_non_201');
 
 if (!Number.isInteger(rate) || rate < 1 || !Number.isInteger(preAllocatedVUs) ||
     preAllocatedVUs < 1 || !Number.isInteger(maxVUs) || maxVUs < preAllocatedVUs) {
@@ -42,7 +44,9 @@ export default function () {
     { headers: { 'Content-Type': 'application/json' }, tags: { name: 'telemetry' }, timeout: '30s' },
   );
   errors502.add(response.status === 502 ? 1 : 0);
+  errors503.add(response.status === 503 ? 1 : 0);
   errors504.add(response.status === 504 ? 1 : 0);
   transportErrors.add(response.status === 0 ? 1 : 0);
+  otherErrors.add(![0, 201, 502, 503, 504].includes(response.status) ? 1 : 0);
   check(response, { 'telemetry responde 201': (r) => r.status === 201 });
 }

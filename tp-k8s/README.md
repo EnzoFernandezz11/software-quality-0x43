@@ -45,7 +45,7 @@ El dashboard es una **SPA**: sus componentes son `'use client'` y hacen `fetch` 
 | `30-back.yaml` | Deployment + Service `back` (ClusterIP) | gunicorn, readiness/liveness, requests/limits, preStop |
 | `40-front.yaml` | Deployment + Service `front` (ClusterIP) | Next.js standalone |
 | `50-ingress.yaml` | Ingress `terrasense-ingress` | Plantilla del Anexo C |
-| `hpa.yaml` | HPA `back` | Escala el Deployment del backend por CPU |
+| `60-hpa.yaml` | HPA `back` | Escala el Deployment del backend por CPU |
 
 ---
 
@@ -54,7 +54,7 @@ El dashboard es una **SPA**: sus componentes son `'use client'` y hacen `fetch` 
 ### Requisitos
 
 - Linux con **Docker** y **Minikube** (probado con Minikube v1.39 y driver docker). `kubectl` no hace falta porque se usa `minikube kubectl --`.
-- **4 CPU y 6 GB de RAM libres** para el nodo, y unos 20 GB de disco para Docker.
+- **4 CPU y 6 GB de RAM libres** para el nodo, y unos 20 GB de disco para Docker. Las mediciones de #12 se hicieron con 4 CPU y 4 GiB (`MINIKUBE_MEMORY=4096`), no con los 6 GiB predeterminados; #13 debe indicar y coordinar el entorno elegido antes de comparar resultados.
 - **k6** ≥ 1.0 para las pruebas. `k6/browser` necesita además Chromium o Google Chrome.
 
 ### Levantar todo
@@ -144,11 +144,15 @@ Si cambia la IP del nodo (por ejemplo, después de `minikube delete`), volvé a 
 
 ![Dashboard vía Ingress](evidencias/a1-dashboard-via-ingress.png)
 
-> _Pendiente: #12 y #14. Guardar las capturas en `evidencias/`._
+> **Evidencia de #12:** [registro temporal del HPA y los pods](evidencias/hpa-experimento.txt), [salida de k6](evidencias/e2-recuperacion-k6.txt) y [estados durante el colapso](evidencias/e2-recuperacion-pods.txt). La falla observada fue la pérdida de readiness y el reinicio por liveness, no OOMKilled.
+>
+> **Capturas pendientes:** imágenes de la consola mostrando el escalado y el colapso (#12); `falla-ux.png` generada por k6/browser (#14). En el entorno de ejecución no hubo acceso a una interfaz de captura de pantalla.
 
-- [ ] `kubectl get hpa` escalando los pods bajo carga (#12)
-- [ ] Evidencia del colapso: `OOMKilled` o `CrashLoopBackOff` (#12)
-- [ ] `falla-ux.png` generada por `k6/browser` durante la caída de la API (#14)
+Los siguientes gráficos se generaron a partir de los registros anteriores; no son capturas de consola:
+
+![Escalado del HPA observado en la carga sostenida](evidencias/hpa-escalado-grafico.png)
+
+![Caída y recuperación autónoma en E2](evidencias/e2-recuperacion-grafico.png)
 
 ---
 
@@ -168,7 +172,49 @@ SLOs: `http_req_failed < 1 %` y p95 de `POST /api/telemetry` < 300 ms.
 
 ## 5. Análisis de resiliencia (Actividad 4)
 
-### HPA y E2: pico de tráfico
+En la carga sostenida con el perfil nominal, el HPA pasó de 2 a 6 réplicas y luego volvió automáticamente a 2. Hubo fallas de readiness y liveness y reinicios; mientras los pods no estaban listos, el HPA no pudo calcular el uso de CPU. El 70,12 % de las 7.023 solicitudes completadas falló y el p95 fue 26,61 s. k6 descartó 2.976 iteraciones, por lo que no es una medición nominal válida para #13. Es una señal de riesgo que #13 debe investigar, no un veredicto go/no-go. La consulta `find_recent_with_motion` es una posible causa de carga y la liveness bajo saturación puede agravar la caída; no se demostró una causa única.
+
+En E2 (4 CPU, 4 GiB, límites estresados de 250m/256Mi), el pico objetivo subió a 400 req/s en 5 s. De 11.137 solicitudes completadas, fallaron 10.345: **9.779 HTTP 503**, 1 HTTP 502 y 565 errores de transporte. El p95 fue 29,99 s; k6 descartó 2.862 iteraciones por falta de VUs, así que no logró generar toda la carga prevista. Los dos pods quedaron no listos y el HPA permaneció en 2; los 503 coinciden con la ausencia de pods listos. La prueba incumple los SLO sugeridos (<1 % de errores y p95 <300 ms), pero es deliberadamente estresada y no representa la carga nominal. Ver [resumen k6](evidencias/e2-recuperacion-k6.txt), [HPA](evidencias/e2-recuperacion-hpa.txt) y [pods](evidencias/e2-recuperacion-pods.txt).
+
+La recuperación se observó **sin intervenir**: k6 terminó a las 17:47:35 y la primera muestra con ambos pods listos y POST 201 fue a las 17:47:57, aproximadamente **22 s después**; las muestras siguientes siguieron respondiendo 201. La sonda sondea cada ~3–5 s, por lo que el instante exacto tiene esa incertidumbre. Durante la falla Kubernetes reinició ambos contenedores; después de registrar la recuperación se restauró el perfil nominal. Ver el [registro de recuperación](evidencias/e2-recuperacion.jsonl) y [eventos](evidencias/e2-recuperacion-eventos.txt). E1 queda pendiente de #14.
+
+---
+
+## 6. Veredicto go / no-go
+
+> _Pendiente: #13._
+
+---
+
+## 7. Aprendizaje
+
+Complicaciones que fuimos encontrando y cómo las resolvimos.
+
+| Problema | Solución |
+|---|---|
+| `minikube image build --build-opt build-arg=…` no le pasa el build-arg al build cuando el runtime del nodo es containerd (en la práctica anterior hubo que sacarlo), y el front necesita la URL del Ingress al compilar | Se construye con el Docker del host (`docker build --build-arg`) y se carga en el nodo con `minikube image load` |
+| La readinessProbe anterior consultaba `/api/dashboard/history`, que hace un `count(*)` de la tabla entera | Endpoints `/health` (sin DB) y `/health/ready` (`SELECT 1`) |
+| La imagen del back copiaba todo el monorepo | `COPY` solo de `backend/flask/final_project` |
+| **Después de reiniciar el pod de PostgreSQL, la API devolvía HTTP 500** en los primeros requests (`psycopg2.OperationalError: server closed the connection unexpectedly`). El pool de SQLAlchemy reusaba conexiones que habían muerto con el pod. Medido: 2 de 30 POST fallaron | `SQLALCHEMY_ENGINE_OPTIONS = {"pool_pre_ping": True}`: valida cada conexión antes de usarla y descarta las muertas. Repetido el experimento: 30 de 30 con 201 y 0 errores |
+
+Prevenciones que aplicamos de entrada:
+
+- `PGDATA` en un subdirectorio del volumen, porque `initdb` exige un directorio vacío y algunos provisioners crean `lost+found`.
+- `deploy.sh` espera a que el `ingress-nginx-controller` esté listo antes de aplicar el Ingress; si no, el webhook de admisión puede rechazarlo.
+
+---
+
+## Herramientas adicionales
+
+- `k6/seed-readings.sql`: carga lecturas sintéticas para que la tabla tenga un tamaño realista. Uso:
+  ```bash
+  k exec -i db-0 -- sh -c 'psql -U "$POSTGRES_USER" -d "$POSTGRES_DB" -v rows=50000' < tp-k8s/k6/seed-readings.sql
+  ```
+- `k8s/monitoring/` + `k6/run-in-cluster.sh`: Prometheus y Grafana para ver las métricas de k6. Corre los perfiles del `load-test.js` de la práctica anterior como Jobs dentro del clúster; los scripts del TP los define #13.
+
+---
+
+## Apéndice: reproducir HPA, E2 y Grafana
 
 El HPA mantiene de 2 a 6 pods y apunta al 60 % de la CPU solicitada (100m por pod en el perfil nominal). Dos réplicas permiten tolerar la caída de un pod; el máximo limita el consumo del Minikube propuesto. La subida no tiene ventana de estabilización y permite sumar hasta 4 pods cada 15 s; la bajada espera 300 s y quita como máximo un pod por minuto para evitar oscilaciones. Son valores iniciales, no una garantía de capacidad.
 
@@ -176,7 +222,7 @@ El HPA mantiene de 2 a 6 pods y apunta al 60 % de la CPU solicitada (100m por po
 
 ```bash
 alias k='minikube -p terrasense kubectl -- --context=terrasense -n terrasense'
-k apply -f tp-k8s/k8s/hpa.yaml
+k apply -f tp-k8s/k8s/60-hpa.yaml
 k top pods
 k get hpa back
 ```
@@ -184,17 +230,32 @@ k get hpa back
 Esperar a que aparezcan métricas y que el HPA esté en 2 réplicas antes de cada prueba. En dos terminales registrar con fecha la evolución; detener con Ctrl+C después de observar también la bajada:
 
 ```bash
-k get hpa back -w | while IFS= read -r line; do echo "$(date -Is) $line"; done | tee tp-k8s/evidencias/hpa-e2.txt
+k get hpa back -w | while IFS= read -r line; do echo "$(date -Is) $line"; done | tee /tmp/hpa-watch-e2.txt
 ```
 
 ```bash
-k get pods -l app=back -w | while IFS= read -r line; do echo "$(date -Is) $line"; done | tee tp-k8s/evidencias/pods-e2.txt
+k get pods -l app=back -w | while IFS= read -r line; do echo "$(date -Is) $line"; done | tee /tmp/pods-watch-e2.txt
+```
+
+Para medir la recuperación sin intervenir, iniciar además un sondeo en otra terminal antes del pico y dejarlo hasta observar al menos tres POST 201 consecutivos con ambos pods listos. El intervalo real incluye el tiempo de cada comando; usar las marcas de tiempo para calcular el resultado. Cada POST agrega una lectura de prueba.
+
+```bash
+while true; do
+  date -Is
+  k get pods -l app=back
+  curl --noproxy '*' --resolve "api.terrasense.local:80:$(minikube -p terrasense ip)" \
+    -s -o /dev/null --max-time 2 -w 'POST: %{http_code}\n' \
+    -H 'Content-Type: application/json' \
+    -d '{"sensor_id":"recovery-probe","raw_temperature":23.5,"motion_detected":true}' \
+    http://api.terrasense.local/api/telemetry
+  sleep 3
+done | tee /tmp/recuperacion-e2.txt
 ```
 
 Primero comprobar la subida con carga sostenida y el perfil nominal (`requests: 100m/192Mi`, `limits: 500m/384Mi`). Aumentar `SPIKE_RPS` si la CPU no supera el objetivo; después de la carga, esperar al menos 5 minutos más el tiempo de reducción y comprobar que vuelve a 2 pods:
 
 ```bash
-SPIKE_RPS=100 HOLD_DURATION=3m k6 run tp-k8s/k6/e2-spike.js 2>&1 | tee tp-k8s/evidencias/hpa-carga.txt
+SPIKE_RPS=100 HOLD_DURATION=3m k6 run tp-k8s/k6/e2-spike.js 2>&1 | tee /tmp/hpa-carga.txt
 ```
 
 Para E2, aplicar temporalmente el perfil estresado propuesto (`requests` sin cambios; `limits: 250m/256Mi`), esperar el rollout y volver a 2 pods antes de lanzar el pico. No modifica el manifiesto nominal. Los POST agregan datos a la base: usar una base de prueba y anotar cuántas lecturas había, sin borrar datos existentes. Si se usa `seed-readings.sql`, anotar cuántas filas se agregaron; sus fechas se distribuyen en el pasado y no equivalen a tener todas las filas dentro de los últimos 15 minutos.
@@ -203,15 +264,15 @@ Para E2, aplicar temporalmente el perfil estresado propuesto (`requests` sin cam
 k set resources deployment/back -c back --requests=cpu=100m,memory=192Mi --limits=cpu=250m,memory=256Mi
 k rollout status deployment/back --timeout=300s
 k get hpa back
-date -Is | tee tp-k8s/evidencias/spike-e2.txt
-SPIKE_RPS=400 k6 run tp-k8s/k6/e2-spike.js 2>&1 | tee -a tp-k8s/evidencias/spike-e2.txt
-date -Is | tee -a tp-k8s/evidencias/spike-e2.txt
-k describe hpa back > tp-k8s/evidencias/hpa-describe-e2.txt
-k describe pods -l app=back > tp-k8s/evidencias/pods-describe-e2.txt
-k get events --sort-by=.metadata.creationTimestamp > tp-k8s/evidencias/eventos-e2.txt
+date -Is | tee /tmp/spike-e2.txt
+SPIKE_RPS=400 k6 run tp-k8s/k6/e2-spike.js 2>&1 | tee -a /tmp/spike-e2.txt
+date -Is | tee -a /tmp/spike-e2.txt
+k describe hpa back > /tmp/hpa-describe-e2.txt
+k describe pods -l app=back > /tmp/pods-describe-e2.txt
+k get events --sort-by=.metadata.creationTimestamp > /tmp/eventos-e2.txt
 ```
 
-El pico sube en 5 s, se mantiene 30 s y baja en 5 s. Se pueden ajustar `SPIKE_RPS`, `RAMP_DURATION`, `HOLD_DURATION`, `DOWN_DURATION`, `PRE_ALLOCATED_VUS` y `MAX_VUS`. `BASE_URL` permite cambiar el origen de la API. Revisar `dropped_iterations`: si es distinto de cero, k6 no generó toda la carga prevista; aumentar VUs o usar otra máquina generadora. Los checks verifican respuestas 201; la prueba no establece thresholds porque busca observar fallas.
+El pico sube en 5 s, se mantiene 30 s y baja en 5 s. Se pueden ajustar `SPIKE_RPS`, `RAMP_DURATION`, `HOLD_DURATION`, `DOWN_DURATION`, `PRE_ALLOCATED_VUS` y `MAX_VUS`. `BASE_URL` permite cambiar el origen de la API. Revisar `dropped_iterations`: si es distinto de cero, k6 no generó toda la carga prevista; aumentar VUs o usar otra máquina generadora. Los contadores separan 502, 503, 504, errores de transporte y otros códigos distintos de 201; los checks verifican respuestas 201; la prueba no establece thresholds porque busca observar fallas.
 
 Si se desplegó con `SKIP_HOSTS=1`, agregar `INGRESS_IP=$(minikube -p terrasense ip)` al comando de k6 para resolver `api.terrasense.local` sin editar `/etc/hosts`.
 
@@ -255,47 +316,3 @@ Al terminar, restaurar el perfil nominal y esperar el rollout:
 k set resources deployment/back -c back --requests=cpu=100m,memory=192Mi --limits=cpu=500m,memory=384Mi
 k rollout status deployment/back --timeout=300s
 ```
-
-**Primera carga sostenida (2026-11-05):** Minikube con 4 CPU y 4 GiB, perfil nominal y monitoreo activo; rampa de 5 s a 80 req/s, sostenida 2 min y bajada de 5 s, con 100–300 VUs. De 7.023 solicitudes completadas, 70,12 % fallaron (577 respuestas 502 y 296 errores de transporte), p95 26,61 s y p99 30 s. Hubo 2.976 iteraciones descartadas por falta de VUs: no se logró mantener toda la carga prevista, por lo que esta ejecución no sirve como baseline nominal de #13. Las sondas readiness y liveness fallaron y los dos pods originales se reiniciaron. Mientras estaban no disponibles, el HPA informó que no podía calcular CPU; posteriormente creó 4 pods adicionales y mostró 6 réplicas a las 12:33:13. A las 12:34:13 los 6 pods estaban listos y `/health/ready` respondió correctamente. La bitácora y los eventos están en `evidencias/`; La base tenía 2.357 lecturas al consultar después de la carga, todas dentro de los últimos 15 minutos.
-
-El HPA volvió automáticamente a 2 réplicas a las 12:43:00, después de estabilizar y reducir de a un pod por minuto.
-
-**E2 con perfil estresado (12:49:09):** se esperó a tener 2 pods listos y una lectura de CPU válida (2 %) después de aplicar los límites `250m/256Mi`. El script subió de 0 a 400 req/s en 5 s, mantuvo el pico 30 s y bajó en 5 s (200–1.000 VUs). A las 12:49:25 ambos pods estaban no listos y el HPA seguía en 2 réplicas; a las 12:49:30 indicaba CPU desconocida. De 11.033 solicitudes completadas, falló el 95,47 %, incluyendo 712 errores de transporte; p95 29,99 s. Se descartaron 2.966 iteraciones al alcanzar el límite de VUs, por lo que no se generaron todas las solicitudes previstas. La salida y los estados están en `evidencias/e2-spike-metricas.txt`, `hpa-experimento.txt` y `hpa-e2-metricas.txt`.
-
-Tras la prueba se restauró manualmente el perfil nominal mediante un rollout; a las 12:50:48 los dos pods estaban listos y `/health/ready` respondía. Este tiempo incluye esa intervención y **no mide recuperación autónoma**. Un primer intento (`e2-spike.txt`) comenzó con métricas desconocidas y no debe usarse para medir la reacción del HPA. No extrapolar estos resultados al hardware recomendado ni al veredicto go/no-go de #13.
-
-**E1:** pendiente de #14.
-
----
-
-## 6. Veredicto go / no-go
-
-> _Pendiente: #13._
-
----
-
-## 7. Aprendizaje
-
-Complicaciones que fuimos encontrando y cómo las resolvimos.
-
-| Problema | Solución |
-|---|---|
-| `minikube image build --build-opt build-arg=…` no le pasa el build-arg al build cuando el runtime del nodo es containerd (en la práctica anterior hubo que sacarlo), y el front necesita la URL del Ingress al compilar | Se construye con el Docker del host (`docker build --build-arg`) y se carga en el nodo con `minikube image load` |
-| La readinessProbe anterior consultaba `/api/dashboard/history`, que hace un `count(*)` de la tabla entera | Endpoints `/health` (sin DB) y `/health/ready` (`SELECT 1`) |
-| La imagen del back copiaba todo el monorepo | `COPY` solo de `backend/flask/final_project` |
-| **Después de reiniciar el pod de PostgreSQL, la API devolvía HTTP 500** en los primeros requests (`psycopg2.OperationalError: server closed the connection unexpectedly`). El pool de SQLAlchemy reusaba conexiones que habían muerto con el pod. Medido: 2 de 30 POST fallaron | `SQLALCHEMY_ENGINE_OPTIONS = {"pool_pre_ping": True}`: valida cada conexión antes de usarla y descarta las muertas. Repetido el experimento: 30 de 30 con 201 y 0 errores |
-
-Prevenciones que aplicamos de entrada:
-
-- `PGDATA` en un subdirectorio del volumen, porque `initdb` exige un directorio vacío y algunos provisioners crean `lost+found`.
-- `deploy.sh` espera a que el `ingress-nginx-controller` esté listo antes de aplicar el Ingress; si no, el webhook de admisión puede rechazarlo.
-
----
-
-## Herramientas adicionales
-
-- `k6/seed-readings.sql`: carga lecturas sintéticas para que la tabla tenga un tamaño realista. Uso:
-  ```bash
-  k exec -i db-0 -- sh -c 'psql -U "$POSTGRES_USER" -d "$POSTGRES_DB" -v rows=50000' < tp-k8s/k6/seed-readings.sql
-  ```
-- `k8s/monitoring/` + `k6/run-in-cluster.sh`: Prometheus y Grafana para ver las métricas de k6. Corre los perfiles del `load-test.js` de la práctica anterior como Jobs dentro del clúster; los scripts del TP los define #13.
