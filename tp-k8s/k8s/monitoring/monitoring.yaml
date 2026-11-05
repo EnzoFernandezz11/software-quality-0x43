@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: prometheus-config
-  namespace: soft-eng
+  namespace: terrasense
 data:
   prometheus.yml: |
     global:
@@ -27,12 +27,12 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: prometheus
-  namespace: soft-eng
+  namespace: terrasense
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: soft-eng-prometheus
+  name: terrasense-prometheus
 rules:
   - apiGroups: [""]
     resources: [nodes, nodes/proxy, nodes/metrics]
@@ -41,21 +41,21 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  name: soft-eng-prometheus
+  name: terrasense-prometheus
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: soft-eng-prometheus
+  name: terrasense-prometheus
 subjects:
   - kind: ServiceAccount
     name: prometheus
-    namespace: soft-eng
+    namespace: terrasense
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: prometheus
-  namespace: soft-eng
+  namespace: terrasense
 spec:
   replicas: 1
   selector:
@@ -82,7 +82,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: prometheus
-  namespace: soft-eng
+  namespace: terrasense
 spec:
   selector: {app: prometheus}
   ports:
@@ -92,7 +92,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: grafana-provisioning
-  namespace: soft-eng
+  namespace: terrasense
 data:
   datasource.yaml: |
     apiVersion: 1
@@ -116,7 +116,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: grafana
-  namespace: soft-eng
+  namespace: terrasense
 spec:
   replicas: 1
   selector:
@@ -154,7 +154,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: grafana
-  namespace: soft-eng
+  namespace: terrasense
 spec:
   selector: {app: grafana}
   ports:

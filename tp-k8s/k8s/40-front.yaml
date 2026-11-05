@@ -1,0 +1,64 @@
+# Dashboard Next.js. Es una SPA: los componentes son 'use client' y hacen fetch
+# desde el NAVEGADOR del usuario (fuera del clúster) a la URL del Ingress de la API.
+# Esa URL (NEXT_PUBLIC_API_URL) queda fija en el bundle al construir la imagen:
+# deploy.sh la construye con http://api.terrasense.local/api.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: front
+  namespace: terrasense
+  labels:
+    app: front
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: front
+  template:
+    metadata:
+      labels:
+        app: front
+    spec:
+      containers:
+        - name: front
+          image: terrasense-front:local
+          imagePullPolicy: Never
+          ports:
+            - name: http
+              containerPort: 3000
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            periodSeconds: 10
+            timeoutSeconds: 3
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 15
+            periodSeconds: 20
+            timeoutSeconds: 3
+          resources:
+            requests:
+              cpu: 50m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: front
+  namespace: terrasense
+  labels:
+    app: front
+spec:
+  type: ClusterIP
+  selector:
+    app: front
+  ports:
+    - name: http
+      port: 3000
+      targetPort: http
