@@ -143,7 +143,25 @@ Si cambia la IP del nodo (por ejemplo, después de `minikube delete`), volvé a 
 
 ![Dashboard vía Ingress](evidencias/a1-dashboard-via-ingress.png)
 
-> _Pendiente: #12 y #14. Guardar las capturas en `evidencias/`._
+Para A3, las curvas de carga, errores y latencia están separadas por corrida:
+
+| Perfil | Antes de optimizar | Después de optimizar |
+|---|---|---|
+| Load: solicitudes/s y errores | [Captura](evidencias/a3/antes/load-rps-errores.png) | [Captura](evidencias/a3/despues/load-rps-errores.png) |
+| Load: p95 por estado HTTP | [Captura](evidencias/a3/antes/load-p95.png) | [Captura](evidencias/a3/despues/load-p95.png) |
+| Stress: solicitudes/s y errores | [Captura](evidencias/a3/antes/stress-rps-errores.png) | [Captura](evidencias/a3/despues/stress-rps-errores.png) |
+| Stress: p95 por estado HTTP | [Captura](evidencias/a3/antes/stress-p95.png) | [Captura](evidencias/a3/despues/stress-p95.png) |
+
+Las capturas son del dashboard Grafana existente. Las series exportadas de
+Prometheus y los resúmenes de k6 permanecen en
+[`evidencias/a3/antes/`](evidencias/a3/antes/) y
+[`evidencias/a3/despues/`](evidencias/a3/despues/). En este dashboard,
+Grafana separa tanto el p95 como el porcentaje de fallas por estado HTTP:
+una línea de fallas al 100 % corresponde a respuestas 5xx de ese estado,
+**no** al porcentaje total de la corrida. Para decidir los SLO se usan el
+p95 y el porcentaje agregados del resumen k6.
+
+> _Pendiente: #12 y #14._
 
 - [ ] `kubectl get hpa` escalando los pods bajo carga (#12)
 - [ ] Evidencia del colapso: `OOMKilled` o `CrashLoopBackOff` (#12)
@@ -153,15 +171,43 @@ Si cambia la IP del nodo (por ejemplo, después de `minikube delete`), volvé a 
 
 ## 4. Pruebas de carga (Actividad 3)
 
-> _Pendiente: #13._
+Se probaron los mismos scripts de `tp-k8s/k6/` contra el Ingress y con 50.000
+lecturas de 2.000 sensores precargadas **antes de cada corrida**. El entorno
+fue un Minikube aislado con 4 CPU y 6144 MiB; el backend mantuvo 2 réplicas
+fijas y límites de 500m CPU / 384Mi por pod. No había HPA: el escalado de #12
+todavía no integra este experimento. Hardware, versiones y procedimiento:
+[`antes/entorno.md`](evidencias/a3/antes/entorno.md) y
+[`despues/entorno.md`](evidencias/a3/despues/entorno.md).
 
-SLOs: `http_req_failed < 1 %` y p95 de `POST /api/telemetry` < 300 ms.
+Los SLO de la issue son **menos de 1 % de errores HTTP** y **p95 menor a
+300 ms** para `POST /api/telemetry`. `load` intenta 67 req/s durante 5 min;
+`stress` sube de 67 a 450 req/s durante 6 min. RPS es el promedio de
+solicitudes completadas, no la tasa objetivo. En la columna de réplicas,
+`2 / 0` significa dos configuradas y un mínimo observado de cero listas.
 
-| Test | Carga | RPS | p95 | p99 | % error | Réplicas | ¿SLO? |
-|---|---|---|---|---|---|---|---|
-| Smoke | | | | | | | |
-| Load (2.000 sensores) | 67 req/s | | | | | | |
-| Stress | | | | | | | |
+| Código | Perfil | RPS observado | p95 (ms) | p99 (ms) | Error HTTP | Descartadas | Réplicas / mín. listas | ¿SLO? |
+|---|---|---:|---:|---:|---:|---:|---:|---|
+| Antes | Smoke | 0,72 | 1.991 | 2.072 | 0 % | 0 | 2 / 2 | No: p95 |
+| Después | Smoke | 1,95 | 33 | 77 | 0 % | 0 | 2 / 2 | Sí |
+| Antes | Load | 63,99 | 6.611 | 10.470 | 100 % | 903 | 2 / 0 | No |
+| Después | Load | 61,94 | 17.507 | 23.098 | 59,04 % | 1.519 | 2 / 0 | No |
+| Antes | Stress | 215,01 | 1.606 | 5.920 | 100 % | 3.320 | 2 / 0 | No |
+| Después | Stress | 128,27 | 19.790 | 29.972 | 75,91 % | 32.684 | 2 / 0 | No |
+
+El cambio en `find_recent_with_motion` y el índice de `created_at` hicieron
+que `smoke` pasara de p95 1.991 ms a 33 ms. En `load` y `stress` hubo respuestas
+201 después de optimizar, donde antes todas fallaban, pero **la latencia
+agregada empeoró** porque quedaron solicitudes esperando durante intervalos
+largos de saturación. En las corridas anteriores los pods llegaron a
+`OOMKilled`; en las posteriores Kubernetes los reinició al fallar `liveness`
+por tiempo de espera, con CPU cerca del límite de 500m y momentos sin ninguna
+réplica lista. No se puede atribuir el resultado solo a la consulta SQL.
+
+La primera corrida optimizada de `load` registró 22,61 % de errores, p95
+10.775 ms y 659 iteraciones descartadas. El perfil Minikube quedó detenido
+después y se perdieron sus series temporales de Prometheus. Se conserva su
+resumen (`load-intento1-*`) y se repitió con el mismo seed, scripts y límites
+para obtener las curvas de la tabla. Ambas corridas incumplieron los SLO.
 
 ---
 
@@ -173,7 +219,20 @@ SLOs: `http_req_failed < 1 %` y p95 de `POST /api/telemetry` < 300 ms.
 
 ## 6. Veredicto go / no-go
 
-> _Pendiente: #13._
+**NO-GO para 2.000 sensores cada 30 s con este despliegue.** La tasa nominal
+exige ≈ 67 escrituras/s. Después de optimizar, `load` completó 61,94 req/s
+de promedio, con 59,04 % de errores, p95 de 17,51 s y 1.519 iteraciones
+descartadas; los umbrales eran < 1 % y < 300 ms. `smoke` sí cumplió, pero
+solo prueba una carga de 2 VUs.
+
+El **punto de quiebre ya está en el tramo inicial de 67 req/s**, antes de la
+primera subida de `stress` a 120 req/s: la primera muestra de p95 para
+respuestas 201 fue ≈ 3,89 s a los 15 s y la serie de errores 503 aparece a
+los 45 s. La rampa terminó con 75,91 % de errores y 32.684 iteraciones
+descartadas. Por eso estos datos no permiten fijar una capacidad estable por
+encima de 67 req/s. Para cambiar el veredicto hacen falta nuevas mediciones
+con los ajustes de recursos y HPA de #12, conservando los mismos scripts y
+criterios de aceptación.
 
 ---
 

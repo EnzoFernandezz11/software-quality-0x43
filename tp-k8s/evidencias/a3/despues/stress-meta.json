@@ -1,0 +1,7 @@
+{
+  "run_id": "despues-stress-20261105T191943Z",
+  "start_utc": "2026-11-05T19:19:43Z",
+  "end_utc": "2026-11-05T19:25:58Z",
+  "exit_code": 99,
+  "initial_rows": 50000
+}
