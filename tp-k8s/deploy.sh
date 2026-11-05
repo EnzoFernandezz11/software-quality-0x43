@@ -150,6 +150,7 @@ if [ "${SKIP_BUILD:-0}" != "1" ] && [ -n "$existing" ]; then
 fi
 wait_rollout deployment/back app=back
 wait_rollout deployment/front app=front
+k apply -f "$K8S_DIR/hpa.yaml"
 
 # El webhook del controlador rechaza Ingress mientras no está listo.
 k -n ingress-nginx rollout status deployment/ingress-nginx-controller --timeout=300s

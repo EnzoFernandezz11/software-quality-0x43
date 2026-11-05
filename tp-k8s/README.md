@@ -45,6 +45,7 @@ El dashboard es una **SPA**: sus componentes son `'use client'` y hacen `fetch` 
 | `30-back.yaml` | Deployment + Service `back` (ClusterIP) | gunicorn, readiness/liveness, requests/limits, preStop |
 | `40-front.yaml` | Deployment + Service `front` (ClusterIP) | Next.js standalone |
 | `50-ingress.yaml` | Ingress `terrasense-ingress` | Plantilla del Anexo C |
+| `hpa.yaml` | HPA `back` | Escala el Deployment del backend por CPU |
 
 ---
 
@@ -167,7 +168,103 @@ SLOs: `http_req_failed < 1 %` y p95 de `POST /api/telemetry` < 300 ms.
 
 ## 5. Análisis de resiliencia (Actividad 4)
 
-> _Pendiente: #12 (E2) y #14 (E1)._
+### HPA y E2: pico de tráfico
+
+El HPA mantiene de 2 a 6 pods y apunta al 60 % de la CPU solicitada (100m por pod en el perfil nominal). Dos réplicas permiten tolerar la caída de un pod; el máximo limita el consumo del Minikube propuesto. La subida no tiene ventana de estabilización y permite sumar hasta 4 pods cada 15 s; la bajada espera 300 s y quita como máximo un pod por minuto para evitar oscilaciones. Son valores iniciales, no una garantía de capacidad.
+
+`deploy.sh` aplica el HPA. Para aplicarlo sin redesplegar, y observar métricas:
+
+```bash
+alias k='minikube -p terrasense kubectl -- --context=terrasense -n terrasense'
+k apply -f tp-k8s/k8s/hpa.yaml
+k top pods
+k get hpa back
+```
+
+Esperar a que aparezcan métricas y que el HPA esté en 2 réplicas antes de cada prueba. En dos terminales registrar con fecha la evolución; detener con Ctrl+C después de observar también la bajada:
+
+```bash
+k get hpa back -w | while IFS= read -r line; do echo "$(date -Is) $line"; done | tee tp-k8s/evidencias/hpa-e2.txt
+```
+
+```bash
+k get pods -l app=back -w | while IFS= read -r line; do echo "$(date -Is) $line"; done | tee tp-k8s/evidencias/pods-e2.txt
+```
+
+Primero comprobar la subida con carga sostenida y el perfil nominal (`requests: 100m/192Mi`, `limits: 500m/384Mi`). Aumentar `SPIKE_RPS` si la CPU no supera el objetivo; después de la carga, esperar al menos 5 minutos más el tiempo de reducción y comprobar que vuelve a 2 pods:
+
+```bash
+SPIKE_RPS=100 HOLD_DURATION=3m k6 run tp-k8s/k6/e2-spike.js 2>&1 | tee tp-k8s/evidencias/hpa-carga.txt
+```
+
+Para E2, aplicar temporalmente el perfil estresado propuesto (`requests` sin cambios; `limits: 250m/256Mi`), esperar el rollout y volver a 2 pods antes de lanzar el pico. No modifica el manifiesto nominal. Los POST agregan datos a la base: usar una base de prueba y anotar cuántas lecturas había, sin borrar datos existentes. Si se usa `seed-readings.sql`, anotar cuántas filas se agregaron; sus fechas se distribuyen en el pasado y no equivalen a tener todas las filas dentro de los últimos 15 minutos.
+
+```bash
+k set resources deployment/back -c back --requests=cpu=100m,memory=192Mi --limits=cpu=250m,memory=256Mi
+k rollout status deployment/back --timeout=300s
+k get hpa back
+date -Is | tee tp-k8s/evidencias/spike-e2.txt
+SPIKE_RPS=400 k6 run tp-k8s/k6/e2-spike.js 2>&1 | tee -a tp-k8s/evidencias/spike-e2.txt
+date -Is | tee -a tp-k8s/evidencias/spike-e2.txt
+k describe hpa back > tp-k8s/evidencias/hpa-describe-e2.txt
+k describe pods -l app=back > tp-k8s/evidencias/pods-describe-e2.txt
+k get events --sort-by=.metadata.creationTimestamp > tp-k8s/evidencias/eventos-e2.txt
+```
+
+El pico sube en 5 s, se mantiene 30 s y baja en 5 s. Se pueden ajustar `SPIKE_RPS`, `RAMP_DURATION`, `HOLD_DURATION`, `DOWN_DURATION`, `PRE_ALLOCATED_VUS` y `MAX_VUS`. `BASE_URL` permite cambiar el origen de la API. Revisar `dropped_iterations`: si es distinto de cero, k6 no generó toda la carga prevista; aumentar VUs o usar otra máquina generadora. Los checks verifican respuestas 201; la prueba no establece thresholds porque busca observar fallas.
+
+Si se desplegó con `SKIP_HOSTS=1`, agregar `INGRESS_IP=$(minikube -p terrasense ip)` al comando de k6 para resolver `api.terrasense.local` sin editar `/etc/hosts`.
+
+### Ver cada prueba en Grafana
+
+El monitoreo es opcional y consume recursos adicionales. Tras desplegar la aplicación, crear el dashboard y levantar Prometheus y Grafana:
+
+```bash
+k create configmap grafana-dashboards --from-file=k6.json=tp-k8s/k8s/monitoring/grafana-dashboard.json --dry-run=client -o yaml | k apply -f -
+k apply -f tp-k8s/k8s/monitoring/monitoring.yaml
+k rollout status deployment/prometheus --timeout=300s
+k rollout status deployment/grafana --timeout=300s
+```
+
+Dejar abiertos estos túneles en dos terminales:
+
+```bash
+k port-forward svc/grafana 3001:3000
+```
+
+```bash
+k port-forward svc/prometheus 9090:9090
+```
+
+Abrir <http://localhost:3001/d/k6-local>. El dashboard tiene filtros **Prueba** y **Ejecución**; CPU y memoria son del clúster y no se filtran por ejecución. Para enviar el spike que corre fuera del clúster a Prometheus, ejecutar:
+
+```bash
+RUN_ID="e2-$(date +%Y%m%d-%H%M%S)" \
+K6_PROMETHEUS_RW_SERVER_URL=http://127.0.0.1:9090/api/v1/write \
+K6_PROMETHEUS_RW_TREND_STATS='p(95),avg' \
+SPIKE_RPS=400 k6 run -o experimental-prometheus-rw tp-k8s/k6/e2-spike.js
+```
+
+Seleccionar `e2-spike` y su ejecución en Grafana. Para que las futuras pruebas del TP (smoke, load, stress y E1) aparezcan separadas, enviarlas también con salida `experimental-prometheus-rw` y las etiquetas k6 `profile` y `run_id` diferentes para cada prueba y ejecución; por ejemplo `--tag profile=smoke --tag run_id=smoke-001`. Esto no implementa las pruebas pendientes de #13 y #14. El monitoreo guarda datos localmente en el pod de Prometheus: si se reemplaza, el historial puede perderse; guardar capturas para la entrega.
+
+Si no se observa saturación antes de que haya nuevos pods listos, repetir desde 2 réplicas con más carga o límites diferentes y registrar cada configuración. Guardar capturas de HPA y pods durante el experimento; `describe pods` y eventos pueden perder detalles cuando los pods se reemplazan, así que recogerlos también durante la falla. Comparar el inicio del pico, la primera falla y los cambios de réplicas y disponibilidad para calcular los tiempos de reacción y recuperación. El colapso puede manifestarse con errores, timeouts o latencia, sin necesariamente producir OOMKilled.
+
+Al terminar, restaurar el perfil nominal y esperar el rollout:
+
+```bash
+k set resources deployment/back -c back --requests=cpu=100m,memory=192Mi --limits=cpu=500m,memory=384Mi
+k rollout status deployment/back --timeout=300s
+```
+
+**Primera carga sostenida (2026-11-05):** Minikube con 4 CPU y 4 GiB, perfil nominal y monitoreo activo; rampa de 5 s a 80 req/s, sostenida 2 min y bajada de 5 s, con 100–300 VUs. De 7.023 solicitudes completadas, 70,12 % fallaron (577 respuestas 502 y 296 errores de transporte), p95 26,61 s y p99 30 s. Hubo 2.976 iteraciones descartadas por falta de VUs: no se logró mantener toda la carga prevista, por lo que esta ejecución no sirve como baseline nominal de #13. Las sondas readiness y liveness fallaron y los dos pods originales se reiniciaron. Mientras estaban no disponibles, el HPA informó que no podía calcular CPU; posteriormente creó 4 pods adicionales y mostró 6 réplicas a las 12:33:13. A las 12:34:13 los 6 pods estaban listos y `/health/ready` respondió correctamente. La bitácora y los eventos están en `evidencias/`; La base tenía 2.357 lecturas al consultar después de la carga, todas dentro de los últimos 15 minutos.
+
+El HPA volvió automáticamente a 2 réplicas a las 12:43:00, después de estabilizar y reducir de a un pod por minuto.
+
+**E2 con perfil estresado (12:49:09):** se esperó a tener 2 pods listos y una lectura de CPU válida (2 %) después de aplicar los límites `250m/256Mi`. El script subió de 0 a 400 req/s en 5 s, mantuvo el pico 30 s y bajó en 5 s (200–1.000 VUs). A las 12:49:25 ambos pods estaban no listos y el HPA seguía en 2 réplicas; a las 12:49:30 indicaba CPU desconocida. De 11.033 solicitudes completadas, falló el 95,47 %, incluyendo 712 errores de transporte; p95 29,99 s. Se descartaron 2.966 iteraciones al alcanzar el límite de VUs, por lo que no se generaron todas las solicitudes previstas. La salida y los estados están en `evidencias/e2-spike-metricas.txt`, `hpa-experimento.txt` y `hpa-e2-metricas.txt`.
+
+Tras la prueba se restauró manualmente el perfil nominal mediante un rollout; a las 12:50:48 los dos pods estaban listos y `/health/ready` respondía. Este tiempo incluye esa intervención y **no mide recuperación autónoma**. Un primer intento (`e2-spike.txt`) comenzó con métricas desconocidas y no debe usarse para medir la reacción del HPA. No extrapolar estos resultados al hardware recomendado ni al veredicto go/no-go de #13.
+
+**E1:** pendiente de #14.
 
 ---
 
