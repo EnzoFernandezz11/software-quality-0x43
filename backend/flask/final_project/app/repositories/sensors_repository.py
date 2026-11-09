@@ -58,17 +58,35 @@ class SensorsRepository:
         ]
 
     def find_recent_with_motion(self, minutes: int = 15) -> list[dict[str, Any]]:
-        """Return readings with motion in the last *minutes* minutes (oldest first)."""
+        """Return the first and last motion readings in the time window.
+
+        Thermal inertia only compares these two readings. Filter in PostgreSQL
+        so each telemetry POST does not load the whole window into Python.
+        """
         cutoff = datetime.now(timezone.utc) - timedelta(minutes=minutes)
-        rows = (
-            SensorReading.query.filter(SensorReading.created_at >= cutoff)
-            .order_by(SensorReading.created_at.asc())
-            .all()
+        query = SensorReading.query.with_entities(
+            SensorReading.id,
+            SensorReading.filtered_temperature,
+            SensorReading.created_at,
+        ).filter(
+            SensorReading.created_at >= cutoff,
+            SensorReading.motion_detected.is_(True),
         )
+
+        first = query.order_by(
+            SensorReading.created_at.asc(), SensorReading.id.asc()
+        ).first()
+        if first is None:
+            return []
+
+        last = query.order_by(
+            SensorReading.created_at.desc(), SensorReading.id.desc()
+        ).first()
+        rows = [first] if first.id == last.id else [first, last]
         return [
             {
                 "filtered_temperature": r.filtered_temperature,
-                "motion_detected": r.motion_detected,
+                "motion_detected": True,
                 "created_at": r.created_at,
             }
             for r in rows
