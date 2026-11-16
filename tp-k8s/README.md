@@ -419,7 +419,9 @@ criterios de aceptación.
 
 ## 7. Aprendizaje
 
-Complicaciones que fuimos encontrando y cómo las resolvimos.
+Complicaciones que fuimos encontrando y cómo las resolvimos. Cuando un problema no se pudo resolver, lo indicamos en la fila correspondiente.
+
+### A1: despliegue
 
 | Problema | Solución |
 |---|---|
@@ -432,6 +434,30 @@ Prevenciones que aplicamos de entrada:
 
 - `PGDATA` en un subdirectorio del volumen, porque `initdb` exige un directorio vacío y algunos provisioners crean `lost+found`.
 - `deploy.sh` espera a que el `ingress-nginx-controller` esté listo antes de aplicar el Ingress; si no, el webhook de admisión puede rechazarlo.
+
+### A3: pruebas de carga
+
+| Problema | Solución |
+|---|---|
+| **Con solo 2 VUs, `smoke` tenía un p95 de 1.991 ms, y en `load` y `stress` fallaba el 100 % de los POST.** Los pods llegaron a `OOMKilled` y `CrashLoopBackOff`. En cada POST, `find_recent_with_motion` traía a Python todas las lecturas de los últimos 15 min, y `created_at` no tenía índice | La consulta filtra las lecturas con movimiento en PostgreSQL y trae solo la primera y la última de la ventana; además se indexó `created_at` (migración `b7c9e2f4a601`). `smoke` bajó a p95 33 ms y no hubo más `OOMKilled`. **`load` y `stress` siguieron incumpliendo los SLO**: es la base del NO-GO (sección 6) |
+| **Bajo saturación, la `livenessProbe` (`/health`, timeout 2 s) fallaba por tiempo de espera** y Kubernetes reiniciaba pods que estaban lentos pero vivos, con lapsos sin ninguna réplica lista | No se resolvió. Se identificó como posible agravante de la caída, junto con la CPU cerca del límite de 500m; no se demostró una causa única |
+| **Después de `load`, los pods quedaban reiniciando** y contaminaban la corrida siguiente | Antes de `stress` se recrearon los pods del back, se esperó a que estuvieran listos y se verificó `/health/ready` por el Ingress. Además, antes de cada perfil se vació la tabla y se recargaron 50.000 lecturas con `seed-readings.sql`, para que todas las corridas arrancaran igual |
+| **k6 no llegaba a generar la carga pedida.** Con la API lenta, los VUs quedaban esperando respuesta y se agotaban (`Insufficient VUs`): hubo hasta 32.684 iteraciones descartadas en `stress`, y también en E2 | Se usaron ejecutores de tasa fija (`constant-arrival-rate` y `ramping-arrival-rate`) y el umbral `dropped_iterations: count<1`, para que una corrida que no generó toda la carga no pase. Las tablas informan el RPS observado y las iteraciones descartadas. No se eliminaron: son una señal más de saturación |
+| **Minikube se detuvo después de la primera corrida optimizada de `load`** (causa no determinada) y se perdieron sus series de Prometheus, que se guardan dentro del pod | Se conservaron el resumen, la consola y el muestreo de pods (`load-intento1-*`), y se repitió `load` con el mismo seed, scripts y límites. Las series exportadas y las capturas de Grafana quedaron en `evidencias/a3/` |
+| **Grafana separa el porcentaje de fallas y el p95 por estado HTTP**, así que una línea al 100 % parecía indicar que fallaba toda la corrida | Los SLO se deciden con el porcentaje de errores y el p95 agregados del resumen de k6; Grafana queda como apoyo visual (aclarado en la sección 3) |
+
+### A4: pruebas de fallas (E1 y E2)
+
+| Problema | Solución |
+|---|---|
+| **`k6/browser` necesita Chromium o Chrome**; las corridas se hicieron con Brave | `e1.sh` busca `chromium`, `chromium-browser`, `google-chrome` y `brave-browser`, y exporta `K6_BROWSER_EXECUTABLE_PATH`. También se puede indicar a mano |
+| **Si el pod se borra a mano, no se sabe en qué momento exacto ocurrió la falla** ni se puede sincronizar con la captura | `e1.sh` espera la marca `E1_START_MS` que imprime k6 al iniciar y borra los pods exactamente a los 20 s. El navegador arranca en ese mismo instante, y los cambios de pods y endpoints quedan registrados con hora |
+| **Riesgo de entregar como `falla-ux.png` una pantalla sana**, si la captura se tomaba antes de que el dashboard notara la caída | El navegador espera hasta 12 s el mensaje de error de la SPA. `e1.sh` solo copia la captura a `falla-ux.png` si k6 registró degradación (`ux_degradada = 1`); si no, termina con error y pide repetir |
+| **En E1a no hubo errores, así que no se podía medir la ventana de falla a partir de los POST.** El `preStop` y la readiness ocultan la caída de un solo pod | Se registran los endpoints del Service con hora (`endpoints.txt`): la IP borrada salió en el mismo segundo del borrado y el reemplazo quedó listo a los 7 s. E1b borra todos los pods para forzar una ventana medible (5,8 s) |
+| **En E1b, el p95 de 34 ms cumplía el SLO aunque hubo 10 % de errores**, porque los 503 rápidos también entran en el p95 | Se analizó aparte la ventana de falla: 30 de 30 POST fallaron (100 %). Una latencia baja no demuestra disponibilidad; por eso los dos SLO se evalúan juntos |
+| **Los primeros picos de E2 fallaron entre el 95 % y el 98,5 %, pero casi ninguna falla quedaba clasificada**: el script solo contaba 502, 504 y errores de transporte | Se agregaron contadores de 503 y de otros códigos distintos de 201. Al repetir, 9.779 de las 10.345 fallas fueron 503, coincidiendo con la ausencia de pods listos. Las corridas anteriores se conservan (`e2-intento-sin-metricas.txt`, `e2-spike-metricas.txt`) |
+| **El HPA no escaló durante el colapso de E2: quedó en 2 réplicas con CPU `<unknown>`.** Con los pods no listos, no recibe métricas (`FailedGetResourceMetric: did not receive metrics for targeted pods`). Recién aplicado, tampoco tiene métricas durante el primer minuto | Antes de cada prueba se espera a que `k top pods` muestre datos y a que el HPA esté en 2 réplicas. Que el HPA no reaccione cuando los pods caen antes de escalar no se resolvió: es el hallazgo central de E2 (sección 5) |
+| **Las mediciones se hicieron en entornos distintos**: #12 usó un nodo de 4 GiB (y límites estresados en E2), mientras que A3 y E1 usaron 6 GiB, el perfil nominal y ningún HPA | Cada corrida guarda su entorno (`entorno.md`, `configuracion.txt`) y el README indica los recursos junto a cada resultado. Los números no se comparan entre experimentos sin esa aclaración |
 
 ---
 
