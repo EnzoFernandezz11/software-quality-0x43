@@ -167,8 +167,10 @@ solicitudes (10 %), incumpliendo el SLO de errores menor al 1 %. El p95 de
 a la única observación del navegador, que detectó la falla.
 
 ![Resultados de E1b: SLO de errores incumplido](evidencias/e1b-slo-errores.png)
-### HPA y E2: capturas del escalado y la saturación (#12)
-Para A3, las curvas de carga, errores y latencia están separadas por corrida:
+
+### A3: curvas de carga, errores y latencia (#13)
+
+Las curvas de carga, errores y latencia están separadas por corrida:
 
 | Perfil | Antes de optimizar | Después de optimizar |
 |---|---|---|
@@ -185,6 +187,8 @@ Grafana separa tanto el p95 como el porcentaje de fallas por estado HTTP:
 una línea de fallas al 100 % corresponde a respuestas 5xx de ese estado,
 **no** al porcentaje total de la corrida. Para decidir los SLO se usan el
 p95 y el porcentaje agregados del resumen k6.
+
+### HPA y E2: capturas del escalado y la saturación (#12)
 
 > **Evidencia de #12:** [registro temporal del HPA y los pods](evidencias/hpa-experimento.txt), [salida de k6](evidencias/e2-recuperacion-k6.txt) y [estados durante el colapso](evidencias/e2-recuperacion-pods.txt). La falla observada fue la pérdida de readiness y el reinicio por liveness, no OOMKilled.
 
@@ -261,6 +265,14 @@ para obtener las curvas de la tabla. Ambas corridas incumplieron los SLO.
 ---
 
 ## 5. Análisis de resiliencia (Actividad 4)
+
+### Resumen
+
+**E1, caída de pods.** Al borrar un pod con carga (E1a), el otro siguió atendiendo y el reemplazo quedó listo a los 7 s: no hubo errores y se cumplieron ambos SLO. Al borrar todos los pods (E1b), la API respondió 503 durante 5,8 s y se recuperó sola, sin intervención. El dashboard no quedó en blanco: conservó las últimas lecturas y mostró «Failed to fetch». E1b incumplió el SLO de errores: 10 % en toda la corrida y 100 % dentro de la ventana de falla. Las dos pruebas se hicieron sin HPA y con 5 POST/s, una carga 13 veces menor que la nominal.
+
+**HPA y E2, saturación.** Con carga sostenida, el HPA escaló de 2 a 6 réplicas y volvió a 2 al terminar, pero no evitó la saturación: falló el 70,12 % de las solicitudes. En el pico de E2 (400 req/s en 5 s, con límites reducidos a 250m/256Mi), los dos pods dejaron de estar listos antes de que el HPA pudiera reaccionar. Sin pods listos el HPA no recibe métricas de CPU, así que quedó en 2 réplicas. Falló el 92,88 % de las solicitudes, casi todas con 503, y Kubernetes reinició los contenedores por la `livenessProbe`, no por `OOMKilled`. El sistema se recuperó solo unos 22 s después de terminar el pico.
+
+**SLO.** Solo E1a cumplió los dos SLO. E1b, la carga sostenida con HPA y E2 los incumplieron, igual que `load` y `stress` en la sección 4. La recuperación fue siempre automática, pero el HPA, tal como está configurado, no alcanzó a proteger el servicio: escala por CPU con demora, y cuando los pods ya están saturados deja de recibir métricas. El detalle de cada experimento sigue a continuación, y el veredicto está en la sección 6.
 
 ### E1: caída de pods y experiencia del usuario (#14)
 
