@@ -1,5 +1,5 @@
--- Carga lecturas sintéticas en sensor_readings para las pruebas de carga.
--- Cantidad por defecto: 50000; se cambia con psql -v rows=N.
+-- Carga lecturas sintéticas de 2000 sensores para las pruebas de carga.
+-- Cantidad por defecto: 50000 (~12,5 min a 67 lecturas/s); se cambia con psql -v rows=N.
 -- Los sensor_id empiezan con "seed-" para poder borrarlas sin tocar datos reales:
 --   DELETE FROM sensor_readings WHERE sensor_id LIKE 'seed-%';
 
@@ -18,12 +18,12 @@ INSERT INTO sensor_readings (
     room_location
 )
 SELECT
-    'seed-esp32-' || (n % 5 + 1),
-    now() - make_interval(secs => n * 30),
-    round((22 + 4 * sin(n / 120.0) + random() * 2)::numeric, 2),
+    'seed-esp32-' || lpad((((n - 1) % 2000) + 1)::text, 4, '0'),
+    now() - make_interval(secs => ((:rows - n)::double precision * 30.0 / 2000.0)),
+    round((22 + 4 * sin(n / 120.0) + (n % 7) / 10.0)::numeric, 2),
     round((22 + 4 * sin(n / 120.0) + 1)::numeric, 2),
-    random() < 0.3,
-    random() < 0.05,
+    n % 10 < 3,
+    n % 20 = 0,
     (ARRAY['Oficina', 'Laboratorio', 'Sala de servidores', 'Depósito', 'Recepción'])[n % 5 + 1]
 FROM generate_series(1, :rows) AS n;
 

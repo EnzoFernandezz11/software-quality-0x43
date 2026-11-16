@@ -1,0 +1,45 @@
+time="2026-11-05T13:57:27-03:00" level=warning msg="Insufficient VUs, reached 500 active VUs and cannot initialize more" executor=constant-arrival-rate scenario=load
+
+
+  █ THRESHOLDS 
+
+    dropped_iterations
+    ✗ 'count<1' count=903
+
+    http_req_duration{name:telemetry}
+    ✗ 'p(95)<300' p(95)=6.61s
+
+    http_req_failed{name:telemetry}
+    ✗ 'rate<0.01' rate=100.00%
+
+
+  █ TOTAL RESULTS 
+
+    checks_total.......: 19198   63.992961/s
+    checks_succeeded...: 0.00%   0 out of 19198
+    checks_failed......: 100.00% 19198 out of 19198
+
+    ✗ telemetry returned 201
+      ↳  0% — ✓ 0 / ✗ 19198
+
+    HTTP
+    http_req_duration......: avg=907.75ms min=221.63µs med=531.96µs max=12.65s p(95)=6.61s p(99)=10.46s
+      { name:telemetry }...: avg=907.75ms min=221.63µs med=531.96µs max=12.65s p(95)=6.61s p(99)=10.46s
+    http_req_failed........: 100.00% 19198 out of 19198
+      { name:telemetry }...: 100.00% 19198 out of 19198
+    http_reqs..............: 19198   63.992961/s
+
+    EXECUTION
+    dropped_iterations.....: 903     3.009983/s
+    iteration_duration.....: avg=908.15ms min=413.13µs med=849.34µs max=12.65s p(95)=6.61s p(99)=10.47s
+    iterations.............: 19198   63.992961/s
+    vus....................: 0       min=0              max=500
+    vus_max................: 500     min=100            max=500
+
+    NETWORK
+    data_received..........: 6.4 MB  21 kB/s
+    data_sent..............: 4.1 MB  14 kB/s
+
+
+
+time="2026-11-05T14:00:08-03:00" level=error msg="thresholds on metrics 'dropped_iterations, http_req_duration{name:telemetry}, http_req_failed{name:telemetry}' have been crossed"

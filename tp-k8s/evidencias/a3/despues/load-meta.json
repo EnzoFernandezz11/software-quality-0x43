@@ -1,0 +1,7 @@
+{
+  "run_id": "despues-load-20261105T191342Z",
+  "start_utc": "2026-11-05T19:13:42Z",
+  "end_utc": "2026-11-05T19:18:43Z",
+  "exit_code": 99,
+  "initial_rows": 50000
+}

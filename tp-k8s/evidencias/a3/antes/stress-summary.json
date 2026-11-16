@@ -1,0 +1,145 @@
+{
+    "root_group": {
+        "id": "d41d8cd98f00b204e9800998ecf8427e",
+        "groups": {},
+        "checks": {
+                "telemetry returned 201": {
+                    "fails": 77405,
+                    "name": "telemetry returned 201",
+                    "path": "::telemetry returned 201",
+                    "id": "4e78157a8cbf9dfabba3bc4b9e5f2632",
+                    "passes": 0
+                }
+            },
+        "name": "",
+        "path": ""
+    },
+    "metrics": {
+        "http_req_blocked": {
+            "max": 10.431977,
+            "p(95)": 0.015394200000000012,
+            "p(99)": 0.033807360000000744,
+            "avg": 0.009697918907047446,
+            "min": 0.001961,
+            "med": 0.004578
+        },
+        "dropped_iterations": {
+            "count": 3320,
+            "rate": 9.222176266965112,
+            "thresholds": {
+                "count<1": true
+            }
+        },
+        "http_req_failed{name:telemetry}": {
+            "passes": 77405,
+            "fails": 0,
+            "thresholds": {
+                "rate<0.01": true
+            },
+            "value": 1
+        },
+        "data_sent": {
+            "count": 16649812,
+            "rate": 46249.247311997264
+        },
+        "iterations": {
+            "count": 77405,
+            "rate": 215.0128174531429
+        },
+        "http_req_failed": {
+            "passes": 77405,
+            "fails": 0,
+            "value": 1
+        },
+        "http_req_duration": {
+            "avg": 240.85411123934873,
+            "min": 0.124581,
+            "med": 0.281303,
+            "max": 13595.571329,
+            "p(95)": 1606.2547518000003,
+            "p(99)": 5920.226890920001
+        },
+        "http_req_duration{name:telemetry}": {
+            "p(99)": 5920.226890920001,
+            "avg": 240.85411123934873,
+            "min": 0.124581,
+            "med": 0.281303,
+            "max": 13595.571329,
+            "p(95)": 1606.2547518000003,
+            "thresholds": {
+                "p(95)<300": true
+            }
+        },
+        "http_req_tls_handshaking": {
+            "min": 0,
+            "med": 0,
+            "max": 0,
+            "p(95)": 0,
+            "p(99)": 0,
+            "avg": 0
+        },
+        "http_req_connecting": {
+            "med": 0,
+            "max": 10.246388,
+            "p(95)": 0,
+            "p(99)": 0,
+            "avg": 0.0032641497060913387,
+            "min": 0
+        },
+        "vus": {
+            "min": 0,
+            "max": 600,
+            "value": 0
+        },
+        "http_req_waiting": {
+            "max": 13595.52195,
+            "p(95)": 1606.1538362000003,
+            "p(99)": 5920.141979000002,
+            "avg": 240.77025730814213,
+            "min": 0.089397,
+            "med": 0.211227
+        },
+        "data_received": {
+            "count": 26348085,
+            "rate": 73188.76029125888
+        },
+        "http_req_sending": {
+            "min": 0.007804,
+            "med": 0.017434,
+            "max": 16.08301,
+            "p(95)": 0.052909600000000064,
+            "p(99)": 0.07937744000000026,
+            "avg": 0.022675974239390172
+        },
+        "checks": {
+            "passes": 0,
+            "fails": 77405,
+            "value": 0
+        },
+        "http_req_receiving": {
+            "avg": 0.0611779569666045,
+            "min": 0.012895,
+            "med": 0.050217,
+            "max": 28.525118,
+            "p(95)": 0.10130700000000001,
+            "p(99)": 0.19364756000000038
+        },
+        "iteration_duration": {
+            "avg": 241.07386777162662,
+            "min": 0.235642,
+            "med": 0.466604,
+            "max": 13595.808247,
+            "p(95)": 1606.8676964,
+            "p(99)": 5920.678934320002
+        },
+        "vus_max": {
+            "value": 600,
+            "min": 100,
+            "max": 600
+        },
+        "http_reqs": {
+            "count": 77405,
+            "rate": 215.0128174531429
+        }
+    }
+}
