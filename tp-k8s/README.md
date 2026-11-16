@@ -54,7 +54,7 @@ El dashboard es una **SPA**: sus componentes son `'use client'` y hacen `fetch` 
 ### Requisitos
 
 - Linux con **Docker** y **Minikube** (probado con Minikube v1.39 y driver docker). `kubectl` no hace falta porque se usa `minikube kubectl --`.
-- **4 CPU y 6 GB de RAM libres** para el nodo, y unos 20 GB de disco para Docker. Las mediciones de #12 se hicieron con 4 CPU y 4 GiB (`MINIKUBE_MEMORY=4096`), no con los 6 GiB predeterminados; #13 debe indicar y coordinar el entorno elegido antes de comparar resultados.
+- **4 CPU y 6 GB de RAM libres** para el nodo, y unos 20 GB de disco para Docker. Las mediciones de #12 se hicieron con 4 CPU y 4 GiB (`MINIKUBE_MEMORY=4096`), no con los 6 GiB predeterminados. A3 (#13) y E1 (#14) usaron 6 GiB; cada resultado indica su entorno.
 - **k6** ≥ 1.0 para las pruebas. `k6/browser` necesita además Chromium o Google Chrome.
 
 ### Levantar todo
@@ -196,6 +196,20 @@ p95 y el porcentaje agregados del resumen k6.
 
 ![Pods no listos durante el pico E2](evidencias/e2-pods-no-listos.png)
 
+**`CrashLoopBackOff` y `OOMKilled` (A3, `stress` antes de optimizar):** la captura de E2 muestra pods no listos, pero no estos estados. Sí quedaron registrados en el muestreo de `kubectl get pods` que se tomó cada 15 s durante `stress` ([stress-k8s.txt](evidencias/a3/antes/stress-k8s.txt)). A los 31 s de empezar, todavía en el tramo de 67 req/s, los dos pods ya estaban en `CrashLoopBackOff`; a los 4 min, uno terminó en `OOMKilled`. Extracto del registro (horas en UTC; se omiten las columnas de IP y nodo):
+
+```text
+2026-11-05T17:02:25Z
+NAME                    READY   STATUS             RESTARTS      AGE
+back-5f8f749ddf-cqnsl   0/1     CrashLoopBackOff   1 (8s ago)    75s
+back-5f8f749ddf-dbmvd   0/1     CrashLoopBackOff   1 (10s ago)   75s
+...
+2026-11-05T17:06:00Z
+NAME                    READY   STATUS             RESTARTS      AGE
+back-5f8f749ddf-cqnsl   0/1     OOMKilled          5 (96s ago)   4m50s
+back-5f8f749ddf-dbmvd   0/1     CrashLoopBackOff   5 (12s ago)   4m50s
+```
+
 Los siguientes gráficos se generaron a partir de los registros anteriores; no son capturas de consola:
 
 ![Escalado del HPA observado en la carga sostenida](evidencias/hpa-escalado-grafico.png)
@@ -209,8 +223,8 @@ Los siguientes gráficos se generaron a partir de los registros anteriores; no s
 Se probaron los mismos scripts de `tp-k8s/k6/` contra el Ingress y con 50.000
 lecturas de 2.000 sensores precargadas **antes de cada corrida**. El entorno
 fue un Minikube aislado con 4 CPU y 6144 MiB; el backend mantuvo 2 réplicas
-fijas y límites de 500m CPU / 384Mi por pod. No había HPA: el escalado de #12
-todavía no integra este experimento. Hardware, versiones y procedimiento:
+fijas y límites de 500m CPU / 384Mi por pod. No había HPA: las corridas se
+hicieron antes de integrar el escalado de #12. Hardware, versiones y procedimiento:
 [`antes/entorno.md`](evidencias/a3/antes/entorno.md) y
 [`despues/entorno.md`](evidencias/a3/despues/entorno.md).
 
@@ -354,7 +368,8 @@ quedó listo no constituyen una caída del servicio. Evidencia:
 E1a cumplió los SLOs con **5 POST/s**, una carga aproximadamente **13 veces menor**
 que el objetivo nominal de **67 req/s**. Este resultado demuestra continuidad del
 servicio ante la caída de un pod con carga reducida; no permite asegurar disponibilidad
-durante una caída a carga nominal. Esa capacidad deberá evaluarse en #13.
+durante una caída a carga nominal. De hecho, la sección 4 muestra que a esa carga el
+sistema ya incumple los SLO sin ninguna falla inyectada (`load`: 59,04 % de errores).
 
 **E1b:** se borraron ambos pods a las 14:39:10. El Service quedó sin endpoints
 listos hasta las 14:39:17. El primer POST con 503 terminó a las **14:39:14,373671**;
@@ -390,7 +405,7 @@ http_req_duration..............: avg=19.57ms  med=19.22ms  p(95)=34.01ms  p(99)=
 
 ### HPA y E2: escalado y recuperación ante saturación (#12)
 
-En la carga sostenida con el perfil nominal, el HPA pasó de 2 a 6 réplicas y luego volvió automáticamente a 2. Hubo fallas de readiness y liveness y reinicios; mientras los pods no estaban listos, el HPA no pudo calcular el uso de CPU. El 70,12 % de las 7.023 solicitudes completadas falló y el p95 fue 26,61 s. k6 descartó 2.976 iteraciones, por lo que no es una medición nominal válida para #13. Es una señal de riesgo que #13 debe investigar, no un veredicto go/no-go. La consulta `find_recent_with_motion` es una posible causa de carga y la liveness bajo saturación puede agravar la caída; no se demostró una causa única.
+En la carga sostenida con el perfil nominal, el HPA pasó de 2 a 6 réplicas y luego volvió automáticamente a 2. Hubo fallas de readiness y liveness y reinicios; mientras los pods no estaban listos, el HPA no pudo calcular el uso de CPU. El 70,12 % de las 7.023 solicitudes completadas falló y el p95 fue 26,61 s. k6 descartó 2.976 iteraciones, así que no es una medición nominal: esa medición está en la sección 4, y el veredicto, en la sección 6. Esta corrida es anterior a la optimización de `find_recent_with_motion` hecha en A3; aun con esa optimización, `load` siguió incumpliendo los SLO. La liveness bajo saturación puede agravar la caída; no se demostró una causa única.
 
 En E2 (4 CPU, 4 GiB, límites estresados de 250m/256Mi), el pico objetivo subió a 400 req/s en 5 s. De 11.137 solicitudes completadas, fallaron 10.345: **9.779 HTTP 503**, 1 HTTP 502 y 565 errores de transporte. El p95 fue 29,99 s; k6 descartó 2.862 iteraciones por falta de VUs, así que no logró generar toda la carga prevista. Los dos pods quedaron no listos y el HPA permaneció en 2; los 503 coinciden con la ausencia de pods listos. La prueba incumple los SLO sugeridos (<1 % de errores y p95 <300 ms), pero es deliberadamente estresada y no representa la carga nominal. Ver [resumen k6](evidencias/e2-recuperacion-k6.txt), [HPA](evidencias/e2-recuperacion-hpa.txt) y [pods](evidencias/e2-recuperacion-pods.txt).
 
@@ -467,7 +482,7 @@ Prevenciones que aplicamos de entrada:
   ```bash
   k exec -i db-0 -- sh -c 'psql -U "$POSTGRES_USER" -d "$POSTGRES_DB" -v rows=50000' < tp-k8s/k6/seed-readings.sql
   ```
-- `k8s/monitoring/` + `k6/run-in-cluster.sh`: Prometheus y Grafana para ver las métricas de k6. Corre los perfiles del `load-test.js` de la práctica anterior como Jobs dentro del clúster; los scripts del TP los define #13.
+- `k8s/monitoring/` + `k6/run-in-cluster.sh`: Prometheus y Grafana para ver las métricas de k6. Corre los perfiles del `load-test.js` de la práctica anterior como Jobs dentro del clúster. Los scripts del TP (`smoke.js`, `load.js` y `stress.js`) se ejecutaron desde el host contra el Ingress (sección 4).
 
 ---
 
