@@ -1,0 +1,84 @@
+LAST SEEN   TYPE      REASON                  OBJECT                               MESSAGE
+3m13s       Normal    ProvisioningSucceeded   persistentvolumeclaim/db-data-db-0   Successfully provisioned volume pvc-4eef247e-5bf6-481a-8e9b-7d8ed85a3d5c
+3m13s       Warning   FailedScheduling        pod/db-0                             0/1 nodes are available: pod has unbound immediate PersistentVolumeClaims. not found
+3m13s       Normal    Scheduled               pod/db-0                             Successfully assigned terrasense/db-0 to terrasense
+3m13s       Normal    Pulling                 pod/db-0                             Pulling image "postgres:16-alpine"
+3m13s       Normal    SuccessfulCreate        statefulset/db                       Create Pod db-0 in StatefulSet db successful
+3m13s       Normal    SuccessfulCreate        statefulset/db                       Create Claim db-data-db-0 Pod db-0 in StatefulSet db success
+3m13s       Normal    ExternalProvisioning    persistentvolumeclaim/db-data-db-0   Waiting for a volume to be created either by the external provisioner 'k8s.io/minikube-hostpath' or manually by the system administrator. If volume creation is delayed, please verify that the provisioner is running and correctly registered.
+3m13s       Normal    Provisioning            persistentvolumeclaim/db-data-db-0   External provisioner is provisioning volume for claim "terrasense/db-data-db-0"
+2m58s       Normal    Pulled                  pod/db-0                             Successfully pulled image "postgres:16-alpine" in 14.851s (14.851s including waiting). Image size: 116086802 bytes.
+2m58s       Normal    Created                 pod/db-0                             Container created
+2m58s       Normal    Started                 pod/db-0                             Container started
+2m58s       Warning   Unhealthy               pod/db-0                             Readiness probe failed: /var/run/postgresql:5432 - no response
+2m57s       Normal    SuccessfulCreate        job/db-migrate                       Created pod: db-migrate-94bd6
+2m57s       Normal    Scheduled               pod/db-migrate-94bd6                 Successfully assigned terrasense/db-migrate-94bd6 to terrasense
+2m56s       Normal    Pulled                  pod/db-migrate-94bd6                 Container image "postgres:16-alpine" already present on machine and can be accessed by the pod
+2m56s       Normal    Created                 pod/db-migrate-94bd6                 Container created
+2m56s       Normal    Started                 pod/db-migrate-94bd6                 Container started
+2m55s       Normal    Pulled                  pod/db-migrate-94bd6                 Container image "terrasense-back:local" already present on machine and can be accessed by the pod
+2m55s       Normal    Created                 pod/db-migrate-94bd6                 Container created
+2m55s       Normal    Started                 pod/db-migrate-94bd6                 Container started
+2m50s       Normal    Completed               job/db-migrate                       Job completed
+2m50s       Normal    Scheduled               pod/back-5f8f749ddf-xdhbb            Successfully assigned terrasense/back-5f8f749ddf-xdhbb to terrasense
+2m50s       Normal    Scheduled               pod/front-584bf9fddf-x8n5t           Successfully assigned terrasense/front-584bf9fddf-x8n5t to terrasense
+2m50s       Normal    SuccessfulCreate        replicaset/front-584bf9fddf          Created pod: front-584bf9fddf-x8n5t
+2m50s       Normal    ScalingReplicaSet       deployment/front                     Scaled up replica set front-584bf9fddf from 0 to 1
+2m50s       Normal    ScalingReplicaSet       deployment/back                      Scaled up replica set back-5f8f749ddf from 0 to 2
+2m50s       Normal    SuccessfulCreate        replicaset/back-5f8f749ddf           Created pod: back-5f8f749ddf-2npbh
+2m50s       Normal    SuccessfulCreate        replicaset/back-5f8f749ddf           Created pod: back-5f8f749ddf-xdhbb
+2m50s       Normal    Scheduled               pod/back-5f8f749ddf-2npbh            Successfully assigned terrasense/back-5f8f749ddf-2npbh to terrasense
+2m49s       Normal    Created                 pod/back-5f8f749ddf-xdhbb            Container created
+2m49s       Normal    Pulled                  pod/back-5f8f749ddf-2npbh            Container image "terrasense-back:local" already present on machine and can be accessed by the pod
+2m49s       Warning   Unhealthy               pod/back-5f8f749ddf-2npbh            Readiness probe failed: Get "http://10.244.0.10:5000/health/ready": dial tcp 10.244.0.10:5000: connect: connection refused
+2m49s       Normal    Pulled                  pod/back-5f8f749ddf-2npbh            Container image "postgres:16-alpine" already present on machine and can be accessed by the pod
+2m49s       Normal    Created                 pod/back-5f8f749ddf-2npbh            Container created
+2m49s       Warning   Unhealthy               pod/front-584bf9fddf-x8n5t           Readiness probe failed: Get "http://10.244.0.11:3000/": dial tcp 10.244.0.11:3000: connect: connection refused
+2m49s       Normal    Started                 pod/front-584bf9fddf-x8n5t           Container started
+2m49s       Normal    Created                 pod/front-584bf9fddf-x8n5t           Container created
+2m49s       Normal    Pulled                  pod/front-584bf9fddf-x8n5t           Container image "terrasense-front:local" already present on machine and can be accessed by the pod
+2m49s       Normal    Started                 pod/back-5f8f749ddf-2npbh            Container started
+2m49s       Normal    Pulled                  pod/back-5f8f749ddf-xdhbb            Container image "postgres:16-alpine" already present on machine and can be accessed by the pod
+2m49s       Normal    Started                 pod/back-5f8f749ddf-2npbh            Container started
+2m49s       Normal    Started                 pod/back-5f8f749ddf-xdhbb            Container started
+2m49s       Normal    Pulled                  pod/back-5f8f749ddf-xdhbb            Container image "terrasense-back:local" already present on machine and can be accessed by the pod
+2m49s       Normal    Created                 pod/back-5f8f749ddf-xdhbb            Container created
+2m49s       Normal    Started                 pod/back-5f8f749ddf-xdhbb            Container started
+2m49s       Warning   Unhealthy               pod/back-5f8f749ddf-xdhbb            Readiness probe failed: Get "http://10.244.0.9:5000/health/ready": dial tcp 10.244.0.9:5000: connect: connection refused
+2m49s       Normal    Created                 pod/back-5f8f749ddf-2npbh            Container created
+16s         Warning   Unhealthy               pod/back-5f8f749ddf-xdhbb            Readiness probe failed: Get "http://10.244.0.9:5000/health/ready": context deadline exceeded (Client.Timeout exceeded while awaiting headers)
+2m46s       Warning   Unhealthy               pod/back-5f8f749ddf-2npbh            Readiness probe failed: Get "http://10.244.0.10:5000/health/ready": context deadline exceeded (Client.Timeout exceeded while awaiting headers)
+2m29s       Normal    Sync                    ingress/terrasense-ingress           Scheduled for sync
+115s        Normal    Scheduled               pod/back-5f8f749ddf-fs4hx            Successfully assigned terrasense/back-5f8f749ddf-fs4hx to terrasense
+115s        Normal    SuccessfulCreate        replicaset/back-5f8f749ddf           Created pod: back-5f8f749ddf-fs4hx
+115s        Normal    Killing                 pod/back-5f8f749ddf-2npbh            Stopping container back
+115s        Normal    Pulled                  pod/back-5f8f749ddf-fs4hx            Container image "postgres:16-alpine" already present on machine and can be accessed by the pod
+115s        Normal    Created                 pod/back-5f8f749ddf-fs4hx            Container created
+115s        Normal    Started                 pod/back-5f8f749ddf-fs4hx            Container started
+114s        Warning   Unhealthy               pod/back-5f8f749ddf-fs4hx            Readiness probe failed: Get "http://10.244.0.12:5000/health/ready": dial tcp 10.244.0.12:5000: connect: connection refused
+114s        Normal    Pulled                  pod/back-5f8f749ddf-fs4hx            Container image "terrasense-back:local" already present on machine and can be accessed by the pod
+114s        Normal    Created                 pod/back-5f8f749ddf-fs4hx            Container created
+114s        Normal    Started                 pod/back-5f8f749ddf-fs4hx            Container started
+111s        Warning   Unhealthy               pod/back-5f8f749ddf-fs4hx            Readiness probe failed: Get "http://10.244.0.12:5000/health/ready": context deadline exceeded (Client.Timeout exceeded while awaiting headers)
+40s         Normal    Killing                 pod/back-5f8f749ddf-fs4hx            Stopping container back
+40s         Warning   Unhealthy               pod/back-5f8f749ddf-h7hl4            Readiness probe failed: Get "http://10.244.0.14:5000/health/ready": dial tcp 10.244.0.14:5000: connect: connection refused
+40s         Normal    Scheduled               pod/back-5f8f749ddf-h7hl4            Successfully assigned terrasense/back-5f8f749ddf-h7hl4 to terrasense
+40s         Normal    Pulled                  pod/back-5f8f749ddf-h7hl4            Container image "postgres:16-alpine" already present on machine and can be accessed by the pod
+40s         Normal    Created                 pod/back-5f8f749ddf-h7hl4            Container created
+40s         Normal    Started                 pod/back-5f8f749ddf-h7hl4            Container started
+40s         Normal    Pulled                  pod/back-5f8f749ddf-h7hl4            Container image "terrasense-back:local" already present on machine and can be accessed by the pod
+40s         Normal    Pulled                  pod/back-5f8f749ddf-plb7j            Container image "postgres:16-alpine" already present on machine and can be accessed by the pod
+40s         Normal    Created                 pod/back-5f8f749ddf-h7hl4            Container created
+40s         Normal    SuccessfulCreate        replicaset/back-5f8f749ddf           Created pod: back-5f8f749ddf-h7hl4
+40s         Normal    Started                 pod/back-5f8f749ddf-h7hl4            Container started
+40s         Normal    SuccessfulCreate        replicaset/back-5f8f749ddf           Created pod: back-5f8f749ddf-plb7j
+40s         Normal    Killing                 pod/back-5f8f749ddf-xdhbb            Stopping container back
+40s         Normal    Created                 pod/back-5f8f749ddf-plb7j            Container created
+40s         Normal    Scheduled               pod/back-5f8f749ddf-plb7j            Successfully assigned terrasense/back-5f8f749ddf-plb7j to terrasense
+40s         Normal    Started                 pod/back-5f8f749ddf-plb7j            Container started
+40s         Warning   Unhealthy               pod/back-5f8f749ddf-plb7j            Readiness probe failed: Get "http://10.244.0.13:5000/health/ready": dial tcp 10.244.0.13:5000: connect: connection refused
+40s         Normal    Started                 pod/back-5f8f749ddf-plb7j            Container started
+40s         Normal    Created                 pod/back-5f8f749ddf-plb7j            Container created
+40s         Normal    Pulled                  pod/back-5f8f749ddf-plb7j            Container image "terrasense-back:local" already present on machine and can be accessed by the pod
+37s         Warning   Unhealthy               pod/back-5f8f749ddf-plb7j            Readiness probe failed: Get "http://10.244.0.13:5000/health/ready": context deadline exceeded (Client.Timeout exceeded while awaiting headers)
+37s         Warning   Unhealthy               pod/back-5f8f749ddf-h7hl4            Readiness probe failed: Get "http://10.244.0.14:5000/health/ready": context deadline exceeded (Client.Timeout exceeded while awaiting headers)
