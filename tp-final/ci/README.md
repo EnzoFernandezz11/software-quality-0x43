@@ -1,6 +1,6 @@
 # Gate de calidad de la versión candidata
 
-**Responsable:** Nacho. **Fecha de evaluación:** 18/11/2026. **Estado:** checks aprobados. Rollout medido pendiente de verificar el backend compartido.
+**Responsable:** Nacho. **Fecha de evaluación:** 18/11/2026. **Estado:** checks aprobados y GO para iniciar el rollout medido en `terrasense-tp23`.
 
 La consigna del TP final (sección 3.1 de `TP_Final.pdf`) exige que la imagen candidata haya pasado linters y Horusec antes del rollout medido. El plan maestro del equipo asigna a Nacho la verificación de esa gate. La imagen y el proceso de build los prepara Valentín. Los dos documentos de planificación están fuera del repositorio; la evidencia técnica versionada se enlaza abajo.
 
@@ -50,19 +50,19 @@ El JSON de la candidata registra **182 alertas** (10 críticas, 14 altas, 29 med
 | Alta · 4 | Safety evalúa rangos permitidos por `requirements.txt`. La imagen local inspeccionada tiene Flask 3.1.3, Flask-CORS 6.0.5, Marshmallow 4.4.0 y python-dotenv 1.2.4, fuera de los rangos señalados en esta corrida. | Confirmar el inventario en la imagen que use el canary si difiere de la inspeccionada. |
 | Media · 29 y baja · 129 | Incluyen advertencias en manifiestos Kubernetes, incluido material histórico, aserciones de pruebas, código de firmware y el arranque local de Flask. | Los detalles por regla y archivo quedan en el JSON. |
 
-La imagen de backend inspeccionada fue `terrasense-back:local` con ID `sha256:15594d6dfbaff1780854c93396ddb8be25422a2aee77e36ad49190b701ed374d`. El perfil local de Minikube estaba detenido durante la revisión. El inventario y la clave de los pods del canary quedan por comprobar.
+La imagen de backend inspeccionada inicialmente fue `terrasense-back:local` con ID `sha256:15594d6dfbaff1780854c93396ddb8be25422a2aee77e36ad49190b701ed374d`. El perfil local de Minikube estaba detenido durante esa revisión. La verificación del inventario y de la clave efectiva en el entorno de medición quedó registrada después en la evidencia enlazada abajo.
 
 ## Decisión para el rollout medido
 
-**18/11/2026 · Nacho · NO-GO provisional para iniciar el rollout medido.** Los checks de la candidata están aprobados y la verificación del backend compartido queda pendiente. Para dar el GO, Valentino debe registrar el resultado de estas comprobaciones en el entorno del canary. [Pedido en la issue #22](https://github.com/EnzoFernandezz11/software-quality-0x43/issues/22#issuecomment-6981814584)
+**18/11/2026 · Nacho · GO para iniciar el rollout medido de `front-v1.1.0` (`acdca28`).** Las comprobaciones que motivaron el NO-GO provisional quedaron resueltas en el perfil de Minikube `terrasense-tp23`, namespace `terrasense`. [Solicitud de verificación](https://github.com/EnzoFernandezz11/software-quality-0x43/issues/22#issuecomment-6981814584) · [Confirmación del equipo](https://github.com/EnzoFernandezz11/software-quality-0x43/issues/25#issuecomment-6986381594) · [Cierre de la gate](https://github.com/EnzoFernandezz11/software-quality-0x43/issues/25#issuecomment-6986489015)
 
-1. Verificar que la clave efectiva de Flask esté presente, sea no vacía y difiera del respaldo y de los valores públicos de ejemplo. Si el entorno usa uno de esos valores, corregir el Secret y volver a comprobar el pod. Registrar únicamente el resultado de la comprobación.
-2. Registrar el perfil o namespace y el ID o digest de la imagen del backend que está ejecutando el pod. Si se usa otra imagen, registrar las versiones instaladas de Flask, Flask-CORS, Marshmallow y python-dotenv.
+1. Ambos pods usan una clave efectiva de Flask propia del entorno. El equipo confirmó que difiere del respaldo y de los valores públicos de ejemplo y registró el resultado sin exponer la clave.
+2. Ambos pods usan `terrasense-back:local` con ID `sha256:8a190cf71e6a51ae96312a692213479ed75d89e3029a84a6399e678f46b113f1`. El ID difiere del de la imagen local inicial. Los dos pods tienen Flask 3.1.3, Flask-CORS 6.0.5, Marshmallow 4.4.0 y python-dotenv 1.2.4, las mismas versiones evaluadas en esta revisión. [Registro de verificación](https://github.com/EnzoFernandezz11/software-quality-0x43/blob/5c8e0efaa2cb5324713ca9092adf3f51511c0f84/tp-final/evidencias/reportes/canary-previo/verificacion-gate.txt)
 
-Con ese reporte, Nacho revisa la evidencia y actualiza la decisión en la [issue #25](https://github.com/EnzoFernandezz11/software-quality-0x43/issues/25). El resultado y este informe quedan como insumo para el README técnico de la [issue #24](https://github.com/EnzoFernandezz11/software-quality-0x43/issues/24).
+El GO habilita la medición en el entorno verificado. La decisión de promover o revertir la candidata se toma con los resultados del rollout y el estrés A/B. El resultado de la gate queda como insumo para el README técnico. [Rollout #22](https://github.com/EnzoFernandezz11/software-quality-0x43/issues/22) · [Medición #23](https://github.com/EnzoFernandezz11/software-quality-0x43/issues/23) · [README #24](https://github.com/EnzoFernandezz11/software-quality-0x43/issues/24)
 
 ## Material breve para la presentación
 
-Los linters y Horusec se ejecutaron sobre el árbol Git que produjo `1.1.0`. Los linters comprobaron las reglas estáticas configuradas. La revisión de Horusec dejó dos comprobaciones del backend compartido como condición para iniciar la medición.
+Los linters y Horusec se ejecutaron sobre el árbol Git que produjo `1.1.0`. La verificación de la clave efectiva y las dependencias del backend compartido habilitó el rollout medido en `terrasense-tp23`.
 
 Las comprobaciones locales efectuadas sobre la base del TP4 se registran en [verificación local](verificacion-local.md). No constituyen la gate de `1.1.0`.
