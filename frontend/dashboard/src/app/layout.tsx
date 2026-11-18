@@ -11,6 +11,10 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Panel Smart Office",
   description: "Dashboard IoT — Telemetría en vivo, algoritmos y auditoría",
+  // <meta name="app-version"> para identificar la versión desde el HTML (k6/browser).
+  other: {
+    "app-version": process.env.NEXT_PUBLIC_APP_VERSION ?? "desconocida",
+  },
 };
 
 export default function RootLayout({

@@ -26,10 +26,26 @@ COPY frontend/dashboard/ ./
 ARG NEXT_PUBLIC_API_URL=http://localhost:5000/api
 ENV NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
 
+# TP final (canary): la versión sale de `package.json`. Si se pasa APP_VERSION
+# (el tag de la imagen), el build falla cuando no coincide con el código.
+ARG APP_VERSION=""
+RUN node -e 'const v = require("./package.json").version; const e = process.env.APP_VERSION; \
+  if (e && e !== v) { console.error(`APP_VERSION=${e} no coincide con package.json (${v})`); process.exit(1); } \
+  console.log(`Versión del panel: ${v}`);'
+
 ENV NEXT_TELEMETRY_DISABLED=1
 RUN npm run build
 
 FROM base AS runner
+
+# Trazabilidad: `docker inspect` muestra la versión y la revisión de Git de origen.
+ARG APP_VERSION=""
+ARG GIT_SHA=""
+LABEL org.opencontainers.image.title="terrasense-front" \
+      org.opencontainers.image.version="${APP_VERSION}" \
+      org.opencontainers.image.revision="${GIT_SHA}" \
+      org.opencontainers.image.source="https://github.com/EnzoFernandezz11/software-quality-0x43"
+
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 

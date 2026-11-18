@@ -177,6 +177,18 @@
   background-clip: text;
 }
 
+/* Versión visible en el encabezado (identifica la imagen en las capturas) */
+.app-version-badge {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.2rem 0.6rem;
+  border-radius: 9999px;
+  border: 1px solid var(--border);
+  color: var(--muted-foreground);
+  background: var(--card);
+}
+
 /* Icon ring next to the title */
 .dashboard-icon-ring {
   display: flex;
