@@ -16,7 +16,7 @@ Repetir el reparto en al menos dos pesos diferentes ya aplicados en el Ingress. 
 
 ```bash
 K6_WEB_DASHBOARD=true K6_WEB_DASHBOARD_EXPORT="$reportes/reparto-10.html" \
-  k6 run -e WEIGHT=10 -e RATE=10 -e DURATION_SECONDS=120 \
+  k6 run -e WEIGHT=10 -e RATE=10 -e DURATION_SECONDS=180 \
   -e REPORT_JSON="$reportes/reparto-10.json" tp-final/k6/reparto.js
 ```
 
@@ -35,7 +35,7 @@ K6_BROWSER_HEADLESS=false k6 run -e CAPTURE_DIR="$capturas" -e VISITS=20 \
   tp-final/k6/navegacion.js
 ```
 
-Cada visita abre un contexto independiente. El script guarda la primera captura válida de cada versión tras verificar HTTP 200, el header del documento, un encabezado visible del panel y las respuestas de JS y CSS. El selector predeterminado es `h1.dashboard-title`, que viene del dashboard del TP4. Si el build cambia esa marca, indicar con `DASHBOARD_SELECTOR` un selector del panel que exista en ambos builds. Registrar fallos de recursos, distinguiendo estado HTTP, MIME incorrecto y fallos de red. Si una versión falta o alguna visita falla, k6 lo señala al terminar. Conservar ese resultado y repetir cuando corresponda.
+Cada visita abre un contexto independiente. El script guarda la primera captura válida de cada versión tras verificar HTTP 200, el header del documento, un encabezado visible, la primera actualización de datos de la API y las respuestas de JS y CSS. El selector predeterminado es `h1.dashboard-title`. Registrar fallos de recursos, distinguiendo estado HTTP, MIME incorrecto y fallos de red. Si una versión falta o alguna visita falla, k6 lo señala al terminar.
 
 ## Estrés A/B
 

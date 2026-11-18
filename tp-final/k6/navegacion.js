@@ -58,6 +58,7 @@ export default async function () {
   let recursosValidos = false;
   let documentoValido = false;
   let panelVisible = false;
+  let datosCargados = false;
   let captura = null;
 
   page.on('response', (response) => {
@@ -79,6 +80,18 @@ export default async function () {
       } catch (error) {
         console.warn('Panel no visible: ' + error.message);
       }
+      if (panelVisible) {
+        try {
+          await page.waitForFunction(() => Array.from(document.querySelectorAll('article')).some((card) => {
+            const valor = card.querySelector('.kpi-value')?.textContent.trim();
+            return card.querySelector('.section-label')?.textContent === 'Última actualización' &&
+              valor && valor !== 'Esperando…';
+          }), { timeout: 8000 });
+          datosCargados = true;
+        } catch (error) {
+          console.warn('El panel no recibió datos del backend: ' + (error?.message ?? String(error)));
+        }
+      }
     }
 
     const revisados = (await Promise.all(recursos)).filter(Boolean);
@@ -89,7 +102,7 @@ export default async function () {
       console.warn(JSON.stringify({ version, fallos, fallosRed, recursosObservados: revisados.length }));
     }
 
-    if (documentoValido && panelVisible && recursosValidos && !guardadas.has(version)) {
+    if (datosCargados && recursosValidos && !guardadas.has(version)) {
       const archivo = directorio + '/dashboard-' + version + '.png';
       await page.screenshot({ path: archivo, fullPage: true });
       guardadas.add(version);
@@ -98,12 +111,12 @@ export default async function () {
   } catch (error) {
     console.error('Falló la navegación: ' + error.message);
   } finally {
-    check(documentoValido && panelVisible && recursosValidos, { 'documento, panel, JS y CSS válidos': (ok) => ok });
+    check(datosCargados && recursosValidos, { 'panel con datos, JS y CSS válidos': (ok) => ok });
     for (const esperada of ['1.0.0', '1.1.0']) {
       capturas.add(captura && version === esperada ? 1 : 0, { version: esperada });
     }
     console.log(JSON.stringify({
-      visita: exec.scenario.iterationInTest + 1, version, documentoValido, panelVisible, recursosValidos, captura,
+      visita: exec.scenario.iterationInTest + 1, version, documentoValido, panelVisible, datosCargados, recursosValidos, captura,
     }));
     await page.close();
   }
