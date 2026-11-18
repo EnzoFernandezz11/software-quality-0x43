@@ -1,0 +1,27 @@
+Etapa 0 del rollout (#22) · 2026-11-18T13:37:09-03:00 · git edba94f
+Peso canary: 0 %
+Imágenes: front-stable=terrasense-front:1.0.0 front-canary=terrasense-front:1.1.0 
+NAME                            READY   STATUS    RESTARTS   AGE    TRACK    VERSION
+front-canary-665495b56-fmbr6    1/1     Running   0          71m    canary   1.1.0
+front-canary-665495b56-hmp7x    1/1     Running   0          71m    canary   1.1.0
+front-stable-5677c57859-gz4tc   1/1     Running   0          114m   stable   1.0.0
+front-stable-5677c57859-tf4n8   1/1     Running   0          113m   stable   1.0.0
+
+1. Candidata forzada con el header: documento y cada recurso JS/CSS
+   $ curl -H 'X-Canary: always' http://terrasense.local/dashboard  (y cada /_next/static/*.js|css con el mismo header)
+   documento: 200 X-App-Version=1.1.0
+   meta app-version: 1.1.0
+   recursos:       9 200 X-App-Version=1.1.0
+
+2. Candidata forzada con la cookie canary=always (navegador sin cookie de afinidad previa), 10 requests
+   $ curl -b 'canary=always' http://terrasense.local/dashboard
+       10 200 X-App-Version=1.1.0
+
+3. Estable forzada con el header
+   $ curl -H 'X-Canary: never' http://terrasense.local/dashboard
+   documento: 200 X-App-Version=1.0.0
+
+4. Sin header ni cookie: nadie ve la candidata
+   $ bash tp-final/rollout/rollout.sh muestra 200
+Muestra de 200 requests a http://terrasense.local/dashboard sin cookies (peso configurado: 0 %):
+    200  HTTP 200  versión 1.0.0    100,0 %

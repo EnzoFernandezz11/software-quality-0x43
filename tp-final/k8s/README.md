@@ -65,7 +65,7 @@ curl -sI -H 'X-Canary: always' http://terrasense.local/dashboard | grep -i x-app
 curl -sI -H 'X-Canary: never'  http://terrasense.local/dashboard | grep -i x-app-version   # 1.0.0
 ```
 
-En el navegador, la cookie `canary=always` fuerza la candidata. Para que vuelva a sortear hay que borrar la cookie `terrasense-front` o abrir una ventana de incógnito nueva.
+En el navegador, la cookie `canary=always` fuerza la candidata, pero solo si el navegador no está fijado a la estable: la cookie de afinidad `terrasense-front` tiene prioridad. Hay que borrar `terrasense-front` y crear `canary=always` en F12 → Application → Cookies, y después recargar. La consola no sirve, porque `terrasense-front` es `HttpOnly` y JavaScript no la puede borrar. Para que vuelva a sortear hay que abrir una ventana de incógnito nueva: borrar solo `canary` no alcanza, porque `terrasense-front` también fija la candidata.
 
 ## Qué hace cada archivo y por qué está así
 
@@ -126,6 +126,7 @@ La consigna pide `tp-final/k8s/base/` con namespace, configmaps, db y back. Se c
   - aplica el Ingress canary **después** del principal;
   - verifica cada versión con el header.
 - **`rollout/rollout.sh`.** Opera las etapas como se explicó arriba. Promover sigue el Anexo A.7: primero la stable pasa a la imagen nueva (peso 100 no es promoción), después el peso baja a 0 y recién al final el canary queda en 0 réplicas.
+- **`rollout/reemplazo-pod.sh`.** Elimina un pod del front con tráfico continuo y cuenta las respuestas. Es la prueba del video 2.
 - **`rollout/verificar-afinidad.sh`.** Es la prueba previa que justifica la afinidad y el procedimiento de rollback. Su salida está en `tp-final/evidencias/reportes/rollout/verificacion-afinidad.txt`.
 
 ## Videos para la presentación (máx. 3 min cada uno)
@@ -139,7 +140,7 @@ Grabar con la terminal y el navegador lado a lado, fuente grande y `date` visibl
 
 **2. Reemplazo de un pod.**
 - Arriba: `kubectl -n terrasense get pods -l app=front -L track,version -w`.
-- Abajo: `kubectl -n terrasense delete pod <un pod front-stable>`, mientras corre `rollout.sh muestra 300` o el panel se recarga.
+- Abajo: `bash tp-final/rollout/reemplazo-pod.sh`. Manda una request cada 0,1 s, elimina un pod de `front-stable`, espera a que el reemplazo esté listo y cuenta las respuestas por código y versión. Prueba del 2026-11-18: 188 de 188 con 200, reemplazo en 13 s ([`reemplazo-pod-stable.txt`](../evidencias/reportes/rollout/reemplazo-pod-stable.txt)).
 - Leyenda: «el Deployment crea un pod nuevo, que entra al Service recién cuando su readiness pasa; con 2 réplicas y `preStop`, la muestra no registra errores».
 - Ojo: el pod eliminado puede aparecer unos segundos como `Error` antes de desaparecer. Es el código de salida de Next.js al recibir la señal de apagado, no una falla: la muestra no registra errores.
 

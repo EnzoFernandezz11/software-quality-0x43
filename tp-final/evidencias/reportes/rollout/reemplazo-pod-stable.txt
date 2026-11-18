@@ -1,0 +1,19 @@
+Reemplazo de un pod de front-stable · 2026-11-18T13:39:08-03:00 · git edba94f
+NAME                            READY   STATUS    RESTARTS   AGE    TRACK    VERSION
+front-canary-665495b56-fmbr6    1/1     Running   0          73m    canary   1.1.0
+front-canary-665495b56-hmp7x    1/1     Running   0          73m    canary   1.1.0
+front-stable-5677c57859-l4kx2   1/1     Running   0          24s    stable   1.0.0
+front-stable-5677c57859-tf4n8   1/1     Running   0          115m   stable   1.0.0
+
+13:39:13  se elimina front-stable-5677c57859-l4kx2
+pod "front-stable-5677c57859-l4kx2" deleted from terrasense namespace
+13:39:26  front-stable de nuevo con todos sus pods listos (13 s)
+
+Respuestas durante el reemplazo (código HTTP, versión):
+    188 200 1.0.0
+
+NAME                            READY   STATUS    RESTARTS   AGE    TRACK    VERSION
+front-canary-665495b56-fmbr6    1/1     Running   0          73m    canary   1.1.0
+front-canary-665495b56-hmp7x    1/1     Running   0          73m    canary   1.1.0
+front-stable-5677c57859-4mpcm   1/1     Running   0          17s    stable   1.0.0
+front-stable-5677c57859-tf4n8   1/1     Running   0          116m   stable   1.0.0
