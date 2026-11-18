@@ -27,7 +27,13 @@ export default function RootLayout({
       lang="es"
       className={`${inter.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        {/* v1.1.0: cambio exagerado para distinguir la versión del canary a simple vista */}
+        <div className="release-banner" role="status">
+          ★ Nuevo panel · versión {process.env.NEXT_PUBLIC_APP_VERSION} ★
+        </div>
+        {children}
+      </body>
     </html>
   );
 }
