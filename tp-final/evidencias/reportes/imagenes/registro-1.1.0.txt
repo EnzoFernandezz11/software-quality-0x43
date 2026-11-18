@@ -1,0 +1,16 @@
+fecha:        2026-11-18T00:15:28-03:00
+ref:          front-v1.1.0
+git_sha:      acdca2896a16239c60d0fea21b6816a66b16857a
+commit:       acdca28 feat(front): versión candidata 1.1.0 con cambio visual (#21)
+imagen:       terrasense-front:1.1.0
+image_id:     sha256:52c210ceec0131afcc6bbf6bd8bf664b7a18c34bdd31ce196aa36221e99019ab
+api_url:      http://api.terrasense.local/api
+dockerfile:   docker/nextjs.Dockerfile (en acdca2896a16239c60d0fea21b6816a66b16857a)
+docker:       29.1.3
+minikube:     no cargada (usar --load)
+labels:
+  org.opencontainers.image.revision=acdca2896a16239c60d0fea21b6816a66b16857a
+  org.opencontainers.image.source=https://github.com/EnzoFernandezz11/software-quality-0x43
+  org.opencontainers.image.title=terrasense-front
+  org.opencontainers.image.version=1.1.0
+

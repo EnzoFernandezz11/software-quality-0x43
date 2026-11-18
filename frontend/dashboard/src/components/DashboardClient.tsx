@@ -17,6 +17,8 @@ import { useAccessMonitoring } from '@/hooks/useAccessMonitoring';
 import { useSensorPolling } from '@/hooks/useSensorPolling';
 import type { AccessAudit, RoomConfig } from '@/types/sensor.types';
 
+const APP_VERSION = process.env.NEXT_PUBLIC_APP_VERSION ?? 'desconocida';
+
 /* ── KPI card — compact, equal-width, premium typography ── */
 type MetricCardProps = {
   label: string;
@@ -100,6 +102,13 @@ export function DashboardClient() {
               Panel de control IoT
             </p>
           </div>
+          <span
+            className="app-version-badge ml-auto"
+            data-app-version={APP_VERSION}
+            title="Versión del panel"
+          >
+            v{APP_VERSION}
+          </span>
         </header>
 
         {/* ── Error banner ── */}
