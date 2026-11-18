@@ -1,0 +1,3 @@
+2026-11-18T16:12:18-03:00 | promover: stable 1.1.0 | peso=0 | stable=terrasense-front:1.1.0 (2 listos) | canary=terrasense-front:1.1.0 (2 listos) | git=db095ca+sin-commitear
+2026-11-18T16:12:20-03:00 | promover: peso 0       | peso=0 | stable=terrasense-front:1.1.0 (2 listos) | canary=terrasense-front:1.1.0 (2 listos) | git=db095ca+sin-commitear
+2026-11-18T16:12:22-03:00 | promover: canary 0 pods | peso=0 | stable=terrasense-front:1.1.0 (2 listos) | canary=terrasense-front:1.1.0 (0 listos) | git=db095ca+sin-commitear

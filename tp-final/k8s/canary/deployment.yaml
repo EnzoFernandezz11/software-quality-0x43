@@ -16,7 +16,7 @@ metadata:
     app: front
     track: canary
 spec:
-  replicas: 2
+  replicas: 0
   selector:
     matchLabels:
       app: front

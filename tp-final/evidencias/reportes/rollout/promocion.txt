@@ -1,0 +1,27 @@
+Etapa 3 del rollout (#22): promoción de la 1.1.0 · 2026-11-18 · perfil de Minikube terrasense · git db095ca
+
+$ bash tp-final/rollout/rollout.sh promover
+Waiting for deployment "front-stable" rollout to finish: 1 out of 2 new replicas have been updated...
+Waiting for deployment "front-stable" rollout to finish: 1 out of 2 new replicas have been updated...
+Waiting for deployment "front-stable" rollout to finish: 1 out of 2 new replicas have been updated...
+Waiting for deployment "front-stable" rollout to finish: 1 old replicas are pending termination...
+Waiting for deployment "front-stable" rollout to finish: 1 old replicas are pending termination...
+Waiting for deployment "front-stable" rollout to finish: 1 old replicas are pending termination...
+deployment "front-stable" successfully rolled out
+2026-11-18T16:12:18-03:00 | promover: stable 1.1.0 | peso=0 | stable=terrasense-front:1.1.0 (2 listos) | canary=terrasense-front:1.1.0 (2 listos) | git=db095ca+sin-commitear
+2026-11-18T16:12:20-03:00 | promover: peso 0       | peso=0 | stable=terrasense-front:1.1.0 (2 listos) | canary=terrasense-front:1.1.0 (2 listos) | git=db095ca+sin-commitear
+2026-11-18T16:12:22-03:00 | promover: canary 0 pods | peso=0 | stable=terrasense-front:1.1.0 (2 listos) | canary=terrasense-front:1.1.0 (0 listos) | git=db095ca+sin-commitear
+Revertir la promoción: kubectl -n terrasense rollout undo deployment/front-stable (y volver el YAML a 1.0.0).
+
+$ bash tp-final/rollout/rollout.sh muestra 200
+Muestra de 200 requests a http://terrasense.local/dashboard sin cookies (peso configurado: 0 %):
+    200  HTTP 200  versión 1.1.0    100,0 %
+
+Estado al terminar (2026-11-18T16:13:11-03:00)
+NAME                            READY   STATUS    RESTARTS   AGE   TRACK    VERSION
+front-stable-6d9d6d8b57-6tww7   1/1     Running   0          65s   stable   1.1.0
+front-stable-6d9d6d8b57-lh7v8   1/1     Running   0          77s   stable   1.1.0
+NAME           IMAGEN                   REPLICAS   LISTOS
+front-stable   terrasense-front:1.1.0   2          2
+front-canary   terrasense-front:1.1.0   0          <none>
+Peso del Ingress canary: 0

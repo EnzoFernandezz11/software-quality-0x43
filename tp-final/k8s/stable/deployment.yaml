@@ -36,13 +36,13 @@ spec:
       labels:
         app: front
         track: stable
-        version: "1.0.0"
+        version: "1.1.0"
     spec:
       # Tiempo para terminar las requests en curso después del SIGTERM.
       terminationGracePeriodSeconds: 30
       containers:
         - name: front
-          image: terrasense-front:1.0.0
+          image: terrasense-front:1.1.0
           # Imagen local cargada con `minikube image load`: nunca Always.
           imagePullPolicy: IfNotPresent
           ports:
