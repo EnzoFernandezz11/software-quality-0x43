@@ -1,0 +1,206 @@
+2026-11-05T16:55:08Z
+replicas=2/2
+NAME                    READY   STATUS    RESTARTS   AGE    IP            NODE            NOMINATED NODE   READINESS GATES
+back-5f8f749ddf-gm9tx   1/1     Running   0          5m9s   10.244.0.10   terrasense-a3   <none>           <none>
+back-5f8f749ddf-z4mvw   1/1     Running   0          5m9s   10.244.0.9    terrasense-a3   <none>           <none>
+NAME                          CPU(cores)   MEMORY(bytes)   
+back-5f8f749ddf-gm9tx         92m          207Mi           
+back-5f8f749ddf-z4mvw         82m          175Mi           
+db-0                          45m          41Mi            
+front-584bf9fddf-gjb99        2m           36Mi            
+grafana-5d7465f579-nvfxc      5m           93Mi            
+prometheus-78ff55cb6c-8v9xv   4m           36Mi            
+2026-11-05T16:55:23Z
+replicas=1/2
+NAME                    READY   STATUS    RESTARTS      AGE     IP            NODE            NOMINATED NODE   READINESS GATES
+back-5f8f749ddf-gm9tx   1/1     Running   1 (10s ago)   5m24s   10.244.0.10   terrasense-a3   <none>           <none>
+back-5f8f749ddf-z4mvw   0/1     Running   1 (8s ago)    5m24s   10.244.0.9    terrasense-a3   <none>           <none>
+NAME                          CPU(cores)   MEMORY(bytes)   
+back-5f8f749ddf-z4mvw         91m          168Mi           
+db-0                          83m          109Mi           
+front-584bf9fddf-gjb99        2m           36Mi            
+grafana-5d7465f579-nvfxc      5m           93Mi            
+prometheus-78ff55cb6c-8v9xv   5m           36Mi            
+2026-11-05T16:55:39Z
+replicas=/2
+NAME                    READY   STATUS             RESTARTS      AGE     IP            NODE            NOMINATED NODE   READINESS GATES
+back-5f8f749ddf-gm9tx   0/1     OOMKilled          1 (26s ago)   5m40s   10.244.0.10   terrasense-a3   <none>           <none>
+back-5f8f749ddf-z4mvw   0/1     CrashLoopBackOff   1 (12s ago)   5m40s   10.244.0.9    terrasense-a3   <none>           <none>
+NAME                          CPU(cores)   MEMORY(bytes)   
+back-5f8f749ddf-z4mvw         91m          168Mi           
+db-0                          83m          109Mi           
+front-584bf9fddf-gjb99        2m           36Mi            
+grafana-5d7465f579-nvfxc      5m           93Mi            
+prometheus-78ff55cb6c-8v9xv   5m           36Mi            
+2026-11-05T16:55:54Z
+replicas=2/2
+NAME                    READY   STATUS    RESTARTS      AGE     IP            NODE            NOMINATED NODE   READINESS GATES
+back-5f8f749ddf-gm9tx   1/1     Running   2 (24s ago)   5m55s   10.244.0.10   terrasense-a3   <none>           <none>
+back-5f8f749ddf-z4mvw   1/1     Running   2 (27s ago)   5m55s   10.244.0.9    terrasense-a3   <none>           <none>
+NAME                          CPU(cores)   MEMORY(bytes)   
+back-5f8f749ddf-z4mvw         91m          168Mi           
+db-0                          83m          109Mi           
+front-584bf9fddf-gjb99        2m           36Mi            
+grafana-5d7465f579-nvfxc      5m           93Mi            
+prometheus-78ff55cb6c-8v9xv   5m           36Mi            
+2026-11-05T16:56:09Z
+replicas=/2
+NAME                    READY   STATUS             RESTARTS      AGE     IP            NODE            NOMINATED NODE   READINESS GATES
+back-5f8f749ddf-gm9tx   0/1     CrashLoopBackOff   2 (16s ago)   6m11s   10.244.0.10   terrasense-a3   <none>           <none>
+back-5f8f749ddf-z4mvw   0/1     CrashLoopBackOff   2 (16s ago)   6m11s   10.244.0.9    terrasense-a3   <none>           <none>
+NAME                          CPU(cores)   MEMORY(bytes)   
+back-5f8f749ddf-z4mvw         91m          168Mi           
+db-0                          83m          109Mi           
+front-584bf9fddf-gjb99        2m           36Mi            
+grafana-5d7465f579-nvfxc      5m           93Mi            
+prometheus-78ff55cb6c-8v9xv   5m           36Mi            
+2026-11-05T16:56:25Z
+replicas=1/2
+NAME                    READY   STATUS    RESTARTS      AGE     IP            NODE            NOMINATED NODE   READINESS GATES
+back-5f8f749ddf-gm9tx   1/1     Running   3 (31s ago)   6m26s   10.244.0.10   terrasense-a3   <none>           <none>
+back-5f8f749ddf-z4mvw   0/1     Running   3 (31s ago)   6m26s   10.244.0.9    terrasense-a3   <none>           <none>
+NAME                          CPU(cores)   MEMORY(bytes)   
+db-0                          203m         32Mi            
+front-584bf9fddf-gjb99        2m           36Mi            
+grafana-5d7465f579-nvfxc      4m           80Mi            
+prometheus-78ff55cb6c-8v9xv   4m           38Mi            
+2026-11-05T16:56:40Z
+replicas=/2
+NAME                    READY   STATUS             RESTARTS      AGE     IP            NODE            NOMINATED NODE   READINESS GATES
+back-5f8f749ddf-gm9tx   0/1     CrashLoopBackOff   3 (13s ago)   6m41s   10.244.0.10   terrasense-a3   <none>           <none>
+back-5f8f749ddf-z4mvw   0/1     CrashLoopBackOff   3 (8s ago)    6m41s   10.244.0.9    terrasense-a3   <none>           <none>
+NAME                          CPU(cores)   MEMORY(bytes)   
+db-0                          203m         32Mi            
+front-584bf9fddf-gjb99        2m           36Mi            
+grafana-5d7465f579-nvfxc      4m           80Mi            
+prometheus-78ff55cb6c-8v9xv   4m           38Mi            
+2026-11-05T16:56:56Z
+replicas=/2
+NAME                    READY   STATUS             RESTARTS      AGE     IP            NODE            NOMINATED NODE   READINESS GATES
+back-5f8f749ddf-gm9tx   0/1     CrashLoopBackOff   3 (29s ago)   6m57s   10.244.0.10   terrasense-a3   <none>           <none>
+back-5f8f749ddf-z4mvw   0/1     CrashLoopBackOff   3 (24s ago)   6m57s   10.244.0.9    terrasense-a3   <none>           <none>
+NAME                          CPU(cores)   MEMORY(bytes)   
+db-0                          203m         32Mi            
+front-584bf9fddf-gjb99        2m           36Mi            
+grafana-5d7465f579-nvfxc      4m           80Mi            
+prometheus-78ff55cb6c-8v9xv   4m           38Mi            
+2026-11-05T16:57:11Z
+replicas=/2
+NAME                    READY   STATUS             RESTARTS      AGE     IP            NODE            NOMINATED NODE   READINESS GATES
+back-5f8f749ddf-gm9tx   0/1     CrashLoopBackOff   3 (44s ago)   7m12s   10.244.0.10   terrasense-a3   <none>           <none>
+back-5f8f749ddf-z4mvw   0/1     CrashLoopBackOff   3 (39s ago)   7m12s   10.244.0.9    terrasense-a3   <none>           <none>
+NAME                          CPU(cores)   MEMORY(bytes)   
+db-0                          203m         32Mi            
+front-584bf9fddf-gjb99        2m           36Mi            
+grafana-5d7465f579-nvfxc      4m           80Mi            
+prometheus-78ff55cb6c-8v9xv   4m           38Mi            
+2026-11-05T16:57:26Z
+replicas=1/2
+NAME                    READY   STATUS    RESTARTS      AGE     IP            NODE            NOMINATED NODE   READINESS GATES
+back-5f8f749ddf-gm9tx   1/1     Running   4 (60s ago)   7m28s   10.244.0.10   terrasense-a3   <none>           <none>
+back-5f8f749ddf-z4mvw   0/1     Running   4 (55s ago)   7m28s   10.244.0.9    terrasense-a3   <none>           <none>
+NAME                          CPU(cores)   MEMORY(bytes)   
+db-0                          74m          35Mi            
+front-584bf9fddf-gjb99        2m           36Mi            
+grafana-5d7465f579-nvfxc      4m           80Mi            
+prometheus-78ff55cb6c-8v9xv   5m           38Mi            
+2026-11-05T16:57:42Z
+replicas=1/2
+NAME                    READY   STATUS             RESTARTS      AGE     IP            NODE            NOMINATED NODE   READINESS GATES
+back-5f8f749ddf-gm9tx   0/1     CrashLoopBackOff   4 (12s ago)   7m43s   10.244.0.10   terrasense-a3   <none>           <none>
+back-5f8f749ddf-z4mvw   1/1     Running            4 (70s ago)   7m43s   10.244.0.9    terrasense-a3   <none>           <none>
+NAME                          CPU(cores)   MEMORY(bytes)   
+db-0                          74m          35Mi            
+front-584bf9fddf-gjb99        2m           36Mi            
+grafana-5d7465f579-nvfxc      4m           80Mi            
+prometheus-78ff55cb6c-8v9xv   5m           38Mi            
+2026-11-05T16:57:58Z
+replicas=/2
+NAME                    READY   STATUS             RESTARTS      AGE     IP            NODE            NOMINATED NODE   READINESS GATES
+back-5f8f749ddf-gm9tx   0/1     CrashLoopBackOff   4 (28s ago)   7m59s   10.244.0.10   terrasense-a3   <none>           <none>
+back-5f8f749ddf-z4mvw   0/1     CrashLoopBackOff   4 (12s ago)   7m59s   10.244.0.9    terrasense-a3   <none>           <none>
+NAME                          CPU(cores)   MEMORY(bytes)   
+db-0                          74m          35Mi            
+front-584bf9fddf-gjb99        2m           36Mi            
+grafana-5d7465f579-nvfxc      4m           80Mi            
+prometheus-78ff55cb6c-8v9xv   5m           38Mi            
+2026-11-05T16:58:13Z
+replicas=/2
+NAME                    READY   STATUS             RESTARTS      AGE     IP            NODE            NOMINATED NODE   READINESS GATES
+back-5f8f749ddf-gm9tx   0/1     CrashLoopBackOff   4 (43s ago)   8m14s   10.244.0.10   terrasense-a3   <none>           <none>
+back-5f8f749ddf-z4mvw   0/1     CrashLoopBackOff   4 (27s ago)   8m14s   10.244.0.9    terrasense-a3   <none>           <none>
+NAME                          CPU(cores)   MEMORY(bytes)   
+db-0                          74m          35Mi            
+front-584bf9fddf-gjb99        2m           36Mi            
+grafana-5d7465f579-nvfxc      4m           80Mi            
+prometheus-78ff55cb6c-8v9xv   5m           38Mi            
+2026-11-05T16:58:28Z
+replicas=/2
+NAME                    READY   STATUS             RESTARTS      AGE     IP            NODE            NOMINATED NODE   READINESS GATES
+back-5f8f749ddf-gm9tx   0/1     CrashLoopBackOff   4 (58s ago)   8m29s   10.244.0.10   terrasense-a3   <none>           <none>
+back-5f8f749ddf-z4mvw   0/1     CrashLoopBackOff   4 (42s ago)   8m29s   10.244.0.9    terrasense-a3   <none>           <none>
+NAME                          CPU(cores)   MEMORY(bytes)   
+db-0                          188m         32Mi            
+front-584bf9fddf-gjb99        2m           37Mi            
+grafana-5d7465f579-nvfxc      5m           80Mi            
+prometheus-78ff55cb6c-8v9xv   5m           38Mi            
+2026-11-05T16:58:44Z
+replicas=/2
+NAME                    READY   STATUS             RESTARTS      AGE     IP            NODE            NOMINATED NODE   READINESS GATES
+back-5f8f749ddf-gm9tx   0/1     CrashLoopBackOff   4 (74s ago)   8m45s   10.244.0.10   terrasense-a3   <none>           <none>
+back-5f8f749ddf-z4mvw   0/1     CrashLoopBackOff   4 (58s ago)   8m45s   10.244.0.9    terrasense-a3   <none>           <none>
+NAME                          CPU(cores)   MEMORY(bytes)   
+db-0                          188m         32Mi            
+front-584bf9fddf-gjb99        2m           37Mi            
+grafana-5d7465f579-nvfxc      5m           80Mi            
+prometheus-78ff55cb6c-8v9xv   5m           38Mi            
+2026-11-05T16:58:59Z
+replicas=/2
+NAME                    READY   STATUS             RESTARTS      AGE   IP            NODE            NOMINATED NODE   READINESS GATES
+back-5f8f749ddf-gm9tx   0/1     Running            5 (89s ago)   9m    10.244.0.10   terrasense-a3   <none>           <none>
+back-5f8f749ddf-z4mvw   0/1     CrashLoopBackOff   4 (73s ago)   9m    10.244.0.9    terrasense-a3   <none>           <none>
+NAME                          CPU(cores)   MEMORY(bytes)   
+db-0                          188m         32Mi            
+front-584bf9fddf-gjb99        2m           37Mi            
+grafana-5d7465f579-nvfxc      5m           80Mi            
+prometheus-78ff55cb6c-8v9xv   5m           38Mi            
+2026-11-05T16:59:14Z
+replicas=/2
+NAME                    READY   STATUS             RESTARTS      AGE     IP            NODE            NOMINATED NODE   READINESS GATES
+back-5f8f749ddf-gm9tx   0/1     CrashLoopBackOff   5 (5s ago)    9m16s   10.244.0.10   terrasense-a3   <none>           <none>
+back-5f8f749ddf-z4mvw   0/1     Running            5 (89s ago)   9m16s   10.244.0.9    terrasense-a3   <none>           <none>
+NAME                          CPU(cores)   MEMORY(bytes)   
+db-0                          36m          46Mi            
+front-584bf9fddf-gjb99        2m           37Mi            
+grafana-5d7465f579-nvfxc      4m           80Mi            
+prometheus-78ff55cb6c-8v9xv   4m           38Mi            
+2026-11-05T16:59:30Z
+replicas=/2
+NAME                    READY   STATUS             RESTARTS      AGE     IP            NODE            NOMINATED NODE   READINESS GATES
+back-5f8f749ddf-gm9tx   0/1     CrashLoopBackOff   5 (20s ago)   9m31s   10.244.0.10   terrasense-a3   <none>           <none>
+back-5f8f749ddf-z4mvw   0/1     CrashLoopBackOff   5 (3s ago)    9m31s   10.244.0.9    terrasense-a3   <none>           <none>
+NAME                          CPU(cores)   MEMORY(bytes)   
+db-0                          36m          46Mi            
+front-584bf9fddf-gjb99        2m           37Mi            
+grafana-5d7465f579-nvfxc      4m           80Mi            
+prometheus-78ff55cb6c-8v9xv   4m           38Mi            
+2026-11-05T16:59:45Z
+replicas=/2
+NAME                    READY   STATUS             RESTARTS      AGE     IP            NODE            NOMINATED NODE   READINESS GATES
+back-5f8f749ddf-gm9tx   0/1     CrashLoopBackOff   5 (35s ago)   9m46s   10.244.0.10   terrasense-a3   <none>           <none>
+back-5f8f749ddf-z4mvw   0/1     CrashLoopBackOff   5 (18s ago)   9m46s   10.244.0.9    terrasense-a3   <none>           <none>
+NAME                          CPU(cores)   MEMORY(bytes)   
+db-0                          36m          46Mi            
+front-584bf9fddf-gjb99        2m           37Mi            
+grafana-5d7465f579-nvfxc      4m           80Mi            
+prometheus-78ff55cb6c-8v9xv   4m           38Mi            
+2026-11-05T17:00:00Z
+replicas=/2
+NAME                    READY   STATUS             RESTARTS      AGE   IP            NODE            NOMINATED NODE   READINESS GATES
+back-5f8f749ddf-gm9tx   0/1     CrashLoopBackOff   5 (51s ago)   10m   10.244.0.10   terrasense-a3   <none>           <none>
+back-5f8f749ddf-z4mvw   0/1     CrashLoopBackOff   5 (34s ago)   10m   10.244.0.9    terrasense-a3   <none>           <none>
+NAME                          CPU(cores)   MEMORY(bytes)   
+db-0                          36m          46Mi            
+front-584bf9fddf-gjb99        2m           37Mi            
+grafana-5d7465f579-nvfxc      4m           80Mi            
+prometheus-78ff55cb6c-8v9xv   4m           38Mi            

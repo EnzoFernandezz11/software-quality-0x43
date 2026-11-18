@@ -1,29 +1,34 @@
 # syntax=docker/dockerfile:1
+#
+# Image for the Flask API (`backend/flask/final_project`).
+# Build from the repository root:
+#
+#   docker build -f docker/flask.Dockerfile -t soft-eng-flask .
+#
+# Only the Flask project is copied into the image (not the whole monorepo) and
+# the process runs as a non-root user.
 FROM python:3.11-slim
 
-WORKDIR /app
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1
 
-# Install system dependencies if any are needed
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    curl \
-    && rm -rf /var/lib/apt/lists/*
+WORKDIR /app/backend/flask/final_project
 
-# Copy only requirements first to leverage caching
+# Copy only requirements first to leverage the layer cache
 COPY backend/flask/final_project/requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the entire workspace (context is repo root)
-# .dockerignore will keep this context small
-COPY . /app
+COPY backend/flask/final_project/ ./
 
-# Move to the flask project directory
-WORKDIR /app/backend/flask/final_project
+# The code stays owned by root (read-only for the app user).
+RUN useradd --system --uid 1001 --no-create-home flask
+USER flask
 
-# Set default env variables (can be overridden by docker-compose)
 ENV FLASK_APP=main:app
 ENV FLASK_PORT=5000
 
 EXPOSE 5000
 
-# Run migrations and then start the server
+# Default for Docker Compose (development server). Kubernetes overrides the
+# command and serves the app with gunicorn (see tp-k8s/k8s/30-back.yaml).
 CMD ["sh", "-c", "flask db upgrade && python main.py"]

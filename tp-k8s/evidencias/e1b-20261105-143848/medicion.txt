@@ -1,0 +1,18 @@
+{
+  "requests": 300,
+  "errores": 30,
+  "porcentaje_error": 10.0,
+  "estados_http": {
+    "201": 270,
+    "503": 30
+  },
+  "primer_error": "2026-11-05T14:39:14.373671-03:00",
+  "ultimo_error": "2026-11-05T14:39:20.174335-03:00",
+  "ventana_error_s": 5.800664,
+  "primer_exito_posterior": "2026-11-05T14:39:20.409672-03:00",
+  "recuperacion_observada": true,
+  "p95_ms": 34.01837460000003,
+  "iteraciones_descartadas": 0,
+  "slo_error": false,
+  "slo_p95": true
+}

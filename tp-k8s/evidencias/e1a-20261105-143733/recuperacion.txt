@@ -1,0 +1,6 @@
+deployment "back" successfully rolled out
+NAME                    READY   STATUS    RESTARTS   AGE   IP            NODE         NOMINATED NODE   READINESS GATES
+back-5f8f749ddf-fs4hx   1/1     Running   0          40s   10.244.0.12   terrasense   <none>           <none>
+back-5f8f749ddf-xdhbb   1/1     Running   0          95s   10.244.0.9    terrasense   <none>           <none>
+NAME   ENDPOINTS                          AGE
+back   10.244.0.12:5000,10.244.0.9:5000   95s

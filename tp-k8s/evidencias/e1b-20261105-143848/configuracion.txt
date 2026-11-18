@@ -1,0 +1,7 @@
+2026-11-05T14:38:49-03:00
+mode=e1b profile=terrasense namespace=terrasense run_id=e1b-20261105-143848
+rps=5 duration=60s failure_delay=20s ux_wait=12s vus=20/100
+api=http://api.terrasense.local front=http://terrasense.local ingress_ip=192.168.58.2 browser=/usr/bin/brave-browser
+k6 v2.3.0 (commit/e088784614, go1.26.8, linux/amd64)
+minikube version: v1.39.0
+commit: 7a9f6a841470a207de8cf4bafcccee0969d8ba10

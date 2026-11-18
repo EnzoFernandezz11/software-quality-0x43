@@ -1,0 +1,36 @@
+
+
+  █ THRESHOLDS
+
+    http_req_duration{name:telemetry}
+    ✓ 'p(95)<300' p(95)=32.71ms
+
+    http_req_failed{name:telemetry}
+    ✓ 'rate<0.01' rate=0.00%
+
+
+  █ TOTAL RESULTS
+
+    checks_total.......: 60      1.947291/s
+    checks_succeeded...: 100.00% 60 out of 60
+    checks_failed......: 0.00%   0 out of 60
+
+    ✓ telemetry returned 201
+
+    HTTP
+    http_req_duration..............: avg=22.61ms min=9.8ms med=20.23ms max=138.89ms p(95)=32.71ms p(99)=77.41ms
+      { expected_response:true }...: avg=22.61ms min=9.8ms med=20.23ms max=138.89ms p(95)=32.71ms p(99)=77.41ms
+      { name:telemetry }...........: avg=22.61ms min=9.8ms med=20.23ms max=138.89ms p(95)=32.71ms p(99)=77.41ms
+    http_req_failed................: 0.00% 0 out of 60
+      { name:telemetry }...........: 0.00% 0 out of 60
+    http_reqs......................: 60    1.947291/s
+
+    EXECUTION
+    iteration_duration.............: avg=1.02s   min=1.01s med=1.02s   max=1.14s    p(95)=1.03s   p(99)=1.07s
+    iterations.....................: 60    1.947291/s
+    vus............................: 2     min=2       max=2
+    vus_max........................: 2     min=2       max=2
+
+    NETWORK
+    data_received..................: 25 kB 822 B/s
+    data_sent......................: 13 kB 419 B/s

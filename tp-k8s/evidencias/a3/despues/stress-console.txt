@@ -1,0 +1,46 @@
+time="2026-11-05T16:21:13-03:00" level=warning msg="Insufficient VUs, reached 600 active VUs and cannot initialize more" executor=ramping-arrival-rate scenario=stress
+
+
+  █ THRESHOLDS
+
+    dropped_iterations
+    ✗ 'count<1' count=32684
+
+    http_req_duration{name:telemetry}
+    ✗ 'p(95)<300' p(95)=19.78s
+
+    http_req_failed{name:telemetry}
+    ✗ 'rate<0.01' rate=75.91%
+
+
+  █ TOTAL RESULTS
+
+    checks_total.......: 48039  128.26576/s
+    checks_succeeded...: 24.08% 11572 out of 48039
+    checks_failed......: 75.91% 36467 out of 48039
+
+    ✗ telemetry returned 201
+      ↳  24% — ✓ 11572 / ✗ 36467
+
+    HTTP
+    http_req_duration..............: avg=3.07s  min=206.41µs med=960.98µs max=40.8s p(95)=19.78s p(99)=29.97s
+      { expected_response:true }...: avg=12.22s min=16.99ms  med=10.98s   max=40.8s p(95)=29.38s p(99)=35.46s
+      { name:telemetry }...........: avg=3.07s  min=206.41µs med=960.98µs max=40.8s p(95)=19.78s p(99)=29.97s
+    http_req_failed................: 75.91% 36467 out of 48039
+      { name:telemetry }...........: 75.91% 36467 out of 48039
+    http_reqs......................: 48039  128.26576/s
+
+    EXECUTION
+    dropped_iterations.............: 32684  87.267389/s
+    iteration_duration.............: avg=3.07s  min=347.61µs med=1.58ms   max=40.8s p(95)=19.79s p(99)=29.97s
+    iterations.....................: 48039  128.26576/s
+    vus............................: 245    min=0              max=600
+    vus_max........................: 600    min=100            max=600
+
+    NETWORK
+    data_received..................: 18 MB  47 kB/s
+    data_sent......................: 10 MB  28 kB/s
+
+
+
+time="2026-11-05T16:25:58-03:00" level=error msg="thresholds on metrics 'dropped_iterations, http_req_duration{name:telemetry}, http_req_failed{name:telemetry}' have been crossed"

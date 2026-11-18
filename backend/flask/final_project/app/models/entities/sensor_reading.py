@@ -29,4 +29,5 @@ class SensorReading(db.Model):
         DateTime(timezone=True),
         nullable=False,
         server_default=func.now(),
+        index=True,
     )

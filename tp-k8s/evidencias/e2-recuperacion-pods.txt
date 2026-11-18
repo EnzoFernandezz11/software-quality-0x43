@@ -1,0 +1,170 @@
+Name:             back-6f77b7f5bf-dl9kl
+Namespace:        terrasense
+Priority:         0
+Service Account:  default
+Node:             terrasense/192.168.58.2
+Start Time:       Thu, 05 Nov 2026 17:44:04 -0300
+Labels:           app=back
+                  pod-template-hash=6f77b7f5bf
+Annotations:      <none>
+Status:           Running
+IP:               10.244.0.26
+IPs:
+  IP:           10.244.0.26
+Controlled By:  ReplicaSet/back-6f77b7f5bf
+Init Containers:
+  wait-db:
+    Container ID:  containerd://9535e29af763a6cb38299a8d6f18628a1331e3755746110b1670ea1b46815f1e
+    Image:         postgres:16-alpine
+    Image ID:      docker.io/library/postgres@sha256:0cefaabd882e42bcb2a2f3dc56d3ce4770560ba62fd7f197f1a2e008fd5731ab
+    Port:          <none>
+    Host Port:     <none>
+    Command:
+      sh
+      -c
+      until pg_isready -h "$POSTGRES_HOST" -p "$POSTGRES_PORT"; do sleep 2; done
+    State:          Terminated
+      Reason:       Completed
+      Exit Code:    0
+      Started:      Thu, 05 Nov 2026 17:44:05 -0300
+      Finished:     Thu, 05 Nov 2026 17:44:05 -0300
+    Ready:          True
+    Restart Count:  0
+    Environment Variables from:
+      terrasense-config  ConfigMap  Optional: false
+    Environment:         <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-x9xj4 (ro)
+Containers:
+  back:
+    Container ID:  containerd://8cdfdca0c8b8e9cdb1688106633a2ce98375f3a6efccb02cdb10a206aecad49e
+    Image:         terrasense-back:local
+    Image ID:      sha256:a4abb28fa8ae39af4a285c302c4ce472240b211b6c253bb8862d344532d73ee2
+    Port:          5000/TCP (http)
+    Host Port:     0/TCP (http)
+    Command:
+      gunicorn
+      --bind=0.0.0.0:5000
+      main:app
+    State:          Running
+      Started:      Thu, 05 Nov 2026 17:44:06 -0300
+    Ready:          False
+    Restart Count:  0
+    Limits:
+      cpu:     250m
+      memory:  256Mi
+    Requests:
+      cpu:      100m
+      memory:   192Mi
+    Liveness:   http-get http://:http/health delay=10s timeout=2s period=10s successThreshold=1 failureThreshold=3
+    Readiness:  http-get http://:http/health/ready delay=0s timeout=2s period=5s successThreshold=1 failureThreshold=2
+    Environment Variables from:
+      terrasense-config   ConfigMap  Optional: false
+      terrasense-secrets  Secret     Optional: false
+    Environment:          <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-x9xj4 (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True
+  Initialized                 True
+  Ready                       False
+  ContainersReady             False
+  PodScheduled                True
+Volumes:
+  kube-api-access-x9xj4:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    Optional:                false
+    DownwardAPI:             true
+QoS Class:                   Burstable
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+
+
+Name:             back-6f77b7f5bf-jtrst
+Namespace:        terrasense
+Priority:         0
+Service Account:  default
+Node:             terrasense/192.168.58.2
+Start Time:       Thu, 05 Nov 2026 17:44:17 -0300
+Labels:           app=back
+                  pod-template-hash=6f77b7f5bf
+Annotations:      <none>
+Status:           Running
+IP:               10.244.0.27
+IPs:
+  IP:           10.244.0.27
+Controlled By:  ReplicaSet/back-6f77b7f5bf
+Init Containers:
+  wait-db:
+    Container ID:  containerd://473de26a5faa0f2627df5da9716fb8cb7cf12e88aa8912f1208c75bfcb5a04ce
+    Image:         postgres:16-alpine
+    Image ID:      docker.io/library/postgres@sha256:0cefaabd882e42bcb2a2f3dc56d3ce4770560ba62fd7f197f1a2e008fd5731ab
+    Port:          <none>
+    Host Port:     <none>
+    Command:
+      sh
+      -c
+      until pg_isready -h "$POSTGRES_HOST" -p "$POSTGRES_PORT"; do sleep 2; done
+    State:          Terminated
+      Reason:       Completed
+      Exit Code:    0
+      Started:      Thu, 05 Nov 2026 17:44:17 -0300
+      Finished:     Thu, 05 Nov 2026 17:44:17 -0300
+    Ready:          True
+    Restart Count:  0
+    Environment Variables from:
+      terrasense-config  ConfigMap  Optional: false
+    Environment:         <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-v7z7t (ro)
+Containers:
+  back:
+    Container ID:  containerd://ba7f87ce365fc268b38eddf73e42560a58c10e230dc2c15b3e4ed28bf197da0c
+    Image:         terrasense-back:local
+    Image ID:      sha256:a4abb28fa8ae39af4a285c302c4ce472240b211b6c253bb8862d344532d73ee2
+    Port:          5000/TCP (http)
+    Host Port:     0/TCP (http)
+    Command:
+      gunicorn
+      --bind=0.0.0.0:5000
+      main:app
+    State:          Running
+      Started:      Thu, 05 Nov 2026 17:44:18 -0300
+    Ready:          False
+    Restart Count:  0
+    Limits:
+      cpu:     250m
+      memory:  256Mi
+    Requests:
+      cpu:      100m
+      memory:   192Mi
+    Liveness:   http-get http://:http/health delay=10s timeout=2s period=10s successThreshold=1 failureThreshold=3
+    Readiness:  http-get http://:http/health/ready delay=0s timeout=2s period=5s successThreshold=1 failureThreshold=2
+    Environment Variables from:
+      terrasense-config   ConfigMap  Optional: false
+      terrasense-secrets  Secret     Optional: false
+    Environment:          <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-v7z7t (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True
+  Initialized                 True
+  Ready                       False
+  ContainersReady             False
+  PodScheduled                True
+Volumes:
+  kube-api-access-v7z7t:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    Optional:                false
+    DownwardAPI:             true
+QoS Class:                   Burstable
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s

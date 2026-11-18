@@ -1,0 +1,1743 @@
+2026-11-05T12:30:29-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         2          2m22s
+NAME                    READY   STATUS    RESTARTS   AGE
+back-5f8f749ddf-mckqz   1/1     Running   0          2m36s
+back-5f8f749ddf-wbh46   1/1     Running   0          2m36s
+2026-11-05T12:30:35-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         2          2m28s
+NAME                    READY   STATUS    RESTARTS   AGE
+back-5f8f749ddf-mckqz   1/1     Running   0          2m41s
+back-5f8f749ddf-wbh46   1/1     Running   0          2m41s
+2026-11-05T12:30:40-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         2          2m33s
+NAME                    READY   STATUS    RESTARTS   AGE
+back-5f8f749ddf-mckqz   1/1     Running   0          2m47s
+back-5f8f749ddf-wbh46   1/1     Running   0          2m47s
+2026-11-05T12:30:46-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         2          2m39s
+NAME                    READY   STATUS    RESTARTS   AGE
+back-5f8f749ddf-mckqz   1/1     Running   0          2m52s
+back-5f8f749ddf-wbh46   1/1     Running   0          2m52s
+2026-11-05T12:30:51-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         2          2m44s
+NAME                    READY   STATUS    RESTARTS   AGE
+back-5f8f749ddf-mckqz   1/1     Running   0          2m57s
+back-5f8f749ddf-wbh46   1/1     Running   0          2m57s
+2026-11-05T12:30:56-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         2          2m50s
+NAME                    READY   STATUS    RESTARTS   AGE
+back-5f8f749ddf-mckqz   1/1     Running   0          3m3s
+back-5f8f749ddf-wbh46   1/1     Running   0          3m3s
+2026-11-05T12:31:02-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         2          2m55s
+NAME                    READY   STATUS    RESTARTS   AGE
+back-5f8f749ddf-mckqz   0/1     Running   0          3m8s
+back-5f8f749ddf-wbh46   0/1     Running   0          3m8s
+2026-11-05T12:31:07-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         2          3m1s
+NAME                    READY   STATUS    RESTARTS   AGE
+back-5f8f749ddf-mckqz   0/1     Running   0          3m14s
+back-5f8f749ddf-wbh46   0/1     Running   0          3m14s
+2026-11-05T12:31:13-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          3m6s
+NAME                    READY   STATUS    RESTARTS   AGE
+back-5f8f749ddf-mckqz   0/1     Running   0          3m19s
+back-5f8f749ddf-wbh46   1/1     Running   0          3m19s
+2026-11-05T12:31:18-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          3m11s
+NAME                    READY   STATUS    RESTARTS   AGE
+back-5f8f749ddf-mckqz   0/1     Running   0          3m25s
+back-5f8f749ddf-wbh46   1/1     Running   0          3m25s
+2026-11-05T12:31:24-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          3m17s
+NAME                    READY   STATUS    RESTARTS   AGE
+back-5f8f749ddf-mckqz   1/1     Running   0          3m30s
+back-5f8f749ddf-wbh46   0/1     Running   0          3m30s
+2026-11-05T12:31:29-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          3m22s
+NAME                    READY   STATUS    RESTARTS     AGE
+back-5f8f749ddf-mckqz   0/1     Running   1 (4s ago)   3m35s
+back-5f8f749ddf-wbh46   0/1     Running   0            3m35s
+2026-11-05T12:31:35-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          3m28s
+NAME                    READY   STATUS    RESTARTS      AGE
+back-5f8f749ddf-mckqz   0/1     Running   1 (10s ago)   3m41s
+back-5f8f749ddf-wbh46   0/1     Running   0             3m41s
+2026-11-05T12:31:40-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          3m33s
+NAME                    READY   STATUS    RESTARTS      AGE
+back-5f8f749ddf-mckqz   1/1     Running   1 (15s ago)   3m46s
+back-5f8f749ddf-wbh46   0/1     Running   0             3m46s
+2026-11-05T12:31:45-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          3m39s
+NAME                    READY   STATUS    RESTARTS      AGE
+back-5f8f749ddf-mckqz   1/1     Running   1 (21s ago)   3m52s
+back-5f8f749ddf-wbh46   0/1     Running   1 (5s ago)    3m52s
+2026-11-05T12:31:51-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          3m44s
+NAME                    READY   STATUS    RESTARTS      AGE
+back-5f8f749ddf-mckqz   0/1     Running   1 (26s ago)   3m57s
+back-5f8f749ddf-wbh46   0/1     Running   1 (10s ago)   3m57s
+2026-11-05T12:31:56-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          3m49s
+NAME                    READY   STATUS    RESTARTS      AGE
+back-5f8f749ddf-mckqz   0/1     Running   1 (32s ago)   4m3s
+back-5f8f749ddf-wbh46   1/1     Running   1 (16s ago)   4m3s
+2026-11-05T12:32:02-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          3m55s
+NAME                    READY   STATUS    RESTARTS      AGE
+back-5f8f749ddf-mckqz   0/1     Running   1 (37s ago)   4m8s
+back-5f8f749ddf-wbh46   1/1     Running   1 (21s ago)   4m8s
+2026-11-05T12:32:07-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          4m
+NAME                    READY   STATUS    RESTARTS      AGE
+back-5f8f749ddf-mckqz   0/1     Running   1 (43s ago)   4m14s
+back-5f8f749ddf-wbh46   0/1     Running   1 (27s ago)   4m14s
+2026-11-05T12:32:13-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          4m6s
+NAME                    READY   STATUS    RESTARTS      AGE
+back-5f8f749ddf-mckqz   0/1     Running   1 (48s ago)   4m19s
+back-5f8f749ddf-wbh46   0/1     Running   1 (32s ago)   4m19s
+2026-11-05T12:32:18-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          4m11s
+NAME                    READY   STATUS    RESTARTS      AGE
+back-5f8f749ddf-mckqz   0/1     Running   1 (53s ago)   4m24s
+back-5f8f749ddf-wbh46   0/1     Running   1 (37s ago)   4m24s
+2026-11-05T12:32:23-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          4m17s
+NAME                    READY   STATUS    RESTARTS      AGE
+back-5f8f749ddf-mckqz   0/1     Running   1 (59s ago)   4m30s
+back-5f8f749ddf-wbh46   1/1     Running   1 (43s ago)   4m30s
+2026-11-05T12:32:29-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          4m22s
+NAME                    READY   STATUS    RESTARTS      AGE
+back-5f8f749ddf-mckqz   0/1     Running   1 (64s ago)   4m35s
+back-5f8f749ddf-wbh46   0/1     Running   2 (5s ago)    4m35s
+2026-11-05T12:32:34-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          4m28s
+NAME                    READY   STATUS    RESTARTS      AGE
+back-5f8f749ddf-mckqz   0/1     Running   2 (4s ago)    4m41s
+back-5f8f749ddf-wbh46   0/1     Running   2 (11s ago)   4m41s
+2026-11-05T12:32:40-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          4m33s
+NAME                    READY   STATUS    RESTARTS      AGE
+back-5f8f749ddf-mckqz   0/1     Running   2 (9s ago)    4m46s
+back-5f8f749ddf-wbh46   1/1     Running   2 (16s ago)   4m46s
+2026-11-05T12:32:45-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          4m38s
+NAME                    READY   STATUS    RESTARTS      AGE
+back-5f8f749ddf-mckqz   1/1     Running   2 (15s ago)   4m52s
+back-5f8f749ddf-wbh46   1/1     Running   2 (22s ago)   4m52s
+2026-11-05T12:32:51-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          4m44s
+NAME                    READY   STATUS    RESTARTS      AGE
+back-5f8f749ddf-mckqz   1/1     Running   2 (20s ago)   4m57s
+back-5f8f749ddf-wbh46   0/1     Running   2 (27s ago)   4m57s
+2026-11-05T12:32:56-03:00
+NAME   REFERENCE         TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 412%/60%   2         6         2          4m50s
+NAME                    READY   STATUS            RESTARTS      AGE
+back-5f8f749ddf-2dd4f   0/1     PodInitializing   0             3s
+back-5f8f749ddf-9vv2t   0/1     Init:0/1          0             3s
+back-5f8f749ddf-mckqz   1/1     Running           2 (26s ago)   5m3s
+back-5f8f749ddf-vm4r6   0/1     Init:0/1          0             3s
+back-5f8f749ddf-wbh46   0/1     Running           2 (33s ago)   5m3s
+back-5f8f749ddf-zw2fk   0/1     Init:0/1          0             3s
+2026-11-05T12:33:02-03:00
+NAME   REFERENCE         TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 412%/60%   2         6         2          4m56s
+NAME                    READY   STATUS    RESTARTS      AGE
+back-5f8f749ddf-2dd4f   0/1     Running   0             9s
+back-5f8f749ddf-9vv2t   0/1     Running   0             9s
+back-5f8f749ddf-mckqz   1/1     Running   2 (32s ago)   5m9s
+back-5f8f749ddf-vm4r6   0/1     Running   0             9s
+back-5f8f749ddf-wbh46   0/1     Running   2 (39s ago)   5m9s
+back-5f8f749ddf-zw2fk   0/1     Running   0             9s
+2026-11-05T12:33:08-03:00
+NAME   REFERENCE         TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 412%/60%   2         6         2          5m1s
+NAME                    READY   STATUS    RESTARTS      AGE
+back-5f8f749ddf-2dd4f   0/1     Running   0             14s
+back-5f8f749ddf-9vv2t   0/1     Running   0             14s
+back-5f8f749ddf-mckqz   1/1     Running   2 (37s ago)   5m14s
+back-5f8f749ddf-vm4r6   1/1     Running   0             14s
+back-5f8f749ddf-wbh46   0/1     Running   2 (44s ago)   5m14s
+back-5f8f749ddf-zw2fk   0/1     Running   0             14s
+2026-11-05T12:33:13-03:00
+NAME   REFERENCE         TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 418%/60%   2         6         6          5m6s
+NAME                    READY   STATUS    RESTARTS      AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0             20s
+back-5f8f749ddf-9vv2t   1/1     Running   0             20s
+back-5f8f749ddf-mckqz   1/1     Running   2 (43s ago)   5m20s
+back-5f8f749ddf-vm4r6   1/1     Running   0             20s
+back-5f8f749ddf-wbh46   0/1     Running   2 (50s ago)   5m20s
+back-5f8f749ddf-zw2fk   1/1     Running   0             20s
+2026-11-05T12:33:19-03:00
+NAME   REFERENCE         TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 418%/60%   2         6         6          5m12s
+NAME                    READY   STATUS    RESTARTS      AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0             25s
+back-5f8f749ddf-9vv2t   1/1     Running   0             25s
+back-5f8f749ddf-mckqz   1/1     Running   2 (48s ago)   5m25s
+back-5f8f749ddf-vm4r6   1/1     Running   0             25s
+back-5f8f749ddf-wbh46   0/1     Running   2 (55s ago)   5m25s
+back-5f8f749ddf-zw2fk   1/1     Running   0             25s
+2026-11-05T12:33:24-03:00
+NAME   REFERENCE         TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 418%/60%   2         6         6          5m17s
+NAME                    READY   STATUS    RESTARTS      AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0             31s
+back-5f8f749ddf-9vv2t   1/1     Running   0             31s
+back-5f8f749ddf-mckqz   1/1     Running   2 (54s ago)   5m31s
+back-5f8f749ddf-vm4r6   1/1     Running   0             31s
+back-5f8f749ddf-wbh46   0/1     Running   2 (61s ago)   5m31s
+back-5f8f749ddf-zw2fk   1/1     Running   0             31s
+2026-11-05T12:33:30-03:00
+NAME   REFERENCE         TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 418%/60%   2         6         6          5m23s
+NAME                    READY   STATUS    RESTARTS      AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0             36s
+back-5f8f749ddf-9vv2t   1/1     Running   0             36s
+back-5f8f749ddf-mckqz   1/1     Running   2 (59s ago)   5m36s
+back-5f8f749ddf-vm4r6   1/1     Running   0             36s
+back-5f8f749ddf-wbh46   0/1     Running   2 (66s ago)   5m36s
+back-5f8f749ddf-zw2fk   1/1     Running   0             36s
+2026-11-05T12:33:35-03:00
+NAME   REFERENCE         TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 418%/60%   2         6         6          5m28s
+NAME                    READY   STATUS    RESTARTS      AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0             42s
+back-5f8f749ddf-9vv2t   1/1     Running   0             42s
+back-5f8f749ddf-mckqz   1/1     Running   2 (65s ago)   5m42s
+back-5f8f749ddf-vm4r6   1/1     Running   0             42s
+back-5f8f749ddf-wbh46   0/1     Running   3 (4s ago)    5m42s
+back-5f8f749ddf-zw2fk   1/1     Running   0             42s
+2026-11-05T12:33:41-03:00
+NAME   REFERENCE         TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 418%/60%   2         6         6          5m34s
+NAME                    READY   STATUS    RESTARTS      AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0             47s
+back-5f8f749ddf-9vv2t   1/1     Running   0             47s
+back-5f8f749ddf-mckqz   1/1     Running   2 (70s ago)   5m47s
+back-5f8f749ddf-vm4r6   1/1     Running   0             47s
+back-5f8f749ddf-wbh46   0/1     Running   3 (9s ago)    5m47s
+back-5f8f749ddf-zw2fk   1/1     Running   0             47s
+2026-11-05T12:33:46-03:00
+NAME   REFERENCE         TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 418%/60%   2         6         6          5m39s
+NAME                    READY   STATUS    RESTARTS      AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0             52s
+back-5f8f749ddf-9vv2t   1/1     Running   0             52s
+back-5f8f749ddf-mckqz   1/1     Running   2 (75s ago)   5m52s
+back-5f8f749ddf-vm4r6   1/1     Running   0             52s
+back-5f8f749ddf-wbh46   1/1     Running   3 (14s ago)   5m52s
+back-5f8f749ddf-zw2fk   1/1     Running   0             52s
+2026-11-05T12:33:52-03:00
+NAME   REFERENCE         TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 418%/60%   2         6         6          5m45s
+NAME                    READY   STATUS    RESTARTS      AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0             58s
+back-5f8f749ddf-9vv2t   1/1     Running   0             58s
+back-5f8f749ddf-mckqz   1/1     Running   2 (81s ago)   5m58s
+back-5f8f749ddf-vm4r6   1/1     Running   0             58s
+back-5f8f749ddf-wbh46   1/1     Running   3 (20s ago)   5m58s
+back-5f8f749ddf-zw2fk   1/1     Running   0             58s
+2026-11-05T12:33:57-03:00
+NAME   REFERENCE         TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 192%/60%   2         6         6          5m50s
+NAME                    READY   STATUS    RESTARTS      AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0             63s
+back-5f8f749ddf-9vv2t   1/1     Running   0             63s
+back-5f8f749ddf-mckqz   1/1     Running   2 (86s ago)   6m3s
+back-5f8f749ddf-vm4r6   1/1     Running   0             63s
+back-5f8f749ddf-wbh46   1/1     Running   3 (25s ago)   6m3s
+back-5f8f749ddf-zw2fk   1/1     Running   0             63s
+2026-11-05T12:34:02-03:00
+NAME   REFERENCE         TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 192%/60%   2         6         6          5m56s
+NAME                    READY   STATUS    RESTARTS      AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0             69s
+back-5f8f749ddf-9vv2t   1/1     Running   0             69s
+back-5f8f749ddf-mckqz   1/1     Running   2 (92s ago)   6m9s
+back-5f8f749ddf-vm4r6   1/1     Running   0             69s
+back-5f8f749ddf-wbh46   1/1     Running   3 (31s ago)   6m9s
+back-5f8f749ddf-zw2fk   1/1     Running   0             69s
+2026-11-05T12:34:08-03:00
+NAME   REFERENCE         TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 192%/60%   2         6         6          6m1s
+NAME                    READY   STATUS    RESTARTS      AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0             74s
+back-5f8f749ddf-9vv2t   1/1     Running   0             74s
+back-5f8f749ddf-mckqz   1/1     Running   2 (97s ago)   6m14s
+back-5f8f749ddf-vm4r6   1/1     Running   0             74s
+back-5f8f749ddf-wbh46   1/1     Running   3 (36s ago)   6m14s
+back-5f8f749ddf-zw2fk   1/1     Running   0             74s
+2026-11-05T12:34:13-03:00
+NAME   REFERENCE         TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 192%/60%   2         6         6          6m6s
+NAME                    READY   STATUS    RESTARTS       AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0              80s
+back-5f8f749ddf-9vv2t   1/1     Running   0              80s
+back-5f8f749ddf-mckqz   1/1     Running   2 (103s ago)   6m20s
+back-5f8f749ddf-vm4r6   1/1     Running   0              80s
+back-5f8f749ddf-wbh46   1/1     Running   3 (42s ago)    6m20s
+back-5f8f749ddf-zw2fk   1/1     Running   0              80s
+2026-11-05T12:34:19-03:00
+NAME   REFERENCE         TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 192%/60%   2         6         6          6m12s
+NAME                    READY   STATUS    RESTARTS       AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0              85s
+back-5f8f749ddf-9vv2t   1/1     Running   0              85s
+back-5f8f749ddf-mckqz   1/1     Running   2 (108s ago)   6m25s
+back-5f8f749ddf-vm4r6   1/1     Running   0              85s
+back-5f8f749ddf-wbh46   1/1     Running   3 (47s ago)    6m25s
+back-5f8f749ddf-zw2fk   1/1     Running   0              85s
+2026-11-05T12:34:24-03:00
+NAME   REFERENCE         TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 192%/60%   2         6         6          6m17s
+NAME                    READY   STATUS    RESTARTS       AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0              91s
+back-5f8f749ddf-9vv2t   1/1     Running   0              91s
+back-5f8f749ddf-mckqz   1/1     Running   2 (114s ago)   6m31s
+back-5f8f749ddf-vm4r6   1/1     Running   0              91s
+back-5f8f749ddf-wbh46   1/1     Running   3 (53s ago)    6m31s
+back-5f8f749ddf-zw2fk   1/1     Running   0              91s
+2026-11-05T12:34:30-03:00
+NAME   REFERENCE         TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 192%/60%   2         6         6          6m23s
+NAME                    READY   STATUS    RESTARTS       AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0              96s
+back-5f8f749ddf-9vv2t   1/1     Running   0              96s
+back-5f8f749ddf-mckqz   1/1     Running   2 (119s ago)   6m36s
+back-5f8f749ddf-vm4r6   1/1     Running   0              96s
+back-5f8f749ddf-wbh46   1/1     Running   3 (58s ago)    6m36s
+back-5f8f749ddf-zw2fk   1/1     Running   0              96s
+2026-11-05T12:34:35-03:00
+NAME   REFERENCE         TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 192%/60%   2         6         6          6m28s
+NAME                    READY   STATUS    RESTARTS       AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0              102s
+back-5f8f749ddf-9vv2t   1/1     Running   0              102s
+back-5f8f749ddf-mckqz   1/1     Running   2 (2m5s ago)   6m42s
+back-5f8f749ddf-vm4r6   1/1     Running   0              102s
+back-5f8f749ddf-wbh46   1/1     Running   3 (64s ago)    6m42s
+back-5f8f749ddf-zw2fk   1/1     Running   0              102s
+2026-11-05T12:34:41-03:00
+NAME   REFERENCE         TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 192%/60%   2         6         6          6m34s
+NAME                    READY   STATUS    RESTARTS        AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0               107s
+back-5f8f749ddf-9vv2t   1/1     Running   0               107s
+back-5f8f749ddf-mckqz   1/1     Running   2 (2m10s ago)   6m47s
+back-5f8f749ddf-vm4r6   1/1     Running   0               107s
+back-5f8f749ddf-wbh46   1/1     Running   3 (69s ago)     6m47s
+back-5f8f749ddf-zw2fk   1/1     Running   0               107s
+2026-11-05T12:34:46-03:00
+NAME   REFERENCE         TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 192%/60%   2         6         6          6m39s
+NAME                    READY   STATUS    RESTARTS        AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0               113s
+back-5f8f749ddf-9vv2t   1/1     Running   0               113s
+back-5f8f749ddf-mckqz   1/1     Running   2 (2m16s ago)   6m53s
+back-5f8f749ddf-vm4r6   1/1     Running   0               113s
+back-5f8f749ddf-wbh46   1/1     Running   3 (75s ago)     6m53s
+back-5f8f749ddf-zw2fk   1/1     Running   0               113s
+2026-11-05T12:34:52-03:00
+NAME   REFERENCE         TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 192%/60%   2         6         6          6m45s
+NAME                    READY   STATUS    RESTARTS        AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0               118s
+back-5f8f749ddf-9vv2t   1/1     Running   0               118s
+back-5f8f749ddf-mckqz   1/1     Running   2 (2m21s ago)   6m58s
+back-5f8f749ddf-vm4r6   1/1     Running   0               118s
+back-5f8f749ddf-wbh46   1/1     Running   3 (80s ago)     6m58s
+back-5f8f749ddf-zw2fk   1/1     Running   0               118s
+2026-11-05T12:34:57-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         6          6m50s
+NAME                    READY   STATUS    RESTARTS        AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0               2m4s
+back-5f8f749ddf-9vv2t   1/1     Running   0               2m4s
+back-5f8f749ddf-mckqz   1/1     Running   2 (2m27s ago)   7m4s
+back-5f8f749ddf-vm4r6   1/1     Running   0               2m4s
+back-5f8f749ddf-wbh46   1/1     Running   3 (86s ago)     7m4s
+back-5f8f749ddf-zw2fk   1/1     Running   0               2m4s
+2026-11-05T12:35:03-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         6          6m56s
+NAME                    READY   STATUS    RESTARTS        AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0               2m9s
+back-5f8f749ddf-9vv2t   1/1     Running   0               2m9s
+back-5f8f749ddf-mckqz   1/1     Running   2 (2m32s ago)   7m9s
+back-5f8f749ddf-vm4r6   1/1     Running   0               2m9s
+back-5f8f749ddf-wbh46   1/1     Running   3 (91s ago)     7m9s
+back-5f8f749ddf-zw2fk   1/1     Running   0               2m9s
+2026-11-05T12:35:08-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         6          7m1s
+NAME                    READY   STATUS    RESTARTS        AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0               2m15s
+back-5f8f749ddf-9vv2t   1/1     Running   0               2m15s
+back-5f8f749ddf-mckqz   1/1     Running   2 (2m38s ago)   7m15s
+back-5f8f749ddf-vm4r6   1/1     Running   0               2m15s
+back-5f8f749ddf-wbh46   1/1     Running   3 (97s ago)     7m15s
+back-5f8f749ddf-zw2fk   1/1     Running   0               2m15s
+2026-11-05T12:35:14-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         6          7m7s
+NAME                    READY   STATUS    RESTARTS        AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0               2m20s
+back-5f8f749ddf-9vv2t   1/1     Running   0               2m20s
+back-5f8f749ddf-mckqz   1/1     Running   2 (2m43s ago)   7m20s
+back-5f8f749ddf-vm4r6   1/1     Running   0               2m20s
+back-5f8f749ddf-wbh46   1/1     Running   3 (102s ago)    7m20s
+back-5f8f749ddf-zw2fk   1/1     Running   0               2m20s
+2026-11-05T12:35:19-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         6          7m12s
+NAME                    READY   STATUS    RESTARTS        AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0               2m26s
+back-5f8f749ddf-9vv2t   1/1     Running   0               2m26s
+back-5f8f749ddf-mckqz   1/1     Running   2 (2m49s ago)   7m26s
+back-5f8f749ddf-vm4r6   1/1     Running   0               2m26s
+back-5f8f749ddf-wbh46   1/1     Running   3 (108s ago)    7m26s
+back-5f8f749ddf-zw2fk   1/1     Running   0               2m26s
+2026-11-05T12:35:25-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         6          7m18s
+NAME                    READY   STATUS    RESTARTS        AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0               2m31s
+back-5f8f749ddf-9vv2t   1/1     Running   0               2m31s
+back-5f8f749ddf-mckqz   1/1     Running   2 (2m54s ago)   7m31s
+back-5f8f749ddf-vm4r6   1/1     Running   0               2m31s
+back-5f8f749ddf-wbh46   1/1     Running   3 (113s ago)    7m31s
+back-5f8f749ddf-zw2fk   1/1     Running   0               2m31s
+2026-11-05T12:35:30-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         6          7m23s
+NAME                    READY   STATUS    RESTARTS        AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0               2m36s
+back-5f8f749ddf-9vv2t   1/1     Running   0               2m36s
+back-5f8f749ddf-mckqz   1/1     Running   2 (2m59s ago)   7m36s
+back-5f8f749ddf-vm4r6   1/1     Running   0               2m36s
+back-5f8f749ddf-wbh46   1/1     Running   3 (118s ago)    7m36s
+back-5f8f749ddf-zw2fk   1/1     Running   0               2m36s
+2026-11-05T12:35:36-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         6          7m29s
+NAME                    READY   STATUS    RESTARTS       AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0              2m42s
+back-5f8f749ddf-9vv2t   1/1     Running   0              2m42s
+back-5f8f749ddf-mckqz   1/1     Running   2 (3m5s ago)   7m42s
+back-5f8f749ddf-vm4r6   1/1     Running   0              2m42s
+back-5f8f749ddf-wbh46   1/1     Running   3 (2m4s ago)   7m42s
+back-5f8f749ddf-zw2fk   1/1     Running   0              2m42s
+2026-11-05T12:35:41-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         6          7m34s
+NAME                    READY   STATUS    RESTARTS        AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0               2m47s
+back-5f8f749ddf-9vv2t   1/1     Running   0               2m47s
+back-5f8f749ddf-mckqz   1/1     Running   2 (3m10s ago)   7m47s
+back-5f8f749ddf-vm4r6   1/1     Running   0               2m47s
+back-5f8f749ddf-wbh46   1/1     Running   3 (2m9s ago)    7m47s
+back-5f8f749ddf-zw2fk   1/1     Running   0               2m47s
+2026-11-05T12:35:46-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         6          7m40s
+NAME                    READY   STATUS    RESTARTS        AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0               2m53s
+back-5f8f749ddf-9vv2t   1/1     Running   0               2m53s
+back-5f8f749ddf-mckqz   1/1     Running   2 (3m16s ago)   7m53s
+back-5f8f749ddf-vm4r6   1/1     Running   0               2m53s
+back-5f8f749ddf-wbh46   1/1     Running   3 (2m15s ago)   7m53s
+back-5f8f749ddf-zw2fk   1/1     Running   0               2m53s
+2026-11-05T12:35:52-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         6          7m45s
+NAME                    READY   STATUS    RESTARTS        AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0               2m58s
+back-5f8f749ddf-9vv2t   1/1     Running   0               2m58s
+back-5f8f749ddf-mckqz   1/1     Running   2 (3m21s ago)   7m58s
+back-5f8f749ddf-vm4r6   1/1     Running   0               2m58s
+back-5f8f749ddf-wbh46   1/1     Running   3 (2m20s ago)   7m58s
+back-5f8f749ddf-zw2fk   1/1     Running   0               2m58s
+2026-11-05T12:35:57-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         6          7m51s
+NAME                    READY   STATUS    RESTARTS        AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0               3m4s
+back-5f8f749ddf-9vv2t   1/1     Running   0               3m4s
+back-5f8f749ddf-mckqz   1/1     Running   2 (3m27s ago)   8m4s
+back-5f8f749ddf-vm4r6   1/1     Running   0               3m4s
+back-5f8f749ddf-wbh46   1/1     Running   3 (2m26s ago)   8m4s
+back-5f8f749ddf-zw2fk   1/1     Running   0               3m4s
+2026-11-05T12:36:03-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         6          7m56s
+NAME                    READY   STATUS    RESTARTS        AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0               3m9s
+back-5f8f749ddf-9vv2t   1/1     Running   0               3m9s
+back-5f8f749ddf-mckqz   1/1     Running   2 (3m32s ago)   8m9s
+back-5f8f749ddf-vm4r6   1/1     Running   0               3m9s
+back-5f8f749ddf-wbh46   1/1     Running   3 (2m31s ago)   8m9s
+back-5f8f749ddf-zw2fk   1/1     Running   0               3m9s
+2026-11-05T12:36:08-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         6          8m2s
+NAME                    READY   STATUS    RESTARTS        AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0               3m15s
+back-5f8f749ddf-9vv2t   1/1     Running   0               3m15s
+back-5f8f749ddf-mckqz   1/1     Running   2 (3m38s ago)   8m15s
+back-5f8f749ddf-vm4r6   1/1     Running   0               3m15s
+back-5f8f749ddf-wbh46   1/1     Running   3 (2m37s ago)   8m15s
+back-5f8f749ddf-zw2fk   1/1     Running   0               3m15s
+2026-11-05T12:36:14-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         6          8m7s
+NAME                    READY   STATUS    RESTARTS        AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0               3m20s
+back-5f8f749ddf-9vv2t   1/1     Running   0               3m20s
+back-5f8f749ddf-mckqz   1/1     Running   2 (3m43s ago)   8m20s
+back-5f8f749ddf-vm4r6   1/1     Running   0               3m20s
+back-5f8f749ddf-wbh46   1/1     Running   3 (2m42s ago)   8m20s
+back-5f8f749ddf-zw2fk   1/1     Running   0               3m20s
+2026-11-05T12:36:19-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         6          8m13s
+NAME                    READY   STATUS    RESTARTS        AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0               3m26s
+back-5f8f749ddf-9vv2t   1/1     Running   0               3m26s
+back-5f8f749ddf-mckqz   1/1     Running   2 (3m49s ago)   8m26s
+back-5f8f749ddf-vm4r6   1/1     Running   0               3m26s
+back-5f8f749ddf-wbh46   1/1     Running   3 (2m48s ago)   8m26s
+back-5f8f749ddf-zw2fk   1/1     Running   0               3m26s
+2026-11-05T12:36:25-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         6          8m18s
+NAME                    READY   STATUS    RESTARTS        AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0               3m31s
+back-5f8f749ddf-9vv2t   1/1     Running   0               3m31s
+back-5f8f749ddf-mckqz   1/1     Running   2 (3m54s ago)   8m31s
+back-5f8f749ddf-vm4r6   1/1     Running   0               3m31s
+back-5f8f749ddf-wbh46   1/1     Running   3 (2m53s ago)   8m31s
+back-5f8f749ddf-zw2fk   1/1     Running   0               3m31s
+2026-11-05T12:36:30-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         6          8m23s
+NAME                    READY   STATUS    RESTARTS        AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0               3m37s
+back-5f8f749ddf-9vv2t   1/1     Running   0               3m37s
+back-5f8f749ddf-mckqz   1/1     Running   2 (4m ago)      8m37s
+back-5f8f749ddf-vm4r6   1/1     Running   0               3m37s
+back-5f8f749ddf-wbh46   1/1     Running   3 (2m59s ago)   8m37s
+back-5f8f749ddf-zw2fk   1/1     Running   0               3m37s
+2026-11-05T12:36:36-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         6          8m29s
+NAME                    READY   STATUS    RESTARTS       AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0              3m42s
+back-5f8f749ddf-9vv2t   1/1     Running   0              3m42s
+back-5f8f749ddf-mckqz   1/1     Running   2 (4m5s ago)   8m42s
+back-5f8f749ddf-vm4r6   1/1     Running   0              3m42s
+back-5f8f749ddf-wbh46   1/1     Running   3 (3m4s ago)   8m42s
+back-5f8f749ddf-zw2fk   1/1     Running   0              3m42s
+2026-11-05T12:36:41-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         6          8m34s
+NAME                    READY   STATUS    RESTARTS        AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0               3m48s
+back-5f8f749ddf-9vv2t   1/1     Running   0               3m48s
+back-5f8f749ddf-mckqz   1/1     Running   2 (4m11s ago)   8m48s
+back-5f8f749ddf-vm4r6   1/1     Running   0               3m48s
+back-5f8f749ddf-wbh46   1/1     Running   3 (3m10s ago)   8m48s
+back-5f8f749ddf-zw2fk   1/1     Running   0               3m48s
+2026-11-05T12:36:47-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         6          8m40s
+NAME                    READY   STATUS    RESTARTS        AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0               3m53s
+back-5f8f749ddf-9vv2t   1/1     Running   0               3m53s
+back-5f8f749ddf-mckqz   1/1     Running   2 (4m16s ago)   8m53s
+back-5f8f749ddf-vm4r6   1/1     Running   0               3m53s
+back-5f8f749ddf-wbh46   1/1     Running   3 (3m15s ago)   8m53s
+back-5f8f749ddf-zw2fk   1/1     Running   0               3m53s
+2026-11-05T12:36:52-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         6          8m45s
+NAME                    READY   STATUS    RESTARTS        AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0               3m59s
+back-5f8f749ddf-9vv2t   1/1     Running   0               3m59s
+back-5f8f749ddf-mckqz   1/1     Running   2 (4m22s ago)   8m59s
+back-5f8f749ddf-vm4r6   1/1     Running   0               3m59s
+back-5f8f749ddf-wbh46   1/1     Running   3 (3m21s ago)   8m59s
+back-5f8f749ddf-zw2fk   1/1     Running   0               3m59s
+2026-11-05T12:36:58-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         6          8m51s
+NAME                    READY   STATUS    RESTARTS        AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0               4m4s
+back-5f8f749ddf-9vv2t   1/1     Running   0               4m4s
+back-5f8f749ddf-mckqz   1/1     Running   2 (4m27s ago)   9m4s
+back-5f8f749ddf-vm4r6   1/1     Running   0               4m4s
+back-5f8f749ddf-wbh46   1/1     Running   3 (3m26s ago)   9m4s
+back-5f8f749ddf-zw2fk   1/1     Running   0               4m4s
+2026-11-05T12:37:03-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         6          8m56s
+NAME                    READY   STATUS    RESTARTS        AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0               4m10s
+back-5f8f749ddf-9vv2t   1/1     Running   0               4m10s
+back-5f8f749ddf-mckqz   1/1     Running   2 (4m33s ago)   9m10s
+back-5f8f749ddf-vm4r6   1/1     Running   0               4m10s
+back-5f8f749ddf-wbh46   1/1     Running   3 (3m32s ago)   9m10s
+back-5f8f749ddf-zw2fk   1/1     Running   0               4m10s
+2026-11-05T12:37:09-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         6          9m2s
+NAME                    READY   STATUS    RESTARTS        AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0               4m15s
+back-5f8f749ddf-9vv2t   1/1     Running   0               4m15s
+back-5f8f749ddf-mckqz   1/1     Running   2 (4m38s ago)   9m15s
+back-5f8f749ddf-vm4r6   1/1     Running   0               4m15s
+back-5f8f749ddf-wbh46   1/1     Running   3 (3m37s ago)   9m15s
+back-5f8f749ddf-zw2fk   1/1     Running   0               4m15s
+2026-11-05T12:37:14-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         6          9m7s
+NAME                    READY   STATUS    RESTARTS        AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0               4m21s
+back-5f8f749ddf-9vv2t   1/1     Running   0               4m21s
+back-5f8f749ddf-mckqz   1/1     Running   2 (4m44s ago)   9m21s
+back-5f8f749ddf-vm4r6   1/1     Running   0               4m21s
+back-5f8f749ddf-wbh46   1/1     Running   3 (3m43s ago)   9m21s
+back-5f8f749ddf-zw2fk   1/1     Running   0               4m21s
+2026-11-05T12:37:20-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         6          9m13s
+NAME                    READY   STATUS    RESTARTS        AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0               4m26s
+back-5f8f749ddf-9vv2t   1/1     Running   0               4m26s
+back-5f8f749ddf-mckqz   1/1     Running   2 (4m49s ago)   9m26s
+back-5f8f749ddf-vm4r6   1/1     Running   0               4m26s
+back-5f8f749ddf-wbh46   1/1     Running   3 (3m48s ago)   9m26s
+back-5f8f749ddf-zw2fk   1/1     Running   0               4m26s
+2026-11-05T12:37:25-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         6          9m18s
+NAME                    READY   STATUS    RESTARTS        AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0               4m32s
+back-5f8f749ddf-9vv2t   1/1     Running   0               4m32s
+back-5f8f749ddf-mckqz   1/1     Running   2 (4m55s ago)   9m32s
+back-5f8f749ddf-vm4r6   1/1     Running   0               4m32s
+back-5f8f749ddf-wbh46   1/1     Running   3 (3m54s ago)   9m32s
+back-5f8f749ddf-zw2fk   1/1     Running   0               4m32s
+2026-11-05T12:37:31-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         6          9m24s
+NAME                    READY   STATUS    RESTARTS        AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0               4m37s
+back-5f8f749ddf-9vv2t   1/1     Running   0               4m37s
+back-5f8f749ddf-mckqz   1/1     Running   2 (5m ago)      9m37s
+back-5f8f749ddf-vm4r6   1/1     Running   0               4m37s
+back-5f8f749ddf-wbh46   1/1     Running   3 (3m59s ago)   9m37s
+back-5f8f749ddf-zw2fk   1/1     Running   0               4m37s
+2026-11-05T12:37:36-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         6          9m29s
+NAME                    READY   STATUS    RESTARTS       AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0              4m43s
+back-5f8f749ddf-9vv2t   1/1     Running   0              4m43s
+back-5f8f749ddf-mckqz   1/1     Running   2 (5m6s ago)   9m43s
+back-5f8f749ddf-vm4r6   1/1     Running   0              4m43s
+back-5f8f749ddf-wbh46   1/1     Running   3 (4m5s ago)   9m43s
+back-5f8f749ddf-zw2fk   1/1     Running   0              4m43s
+2026-11-05T12:37:42-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         6          9m35s
+NAME                    READY   STATUS    RESTARTS        AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0               4m48s
+back-5f8f749ddf-9vv2t   1/1     Running   0               4m48s
+back-5f8f749ddf-mckqz   1/1     Running   2 (5m11s ago)   9m48s
+back-5f8f749ddf-vm4r6   1/1     Running   0               4m48s
+back-5f8f749ddf-wbh46   1/1     Running   3 (4m10s ago)   9m48s
+back-5f8f749ddf-zw2fk   1/1     Running   0               4m48s
+2026-11-05T12:37:47-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         6          9m40s
+NAME                    READY   STATUS    RESTARTS        AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0               4m54s
+back-5f8f749ddf-9vv2t   1/1     Running   0               4m54s
+back-5f8f749ddf-mckqz   1/1     Running   2 (5m17s ago)   9m54s
+back-5f8f749ddf-vm4r6   1/1     Running   0               4m54s
+back-5f8f749ddf-wbh46   1/1     Running   3 (4m16s ago)   9m54s
+back-5f8f749ddf-zw2fk   1/1     Running   0               4m54s
+2026-11-05T12:37:53-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         6          9m46s
+NAME                    READY   STATUS    RESTARTS        AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0               4m59s
+back-5f8f749ddf-9vv2t   1/1     Running   0               4m59s
+back-5f8f749ddf-mckqz   1/1     Running   2 (5m22s ago)   9m59s
+back-5f8f749ddf-vm4r6   1/1     Running   0               4m59s
+back-5f8f749ddf-wbh46   1/1     Running   3 (4m21s ago)   9m59s
+back-5f8f749ddf-zw2fk   1/1     Running   0               4m59s
+2026-11-05T12:37:58-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         6          9m51s
+NAME                    READY   STATUS    RESTARTS        AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0               5m5s
+back-5f8f749ddf-9vv2t   1/1     Running   0               5m5s
+back-5f8f749ddf-mckqz   1/1     Running   2 (5m28s ago)   10m
+back-5f8f749ddf-vm4r6   1/1     Running   0               5m5s
+back-5f8f749ddf-wbh46   1/1     Running   3 (4m27s ago)   10m
+back-5f8f749ddf-zw2fk   1/1     Running   0               5m5s
+2026-11-05T12:38:04-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         6          9m57s
+NAME                    READY   STATUS    RESTARTS        AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0               5m10s
+back-5f8f749ddf-9vv2t   1/1     Running   0               5m10s
+back-5f8f749ddf-mckqz   1/1     Running   2 (5m33s ago)   10m
+back-5f8f749ddf-vm4r6   1/1     Running   0               5m10s
+back-5f8f749ddf-wbh46   1/1     Running   3 (4m32s ago)   10m
+back-5f8f749ddf-zw2fk   1/1     Running   0               5m10s
+2026-11-05T12:38:09-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         6          10m
+NAME                    READY   STATUS    RESTARTS        AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0               5m16s
+back-5f8f749ddf-9vv2t   1/1     Running   0               5m16s
+back-5f8f749ddf-mckqz   1/1     Running   2 (5m39s ago)   10m
+back-5f8f749ddf-vm4r6   1/1     Running   0               5m16s
+back-5f8f749ddf-wbh46   1/1     Running   3 (4m38s ago)   10m
+back-5f8f749ddf-zw2fk   1/1     Running   0               5m16s
+2026-11-05T12:38:15-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         6          10m
+NAME                    READY   STATUS    RESTARTS        AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0               5m21s
+back-5f8f749ddf-9vv2t   1/1     Running   0               5m21s
+back-5f8f749ddf-mckqz   1/1     Running   2 (5m44s ago)   10m
+back-5f8f749ddf-vm4r6   1/1     Running   0               5m21s
+back-5f8f749ddf-wbh46   1/1     Running   3 (4m43s ago)   10m
+back-5f8f749ddf-zw2fk   1/1     Running   0               5m21s
+2026-11-05T12:38:20-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         6          10m
+NAME                    READY   STATUS    RESTARTS        AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0               5m27s
+back-5f8f749ddf-9vv2t   1/1     Running   0               5m27s
+back-5f8f749ddf-mckqz   1/1     Running   2 (5m50s ago)   10m
+back-5f8f749ddf-vm4r6   1/1     Running   0               5m27s
+back-5f8f749ddf-wbh46   1/1     Running   3 (4m49s ago)   10m
+back-5f8f749ddf-zw2fk   1/1     Running   0               5m27s
+2026-11-05T12:38:26-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         6          10m
+NAME                    READY   STATUS    RESTARTS        AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0               5m32s
+back-5f8f749ddf-9vv2t   1/1     Running   0               5m32s
+back-5f8f749ddf-mckqz   1/1     Running   2 (5m55s ago)   10m
+back-5f8f749ddf-vm4r6   1/1     Running   0               5m32s
+back-5f8f749ddf-wbh46   1/1     Running   3 (4m54s ago)   10m
+back-5f8f749ddf-zw2fk   1/1     Running   0               5m32s
+2026-11-05T12:38:31-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         6          10m
+NAME                    READY   STATUS    RESTARTS       AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0              5m38s
+back-5f8f749ddf-9vv2t   1/1     Running   0              5m38s
+back-5f8f749ddf-mckqz   1/1     Running   2 (6m1s ago)   10m
+back-5f8f749ddf-vm4r6   1/1     Running   0              5m38s
+back-5f8f749ddf-wbh46   1/1     Running   3 (5m ago)     10m
+back-5f8f749ddf-zw2fk   1/1     Running   0              5m38s
+2026-11-05T12:38:37-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         6          10m
+NAME                    READY   STATUS    RESTARTS       AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0              5m43s
+back-5f8f749ddf-9vv2t   1/1     Running   0              5m43s
+back-5f8f749ddf-mckqz   1/1     Running   2 (6m6s ago)   10m
+back-5f8f749ddf-vm4r6   1/1     Running   0              5m43s
+back-5f8f749ddf-wbh46   1/1     Running   3 (5m5s ago)   10m
+back-5f8f749ddf-zw2fk   1/1     Running   0              5m43s
+2026-11-05T12:38:42-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         6          10m
+NAME                    READY   STATUS    RESTARTS        AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0               5m49s
+back-5f8f749ddf-9vv2t   1/1     Running   0               5m49s
+back-5f8f749ddf-mckqz   1/1     Running   2 (6m12s ago)   10m
+back-5f8f749ddf-vm4r6   1/1     Running   0               5m49s
+back-5f8f749ddf-wbh46   1/1     Running   3 (5m11s ago)   10m
+back-5f8f749ddf-zw2fk   1/1     Running   0               5m49s
+2026-11-05T12:38:48-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         6          10m
+NAME                    READY   STATUS    RESTARTS        AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0               5m54s
+back-5f8f749ddf-9vv2t   1/1     Running   0               5m54s
+back-5f8f749ddf-mckqz   1/1     Running   2 (6m17s ago)   10m
+back-5f8f749ddf-vm4r6   1/1     Running   0               5m54s
+back-5f8f749ddf-wbh46   1/1     Running   3 (5m16s ago)   10m
+back-5f8f749ddf-zw2fk   1/1     Running   0               5m54s
+2026-11-05T12:38:53-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         6          10m
+NAME                    READY   STATUS    RESTARTS        AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0               5m59s
+back-5f8f749ddf-9vv2t   1/1     Running   0               5m59s
+back-5f8f749ddf-mckqz   1/1     Running   2 (6m22s ago)   10m
+back-5f8f749ddf-vm4r6   1/1     Running   0               5m59s
+back-5f8f749ddf-wbh46   1/1     Running   3 (5m21s ago)   10m
+back-5f8f749ddf-zw2fk   1/1     Running   0               5m59s
+2026-11-05T12:38:59-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         6          10m
+NAME                    READY   STATUS    RESTARTS        AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0               6m5s
+back-5f8f749ddf-9vv2t   1/1     Running   0               6m5s
+back-5f8f749ddf-mckqz   1/1     Running   2 (6m28s ago)   11m
+back-5f8f749ddf-vm4r6   1/1     Running   0               6m5s
+back-5f8f749ddf-wbh46   1/1     Running   3 (5m27s ago)   11m
+back-5f8f749ddf-zw2fk   1/1     Running   0               6m5s
+2026-11-05T12:39:04-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         6          10m
+NAME                    READY   STATUS    RESTARTS        AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0               6m10s
+back-5f8f749ddf-9vv2t   1/1     Running   0               6m10s
+back-5f8f749ddf-mckqz   1/1     Running   2 (6m33s ago)   11m
+back-5f8f749ddf-vm4r6   1/1     Running   0               6m10s
+back-5f8f749ddf-wbh46   1/1     Running   3 (5m32s ago)   11m
+back-5f8f749ddf-zw2fk   1/1     Running   0               6m10s
+2026-11-05T12:39:09-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         6          11m
+NAME                    READY   STATUS    RESTARTS        AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0               6m16s
+back-5f8f749ddf-9vv2t   1/1     Running   0               6m16s
+back-5f8f749ddf-mckqz   1/1     Running   2 (6m39s ago)   11m
+back-5f8f749ddf-vm4r6   1/1     Running   0               6m16s
+back-5f8f749ddf-wbh46   1/1     Running   3 (5m38s ago)   11m
+back-5f8f749ddf-zw2fk   1/1     Running   0               6m16s
+2026-11-05T12:39:15-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         6          11m
+NAME                    READY   STATUS    RESTARTS        AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0               6m21s
+back-5f8f749ddf-9vv2t   1/1     Running   0               6m21s
+back-5f8f749ddf-mckqz   1/1     Running   2 (6m44s ago)   11m
+back-5f8f749ddf-vm4r6   1/1     Running   0               6m21s
+back-5f8f749ddf-wbh46   1/1     Running   3 (5m43s ago)   11m
+back-5f8f749ddf-zw2fk   1/1     Running   0               6m21s
+2026-11-05T12:39:21-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         6          11m
+NAME                    READY   STATUS    RESTARTS        AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0               6m27s
+back-5f8f749ddf-9vv2t   1/1     Running   0               6m27s
+back-5f8f749ddf-mckqz   1/1     Running   2 (6m50s ago)   11m
+back-5f8f749ddf-vm4r6   1/1     Running   0               6m27s
+back-5f8f749ddf-wbh46   1/1     Running   3 (5m49s ago)   11m
+back-5f8f749ddf-zw2fk   1/1     Running   0               6m27s
+2026-11-05T12:39:26-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         6          11m
+NAME                    READY   STATUS    RESTARTS        AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0               6m32s
+back-5f8f749ddf-9vv2t   1/1     Running   0               6m32s
+back-5f8f749ddf-mckqz   1/1     Running   2 (6m55s ago)   11m
+back-5f8f749ddf-vm4r6   1/1     Running   0               6m32s
+back-5f8f749ddf-wbh46   1/1     Running   3 (5m54s ago)   11m
+back-5f8f749ddf-zw2fk   1/1     Running   0               6m32s
+2026-11-05T12:39:31-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         6          11m
+NAME                    READY   STATUS    RESTARTS       AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0              6m38s
+back-5f8f749ddf-9vv2t   1/1     Running   0              6m38s
+back-5f8f749ddf-mckqz   1/1     Running   2 (7m1s ago)   11m
+back-5f8f749ddf-vm4r6   1/1     Running   0              6m38s
+back-5f8f749ddf-wbh46   1/1     Running   3 (6m ago)     11m
+back-5f8f749ddf-zw2fk   1/1     Running   0              6m38s
+2026-11-05T12:39:37-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         6          11m
+NAME                    READY   STATUS    RESTARTS       AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0              6m43s
+back-5f8f749ddf-9vv2t   1/1     Running   0              6m43s
+back-5f8f749ddf-mckqz   1/1     Running   2 (7m6s ago)   11m
+back-5f8f749ddf-vm4r6   1/1     Running   0              6m43s
+back-5f8f749ddf-wbh46   1/1     Running   3 (6m5s ago)   11m
+back-5f8f749ddf-zw2fk   1/1     Running   0              6m43s
+2026-11-05T12:39:42-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         6          11m
+NAME                    READY   STATUS        RESTARTS        AGE
+back-5f8f749ddf-2dd4f   1/1     Running       0               6m49s
+back-5f8f749ddf-9vv2t   1/1     Running       0               6m49s
+back-5f8f749ddf-mckqz   1/1     Running       2 (7m12s ago)   11m
+back-5f8f749ddf-vm4r6   1/1     Running       0               6m49s
+back-5f8f749ddf-wbh46   1/1     Terminating   3 (6m11s ago)   11m
+back-5f8f749ddf-zw2fk   1/1     Running       0               6m49s
+2026-11-05T12:39:48-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         6          11m
+NAME                    READY   STATUS    RESTARTS        AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0               6m54s
+back-5f8f749ddf-9vv2t   1/1     Running   0               6m54s
+back-5f8f749ddf-mckqz   1/1     Running   2 (7m17s ago)   11m
+back-5f8f749ddf-vm4r6   1/1     Running   0               6m54s
+back-5f8f749ddf-zw2fk   1/1     Running   0               6m54s
+2026-11-05T12:39:53-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         6          11m
+NAME                    READY   STATUS    RESTARTS        AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0               7m
+back-5f8f749ddf-9vv2t   1/1     Running   0               7m
+back-5f8f749ddf-mckqz   1/1     Running   2 (7m23s ago)   12m
+back-5f8f749ddf-vm4r6   1/1     Running   0               7m
+back-5f8f749ddf-zw2fk   1/1     Running   0               7m
+2026-11-05T12:39:59-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         5          11m
+NAME                    READY   STATUS    RESTARTS        AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0               7m5s
+back-5f8f749ddf-9vv2t   1/1     Running   0               7m5s
+back-5f8f749ddf-mckqz   1/1     Running   2 (7m28s ago)   12m
+back-5f8f749ddf-vm4r6   1/1     Running   0               7m5s
+back-5f8f749ddf-zw2fk   1/1     Running   0               7m5s
+2026-11-05T12:40:04-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         5          11m
+NAME                    READY   STATUS    RESTARTS        AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0               7m11s
+back-5f8f749ddf-9vv2t   1/1     Running   0               7m11s
+back-5f8f749ddf-mckqz   1/1     Running   2 (7m34s ago)   12m
+back-5f8f749ddf-vm4r6   1/1     Running   0               7m11s
+back-5f8f749ddf-zw2fk   1/1     Running   0               7m11s
+2026-11-05T12:40:10-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         5          12m
+NAME                    READY   STATUS    RESTARTS        AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0               7m16s
+back-5f8f749ddf-9vv2t   1/1     Running   0               7m16s
+back-5f8f749ddf-mckqz   1/1     Running   2 (7m39s ago)   12m
+back-5f8f749ddf-vm4r6   1/1     Running   0               7m16s
+back-5f8f749ddf-zw2fk   1/1     Running   0               7m16s
+2026-11-05T12:40:15-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         5          12m
+NAME                    READY   STATUS    RESTARTS        AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0               7m22s
+back-5f8f749ddf-9vv2t   1/1     Running   0               7m22s
+back-5f8f749ddf-mckqz   1/1     Running   2 (7m45s ago)   12m
+back-5f8f749ddf-vm4r6   1/1     Running   0               7m22s
+back-5f8f749ddf-zw2fk   1/1     Running   0               7m22s
+2026-11-05T12:40:21-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         5          12m
+NAME                    READY   STATUS    RESTARTS        AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0               7m27s
+back-5f8f749ddf-9vv2t   1/1     Running   0               7m27s
+back-5f8f749ddf-mckqz   1/1     Running   2 (7m50s ago)   12m
+back-5f8f749ddf-vm4r6   1/1     Running   0               7m27s
+back-5f8f749ddf-zw2fk   1/1     Running   0               7m27s
+2026-11-05T12:40:26-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         5          12m
+NAME                    READY   STATUS    RESTARTS        AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0               7m33s
+back-5f8f749ddf-9vv2t   1/1     Running   0               7m33s
+back-5f8f749ddf-mckqz   1/1     Running   2 (7m56s ago)   12m
+back-5f8f749ddf-vm4r6   1/1     Running   0               7m33s
+back-5f8f749ddf-zw2fk   1/1     Running   0               7m33s
+2026-11-05T12:40:32-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         5          12m
+NAME                    READY   STATUS    RESTARTS       AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0              7m38s
+back-5f8f749ddf-9vv2t   1/1     Running   0              7m38s
+back-5f8f749ddf-mckqz   1/1     Running   2 (8m1s ago)   12m
+back-5f8f749ddf-vm4r6   1/1     Running   0              7m38s
+back-5f8f749ddf-zw2fk   1/1     Running   0              7m38s
+2026-11-05T12:40:37-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         5          12m
+NAME                    READY   STATUS    RESTARTS       AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0              7m44s
+back-5f8f749ddf-9vv2t   1/1     Running   0              7m44s
+back-5f8f749ddf-mckqz   1/1     Running   2 (8m7s ago)   12m
+back-5f8f749ddf-vm4r6   1/1     Running   0              7m44s
+back-5f8f749ddf-zw2fk   1/1     Running   0              7m44s
+2026-11-05T12:40:43-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         5          12m
+NAME                    READY   STATUS        RESTARTS        AGE
+back-5f8f749ddf-2dd4f   1/1     Running       0               7m49s
+back-5f8f749ddf-9vv2t   1/1     Running       0               7m49s
+back-5f8f749ddf-mckqz   1/1     Running       2 (8m12s ago)   12m
+back-5f8f749ddf-vm4r6   1/1     Terminating   0               7m49s
+back-5f8f749ddf-zw2fk   1/1     Running       0               7m49s
+2026-11-05T12:40:48-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         5          12m
+NAME                    READY   STATUS    RESTARTS        AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0               7m55s
+back-5f8f749ddf-9vv2t   1/1     Running   0               7m55s
+back-5f8f749ddf-mckqz   1/1     Running   2 (8m18s ago)   12m
+back-5f8f749ddf-zw2fk   1/1     Running   0               7m55s
+2026-11-05T12:40:54-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         5          12m
+NAME                    READY   STATUS    RESTARTS        AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0               8m
+back-5f8f749ddf-9vv2t   1/1     Running   0               8m
+back-5f8f749ddf-mckqz   1/1     Running   2 (8m23s ago)   13m
+back-5f8f749ddf-zw2fk   1/1     Running   0               8m
+2026-11-05T12:40:59-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         4          12m
+NAME                    READY   STATUS    RESTARTS        AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0               8m6s
+back-5f8f749ddf-9vv2t   1/1     Running   0               8m6s
+back-5f8f749ddf-mckqz   1/1     Running   2 (8m29s ago)   13m
+back-5f8f749ddf-zw2fk   1/1     Running   0               8m6s
+2026-11-05T12:41:05-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         4          12m
+NAME                    READY   STATUS    RESTARTS        AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0               8m11s
+back-5f8f749ddf-9vv2t   1/1     Running   0               8m11s
+back-5f8f749ddf-mckqz   1/1     Running   2 (8m34s ago)   13m
+back-5f8f749ddf-zw2fk   1/1     Running   0               8m11s
+2026-11-05T12:41:10-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         4          13m
+NAME                    READY   STATUS    RESTARTS        AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0               8m17s
+back-5f8f749ddf-9vv2t   1/1     Running   0               8m17s
+back-5f8f749ddf-mckqz   1/1     Running   2 (8m40s ago)   13m
+back-5f8f749ddf-zw2fk   1/1     Running   0               8m17s
+2026-11-05T12:41:16-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         4          13m
+NAME                    READY   STATUS    RESTARTS        AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0               8m22s
+back-5f8f749ddf-9vv2t   1/1     Running   0               8m22s
+back-5f8f749ddf-mckqz   1/1     Running   2 (8m45s ago)   13m
+back-5f8f749ddf-zw2fk   1/1     Running   0               8m22s
+2026-11-05T12:41:21-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         4          13m
+NAME                    READY   STATUS    RESTARTS        AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0               8m28s
+back-5f8f749ddf-9vv2t   1/1     Running   0               8m28s
+back-5f8f749ddf-mckqz   1/1     Running   2 (8m51s ago)   13m
+back-5f8f749ddf-zw2fk   1/1     Running   0               8m28s
+2026-11-05T12:41:27-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         4          13m
+NAME                    READY   STATUS    RESTARTS        AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0               8m33s
+back-5f8f749ddf-9vv2t   1/1     Running   0               8m33s
+back-5f8f749ddf-mckqz   1/1     Running   2 (8m56s ago)   13m
+back-5f8f749ddf-zw2fk   1/1     Running   0               8m33s
+2026-11-05T12:41:32-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         4          13m
+NAME                    READY   STATUS    RESTARTS       AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0              8m39s
+back-5f8f749ddf-9vv2t   1/1     Running   0              8m39s
+back-5f8f749ddf-mckqz   1/1     Running   2 (9m2s ago)   13m
+back-5f8f749ddf-zw2fk   1/1     Running   0              8m39s
+2026-11-05T12:41:38-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         4          13m
+NAME                    READY   STATUS    RESTARTS       AGE
+back-5f8f749ddf-2dd4f   1/1     Running   0              8m44s
+back-5f8f749ddf-9vv2t   1/1     Running   0              8m44s
+back-5f8f749ddf-mckqz   1/1     Running   2 (9m7s ago)   13m
+back-5f8f749ddf-zw2fk   1/1     Running   0              8m44s
+2026-11-05T12:41:43-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         4          13m
+NAME                    READY   STATUS        RESTARTS        AGE
+back-5f8f749ddf-2dd4f   1/1     Terminating   0               8m50s
+back-5f8f749ddf-9vv2t   1/1     Running       0               8m50s
+back-5f8f749ddf-mckqz   1/1     Running       2 (9m13s ago)   13m
+back-5f8f749ddf-zw2fk   1/1     Running       0               8m50s
+2026-11-05T12:41:49-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         4          13m
+NAME                    READY   STATUS    RESTARTS        AGE
+back-5f8f749ddf-9vv2t   1/1     Running   0               8m55s
+back-5f8f749ddf-mckqz   1/1     Running   2 (9m18s ago)   13m
+back-5f8f749ddf-zw2fk   1/1     Running   0               8m55s
+2026-11-05T12:41:54-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         4          13m
+NAME                    READY   STATUS    RESTARTS        AGE
+back-5f8f749ddf-9vv2t   1/1     Running   0               9m1s
+back-5f8f749ddf-mckqz   1/1     Running   2 (9m24s ago)   14m
+back-5f8f749ddf-zw2fk   1/1     Running   0               9m1s
+2026-11-05T12:42:00-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         3          13m
+NAME                    READY   STATUS    RESTARTS        AGE
+back-5f8f749ddf-9vv2t   1/1     Running   0               9m6s
+back-5f8f749ddf-mckqz   1/1     Running   2 (9m29s ago)   14m
+back-5f8f749ddf-zw2fk   1/1     Running   0               9m6s
+2026-11-05T12:42:05-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         3          13m
+NAME                    READY   STATUS    RESTARTS        AGE
+back-5f8f749ddf-9vv2t   1/1     Running   0               9m12s
+back-5f8f749ddf-mckqz   1/1     Running   2 (9m35s ago)   14m
+back-5f8f749ddf-zw2fk   1/1     Running   0               9m12s
+2026-11-05T12:42:11-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         3          14m
+NAME                    READY   STATUS    RESTARTS        AGE
+back-5f8f749ddf-9vv2t   1/1     Running   0               9m17s
+back-5f8f749ddf-mckqz   1/1     Running   2 (9m40s ago)   14m
+back-5f8f749ddf-zw2fk   1/1     Running   0               9m17s
+2026-11-05T12:42:16-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         3          14m
+NAME                    READY   STATUS    RESTARTS        AGE
+back-5f8f749ddf-9vv2t   1/1     Running   0               9m22s
+back-5f8f749ddf-mckqz   1/1     Running   2 (9m45s ago)   14m
+back-5f8f749ddf-zw2fk   1/1     Running   0               9m22s
+2026-11-05T12:42:22-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         3          14m
+NAME                    READY   STATUS    RESTARTS        AGE
+back-5f8f749ddf-9vv2t   1/1     Running   0               9m28s
+back-5f8f749ddf-mckqz   1/1     Running   2 (9m51s ago)   14m
+back-5f8f749ddf-zw2fk   1/1     Running   0               9m28s
+2026-11-05T12:42:27-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         3          14m
+NAME                    READY   STATUS    RESTARTS        AGE
+back-5f8f749ddf-9vv2t   1/1     Running   0               9m33s
+back-5f8f749ddf-mckqz   1/1     Running   2 (9m56s ago)   14m
+back-5f8f749ddf-zw2fk   1/1     Running   0               9m33s
+2026-11-05T12:42:33-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         3          14m
+NAME                    READY   STATUS    RESTARTS      AGE
+back-5f8f749ddf-9vv2t   1/1     Running   0             9m39s
+back-5f8f749ddf-mckqz   1/1     Running   2 (10m ago)   14m
+back-5f8f749ddf-zw2fk   1/1     Running   0             9m39s
+2026-11-05T12:42:38-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         3          14m
+NAME                    READY   STATUS    RESTARTS      AGE
+back-5f8f749ddf-9vv2t   1/1     Running   0             9m44s
+back-5f8f749ddf-mckqz   1/1     Running   2 (10m ago)   14m
+back-5f8f749ddf-zw2fk   1/1     Running   0             9m44s
+2026-11-05T12:42:44-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         3          14m
+NAME                    READY   STATUS        RESTARTS      AGE
+back-5f8f749ddf-9vv2t   1/1     Running       0             9m50s
+back-5f8f749ddf-mckqz   1/1     Running       2 (10m ago)   14m
+back-5f8f749ddf-zw2fk   1/1     Terminating   0             9m50s
+2026-11-05T12:42:49-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         3          14m
+NAME                    READY   STATUS    RESTARTS      AGE
+back-5f8f749ddf-9vv2t   1/1     Running   0             9m55s
+back-5f8f749ddf-mckqz   1/1     Running   2 (10m ago)   14m
+2026-11-05T12:42:55-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         3          14m
+NAME                    READY   STATUS    RESTARTS      AGE
+back-5f8f749ddf-9vv2t   1/1     Running   0             10m
+back-5f8f749ddf-mckqz   1/1     Running   2 (10m ago)   15m
+2026-11-05T12:43:00-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         2          14m
+NAME                    READY   STATUS    RESTARTS      AGE
+back-5f8f749ddf-9vv2t   1/1     Running   0             10m
+back-5f8f749ddf-mckqz   1/1     Running   2 (10m ago)   15m
+2026-11-05T12:43:06-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         2          14m
+NAME                    READY   STATUS    RESTARTS      AGE
+back-5f8f749ddf-9vv2t   1/1     Running   0             10m
+back-5f8f749ddf-mckqz   1/1     Running   2 (10m ago)   15m
+2026-11-05T12:43:11-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         2          15m
+NAME                    READY   STATUS    RESTARTS      AGE
+back-5f8f749ddf-9vv2t   1/1     Running   0             10m
+back-5f8f749ddf-mckqz   1/1     Running   2 (10m ago)   15m
+2026-11-05T12:43:17-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         2          15m
+NAME                    READY   STATUS    RESTARTS      AGE
+back-5f8f749ddf-9vv2t   1/1     Running   0             10m
+back-5f8f749ddf-mckqz   1/1     Running   2 (10m ago)   15m
+2026-11-05T12:43:22-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         2          15m
+NAME                    READY   STATUS    RESTARTS      AGE
+back-5f8f749ddf-9vv2t   1/1     Running   0             10m
+back-5f8f749ddf-mckqz   1/1     Running   2 (10m ago)   15m
+2026-11-05T12:43:27-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         2          15m
+NAME                    READY   STATUS    RESTARTS      AGE
+back-5f8f749ddf-9vv2t   1/1     Running   0             10m
+back-5f8f749ddf-mckqz   1/1     Running   2 (10m ago)   15m
+2026-11-05T12:43:33-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         2          15m
+NAME                    READY   STATUS    RESTARTS      AGE
+back-5f8f749ddf-9vv2t   1/1     Running   0             10m
+back-5f8f749ddf-mckqz   1/1     Running   2 (11m ago)   15m
+2026-11-05T12:43:38-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         2          15m
+NAME                    READY   STATUS    RESTARTS      AGE
+back-5f8f749ddf-9vv2t   1/1     Running   0             10m
+back-5f8f749ddf-mckqz   1/1     Running   2 (11m ago)   15m
+2026-11-05T12:43:44-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         2          15m
+NAME                    READY   STATUS    RESTARTS      AGE
+back-5f8f749ddf-9vv2t   1/1     Running   0             10m
+back-5f8f749ddf-mckqz   1/1     Running   2 (11m ago)   15m
+back-6f77b7f5bf-fktpk   0/1     Running   0             4s
+2026-11-05T12:43:49-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         2          15m
+NAME                    READY   STATUS    RESTARTS      AGE
+back-5f8f749ddf-9vv2t   1/1     Running   0             10m
+back-5f8f749ddf-mckqz   1/1     Running   2 (11m ago)   15m
+back-6f77b7f5bf-fktpk   0/1     Running   0             10s
+2026-11-05T12:43:55-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         2          15m
+NAME                    READY   STATUS    RESTARTS      AGE
+back-5f8f749ddf-9vv2t   1/1     Running   0             11m
+back-5f8f749ddf-mckqz   1/1     Running   2 (11m ago)   16m
+back-6f77b7f5bf-fktpk   0/1     Running   0             15s
+2026-11-05T12:44:00-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         2          15m
+NAME                    READY   STATUS    RESTARTS      AGE
+back-5f8f749ddf-9vv2t   1/1     Running   0             11m
+back-5f8f749ddf-mckqz   1/1     Running   2 (11m ago)   16m
+back-6f77b7f5bf-fktpk   0/1     Running   0             21s
+2026-11-05T12:44:06-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         2          15m
+NAME                    READY   STATUS        RESTARTS      AGE
+back-5f8f749ddf-9vv2t   1/1     Terminating   0             11m
+back-5f8f749ddf-mckqz   1/1     Running       2 (11m ago)   16m
+back-6f77b7f5bf-22dwf   0/1     Running       0             3s
+back-6f77b7f5bf-fktpk   1/1     Running       0             26s
+2026-11-05T12:44:11-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         2          16m
+NAME                    READY   STATUS    RESTARTS      AGE
+back-5f8f749ddf-mckqz   1/1     Running   2 (11m ago)   16m
+back-6f77b7f5bf-22dwf   0/1     Running   0             9s
+back-6f77b7f5bf-fktpk   1/1     Running   0             32s
+2026-11-05T12:44:17-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         2          16m
+NAME                    READY   STATUS    RESTARTS      AGE
+back-5f8f749ddf-mckqz   1/1     Running   2 (11m ago)   16m
+back-6f77b7f5bf-22dwf   0/1     Running   0             14s
+back-6f77b7f5bf-fktpk   1/1     Running   0             37s
+2026-11-05T12:44:22-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         2          16m
+NAME                    READY   STATUS    RESTARTS      AGE
+back-5f8f749ddf-mckqz   1/1     Running   2 (11m ago)   16m
+back-6f77b7f5bf-22dwf   0/1     Running   0             20s
+back-6f77b7f5bf-fktpk   1/1     Running   0             43s
+2026-11-05T12:44:28-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         2          16m
+NAME                    READY   STATUS        RESTARTS      AGE
+back-5f8f749ddf-mckqz   1/1     Terminating   2 (11m ago)   16m
+back-6f77b7f5bf-22dwf   1/1     Running       0             25s
+back-6f77b7f5bf-fktpk   1/1     Running       0             48s
+2026-11-05T12:44:33-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         2          16m
+NAME                    READY   STATUS        RESTARTS      AGE
+back-5f8f749ddf-mckqz   1/1     Terminating   2 (12m ago)   16m
+back-6f77b7f5bf-22dwf   1/1     Running       0             31s
+back-6f77b7f5bf-fktpk   1/1     Running       0             54s
+2026-11-05T12:44:39-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         2          16m
+NAME                    READY   STATUS    RESTARTS   AGE
+back-6f77b7f5bf-22dwf   1/1     Running   0          36s
+back-6f77b7f5bf-fktpk   1/1     Running   0          59s
+2026-11-05T12:44:44-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          16m
+NAME                    READY   STATUS    RESTARTS   AGE
+back-6f77b7f5bf-22dwf   1/1     Running   0          42s
+back-6f77b7f5bf-fktpk   1/1     Running   0          65s
+2026-11-05T12:44:50-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          16m
+NAME                    READY   STATUS    RESTARTS   AGE
+back-6f77b7f5bf-22dwf   1/1     Running   0          47s
+back-6f77b7f5bf-fktpk   1/1     Running   0          70s
+2026-11-05T12:44:55-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          16m
+NAME                    READY   STATUS    RESTARTS   AGE
+back-6f77b7f5bf-22dwf   1/1     Running   0          53s
+back-6f77b7f5bf-fktpk   1/1     Running   0          76s
+2026-11-05T12:45:01-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          16m
+NAME                    READY   STATUS    RESTARTS   AGE
+back-6f77b7f5bf-22dwf   1/1     Running   0          58s
+back-6f77b7f5bf-fktpk   0/1     Running   0          81s
+2026-11-05T12:45:06-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          16m
+NAME                    READY   STATUS    RESTARTS   AGE
+back-6f77b7f5bf-22dwf   0/1     Running   0          63s
+back-6f77b7f5bf-fktpk   0/1     Running   0          86s
+2026-11-05T12:45:12-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          17m
+NAME                    READY   STATUS    RESTARTS   AGE
+back-6f77b7f5bf-22dwf   0/1     Running   0          69s
+back-6f77b7f5bf-fktpk   0/1     Running   0          92s
+2026-11-05T12:45:17-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          17m
+NAME                    READY   STATUS    RESTARTS   AGE
+back-6f77b7f5bf-22dwf   0/1     Running   0          74s
+back-6f77b7f5bf-fktpk   0/1     Running   0          97s
+2026-11-05T12:45:22-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          17m
+NAME                    READY   STATUS    RESTARTS   AGE
+back-6f77b7f5bf-22dwf   0/1     Running   0          80s
+back-6f77b7f5bf-fktpk   0/1     Running   0          103s
+2026-11-05T12:45:28-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          17m
+NAME                    READY   STATUS    RESTARTS   AGE
+back-6f77b7f5bf-22dwf   0/1     Running   0          85s
+back-6f77b7f5bf-fktpk   0/1     Running   0          108s
+2026-11-05T12:45:33-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          17m
+NAME                    READY   STATUS    RESTARTS   AGE
+back-6f77b7f5bf-22dwf   0/1     Running   0          91s
+back-6f77b7f5bf-fktpk   0/1     Running   0          114s
+2026-11-05T12:45:39-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          17m
+NAME                    READY   STATUS    RESTARTS   AGE
+back-6f77b7f5bf-22dwf   0/1     Running   0          96s
+back-6f77b7f5bf-fktpk   0/1     Running   0          119s
+2026-11-05T12:45:44-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          17m
+NAME                    READY   STATUS    RESTARTS     AGE
+back-6f77b7f5bf-22dwf   0/1     Running   1 (4s ago)   102s
+back-6f77b7f5bf-fktpk   0/1     Running   0            2m5s
+2026-11-05T12:45:50-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          17m
+NAME                    READY   STATUS    RESTARTS     AGE
+back-5f8f749ddf-s886j   0/1     Running   0            2s
+back-6f77b7f5bf-22dwf   0/1     Running   1 (9s ago)   107s
+back-6f77b7f5bf-fktpk   0/1     Running   1 (2s ago)   2m10s
+2026-11-05T12:45:55-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          17m
+NAME                    READY   STATUS    RESTARTS      AGE
+back-5f8f749ddf-s886j   0/1     Running   0             8s
+back-6f77b7f5bf-22dwf   0/1     Running   1 (15s ago)   113s
+back-6f77b7f5bf-fktpk   0/1     Running   1 (8s ago)    2m16s
+2026-11-05T12:46:01-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          17m
+NAME                    READY   STATUS        RESTARTS      AGE
+back-5f8f749ddf-8tzk7   0/1     Init:0/1      0             1s
+back-5f8f749ddf-s886j   1/1     Running       0             13s
+back-6f77b7f5bf-22dwf   0/1     Terminating   1 (20s ago)   118s
+back-6f77b7f5bf-fktpk   0/1     Running       1 (13s ago)   2m21s
+2026-11-05T12:46:06-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          17m
+NAME                    READY   STATUS        RESTARTS      AGE
+back-5f8f749ddf-8tzk7   0/1     Running       0             6s
+back-5f8f749ddf-s886j   1/1     Running       0             18s
+back-6f77b7f5bf-22dwf   1/1     Terminating   1 (25s ago)   2m3s
+back-6f77b7f5bf-fktpk   0/1     Running       1 (18s ago)   2m26s
+2026-11-05T12:46:12-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          18m
+NAME                    READY   STATUS    RESTARTS      AGE
+back-5f8f749ddf-8tzk7   0/1     Running   0             12s
+back-5f8f749ddf-s886j   1/1     Running   0             24s
+back-6f77b7f5bf-fktpk   1/1     Running   1 (24s ago)   2m32s
+2026-11-05T12:46:17-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          18m
+NAME                    READY   STATUS        RESTARTS      AGE
+back-5f8f749ddf-8tzk7   1/1     Running       0             17s
+back-5f8f749ddf-s886j   1/1     Running       0             29s
+back-6f77b7f5bf-fktpk   1/1     Terminating   1 (29s ago)   2m37s
+2026-11-05T12:46:23-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          18m
+NAME                    READY   STATUS    RESTARTS   AGE
+back-5f8f749ddf-8tzk7   1/1     Running   0          23s
+back-5f8f749ddf-s886j   1/1     Running   0          35s
+2026-11-05T12:46:28-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          18m
+NAME                    READY   STATUS    RESTARTS   AGE
+back-5f8f749ddf-8tzk7   1/1     Running   0          28s
+back-5f8f749ddf-s886j   1/1     Running   0          40s
+2026-11-05T12:46:33-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          18m
+NAME                    READY   STATUS    RESTARTS   AGE
+back-5f8f749ddf-8tzk7   1/1     Running   0          34s
+back-5f8f749ddf-s886j   1/1     Running   0          46s
+back-6f77b7f5bf-r82p4   0/1     Running   0          3s
+2026-11-05T12:46:39-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          18m
+NAME                    READY   STATUS    RESTARTS   AGE
+back-5f8f749ddf-8tzk7   1/1     Running   0          39s
+back-5f8f749ddf-s886j   1/1     Running   0          51s
+back-6f77b7f5bf-r82p4   0/1     Running   0          8s
+2026-11-05T12:46:44-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          18m
+NAME                    READY   STATUS    RESTARTS   AGE
+back-5f8f749ddf-8tzk7   1/1     Running   0          45s
+back-5f8f749ddf-s886j   1/1     Running   0          57s
+back-6f77b7f5bf-r82p4   0/1     Running   0          14s
+2026-11-05T12:46:50-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          18m
+NAME                    READY   STATUS    RESTARTS   AGE
+back-5f8f749ddf-8tzk7   1/1     Running   0          50s
+back-5f8f749ddf-s886j   1/1     Running   0          62s
+back-6f77b7f5bf-r82p4   0/1     Running   0          19s
+2026-11-05T12:46:55-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          18m
+NAME                    READY   STATUS        RESTARTS   AGE
+back-5f8f749ddf-8tzk7   1/1     Running       0          56s
+back-5f8f749ddf-s886j   1/1     Terminating   0          68s
+back-6f77b7f5bf-cvmdq   0/1     Running       0          2s
+back-6f77b7f5bf-r82p4   1/1     Running       0          25s
+2026-11-05T12:47:01-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          18m
+NAME                    READY   STATUS      RESTARTS   AGE
+back-5f8f749ddf-8tzk7   1/1     Running     0          61s
+back-5f8f749ddf-s886j   0/1     Completed   0          73s
+back-6f77b7f5bf-cvmdq   0/1     Running     0          7s
+back-6f77b7f5bf-r82p4   1/1     Running     0          30s
+2026-11-05T12:47:06-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          19m
+NAME                    READY   STATUS    RESTARTS   AGE
+back-5f8f749ddf-8tzk7   1/1     Running   0          67s
+back-6f77b7f5bf-cvmdq   0/1     Running   0          13s
+back-6f77b7f5bf-r82p4   1/1     Running   0          36s
+2026-11-05T12:47:12-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          19m
+NAME                    READY   STATUS    RESTARTS   AGE
+back-5f8f749ddf-8tzk7   1/1     Running   0          72s
+back-6f77b7f5bf-cvmdq   0/1     Running   0          18s
+back-6f77b7f5bf-r82p4   1/1     Running   0          41s
+2026-11-05T12:47:17-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          19m
+NAME                    READY   STATUS        RESTARTS   AGE
+back-5f8f749ddf-8tzk7   1/1     Terminating   0          78s
+back-6f77b7f5bf-cvmdq   1/1     Running       0          24s
+back-6f77b7f5bf-r82p4   1/1     Running       0          47s
+2026-11-05T12:47:23-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          19m
+NAME                    READY   STATUS        RESTARTS   AGE
+back-5f8f749ddf-8tzk7   1/1     Terminating   0          83s
+back-6f77b7f5bf-cvmdq   1/1     Running       0          29s
+back-6f77b7f5bf-r82p4   1/1     Running       0          52s
+2026-11-05T12:47:28-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          19m
+NAME                    READY   STATUS    RESTARTS   AGE
+back-6f77b7f5bf-cvmdq   1/1     Running   0          35s
+back-6f77b7f5bf-r82p4   1/1     Running   0          58s
+2026-11-05T12:47:34-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          19m
+NAME                    READY   STATUS    RESTARTS   AGE
+back-6f77b7f5bf-cvmdq   1/1     Running   0          40s
+back-6f77b7f5bf-r82p4   1/1     Running   0          63s
+2026-11-05T12:47:39-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          19m
+NAME                    READY   STATUS    RESTARTS   AGE
+back-6f77b7f5bf-cvmdq   1/1     Running   0          46s
+back-6f77b7f5bf-r82p4   1/1     Running   0          69s
+2026-11-05T12:47:45-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          19m
+NAME                    READY   STATUS    RESTARTS   AGE
+back-6f77b7f5bf-cvmdq   1/1     Running   0          51s
+back-6f77b7f5bf-r82p4   1/1     Running   0          74s
+2026-11-05T12:47:50-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          19m
+NAME                    READY   STATUS    RESTARTS   AGE
+back-6f77b7f5bf-cvmdq   1/1     Running   0          56s
+back-6f77b7f5bf-r82p4   1/1     Running   0          79s
+2026-11-05T12:47:56-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          19m
+NAME                    READY   STATUS    RESTARTS   AGE
+back-6f77b7f5bf-cvmdq   1/1     Running   0          62s
+back-6f77b7f5bf-r82p4   1/1     Running   0          85s
+2026-11-05T12:48:01-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          19m
+NAME                    READY   STATUS    RESTARTS   AGE
+back-6f77b7f5bf-cvmdq   1/1     Running   0          68s
+back-6f77b7f5bf-r82p4   1/1     Running   0          91s
+2026-11-05T12:48:07-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          20m
+NAME                    READY   STATUS    RESTARTS   AGE
+back-6f77b7f5bf-cvmdq   1/1     Running   0          75s
+back-6f77b7f5bf-r82p4   1/1     Running   0          98s
+2026-11-05T12:48:14-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          20m
+NAME                    READY   STATUS    RESTARTS   AGE
+back-6f77b7f5bf-cvmdq   1/1     Running   0          80s
+back-6f77b7f5bf-r82p4   1/1     Running   0          103s
+2026-11-05T12:48:19-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          20m
+NAME                    READY   STATUS    RESTARTS   AGE
+back-6f77b7f5bf-cvmdq   1/1     Running   0          86s
+back-6f77b7f5bf-r82p4   1/1     Running   0          109s
+2026-11-05T12:48:25-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          20m
+NAME                    READY   STATUS    RESTARTS   AGE
+back-6f77b7f5bf-cvmdq   1/1     Running   0          91s
+back-6f77b7f5bf-r82p4   1/1     Running   0          114s
+2026-11-05T12:48:30-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          20m
+NAME                    READY   STATUS    RESTARTS   AGE
+back-6f77b7f5bf-cvmdq   1/1     Running   0          97s
+back-6f77b7f5bf-r82p4   1/1     Running   0          2m
+2026-11-05T12:48:36-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          20m
+NAME                    READY   STATUS    RESTARTS   AGE
+back-6f77b7f5bf-cvmdq   1/1     Running   0          102s
+back-6f77b7f5bf-r82p4   1/1     Running   0          2m5s
+2026-11-05T12:48:41-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          20m
+NAME                    READY   STATUS    RESTARTS   AGE
+back-6f77b7f5bf-cvmdq   1/1     Running   0          108s
+back-6f77b7f5bf-r82p4   1/1     Running   0          2m11s
+2026-11-05T12:48:47-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          20m
+NAME                    READY   STATUS    RESTARTS   AGE
+back-6f77b7f5bf-cvmdq   1/1     Running   0          113s
+back-6f77b7f5bf-r82p4   1/1     Running   0          2m16s
+2026-11-05T12:48:52-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          20m
+NAME                    READY   STATUS    RESTARTS   AGE
+back-6f77b7f5bf-cvmdq   1/1     Running   0          119s
+back-6f77b7f5bf-r82p4   1/1     Running   0          2m22s
+2026-11-05T12:48:58-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         2          20m
+NAME                    READY   STATUS    RESTARTS   AGE
+back-6f77b7f5bf-cvmdq   1/1     Running   0          2m4s
+back-6f77b7f5bf-r82p4   1/1     Running   0          2m27s
+2026-11-05T12:49:03-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         2          20m
+NAME                    READY   STATUS    RESTARTS   AGE
+back-6f77b7f5bf-cvmdq   1/1     Running   0          2m9s
+back-6f77b7f5bf-r82p4   1/1     Running   0          2m32s
+2026-11-05T12:49:09-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         2          21m
+NAME                    READY   STATUS    RESTARTS   AGE
+back-6f77b7f5bf-cvmdq   1/1     Running   0          2m15s
+back-6f77b7f5bf-r82p4   1/1     Running   0          2m38s
+2026-11-05T12:49:14-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         2          21m
+NAME                    READY   STATUS    RESTARTS   AGE
+back-6f77b7f5bf-cvmdq   1/1     Running   0          2m20s
+back-6f77b7f5bf-r82p4   1/1     Running   0          2m43s
+2026-11-05T12:49:19-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         2          21m
+NAME                    READY   STATUS    RESTARTS   AGE
+back-6f77b7f5bf-cvmdq   0/1     Running   0          2m26s
+back-6f77b7f5bf-r82p4   1/1     Running   0          2m49s
+2026-11-05T12:49:25-03:00
+NAME   REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 2%/60%   2         6         2          21m
+NAME                    READY   STATUS    RESTARTS   AGE
+back-6f77b7f5bf-cvmdq   0/1     Running   0          2m31s
+back-6f77b7f5bf-r82p4   0/1     Running   0          2m54s
+2026-11-05T12:49:30-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          21m
+NAME                    READY   STATUS    RESTARTS   AGE
+back-6f77b7f5bf-cvmdq   0/1     Running   0          2m37s
+back-6f77b7f5bf-r82p4   0/1     Running   0          3m
+2026-11-05T12:49:36-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          21m
+NAME                    READY   STATUS    RESTARTS   AGE
+back-6f77b7f5bf-cvmdq   0/1     Running   0          2m42s
+back-6f77b7f5bf-r82p4   0/1     Running   0          3m5s
+2026-11-05T12:49:41-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          21m
+NAME                    READY   STATUS    RESTARTS   AGE
+back-6f77b7f5bf-cvmdq   0/1     Running   0          2m48s
+back-6f77b7f5bf-r82p4   0/1     Running   0          3m11s
+2026-11-05T12:49:47-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          21m
+NAME                    READY   STATUS    RESTARTS   AGE
+back-6f77b7f5bf-cvmdq   0/1     Running   0          2m53s
+back-6f77b7f5bf-r82p4   0/1     Running   0          3m16s
+2026-11-05T12:49:52-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          21m
+NAME                    READY   STATUS    RESTARTS   AGE
+back-6f77b7f5bf-cvmdq   0/1     Running   0          2m59s
+back-6f77b7f5bf-r82p4   0/1     Running   0          3m22s
+2026-11-05T12:49:58-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          21m
+NAME                    READY   STATUS    RESTARTS   AGE
+back-6f77b7f5bf-cvmdq   0/1     Running   0          3m4s
+back-6f77b7f5bf-r82p4   0/1     Running   0          3m27s
+2026-11-05T12:50:03-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          21m
+NAME                    READY   STATUS    RESTARTS     AGE
+back-6f77b7f5bf-cvmdq   0/1     Running   1 (2s ago)   3m10s
+back-6f77b7f5bf-r82p4   0/1     Running   1 (4s ago)   3m33s
+2026-11-05T12:50:09-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          22m
+NAME                    READY   STATUS    RESTARTS     AGE
+back-6f77b7f5bf-cvmdq   0/1     Running   1 (7s ago)   3m15s
+back-6f77b7f5bf-r82p4   0/1     Running   1 (9s ago)   3m38s
+2026-11-05T12:50:14-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          22m
+NAME                    READY   STATUS    RESTARTS      AGE
+back-5f8f749ddf-qh25j   0/1     Running   0             2s
+back-6f77b7f5bf-cvmdq   0/1     Running   1 (12s ago)   3m20s
+back-6f77b7f5bf-r82p4   0/1     Running   1 (14s ago)   3m43s
+2026-11-05T12:50:19-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          22m
+NAME                    READY   STATUS    RESTARTS      AGE
+back-5f8f749ddf-qh25j   0/1     Running   0             8s
+back-6f77b7f5bf-cvmdq   0/1     Running   1 (18s ago)   3m26s
+back-6f77b7f5bf-r82p4   0/1     Running   1 (20s ago)   3m49s
+2026-11-05T12:50:25-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          22m
+NAME                    READY   STATUS        RESTARTS      AGE
+back-5f8f749ddf-kj675   0/1     Running       0             1s
+back-5f8f749ddf-qh25j   1/1     Running       0             13s
+back-6f77b7f5bf-cvmdq   1/1     Terminating   1 (23s ago)   3m31s
+back-6f77b7f5bf-r82p4   1/1     Running       1 (25s ago)   3m54s
+2026-11-05T12:50:30-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          22m
+NAME                    READY   STATUS        RESTARTS      AGE
+back-5f8f749ddf-kj675   0/1     Running       0             7s
+back-5f8f749ddf-qh25j   1/1     Running       0             19s
+back-6f77b7f5bf-cvmdq   1/1     Terminating   1 (29s ago)   3m37s
+back-6f77b7f5bf-r82p4   1/1     Running       1 (31s ago)   4m
+2026-11-05T12:50:36-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          22m
+NAME                    READY   STATUS        RESTARTS      AGE
+back-5f8f749ddf-kj675   1/1     Running       0             12s
+back-5f8f749ddf-qh25j   1/1     Running       0             24s
+back-6f77b7f5bf-r82p4   1/1     Terminating   1 (36s ago)   4m5s
+2026-11-05T12:50:41-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          22m
+NAME                    READY   STATUS        RESTARTS      AGE
+back-5f8f749ddf-kj675   1/1     Running       0             18s
+back-5f8f749ddf-qh25j   1/1     Running       0             30s
+back-6f77b7f5bf-r82p4   1/1     Terminating   1 (42s ago)   4m11s
+2026-11-05T12:50:47-03:00
+NAME   REFERENCE         TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: <unknown>/60%   2         6         2          22m
+NAME                    READY   STATUS    RESTARTS   AGE
+back-5f8f749ddf-kj675   1/1     Running   0          23s
+back-5f8f749ddf-qh25j   1/1     Running   0          35s

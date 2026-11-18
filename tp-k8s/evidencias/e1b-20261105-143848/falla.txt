@@ -1,0 +1,6 @@
+2026-11-05T14:39:10-03:00 inicio del borrado
+kubectl delete pod --wait=false: back-5f8f749ddf-fs4hx
+back-5f8f749ddf-xdhbb
+pod "back-5f8f749ddf-fs4hx" deleted from terrasense namespace
+pod "back-5f8f749ddf-xdhbb" deleted from terrasense namespace
+2026-11-05T14:39:10-03:00 borrado solicitado
