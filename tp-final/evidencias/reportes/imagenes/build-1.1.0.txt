@@ -1,0 +1,97 @@
+DEPRECATED: The legacy builder is deprecated and will be removed in a future release.
+            Install the buildx component to build images with BuildKit:
+            https://docs.docker.com/go/buildx/
+
+Sending build context to Docker daemon  6.948MB
+Step 1/30 : ARG NODE_VERSION=22
+Step 2/30 : FROM node:${NODE_VERSION}-alpine AS base
+ ---> c10474645fd3
+Step 3/30 : WORKDIR /app
+ ---> Using cache
+ ---> 205af1040641
+Step 4/30 : FROM base AS deps
+ ---> 205af1040641
+Step 5/30 : COPY frontend/dashboard/package.json frontend/dashboard/package-lock.json ./
+ ---> Using cache
+ ---> 785ec0862683
+Step 6/30 : RUN npm ci
+ ---> Using cache
+ ---> 7d83a9b00a81
+Step 7/30 : FROM base AS builder
+ ---> 205af1040641
+Step 8/30 : COPY --from=deps /app/node_modules ./node_modules
+ ---> Using cache
+ ---> 1bef2f2df794
+Step 9/30 : COPY frontend/dashboard/ ./
+ ---> Using cache
+ ---> f54baa0daf6d
+Step 10/30 : ARG NEXT_PUBLIC_API_URL=http://localhost:5000/api
+ ---> Using cache
+ ---> 96b5bed22118
+Step 11/30 : ENV NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
+ ---> Using cache
+ ---> ca8b15b7012b
+Step 12/30 : ARG APP_VERSION=""
+ ---> Using cache
+ ---> 1adc2b62245e
+Step 13/30 : RUN node -e 'const v = require("./package.json").version; const e = process.env.APP_VERSION;   if (e && e !== v) { console.error(`APP_VERSION=${e} no coincide con package.json (${v})`); process.exit(1); }   console.log(`Versión del panel: ${v}`);'
+ ---> Using cache
+ ---> e715c9a6cccd
+Step 14/30 : ENV NEXT_TELEMETRY_DISABLED=1
+ ---> Using cache
+ ---> 51a6083edba6
+Step 15/30 : RUN npm run build
+ ---> Using cache
+ ---> 503e75dc002d
+Step 16/30 : FROM base AS runner
+ ---> 205af1040641
+Step 17/30 : ARG APP_VERSION=""
+ ---> Using cache
+ ---> c3289d6158d1
+Step 18/30 : ARG GIT_SHA=""
+ ---> Using cache
+ ---> 03824db73e2d
+Step 19/30 : LABEL org.opencontainers.image.title="terrasense-front"       org.opencontainers.image.version="${APP_VERSION}"       org.opencontainers.image.revision="${GIT_SHA}"       org.opencontainers.image.source="https://github.com/EnzoFernandezz11/software-quality-0x43"
+ ---> Running in 802d45197c6e
+ ---> Removed intermediate container 802d45197c6e
+ ---> 1b644e539731
+Step 20/30 : ENV NODE_ENV=production
+ ---> Running in f4e4525e209c
+ ---> Removed intermediate container f4e4525e209c
+ ---> 2184966ba6d8
+Step 21/30 : ENV NEXT_TELEMETRY_DISABLED=1
+ ---> Running in 6e5554b8adbf
+ ---> Removed intermediate container 6e5554b8adbf
+ ---> 3ad027c215cd
+Step 22/30 : RUN addgroup --system --gid 1001 nodejs   && adduser --system --uid 1001 --ingroup nodejs nextjs
+ ---> Running in 3c55924523a3
+ ---> Removed intermediate container 3c55924523a3
+ ---> 515d41f02aca
+Step 23/30 : COPY --from=builder /app/public ./public
+ ---> 82f3a89d4da5
+Step 24/30 : COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+ ---> 26a75a21f911
+Step 25/30 : COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+ ---> fee5b869352d
+Step 26/30 : USER nextjs
+ ---> Running in d48f814d0db3
+ ---> Removed intermediate container d48f814d0db3
+ ---> 04190b39f12b
+Step 27/30 : EXPOSE 3000
+ ---> Running in 383252efc24c
+ ---> Removed intermediate container 383252efc24c
+ ---> b65d727a3232
+Step 28/30 : ENV PORT=3000
+ ---> Running in 4e1e2f523795
+ ---> Removed intermediate container 4e1e2f523795
+ ---> d65cb5159321
+Step 29/30 : ENV HOSTNAME=0.0.0.0
+ ---> Running in 9ca0083d710c
+ ---> Removed intermediate container 9ca0083d710c
+ ---> a940ef222feb
+Step 30/30 : CMD ["node", "server.js"]
+ ---> Running in e09a2b25050a
+ ---> Removed intermediate container e09a2b25050a
+ ---> 52c210ceec01
+Successfully built 52c210ceec01
+Successfully tagged terrasense-front:1.1.0
