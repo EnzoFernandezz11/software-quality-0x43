@@ -2,8 +2,6 @@
 
 Los scripts de la [issue #23](https://github.com/EnzoFernandezz11/software-quality-0x43/issues/23) corren desde la raíz del repositorio con k6. Para la navegación también hace falta Chrome o Chromium. Las pruebas reales usan el Ingress de la #22, las dos imágenes de la #21 y la gate aprobada de la #25.
 
-Para la revisión de la #23 se propone a Ignacio (`@IgnacioAVerdinelli`), por su trabajo en las pruebas de k6 y la gate de calidad, y a Garba (`@ValeGarba15`), responsable del rollout de la #22 y de la decisión de promoción o rollback.
-
 ## Alcance y trazabilidad de la evidencia
 
 La [issue #23](https://github.com/EnzoFernandezz11/software-quality-0x43/issues/23) aporta mediciones y capturas para las actividades 3.1 y 3.2 de la consigna: contrastar el peso configurado con el reparto observado y evaluar una hipótesis de rendimiento antes de decidir sobre la candidata. La actividad 3.4 requiere presentar evidencia interpretada, videos de hasta tres minutos y el veredicto final del equipo; este directorio aporta insumos para esa presentación. La promoción o rollback corresponde a la #22; el README general y la presentación se coordinan con la #24.
