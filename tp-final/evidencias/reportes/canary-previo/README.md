@@ -2,7 +2,7 @@
 
 Captura del 18 de noviembre de 2026, zona horaria Argentina (UTC-3), en Minikube `terrasense-tp23`, namespace `terrasense`. Despliegue de integración `99d2ce071cd4b35f485b9e4d945ba4e0a3e3fce2`; el smoke se ejecutó desde `54a2ac0c3dc7ebe291c24c248574199e7b3e5fd6`. Las revisiones de las imágenes están en la captura de configuración.
 
-- `verificacion-gate.txt`: ambos pods backend cargaron una clave efectiva propia del entorno; incluye versiones de dependencias e identificadores de imagen. Es una comprobación técnica: el GO formal de #25 sigue pendiente de Nacho.
+- `verificacion-gate.txt`: ambos pods backend cargaron una clave efectiva propia del entorno; incluye versiones de dependencias e identificadores de imagen. En el momento de esta captura el GO formal estaba pendiente; Nacho lo otorgó después para la candidata y este perfil en [#25](https://github.com/EnzoFernandezz11/software-quality-0x43/issues/25#issuecomment-6986489015).
 - `despliegue-configuracion.txt`: imágenes, recursos, réplicas, HPA, pods, servicios e Ingress. Es una captura puntual, no un estado en vivo. Peso canary configurado: 0 %.
 - `smoke.json`: smoke de 10 segundos y un usuario virtual; 10 respuestas identificadas como 1.0.0, sin errores. El campo de peso esperado es `null` porque no se pasó al smoke; la configuración del Ingress se registró por separado.
 - `ruteo-smoke.txt`: solicitudes HTTP normal y con `X-Canary: never` y `always`; respondieron 200 con versiones 1.0.0, 1.0.0 y 1.1.0 respectivamente.

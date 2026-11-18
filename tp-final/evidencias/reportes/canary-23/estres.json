@@ -1,0 +1,190 @@
+{
+  "url": "http://terrasense.local/dashboard",
+  "pesoCanaryConfigurado": 50,
+  "etapas": [
+    {
+      "nombre": "etapa1",
+      "duracionObjetivoS": 120,
+      "tasaObjetivoRps": 10,
+      "solicitudesObjetivo": 1200,
+      "global": {
+        "total": 1201,
+        "rps": 10.008333333333333,
+        "errores": 0,
+        "porcentajeError": 0,
+        "p95Ms": 4.870347
+      },
+      "porVersion": {
+        "1.0.0": {
+          "total": 579,
+          "rps": 4.825,
+          "errores": 0,
+          "porcentajeError": 0,
+          "p95Ms": 4.8377178999999995
+        },
+        "1.1.0": {
+          "total": 622,
+          "rps": 5.183333333333334,
+          "errores": 0,
+          "porcentajeError": 0,
+          "p95Ms": 4.940382449999999
+        },
+        "desconocida": {
+          "total": 0,
+          "rps": 0,
+          "errores": 0,
+          "porcentajeError": null,
+          "p95Ms": null
+        }
+      },
+      "reparto": {
+        "denominadorRespuestasReconocidas": 1201,
+        "porcentajeCanary": 51.7901748542881,
+        "diferenciaCanaryPuntos": 1.7901748542880966
+      },
+      "iteracionesDescartadas": 0,
+      "hipotesisAB": {
+        "estado": "cumple",
+        "motivos": []
+      }
+    },
+    {
+      "nombre": "etapa2",
+      "duracionObjetivoS": 120,
+      "tasaObjetivoRps": 20,
+      "solicitudesObjetivo": 2400,
+      "global": {
+        "total": 2400,
+        "rps": 20,
+        "errores": 0,
+        "porcentajeError": 0,
+        "p95Ms": 4.503120799999999
+      },
+      "porVersion": {
+        "1.0.0": {
+          "total": 1195,
+          "rps": 9.958333333333334,
+          "errores": 0,
+          "porcentajeError": 0,
+          "p95Ms": 4.5210859999999995
+        },
+        "1.1.0": {
+          "total": 1205,
+          "rps": 10.041666666666666,
+          "errores": 0,
+          "porcentajeError": 0,
+          "p95Ms": 4.4824478
+        },
+        "desconocida": {
+          "total": 0,
+          "rps": 0,
+          "errores": 0,
+          "porcentajeError": null,
+          "p95Ms": null
+        }
+      },
+      "reparto": {
+        "denominadorRespuestasReconocidas": 2400,
+        "porcentajeCanary": 50.208333333333336,
+        "diferenciaCanaryPuntos": 0.2083333333333357
+      },
+      "iteracionesDescartadas": 0,
+      "hipotesisAB": {
+        "estado": "cumple",
+        "motivos": []
+      }
+    },
+    {
+      "nombre": "etapa3",
+      "duracionObjetivoS": 120,
+      "tasaObjetivoRps": 40,
+      "solicitudesObjetivo": 4800,
+      "global": {
+        "total": 4801,
+        "rps": 40.00833333333333,
+        "errores": 0,
+        "porcentajeError": 0,
+        "p95Ms": 4.36036
+      },
+      "porVersion": {
+        "1.0.0": {
+          "total": 2402,
+          "rps": 20.016666666666666,
+          "errores": 0,
+          "porcentajeError": 0,
+          "p95Ms": 4.1392450499999995
+        },
+        "1.1.0": {
+          "total": 2399,
+          "rps": 19.991666666666667,
+          "errores": 0,
+          "porcentajeError": 0,
+          "p95Ms": 4.4420337
+        },
+        "desconocida": {
+          "total": 0,
+          "rps": 0,
+          "errores": 0,
+          "porcentajeError": null,
+          "p95Ms": null
+        }
+      },
+      "reparto": {
+        "denominadorRespuestasReconocidas": 4801,
+        "porcentajeCanary": 49.96875650906061,
+        "diferenciaCanaryPuntos": -0.031243490939388607
+      },
+      "iteracionesDescartadas": 0,
+      "hipotesisAB": {
+        "estado": "cumple",
+        "motivos": []
+      }
+    },
+    {
+      "nombre": "etapa4",
+      "duracionObjetivoS": 120,
+      "tasaObjetivoRps": 80,
+      "solicitudesObjetivo": 9600,
+      "global": {
+        "total": 9601,
+        "rps": 80.00833333333334,
+        "errores": 0,
+        "porcentajeError": 0,
+        "p95Ms": 3.661621
+      },
+      "porVersion": {
+        "1.0.0": {
+          "total": 4836,
+          "rps": 40.3,
+          "errores": 0,
+          "porcentajeError": 0,
+          "p95Ms": 3.56893775
+        },
+        "1.1.0": {
+          "total": 4765,
+          "rps": 39.708333333333336,
+          "errores": 0,
+          "porcentajeError": 0,
+          "p95Ms": 3.7358524
+        },
+        "desconocida": {
+          "total": 0,
+          "rps": 0,
+          "errores": 0,
+          "porcentajeError": null,
+          "p95Ms": null
+        }
+      },
+      "reparto": {
+        "denominadorRespuestasReconocidas": 9601,
+        "porcentajeCanary": 49.630246849286536,
+        "diferenciaCanaryPuntos": -0.36975315071346415
+      },
+      "iteracionesDescartadas": 0,
+      "hipotesisAB": {
+        "estado": "cumple",
+        "motivos": []
+      }
+    }
+  ]
+}

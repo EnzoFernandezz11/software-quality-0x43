@@ -1,0 +1,48 @@
+2026-11-18T15:16:02-03:00
+NAME                                                  CLASS   HOSTS                  ADDRESS        PORTS   AGE
+ingress.networking.k8s.io/terrasense-api              nginx   api.terrasense.local   192.168.67.2   80      48m
+ingress.networking.k8s.io/terrasense-ingress          nginx   terrasense.local       192.168.67.2   80      48m
+ingress.networking.k8s.io/terrasense-ingress-canary   nginx   terrasense.local       192.168.67.2   80      48m
+
+NAME                           READY   UP-TO-DATE   AVAILABLE   AGE   CONTAINERS   IMAGES                   SELECTOR
+deployment.apps/back           2/2     2            2           49m   back         terrasense-back:local    app=back
+deployment.apps/front-canary   2/2     2            2           49m   front        terrasense-front:1.1.0   app=front,track=canary
+deployment.apps/front-stable   2/2     2            2           49m   front        terrasense-front:1.0.0   app=front,track=stable
+
+NAME                                      DESIRED   CURRENT   READY   AGE   CONTAINERS   IMAGES                   SELECTOR
+replicaset.apps/back-5f8f749ddf           2         2         2       49m   back         terrasense-back:local    app=back,pod-template-hash=5f8f749ddf
+replicaset.apps/front-canary-665495b56    2         2         2       49m   front        terrasense-front:1.1.0   app=front,pod-template-hash=665495b56,track=canary
+replicaset.apps/front-stable-5677c57859   2         2         2       49m   front        terrasense-front:1.0.0   app=front,pod-template-hash=5677c57859,track=stable
+
+NAME                                READY   STATUS    RESTARTS      AGE   IP            NODE              NOMINATED NODE   READINESS GATES
+pod/back-5f8f749ddf-58v6s           1/1     Running   4 (28m ago)   49m   10.244.0.10   terrasense-tp23   <none>           <none>
+pod/back-5f8f749ddf-628h4           1/1     Running   0             28m   10.244.0.21   terrasense-tp23   <none>           <none>
+pod/db-0                            1/1     Running   0             49m   10.244.0.8    terrasense-tp23   <none>           <none>
+pod/front-canary-665495b56-g5p65    1/1     Running   0             49m   10.244.0.15   terrasense-tp23   <none>           <none>
+pod/front-canary-665495b56-nmzmj    1/1     Running   0             49m   10.244.0.14   terrasense-tp23   <none>           <none>
+pod/front-stable-5677c57859-vbnh2   1/1     Running   0             49m   10.244.0.12   terrasense-tp23   <none>           <none>
+pod/front-stable-5677c57859-xfzlz   1/1     Running   0             49m   10.244.0.13   terrasense-tp23   <none>           <none>
+
+NAME                                       REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/back   Deployment/back   cpu: 2%/60%   2         6         2          49m
+back-5f8f749ddf-58v6s	docker.io/library/terrasense-back:local	sha256:8a190cf71e6a51ae96312a692213479ed75d89e3029a84a6399e678f46b113f1
+back-5f8f749ddf-628h4	docker.io/library/terrasense-back:local	sha256:8a190cf71e6a51ae96312a692213479ed75d89e3029a84a6399e678f46b113f1
+db-0	docker.io/library/postgres:16-alpine	sha256:3cbd775daa28461ef484ed88ca1e5a5a72ff126e196deeebce6fec764edf1200
+front-canary-665495b56-g5p65	docker.io/library/terrasense-front:1.1.0	sha256:cd61685779d62f0bb3f8da4fdb75798e73bf4d5585731e126145fcc34c94b6d0
+front-canary-665495b56-nmzmj	docker.io/library/terrasense-front:1.1.0	sha256:cd61685779d62f0bb3f8da4fdb75798e73bf4d5585731e126145fcc34c94b6d0
+front-stable-5677c57859-vbnh2	docker.io/library/terrasense-front:1.0.0	sha256:9b6bf287082231146db1ea88861786e1eb3733a76af119d634d8f52dfef2b88c
+front-stable-5677c57859-xfzlz	docker.io/library/terrasense-front:1.0.0	sha256:9b6bf287082231146db1ea88861786e1eb3733a76af119d634d8f52dfef2b88c
+NAME                            CPU(cores)   MEMORY(bytes)
+back-5f8f749ddf-58v6s           2m           142Mi
+back-5f8f749ddf-628h4           2m           142Mi
+db-0                            16m          59Mi
+front-canary-665495b56-g5p65    62m          48Mi
+front-canary-665495b56-nmzmj    67m          49Mi
+front-stable-5677c57859-vbnh2   53m          45Mi
+front-stable-5677c57859-xfzlz   69m          46Mi
+NAME              CPU(cores)   CPU(%)   MEMORY(bytes)   MEMORY(%)
+terrasense-tp23   661m         8%       1551Mi          16%
+ 15:16:03 up  6:07,  1 user,  load average: 1.10, 1.16, 1.69
+               total        used        free      shared  buff/cache   available
+Mem:           9.1Gi       4.8Gi       1.7Gi       259Mi       3.2Gi       4.4Gi
+Swap:          4.0Gi       1.6Gi       2.4Gi
