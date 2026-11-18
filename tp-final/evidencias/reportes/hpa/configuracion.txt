@@ -1,10 +1,8 @@
-2026-11-18T14:28:31-03:00
-Perfil: terrasense-tp23
-Namespace: terrasense
-NAME   REFERENCE         TARGETS        MINPODS   MAXPODS   REPLICAS   AGE
-back   Deployment/back   cpu: 37%/60%   2         6         2          91s
-NAME   CPU_REQ   CPU_LIMIT
-back   100m      500m
-NAME                    CPU(cores)   MEMORY(bytes)   
-back-5f8f749ddf-58v6s   37m          141Mi           
-back-5f8f749ddf-lqcx9   38m          141Mi           
+Ensayo registrado el 2026-11-18, horario local UTC-3.
+Perfil Minikube: terrasense-tp23; namespace: terrasense.
+HPA back: mínimo 2, máximo 6, objetivo CPU 60 %.
+Estado inicial: 2 réplicas, 2 pods listos, CPU 2 % de la CPU solicitada.
+Comando: SPIKE_RPS=100 RAMP_DURATION=5s HOLD_DURATION=3m INGRESS_IP=<IP del perfil aislado> k6 run --no-color --out csv=<archivo temporal> tp-k8s/k6/e2-spike.js
+Inicio k6: 2026-11-18T14:46:04-03:00
+Fin k6: 2026-11-18T14:49:15-03:00; exit=0
+Las muestras de Kubernetes son consultas sucesivas de HPA y pods, no una captura atómica.
