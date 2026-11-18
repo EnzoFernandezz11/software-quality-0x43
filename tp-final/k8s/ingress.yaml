@@ -1,0 +1,38 @@
+# Ingress PRINCIPAL del dashboard: terrasense.local -> front-stable.
+# El Ingress canary (canary/ingress-canary.yaml) usa el mismo host y path, y el
+# controller reparte: (100 - peso) % acá y peso % a front-canary.
+#
+# Afinidad de sesión por cookie: el dashboard es Next.js y sus JS/CSS llevan hash
+# en el nombre. Valentín midió (#21, tp-final/imagenes/README.md) que 2 de los 9
+# recursos de /dashboard existen solo en la 1.1.0 y un pod 1.0.0 responde 404.
+# Con reparto por request, el HTML de una versión podía pedir su CSS a la otra y
+# el panel quedaba roto. La cookie fija cada navegador a un upstream: la primera
+# respuesta la deja y las siguientes requests van al mismo lado (con el canary,
+# comportamiento «sticky» por defecto). Como afecta a todos los upstreams del
+# Ingress, la API está en un Ingress propio (base/50-ingress-api.yaml).
+#
+# curl no guarda cookies y k6 las borra al final de cada iteración: los conteos
+# por request siguen reflejando el peso configurado.
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: terrasense-ingress
+  namespace: terrasense
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: "1m"
+    nginx.ingress.kubernetes.io/affinity: "cookie"
+    nginx.ingress.kubernetes.io/session-cookie-name: "terrasense-front"
+    nginx.ingress.kubernetes.io/session-cookie-max-age: "3600"
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: terrasense.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: front-stable
+                port:
+                  number: 3000

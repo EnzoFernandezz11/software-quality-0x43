@@ -1,0 +1,33 @@
+Verificación de afinidad · 2026-11-18T00:49:50-03:00 · git d05abff+manifiestos-sin-commitear
+Imágenes: front-stable=terrasense-front:1.0.0 front-canary=terrasense-front:1.1.0 
+Recursos JS/CSS por página: 9
+
+A. Peso 50, SIN cookies: cada request (documento, JS, CSS) se sortea por separado. 20 páginas:
+      5 documento=1.0.0  recursos_no_200=0  recursos_de_otra_version=si
+      4 documento=1.0.0  recursos_no_200=1  recursos_de_otra_version=si
+      3 documento=1.0.0  recursos_no_200=2  recursos_de_otra_version=si
+      3 documento=1.1.0  recursos_no_200=0  recursos_de_otra_version=si
+      4 documento=1.1.0  recursos_no_200=1  recursos_de_otra_version=si
+      1 documento=1.1.0  recursos_no_200=2  recursos_de_otra_version=si
+
+B. Peso 50, CON cookie (como un navegador; cookie nueva por página). 20 páginas:
+      8 documento=1.0.0  recursos_no_200=0  recursos_de_otra_version=no
+     12 documento=1.1.0  recursos_no_200=0  recursos_de_otra_version=no
+
+C. Peso 0 con header X-Canary:
+  X-Canary: always -> 1.1.0
+  X-Canary: never -> 1.0.0
+
+D. Navegador fijado al canary (cookie obtenida con peso 100) cuando el peso baja a 0:
+  peso 100, primera visita: documento=1.1.0  recursos_no_200=0  recursos_de_otra_version=no
+  peso 0, MISMA cookie, 5 páginas:
+        5 documento=1.1.0  recursos_no_200=0  recursos_de_otra_version=no
+  peso 0, cookie nueva, 5 páginas:
+        5 documento=1.0.0  recursos_no_200=0  recursos_de_otra_version=no
+
+E. El mismo navegador fijado al canary, con peso 0 y front-canary escalado a 0 réplicas:
+  peso 0, 0 réplicas canary, MISMA cookie, 5 páginas:
+        5 documento=1.0.0  recursos_no_200=0  recursos_de_otra_version=no
+  código HTTP del documento con esa cookie: 200
+
+Restaurado: peso 0 y 2 réplicas de front-canary.
