@@ -1,0 +1,4 @@
+Comprobaciones HTTP del 2026-11-18 14:28 -03:00
+normal: curl exit=0, HTTP=200, X-App-Version: 1.0.0
+never: curl exit=0, HTTP=200, X-App-Version: 1.0.0
+always: curl exit=0, HTTP=200, X-App-Version: 1.1.0

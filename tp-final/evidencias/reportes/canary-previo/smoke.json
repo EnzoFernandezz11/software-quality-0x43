@@ -1,0 +1,48 @@
+{
+  "url": "http://terrasense.local/dashboard",
+  "pesoCanaryConfigurado": null,
+  "etapas": [
+    {
+      "nombre": "smoke",
+      "duracionObjetivoS": 10,
+      "tasaObjetivoRps": null,
+      "solicitudesObjetivo": null,
+      "global": {
+        "total": 10,
+        "rps": 1,
+        "errores": 0,
+        "porcentajeError": 0,
+        "p95Ms": 6.219488949999999
+      },
+      "porVersion": {
+        "1.0.0": {
+          "total": 10,
+          "rps": 1,
+          "errores": 0,
+          "porcentajeError": 0,
+          "p95Ms": 6.219488949999999
+        },
+        "1.1.0": {
+          "total": 0,
+          "rps": 0,
+          "errores": 0,
+          "porcentajeError": null,
+          "p95Ms": null
+        },
+        "desconocida": {
+          "total": 0,
+          "rps": 0,
+          "errores": 0,
+          "porcentajeError": null,
+          "p95Ms": null
+        }
+      },
+      "reparto": {
+        "denominadorRespuestasReconocidas": 10,
+        "porcentajeCanary": 0,
+        "diferenciaCanaryPuntos": null
+      },
+      "iteracionesDescartadas": 0
+    }
+  ]
+}
