@@ -1,0 +1,18 @@
+# Selecciona SOLO los pods de la versión candidata (track: canary).
+apiVersion: v1
+kind: Service
+metadata:
+  name: front-canary
+  namespace: terrasense
+  labels:
+    app: front
+    track: canary
+spec:
+  type: ClusterIP
+  selector:
+    app: front
+    track: canary
+  ports:
+    - name: http
+      port: 3000
+      targetPort: http

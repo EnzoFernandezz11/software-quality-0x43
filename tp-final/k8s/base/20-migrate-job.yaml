@@ -1,0 +1,38 @@
+# Aplica las migraciones de Alembic (flask db upgrade) una sola vez por despliegue,
+# antes de levantar la API. Los Jobs son inmutables: deploy.sh lo borra y lo
+# vuelve a crear en cada ejecución.
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: db-migrate
+  namespace: terrasense
+spec:
+  backoffLimit: 2
+  ttlSecondsAfterFinished: 600
+  template:
+    spec:
+      restartPolicy: Never
+      initContainers:
+        - name: wait-db
+          image: postgres:16-alpine
+          command: [sh, -c, 'until pg_isready -h "$POSTGRES_HOST" -p "$POSTGRES_PORT"; do sleep 2; done']
+          envFrom:
+            - configMapRef:
+                name: terrasense-config
+      containers:
+        - name: migrate
+          image: terrasense-back:local
+          imagePullPolicy: Never
+          command: ["flask", "db", "upgrade"]
+          envFrom:
+            - configMapRef:
+                name: terrasense-config
+            - secretRef:
+                name: terrasense-secrets
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi

@@ -1,0 +1,72 @@
+# Dashboard, versión CANDIDATA. Idéntico a ../stable/deployment.yaml salvo en
+# nombre, label `track`, label `version` e imagen. Réplicas, probes y
+# requests/limits se mantienen iguales a propósito: NGINX reparte por porcentaje
+# de requests y no sabe cuántos pods hay (consigna, «el peso no sabe cuántos
+# pods hay»), así que con réplicas distintas el A/B al 50 % no sería comparable.
+#
+# Al cerrar el rollout (promoción o rollback) queda con `replicas: 0`, siempre
+# DESPUÉS de bajar el peso del Ingress canary a 0 (si no, las requests que le
+# tocan al canary reciben 503).
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: front-canary
+  namespace: terrasense
+  labels:
+    app: front
+    track: canary
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: front
+      track: canary
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: front
+        track: canary
+        version: "1.1.0"
+    spec:
+      # Tiempo para terminar las requests en curso después del SIGTERM.
+      terminationGracePeriodSeconds: 30
+      containers:
+        - name: front
+          image: terrasense-front:1.1.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 3000
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            periodSeconds: 10
+            timeoutSeconds: 3
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 15
+            periodSeconds: 20
+            timeoutSeconds: 3
+          lifecycle:
+            # Igual que el back del TP4: espera a que el Ingress saque el pod de
+            # sus endpoints antes de que Next.js deje de aceptar conexiones. Sin
+            # esto, al promover (rolling update) o al eliminar un pod, NGINX le
+            # manda requests a un pod que ya se cerró y el usuario ve un error.
+            preStop:
+              exec:
+                command: ["sleep", "5"]
+          resources:
+            requests:
+              cpu: 50m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi
