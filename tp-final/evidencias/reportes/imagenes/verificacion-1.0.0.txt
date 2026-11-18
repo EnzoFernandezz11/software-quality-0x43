@@ -1,0 +1,17 @@
+fecha:   2026-11-18T00:15:17-03:00
+url:     http://127.0.0.1:32776/dashboard
+imagen:  terrasense-front:1.0.0 (sha256:ffec615e6796af3146b54defbce6127b1e324a906b85cd36dfe4084ed230df25)
+
+## Respuesta del documento
+HTTP/1.1 200 OK
+X-App-Version: 1.0.0
+Content-Type: text/html; charset=utf-8
+
+## Comprobaciones
+OK    header del documento: 1.0.0
+OK    meta app-version: 1.0.0
+OK    h1.dashboard-title presente: si
+OK    header de JS (/_next/static/chunks/11kjahy2ntf0n.js): 1.0.0
+OK    header de CSS (/_next/static/chunks/0txc.gcch3o1h.css): 1.0.0
+
+fallos: 0
