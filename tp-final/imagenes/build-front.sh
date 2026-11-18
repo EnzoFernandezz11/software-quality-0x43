@@ -59,7 +59,8 @@ trap cleanup EXIT
 git -C "$REPO_ROOT" worktree add --detach --quiet "$WORKTREE" "$SHA"
 
 mkdir -p "$OUT_DIR"
-BUILD_LOG="$OUT_DIR/build-${VERSION}.log"
+# .txt y no .log: el .gitignore del repo ignora *.log
+BUILD_LOG="$OUT_DIR/build-${VERSION}.txt"
 
 # Con BuildKit (buildx) se pide la salida completa; el builder legacy no acepta --progress.
 PROGRESS=()
