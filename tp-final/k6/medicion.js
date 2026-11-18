@@ -8,7 +8,15 @@ const versiones = ['1.0.0', '1.1.0', 'desconocida'];
 const visitas = new Counter('visitas');
 const errores = new Rate('errores');
 const latencia = new Trend('latencia', true);
-const limites = { error: 0.01, p95Ms: 300, factorP95: 1.10, muestra: 200, repartoMin: 45, repartoMax: 55 };
+const limites = {
+  error: 0.01,
+  sinVersion: 0.01,
+  p95Ms: 300,
+  factorP95: 1.10,
+  muestra: 200,
+  repartoMin: 45,
+  repartoMax: 55,
+};
 
 http.setResponseCallback(http.expectedStatuses(200));
 
@@ -36,7 +44,7 @@ export function configurar(scenarios, { smoke = false, estres = false } = {}) {
       const filtro = version ? etapa + ',version:' + version : etapa;
       thresholds['visitas{' + filtro + '}'] = ['count>=0'];
       thresholds['errores{' + filtro + '}'] = [
-        estres && version && version !== 'desconocida' ? 'rate<' + limites.error : 'rate<=1',
+        estres && version !== 'desconocida' ? 'rate<' + limites.error : 'rate<=1',
       ];
       thresholds['latencia{' + filtro + '}'] = [
         estres && version === '1.1.0' ? 'p(95)<' + limites.p95Ms : 'p(95)>=0',
@@ -72,7 +80,8 @@ function estadisticas(metrics, filtro, segundos) {
   };
 }
 
-function evaluarAB(stable, canary, repartoCanary, descartadas, deficit) {
+function evaluarAB({ global, porVersion, repartoCanary, descartadas, deficit }) {
+  const { '1.0.0': stable, '1.1.0': canary, desconocida } = porVersion;
   const motivos = [];
   if (stable.total < limites.muestra || canary.total < limites.muestra) motivos.push('muestra insuficiente');
   if (repartoCanary === null || repartoCanary < limites.repartoMin || repartoCanary > limites.repartoMax) {
@@ -80,13 +89,20 @@ function evaluarAB(stable, canary, repartoCanary, descartadas, deficit) {
   }
   if (descartadas > 0) motivos.push('iteraciones descartadas');
   if (deficit > 1) motivos.push('no se completó la carga prevista');
+  if (global.total > 0 && desconocida.total / global.total >= limites.sinVersion) {
+    motivos.push('respuestas sin versión reconocida ≥ 1 %');
+  }
   if (motivos.length) return { estado: 'inconcluso', motivos };
 
   if (stable.porcentajeError >= limites.error * 100) motivos.push('errores de 1.0.0 ≥ 1 %');
   if (canary.porcentajeError >= limites.error * 100) motivos.push('errores de 1.1.0 ≥ 1 %');
   if (canary.p95Ms >= limites.p95Ms) motivos.push('p95 de 1.1.0 ≥ 300 ms');
   if (canary.p95Ms > stable.p95Ms * limites.factorP95) motivos.push('p95 de 1.1.0 supera en más del 10 % al de 1.0.0');
-  return { estado: motivos.length ? 'no cumple' : 'cumple', motivos };
+  if (motivos.length) return { estado: 'no cumple', motivos };
+  if (global.porcentajeError >= limites.error * 100) {
+    return { estado: 'inconcluso', motivos: ['errores HTTP globales ≥ 1 %'] };
+  }
+  return { estado: 'cumple', motivos };
 }
 
 export function resumen(data, perfiles, { estres = false, peso = null } = {}) {
@@ -115,7 +131,15 @@ export function resumen(data, perfiles, { estres = false, peso = null } = {}) {
         diferenciaCanaryPuntos: peso !== null && porcentajeCanary !== null ? porcentajeCanary - peso : null,
       },
       iteracionesDescartadas: descartadas,
-      ...(estres ? { hipotesisAB: evaluarAB(stable, canary, porcentajeCanary, descartadas, objetivo - global.total) } : {}),
+      ...(estres ? {
+        hipotesisAB: evaluarAB({
+          global,
+          porVersion,
+          repartoCanary: porcentajeCanary,
+          descartadas,
+          deficit: objetivo - global.total,
+        }),
+      } : {}),
     };
   });
 

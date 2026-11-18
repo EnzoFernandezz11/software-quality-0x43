@@ -91,7 +91,7 @@ K6_WEB_DASHBOARD=true K6_WEB_DASHBOARD_HOST=127.0.0.1 K6_WEB_DASHBOARD_EXPORT="$
   k6 run --config /tmp/terrasense-k6-dns.json -e REPORT_JSON="$reportes/estres.json" tp-final/k6/estres.js
 ```
 
-Los niveles programan 10, 20, 40 y 80 solicitudes/s durante dos minutos cada uno. Las solicitudes pendientes pueden terminar al comenzar el siguiente nivel y quedan atribuidas al nivel que las inició. El JSON registra el objetivo, la tasa efectiva, las iteraciones descartadas y la evaluación A/B en cada nivel. El código de salida de k6 refleja los thresholds absolutos. Leer también `hipotesisAB` en el JSON para evaluar el p95 relativo, el reparto y la muestra mínima. Guardar junto a los reportes el comando, fecha, peso, imágenes y revisiones, recursos, réplicas y observaciones del generador y el clúster.
+Los niveles programan 10, 20, 40 y 80 solicitudes/s durante dos minutos cada uno. Las solicitudes pendientes pueden terminar al comenzar el siguiente nivel y quedan atribuidas al nivel que las inició. El JSON registra el objetivo, la tasa efectiva, las iteraciones descartadas y la evaluación A/B en cada nivel. El código de salida de k6 refleja los thresholds absolutos, incluido el umbral de error global. Leer `hipotesisAB` en el JSON para evaluar el p95 relativo, el reparto, la muestra mínima y las respuestas sin versión reconocida. El [protocolo](protocolo-estres.md#controles-incorporados-después-de-la-corrida-documentada) explica cuándo la etapa queda inconclusa. Guardar junto a los reportes el comando, fecha, peso, imágenes y revisiones, recursos, réplicas y observaciones del generador y el clúster.
 
 ## Video del HPA
 
