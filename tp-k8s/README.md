@@ -427,11 +427,13 @@ La recuperación se observó **sin intervenir**: k6 terminó a las 17:47:35 y la
 
 ## 6. Veredicto go / no-go
 
-**NO-GO para 2.000 sensores cada 30 s con este despliegue.** La tasa nominal
-exige ≈ 67 escrituras/s. Después de optimizar, `load` completó 61,94 req/s
-de promedio, con 59,04 % de errores, p95 de 17,51 s y 1.519 iteraciones
-descartadas; los umbrales eran < 1 % y < 300 ms. `smoke` sí cumplió, pero
-solo prueba una carga de 2 VUs.
+**NO-GO para 2.000 sensores cada 30 s, medido con el backend en 2 réplicas
+fijas y sin HPA.** Esa medición no corresponde al despliegue final con
+autoescalado (ver sección 4). La tasa nominal exige ≈ 67 escrituras/s.
+Después de optimizar, `load` completó 61,94 req/s de promedio, con 59,04 %
+de errores, p95 de 17,51 s y 1.519 iteraciones descartadas; los umbrales
+eran < 1 % y < 300 ms. `smoke` sí cumplió, pero solo prueba una carga de
+2 VUs.
 
 El **punto de quiebre ya está en el tramo inicial de 67 req/s**, antes de la
 primera subida de `stress` a 120 req/s: la primera muestra de p95 para
