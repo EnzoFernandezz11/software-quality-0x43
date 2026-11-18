@@ -1,0 +1,20 @@
+# Selecciona SOLO los pods de la versión estable (track: stable).
+# Si se dejara el selector `app: front` del TP4, tomaría también los pods canary
+# y el reparto dependería de la cantidad de réplicas, no del peso del Ingress.
+apiVersion: v1
+kind: Service
+metadata:
+  name: front-stable
+  namespace: terrasense
+  labels:
+    app: front
+    track: stable
+spec:
+  type: ClusterIP
+  selector:
+    app: front
+    track: stable
+  ports:
+    - name: http
+      port: 3000
+      targetPort: http

@@ -1,0 +1,40 @@
+# Ingress CANARY del dashboard. El controller no lo trata como una regla nueva:
+# lo usa como backend alternativo de la regla de ../ingress.yaml y le desvía un
+# porcentaje de las requests. Requisitos para que se aplique (Anexo A.12):
+#   - MISMO host, path y pathType que el Ingress principal;
+#   - mismo namespace que el Service front-canary;
+#   - un solo Ingress canary por host y path.
+#
+# El peso se cambia con `tp-final/rollout/rollout.sh peso <n>`, que hace el
+# `kubectl annotate` y actualiza ESTE archivo: el repo describe el estado del clúster.
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: terrasense-ingress-canary
+  namespace: terrasense
+  annotations:
+    nginx.ingress.kubernetes.io/canary: "true"
+    nginx.ingress.kubernetes.io/canary-weight: "0"
+    # QA y k6 fuerzan la candidata con `X-Canary: always` (o la estable con
+    # `never`) sin importar el peso: smoke de la etapa 0 y estrés del canary aislado.
+    nginx.ingress.kubernetes.io/canary-by-header: "X-Canary"
+    # Lo mismo desde el navegador con la cookie `canary=always`.
+    nginx.ingress.kubernetes.io/canary-by-cookie: "canary"
+    # Afinidad de sesión: la misma que en el Ingress principal. Es una de las
+    # pocas anotaciones que el canary NO hereda del principal (Anexo A.2).
+    nginx.ingress.kubernetes.io/affinity: "cookie"
+    nginx.ingress.kubernetes.io/session-cookie-name: "terrasense-front"
+    nginx.ingress.kubernetes.io/session-cookie-max-age: "3600"
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: terrasense.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: front-canary
+                port:
+                  number: 3000

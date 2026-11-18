@@ -1,0 +1,78 @@
+# Dashboard, versión ESTABLE. Mismo contenedor que el `front` del TP4
+# (tp-k8s/k8s/40-front.yaml): puerto, probes y requests/limits sin cambios.
+#
+# Diferencias con el TP4:
+#   - label `track: stable` en el selector, para que su Service no tome los pods canary;
+#   - imagen con tag explícito (nunca `latest` ni `:local`), construida con
+#     tp-final/imagenes/build-front.sh desde el tag de Git front-v<versión>;
+#   - `preStop` + `terminationGracePeriodSeconds` para no cortar requests al reemplazar pods;
+#   - réplicas y recursos IDÉNTICOS al canary: la comparación A/B al 50 % exige
+#     las mismas condiciones en ambas versiones (consigna, Actividad 2).
+#
+# PROMOCIÓN: se cambia `image` y el label `version` a la candidata y se aplica
+# (lo hace `tp-final/rollout/rollout.sh promover`). El selector no cambia.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: front-stable
+  namespace: terrasense
+  labels:
+    app: front
+    track: stable
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: front
+      track: stable
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      # Al promover, los pods nuevos entran antes de sacar los viejos: sin corte.
+      maxUnavailable: 0
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: front
+        track: stable
+        version: "1.0.0"
+    spec:
+      # Tiempo para terminar las requests en curso después del SIGTERM.
+      terminationGracePeriodSeconds: 30
+      containers:
+        - name: front
+          image: terrasense-front:1.0.0
+          # Imagen local cargada con `minikube image load`: nunca Always.
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 3000
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            periodSeconds: 10
+            timeoutSeconds: 3
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 15
+            periodSeconds: 20
+            timeoutSeconds: 3
+          lifecycle:
+            # Igual que el back del TP4: espera a que el Ingress saque el pod de
+            # sus endpoints antes de que Next.js deje de aceptar conexiones. Sin
+            # esto, al promover (rolling update) o al eliminar un pod, NGINX le
+            # manda requests a un pod que ya se cerró y el usuario ve un error.
+            preStop:
+              exec:
+                command: ["sleep", "5"]
+          resources:
+            requests:
+              cpu: 50m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi
