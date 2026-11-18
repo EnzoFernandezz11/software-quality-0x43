@@ -1,0 +1,37 @@
+
+
+  █ TOTAL RESULTS 
+
+    checks_total.......: 17697  85.405103/s
+    checks_succeeded...: 52.03% 9209 out of 17697
+    checks_failed......: 47.96% 8488 out of 17697
+
+    ✗ telemetry responde 201
+      ↳  52% — ✓ 9209 / ✗ 8488
+
+    CUSTOM
+    telemetry_http_502.............: 1160   5.598119/s
+    telemetry_http_503.............: 7328   35.364672/s
+    telemetry_http_504.............: 0      0/s
+    telemetry_other_non_201........: 0      0/s
+    telemetry_transport_errors.....: 0      0/s
+
+    HTTP
+    http_req_duration..............: avg=5.72s  med=2.72s p(95)=21.15s p(99)=26.73s max=29.24s
+      { expected_response:true }...: avg=10.14s med=8.74s p(95)=24.34s p(99)=27.63s max=29.24s
+    http_req_failed................: 47.96% 8488 out of 17697
+    http_reqs......................: 17697  85.405103/s
+
+    EXECUTION
+    dropped_iterations.............: 802    3.870424/s
+    iteration_duration.............: avg=5.73s  med=2.72s p(95)=21.15s p(99)=26.73s max=29.24s
+    iterations.....................: 17697  85.405103/s
+    vus............................: 8      min=0             max=990
+    vus_max........................: 999    min=200           max=999
+
+    NETWORK
+    data_received..................: 6.7 MB 32 kB/s
+    data_sent......................: 3.8 MB 18 kB/s
+
+
+

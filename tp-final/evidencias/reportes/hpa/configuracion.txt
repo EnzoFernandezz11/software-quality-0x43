@@ -1,0 +1,10 @@
+2026-11-18T14:28:31-03:00
+Perfil: terrasense-tp23
+Namespace: terrasense
+NAME   REFERENCE         TARGETS        MINPODS   MAXPODS   REPLICAS   AGE
+back   Deployment/back   cpu: 37%/60%   2         6         2          91s
+NAME   CPU_REQ   CPU_LIMIT
+back   100m      500m
+NAME                    CPU(cores)   MEMORY(bytes)   
+back-5f8f749ddf-58v6s   37m          141Mi           
+back-5f8f749ddf-lqcx9   38m          141Mi           
