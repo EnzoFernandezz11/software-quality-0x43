@@ -1,0 +1,21 @@
+deployment "back" successfully rolled out
+Fecha: 2026-11-18T14:27:21-03:00
+Perfil: terrasense-tp23
+Namespace: terrasense
+POD                     IMAGEN                  IMAGE_ID
+back-5f8f749ddf-58v6s   terrasense-back:local   sha256:8a190cf71e6a51ae96312a692213479ed75d89e3029a84a6399e678f46b113f1
+back-5f8f749ddf-lqcx9   terrasense-back:local   sha256:8a190cf71e6a51ae96312a692213479ed75d89e3029a84a6399e678f46b113f1
+
+pod/back-5f8f749ddf-58v6s
+Clave efectiva de Flask: presente y propia del entorno
+Flask==3.1.3
+Flask-CORS==6.0.5
+marshmallow==4.4.0
+python-dotenv==1.2.4
+
+pod/back-5f8f749ddf-lqcx9
+Clave efectiva de Flask: presente y propia del entorno
+Flask==3.1.3
+Flask-CORS==6.0.5
+marshmallow==4.4.0
+python-dotenv==1.2.4

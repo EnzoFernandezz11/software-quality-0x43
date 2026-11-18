@@ -1,0 +1,48 @@
+{
+  "url": "http://terrasense.local/dashboard",
+  "pesoCanaryConfigurado": 10,
+  "etapas": [
+    {
+      "nombre": "reparto",
+      "duracionObjetivoS": 180,
+      "tasaObjetivoRps": 10,
+      "solicitudesObjetivo": 1800,
+      "global": {
+        "total": 1801,
+        "rps": 10.005555555555556,
+        "errores": 0,
+        "porcentajeError": 0,
+        "p95Ms": 5.202198
+      },
+      "porVersion": {
+        "1.0.0": {
+          "total": 1616,
+          "rps": 8.977777777777778,
+          "errores": 0,
+          "porcentajeError": 0,
+          "p95Ms": 5.15539275
+        },
+        "1.1.0": {
+          "total": 185,
+          "rps": 1.0277777777777777,
+          "errores": 0,
+          "porcentajeError": 0,
+          "p95Ms": 5.709087799999997
+        },
+        "desconocida": {
+          "total": 0,
+          "rps": 0,
+          "errores": 0,
+          "porcentajeError": null,
+          "p95Ms": null
+        }
+      },
+      "reparto": {
+        "denominadorRespuestasReconocidas": 1801,
+        "porcentajeCanary": 10.272071071626874,
+        "diferenciaCanaryPuntos": 0.2720710716268737
+      },
+      "iteracionesDescartadas": 0
+    }
+  ]
+}

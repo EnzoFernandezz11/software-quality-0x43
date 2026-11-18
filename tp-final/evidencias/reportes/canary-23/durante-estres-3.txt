@@ -1,0 +1,31 @@
+2026-11-18T15:11:16-03:00
+NAME                                       REFERENCE         TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/back   Deployment/back   cpu: 2%/60%   2         6         2          44m
+
+NAME                           READY   UP-TO-DATE   AVAILABLE   AGE   CONTAINERS   IMAGES                   SELECTOR
+deployment.apps/back           2/2     2            2           44m   back         terrasense-back:local    app=back
+deployment.apps/front-canary   2/2     2            2           44m   front        terrasense-front:1.1.0   app=front,track=canary
+deployment.apps/front-stable   2/2     2            2           44m   front        terrasense-front:1.0.0   app=front,track=stable
+
+NAME                                READY   STATUS    RESTARTS      AGE   IP            NODE              NOMINATED NODE   READINESS GATES
+pod/back-5f8f749ddf-58v6s           1/1     Running   4 (23m ago)   44m   10.244.0.10   terrasense-tp23   <none>           <none>
+pod/back-5f8f749ddf-628h4           1/1     Running   0             23m   10.244.0.21   terrasense-tp23   <none>           <none>
+pod/db-0                            1/1     Running   0             44m   10.244.0.8    terrasense-tp23   <none>           <none>
+pod/front-canary-665495b56-g5p65    1/1     Running   0             44m   10.244.0.15   terrasense-tp23   <none>           <none>
+pod/front-canary-665495b56-nmzmj    1/1     Running   0             44m   10.244.0.14   terrasense-tp23   <none>           <none>
+pod/front-stable-5677c57859-vbnh2   1/1     Running   0             44m   10.244.0.12   terrasense-tp23   <none>           <none>
+pod/front-stable-5677c57859-xfzlz   1/1     Running   0             44m   10.244.0.13   terrasense-tp23   <none>           <none>
+NAME                            CPU(cores)   MEMORY(bytes)
+back-5f8f749ddf-58v6s           2m           142Mi
+back-5f8f749ddf-628h4           2m           142Mi
+db-0                            14m          59Mi
+front-canary-665495b56-g5p65    22m          47Mi
+front-canary-665495b56-nmzmj    20m          48Mi
+front-stable-5677c57859-vbnh2   19m          45Mi
+front-stable-5677c57859-xfzlz   20m          46Mi
+NAME              CPU(cores)   CPU(%)   MEMORY(bytes)   MEMORY(%)
+terrasense-tp23   404m         5%       1537Mi          16%
+ 15:11:17 up  6:02,  1 user,  load average: 1.19, 1.44, 1.98
+               total        used        free      shared  buff/cache   available
+Mem:           9.1Gi       4.8Gi       1.7Gi       259Mi       3.2Gi       4.3Gi
+Swap:          4.0Gi       1.6Gi       2.4Gi

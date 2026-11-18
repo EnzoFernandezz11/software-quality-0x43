@@ -1,0 +1,64 @@
+Fecha: 2026-11-18T14:28:44-03:00
+Perfil: terrasense-tp23
+Namespace: terrasense
+SHA integración: 99d2ce071cd4b35f485b9e4d945ba4e0a3e3fce2
+v1.39.0
+Client Version: v1.37.0
+Kustomize Version: v5.8.1
+k6 v2.3.0 (commit/e088784614, go1.26.8, linux/amd64)
+
+Pods:
+NAME                            READY   STATUS      RESTARTS   AGE     IP            NODE              NOMINATED NODE   READINESS GATES   LABELS
+back-5f8f749ddf-58v6s           1/1     Running     0          116s    10.244.0.10   terrasense-tp23   <none>           <none>            app=back,pod-template-hash=5f8f749ddf
+back-5f8f749ddf-lqcx9           1/1     Running     0          116s    10.244.0.11   terrasense-tp23   <none>           <none>            app=back,pod-template-hash=5f8f749ddf
+db-0                            1/1     Running     0          2m22s   10.244.0.8    terrasense-tp23   <none>           <none>            app=db,apps.kubernetes.io/pod-index=0,controller-revision-hash=db-65cfb9cf87,statefulset.kubernetes.io/pod-name=db-0
+db-migrate-dwwlh                0/1     Completed   0          2m13s   10.244.0.9    terrasense-tp23   <none>           <none>            batch.kubernetes.io/controller-uid=4821dd0d-d7da-4d6e-8e8f-f12f9262119e,batch.kubernetes.io/job-name=db-migrate,controller-uid=4821dd0d-d7da-4d6e-8e8f-f12f9262119e,job-name=db-migrate
+front-canary-665495b56-g5p65    1/1     Running     0          103s    10.244.0.15   terrasense-tp23   <none>           <none>            app=front,pod-template-hash=665495b56,track=canary,version=1.1.0
+front-canary-665495b56-nmzmj    1/1     Running     0          103s    10.244.0.14   terrasense-tp23   <none>           <none>            app=front,pod-template-hash=665495b56,track=canary,version=1.1.0
+front-stable-5677c57859-vbnh2   1/1     Running     0          103s    10.244.0.12   terrasense-tp23   <none>           <none>            app=front,pod-template-hash=5677c57859,track=stable,version=1.0.0
+front-stable-5677c57859-xfzlz   1/1     Running     0          103s    10.244.0.13   terrasense-tp23   <none>           <none>            app=front,pod-template-hash=5677c57859,track=stable,version=1.0.0
+
+Deployments, HPA, servicios e ingress:
+NAME                           READY   UP-TO-DATE   AVAILABLE   AGE    CONTAINERS   IMAGES                   SELECTOR
+deployment.apps/back           2/2     2            2           117s   back         terrasense-back:local    app=back
+deployment.apps/front-canary   2/2     2            2           103s   front        terrasense-front:1.1.0   app=front,track=canary
+deployment.apps/front-stable   2/2     2            2           103s   front        terrasense-front:1.0.0   app=front,track=stable
+
+NAME                                       REFERENCE         TARGETS        MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/back   Deployment/back   cpu: 37%/60%   2         6         2          104s
+
+NAME                   TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE     SELECTOR
+service/back           ClusterIP   10.111.154.50   <none>        5000/TCP   116s    app=back
+service/db             ClusterIP   10.99.104.122   <none>        5432/TCP   2m22s   app=db
+service/front-canary   ClusterIP   10.109.243.26   <none>        3000/TCP   103s    app=front,track=canary
+service/front-stable   ClusterIP   10.104.19.91    <none>        3000/TCP   103s    app=front,track=stable
+
+NAME                                                  CLASS   HOSTS                  ADDRESS        PORTS   AGE
+ingress.networking.k8s.io/terrasense-api              nginx   api.terrasense.local   192.168.67.2   80      90s
+ingress.networking.k8s.io/terrasense-ingress          nginx   terrasense.local       192.168.67.2   80      90s
+ingress.networking.k8s.io/terrasense-ingress-canary   nginx   terrasense.local       192.168.67.2   80      90s
+
+Configuración de workloads y canary:
+
+Deployment back replicas 2 annotations {}
+container back image terrasense-back:local resources {'limits': {'cpu': '500m', 'memory': '384Mi'}, 'requests': {'cpu': '100m', 'memory': '192Mi'}}
+
+Deployment front-canary replicas 2 annotations {}
+container front image terrasense-front:1.1.0 resources {'limits': {'cpu': '500m', 'memory': '256Mi'}, 'requests': {'cpu': '50m', 'memory': '128Mi'}}
+
+Deployment front-stable replicas 2 annotations {}
+container front image terrasense-front:1.0.0 resources {'limits': {'cpu': '500m', 'memory': '256Mi'}, 'requests': {'cpu': '50m', 'memory': '128Mi'}}
+
+StatefulSet db replicas 1 annotations {}
+container postgres image postgres:16-alpine resources {'limits': {'cpu': '1', 'memory': '512Mi'}, 'requests': {'cpu': '250m', 'memory': '256Mi'}}
+
+Ingress terrasense-api replicas None annotations {'nginx.ingress.kubernetes.io/proxy-body-size': '1m'}
+
+Ingress terrasense-ingress replicas None annotations {'nginx.ingress.kubernetes.io/affinity': 'cookie', 'nginx.ingress.kubernetes.io/proxy-body-size': '1m', 'nginx.ingress.kubernetes.io/session-cookie-max-age': '3600', 'nginx.ingress.kubernetes.io/session-cookie-name': 'terrasense-front'}
+
+Ingress terrasense-ingress-canary replicas None annotations {'nginx.ingress.kubernetes.io/affinity': 'cookie', 'nginx.ingress.kubernetes.io/canary': 'true', 'nginx.ingress.kubernetes.io/canary-by-cookie': 'canary', 'nginx.ingress.kubernetes.io/canary-by-header': 'X-Canary', 'nginx.ingress.kubernetes.io/canary-weight': '0', 'nginx.ingress.kubernetes.io/session-cookie-max-age': '3600', 'nginx.ingress.kubernetes.io/session-cookie-name': 'terrasense-front'}
+
+Imágenes locales:
+["terrasense-front:1.0.0"] ID=sha256:37b33a60bda4022dbde3129e86f802e14339c5903556aa153d16bcfe90140fb4 bytes=315397099 labels={"org.opencontainers.image.revision":"89517031be1ead063cc66712e09061daa3e57d25","org.opencontainers.image.source":"https://github.com/EnzoFernandezz11/software-quality-0x43","org.opencontainers.image.title":"terrasense-front","org.opencontainers.image.version":"1.0.0"}
+["terrasense-front:1.1.0"] ID=sha256:d60fc98425781572fcf9ef40ea23f9f3a14dd4e133b2dd67233fcba3dea5d503 bytes=315398144 labels={"org.opencontainers.image.revision":"acdca2896a16239c60d0fea21b6816a66b16857a","org.opencontainers.image.source":"https://github.com/EnzoFernandezz11/software-quality-0x43","org.opencontainers.image.title":"terrasense-front","org.opencontainers.image.version":"1.1.0"}
+["terrasense-back:local"] ID=sha256:324512ac7fd7e0367a3f971a99198fb589abffa01561fd616244e4f732874afe bytes=310920303
