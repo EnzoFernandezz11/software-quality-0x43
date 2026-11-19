@@ -697,29 +697,11 @@ front-stable-5677c57859-js7vt 1/1    Running    stable  <span class="hl">1.0.0</
     </div>
   </div>
 </section>
-<section class="slide " data-act="3" data-src="Evidencia: `tp-k8s/evidencias/falla-ux.png` · `tp-k8s/evidencias/e1b-*/medicion.txt` · `tp-k8s/evidencias/e2-recuperacion*` · `tp-k8s/README.md` §6" data-srcp="Evidencia: tp-k8s/evidencias/falla-ux.png · tp-k8s/evidencias/e1b-*/medicion.txt · tp-k8s/evidencias/e2-recuperacion* · tp-k8s/README.md §6" data-eyebrow="16 · Pruebas de falla · TP4" aria-label="Fallas">
+<section class="slide " data-act="3" data-src="Evidencia: `tp-k8s/README.md` §6 (#13) · `tp-final/evidencias/reportes/hpa/` · README §6.2" data-srcp="Evidencia: tp-k8s/README.md §6 (#13) · tp-final/evidencias/reportes/hpa/ · README §6.2" data-eyebrow="16 · Veredicto · 10.000 sensores" aria-label="Veredicto 10.000 sensores">
 
   <div class="stack">
     <div>
-      <div class="eyebrow in d1">16 · Pruebas de falla del TP4</div>
-      <h1 class="in d2" style="margin-top:14px">¿Qué experimenta el usuario <em>si falla la API</em>?</h1>
-    </div>
-    <div class="cols c-5-5" style="align-items:stretch">
-      <figure class="glass shot in d3"><img src="../../tp-k8s/evidencias/falla-ux.png" alt="Panel con el banner Failed to fetch y las últimas lecturas" style="height:clamp(240px,46vh,420px);object-fit:cover;object-position:top">
-        <figcaption><span>Se eliminan los dos pods de la API: el panel muestra «Failed to fetch» y conserva las últimas lecturas</span></figcaption></figure>
-      <div class="cols" style="align-content:center">
-        <article class="glass card in d4" style="--dot:#C27800"><div class="eyebrow"><i></i>Caen los 2 pods de la API</div><div class="n sm">≈ 5,8<small>s</small></div><p>de ventana con errores.</p></article>
-        <article class="glass card in d5"><div class="eyebrow">Lo que ve el usuario</div><p>El aviso <b>«Failed to fetch»</b>, sin quedar en blanco: conserva las últimas lecturas.</p></article>
-        <article class="glass card in d6" style="--dot:#23804F"><div class="eyebrow"><i></i>Pico de carga</div><div class="n sm">≈ 22<small>s</small></div><p>después de terminar la carga llegó la primera observación de recuperación, sin intervenir.</p></article>
-      </div>
-    </div>
-  </div>
-</section>
-<section class="slide " data-act="3" data-src="Evidencia: `tp-k8s/README.md` §6 (#13) · `tp-final/evidencias/reportes/hpa/` · README §6.2" data-srcp="Evidencia: tp-k8s/README.md §6 (#13) · tp-final/evidencias/reportes/hpa/ · README §6.2" data-eyebrow="17 · Veredicto · 10.000 sensores" aria-label="Veredicto 10.000 sensores">
-
-  <div class="stack">
-    <div>
-      <div class="eyebrow in d1">17 · Veredicto de capacidad</div>
+      <div class="eyebrow in d1">16 · Veredicto de capacidad</div>
       <div class="in d2" style="margin-top:18px;display:flex;align-items:center;gap:22px;flex-wrap:wrap">
         <span class="verdict nogo"><span class="ic">✕</span>NO-GO</span>
         <h1 style="max-width:24ch;font-size:clamp(28px,3.2vw,54px)">¿Podemos ampliar <em>a 10.000 sensores</em>?</h1>
@@ -769,11 +751,11 @@ front-stable-5677c57859-js7vt 1/1    Running    stable  <span class="hl">1.0.0</
     </div>
   </div>
 </section>
-<section class="slide " data-act="4" data-src="Evidencia: runs de Actions del PR #4, PR #2 y PR #27 · `tp-final/evidencias/capturas/ci/`" data-srcp="Evidencia: runs de Actions del PR #4, PR #2 y PR #27 · tp-final/evidencias/capturas/ci/" data-eyebrow="18 · Pipeline de calidad · Linters" aria-label="Linters">
+<section class="slide " data-act="4" data-src="Evidencia: runs de Actions del PR #4, PR #2 y PR #27 · `tp-final/evidencias/capturas/ci/`" data-srcp="Evidencia: runs de Actions del PR #4, PR #2 y PR #27 · tp-final/evidencias/capturas/ci/" data-eyebrow="17 · Pipeline de calidad · Linters" aria-label="Linters">
 
   <div class="stack">
     <div>
-      <div class="eyebrow in d1">18 · Primera quality gate</div>
+      <div class="eyebrow in d1">17 · Primera quality gate</div>
       <h1 class="in d2" style="margin-top:14px">Un solo linter en rojo <em>bloquea el merge</em>.</h1>
     </div>
     <div class="cols c2">
@@ -785,11 +767,11 @@ front-stable-5677c57859-js7vt 1/1    Running    stable  <span class="hl">1.0.0</
     <div class="glass close in d5"><p>La gate de la 1.1.0 corrió sobre <em>el mismo árbol de Git</em> del que se construyó la imagen. <span style="font-weight:500;color:var(--ink-2)">Límite: solo reglas estáticas; no prueba que el código funcione.</span></p></div>
   </div>
 </section>
-<section class="slide " data-act="4" data-src="Evidencia: `RESPUESTAS_TP2_HORUSEC.md` · `tp-final/ci/README.md` · issue #25" data-srcp="Evidencia: RESPUESTAS_TP2_HORUSEC.md · tp-final/ci/README.md · issue #25" data-eyebrow="19 · Pipeline de calidad · Horusec" aria-label="Horusec">
+<section class="slide " data-act="4" data-src="Evidencia: `RESPUESTAS_TP2_HORUSEC.md` · `tp-final/ci/README.md` · issue #25" data-srcp="Evidencia: RESPUESTAS_TP2_HORUSEC.md · tp-final/ci/README.md · issue #25" data-eyebrow="18 · Pipeline de calidad · Horusec" aria-label="Horusec">
 
   <div class="stack">
     <div>
-      <div class="eyebrow in d1">19 · SAST</div>
+      <div class="eyebrow in d1">18 · SAST</div>
       <h1 class="in d2" style="margin-top:14px">Un check verde de Horusec <em>no significa “seguro”</em>.</h1>
     </div>
     <div class="cols c3">
@@ -806,21 +788,21 @@ front-stable-5677c57859-js7vt 1/1    Running    stable  <span class="hl">1.0.0</
     <div class="glass close in d5"><p>El SAST <em>encuentra</em> riesgos; <em>decidir</em> sobre ellos requiere revisar cada alerta y mirar el despliegue, que el análisis estático no ve.</p></div>
   </div>
 </section>
-<section class="slide " data-act="4" data-src="Detalle con métricas, evidencia y límites de cada prueba: `tp-final/mapa-iso.md` · README §4" data-srcp="Detalle con métricas, evidencia y límites de cada prueba: tp-final/mapa-iso.md · README §4" data-eyebrow="20 · Mapa ISO/IEC 25010" aria-label="Mapa ISO">
+<section class="slide " data-act="4" data-src="Detalle con métricas, evidencia y límites de cada prueba: `tp-final/mapa-iso.md` · README §4" data-srcp="Detalle con métricas, evidencia y límites de cada prueba: tp-final/mapa-iso.md · README §4" data-eyebrow="19 · Mapa ISO/IEC 25010" aria-label="Mapa ISO">
 
   <div class="stack" style="gap:clamp(12px,2.2vh,26px)">
     <div>
-      <div class="eyebrow in d1">20 · ISO/IEC 25010:2023 · calidad del producto</div>
+      <div class="eyebrow in d1">19 · ISO/IEC 25010:2023 · calidad del producto</div>
       <h1 class="in d2" style="margin-top:14px">¿Qué aspectos de calidad <em>evaluamos</em>?</h1>
     </div>
     <div class="iso"><div class="iso-root glass in d2"><b>Calidad del producto</b><small>ISO/IEC 25010:2023</small></div><ul class="iso-br"><li class=" in d3"><span class="iso-c">Adecuación funcional</span><span class="iso-ts"><span class="iso-t"><b>Canary + Chromium</b><small>corrección funcional</small></span></span></li><li class=" in d3"><span class="iso-c">Eficiencia de desempeño</span><span class="iso-ts"><span class="iso-t"><b>k6 · carga TP4</b><small>comportamiento temporal y capacidad</small></span><span class="iso-t"><b>Estrés A/B</b><small>comportamiento temporal</small></span><span class="iso-t"><b>HPA</b><small>utilización de recursos</small></span></span></li><li class="off in d3"><span class="iso-c">Compatibilidad</span><span class="iso-ts"><span class="iso-none">sin pruebas todavía</span></span></li><li class=" in d4"><span class="iso-c">Capacidad de interacción</span><span class="iso-ts"><span class="iso-t"><b>Navegación del canary</b><small>operabilidad</small></span></span></li><li class=" in d4"><span class="iso-c">Fiabilidad</span><span class="iso-ts"><span class="iso-t"><b>Probes de K8s</b><small>disponibilidad</small></span><span class="iso-t"><b>Pruebas de falla</b><small>tolerancia a fallos y recuperabilidad</small></span><span class="iso-t"><b>Canary</b><small>disponibilidad durante el cambio</small></span></span></li><li class=" in d4"><span class="iso-c">Seguridad</span><span class="iso-ts"><span class="iso-t"><b>Horusec</b><small>confidencialidad e integridad</small></span></span></li><li class=" in d5"><span class="iso-c">Mantenibilidad</span><span class="iso-ts"><span class="iso-t"><b>Linters</b><small>analizabilidad y modificabilidad</small></span><span class="iso-t"><b>SonarQube · TP3</b><small>analizabilidad y capacidad de prueba</small></span></span></li><li class=" in d5"><span class="iso-c">Flexibilidad</span><span class="iso-ts"><span class="iso-t"><b>Despliegue en K8s</b><small>instalabilidad</small></span><span class="iso-t"><b>HPA</b><small>escalabilidad</small></span><span class="iso-t"><b>Canary</b><small>reemplazabilidad</small></span></span></li><li class="off in d5"><span class="iso-c">Protección</span><span class="iso-ts"><span class="iso-none">sin pruebas todavía</span></span></li></ul></div>
   </div>
 </section>
-<section class="slide " data-act="4" data-src="Evidencia: `tp-final/evidencias/capturas/canary-23/dashboard-1.1.0.png` · `reportes/canary-23/navegacion-50.txt` · `tp-final/mapa-iso.md` («Producto y calidad en uso»)" data-srcp="Evidencia: tp-final/evidencias/capturas/canary-23/dashboard-1.1.0.png · reportes/canary-23/navegacion-50.txt · tp-final/mapa-iso.md («Producto y calidad en uso»)" data-eyebrow="21 · Calidad en uso" aria-label="Calidad en uso">
+<section class="slide " data-act="4" data-src="Evidencia: `tp-final/evidencias/capturas/canary-23/dashboard-1.1.0.png` · `reportes/canary-23/navegacion-50.txt` · `tp-final/mapa-iso.md` («Producto y calidad en uso»)" data-srcp="Evidencia: tp-final/evidencias/capturas/canary-23/dashboard-1.1.0.png · reportes/canary-23/navegacion-50.txt · tp-final/mapa-iso.md («Producto y calidad en uso»)" data-eyebrow="20 · Calidad en uso" aria-label="Calidad en uso">
 
   <div class="stack">
     <div>
-      <div class="eyebrow in d1">21 · ISO/IEC 25019 · calidad en uso</div>
+      <div class="eyebrow in d1">20 · ISO/IEC 25019 · calidad en uso</div>
       <h1 class="in d2" style="margin-top:14px;max-width:26ch">¿El panel ayuda a tomar una decisión <em>ante una helada</em>?</h1>
     </div>
     <div class="cols c-5-5" style="align-items:stretch">
@@ -837,11 +819,11 @@ front-stable-5677c57859-js7vt 1/1    Running    stable  <span class="hl">1.0.0</
     </div>
   </div>
 </section>
-<section class="slide " data-act="4" data-src="Evidencia: gate #25 (`tp-final/ci/README.md`) · `reportes/canary-23/` · `reportes/rollout/promocion.txt` · README §6.1" data-srcp="Evidencia: gate #25 (tp-final/ci/README.md) · reportes/canary-23/ · reportes/rollout/promocion.txt · README §6.1" data-eyebrow="22 · Veredicto · Panel 1.1.0" aria-label="Veredicto 1.1.0">
+<section class="slide " data-act="4" data-src="Evidencia: gate #25 (`tp-final/ci/README.md`) · `reportes/canary-23/` · `reportes/rollout/promocion.txt` · README §6.1" data-srcp="Evidencia: gate #25 (tp-final/ci/README.md) · reportes/canary-23/ · reportes/rollout/promocion.txt · README §6.1" data-eyebrow="21 · Veredicto · Panel 1.1.0" aria-label="Veredicto 1.1.0">
 
   <div class="stack">
     <div>
-      <div class="eyebrow in d1">22 · Veredicto del panel</div>
+      <div class="eyebrow in d1">21 · Veredicto del panel</div>
       <div class="in d2" style="margin-top:18px;display:flex;align-items:center;gap:22px;flex-wrap:wrap">
         <span class="verdict go"><span class="ic">✓</span>GO</span>
         <h1 style="font-size:clamp(28px,3.2vw,54px)">La versión 1.1.0 <em>quedó como estable</em>.</h1>
@@ -860,11 +842,11 @@ front-stable-5677c57859-js7vt 1/1    Running    stable  <span class="hl">1.0.0</
     <div class="glass close in d6"><p>Después de promover: <em>200 de 200</em> respuestas OK con la 1.1.0.</p></div>
   </div>
 </section>
-<section class="slide " data-act="4" data-src="Todo en el repositorio: `tp-final/README.md` · índice de evidencia en §5" data-srcp="Todo en el repositorio: tp-final/README.md · índice de evidencia en §5" data-eyebrow="23 · Cierre" aria-label="Cierre">
+<section class="slide " data-act="4" data-src="Todo en el repositorio: `tp-final/README.md` · índice de evidencia en §5" data-srcp="Todo en el repositorio: tp-final/README.md · índice de evidencia en §5" data-eyebrow="22 · Cierre" aria-label="Cierre">
 
   <div class="stack">
     <div>
-      <div class="eyebrow in d1">23 · Próximos pasos</div>
+      <div class="eyebrow in d1">22 · Próximos pasos</div>
       <h1 class="in d2" style="margin-top:14px;max-width:28ch">El panel se actualizó por etapas. <em>El próximo desafío es la capacidad de la API.</em></h1>
     </div>
     <div class="cols c4">
