@@ -1,0 +1,24 @@
+Recorrido del rollout sobre el mismo perfil, después de deploy-limpio.txt. Muestras de 200 requests sin cookies (verificación rápida, no son las etapas medidas).
+
+$ export MINIKUBE_PROFILE=tpfinal-tercero
+$ rollout.sh peso 10; rollout.sh muestra 200; rollout.sh peso 50; rollout.sh muestra 200; rollout.sh promover; rollout.sh muestra 200
+2026-11-18T17:32:12-03:00
+2026-11-18T17:32:12-03:00 | peso 10                | peso=10 | stable=terrasense-front:1.0.0 (2 listos) | canary=terrasense-front:1.1.0 (2 listos) | git=dd7e0a8+sin-commitear
+Muestra de 200 requests a http://terrasense.local/dashboard sin cookies (peso configurado: 10 %):
+    175  HTTP 200  versión 1.0.0     87,5 %
+     25  HTTP 200  versión 1.1.0     12,5 %
+2026-11-18T17:32:18-03:00 | peso 50                | peso=50 | stable=terrasense-front:1.0.0 (2 listos) | canary=terrasense-front:1.1.0 (2 listos) | git=dd7e0a8+sin-commitear
+Muestra de 200 requests a http://terrasense.local/dashboard sin cookies (peso configurado: 50 %):
+     89  HTTP 200  versión 1.0.0     44,5 %
+    111  HTTP 200  versión 1.1.0     55,5 %
+deployment "front-stable" successfully rolled out
+2026-11-18T17:32:47-03:00 | promover: stable 1.1.0 | peso=50 | stable=terrasense-front:1.1.0 (2 listos) | canary=terrasense-front:1.1.0 (2 listos) | git=dd7e0a8+sin-commitear
+2026-11-18T17:32:48-03:00 | promover: peso 0       | peso=0 | stable=terrasense-front:1.1.0 (2 listos) | canary=terrasense-front:1.1.0 (2 listos) | git=dd7e0a8+sin-commitear
+2026-11-18T17:32:49-03:00 | promover: canary 0 pods | peso=0 | stable=terrasense-front:1.1.0 (2 listos) | canary=terrasense-front:1.1.0 (0 listos) | git=dd7e0a8+sin-commitear
+Revertir la promoción: kubectl -n terrasense rollout undo deployment/front-stable (y volver el YAML a 1.0.0).
+Muestra de 200 requests a http://terrasense.local/dashboard sin cookies (peso configurado: 0 %):
+    200  HTTP 200  versión 1.1.0    100,0 %
+exit=0
+
+$ git diff --stat -- tp-final/k8s/canary tp-final/k8s/stable tp-final/k8s/ingress.yaml
+(sin diferencias: al promover, los YAML vuelven a ser idénticos a los versionados)

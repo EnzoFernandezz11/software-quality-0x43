@@ -1,0 +1,11 @@
+Peso de /dashboard por versión · 2026-11-18 · imágenes terrasense-front:1.0.0 (8951703) y 1.1.0 (acdca28)
+Cada imagen se levantó con `docker run -p 127.0.0.1:<puerto>:3000` (sin API). Se pidió el documento
+/dashboard y cada JS/CSS de /_next/static/ que referencia, sin y con `Accept-Encoding: gzip`.
+
+Versión  Documento           Recursos JS/CSS          Total sin comprimir
+1.0.0    14.091 B (gzip 3.499)   9 · 1.106.970 B (gzip 317.369)   1.121.061 B
+1.1.0    14.337 B (gzip 3.584)   9 · 1.107.432 B (gzip 317.509)   1.121.769 B
+Diferencia                                                   +708 B (+0,06 %)
+
+Conclusión: la 1.1.0 no pesa más de forma relevante. El documento crece 246 B (+1,7 %) por el banner;
+los recursos, 462 B. No cambia la cantidad de requests por carga de página (1 documento + 9 recursos).
