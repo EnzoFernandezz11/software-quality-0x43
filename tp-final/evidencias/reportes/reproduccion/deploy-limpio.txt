@@ -1,0 +1,390 @@
+Prueba como tercero (#24) · perfil de Minikube nuevo tpfinal-tercero · 2026-11-18T17:28:51-03:00
+Revisión: dd7e0a8 (develop después de #32) + cambios sin commitear de feat/24-entrega-final (deploy.sh con ESTADO=inicial).
+Clon nuevo del repo con sus tags; sin .env (deploy.sh lo crea desde .env.example). Caché de Docker del equipo disponible.
+
+$ MINIKUBE_PROFILE=tpfinal-tercero SKIP_HOSTS=1 ESTADO=inicial bash tp-final/deploy.sh
+ESTADO=inicial: tp-final/k8s/ queda en el estado previo al rollout (git diff tp-final/k8s lo muestra).
+
+[1/9] Verificando herramientas
+Se creó .env a partir de .env.example (valores de desarrollo).
+Dashboard: estable 1.0.0 · candidata 1.1.0
+
+[2/9] Iniciando Minikube (perfil tpfinal-tercero)
+* [tpfinal-tercero] minikube v1.39.0 en Linuxmint 22.1
+  - MINIKUBE_PROFILE=tpfinal-tercero
+* Using the docker driver based on user configuration
+* Using Docker driver with root privileges
+* Starting "tpfinal-tercero" primary control-plane node in "tpfinal-tercero" cluster
+* Pulling base image v0.0.51 ...
+* Preparando Kubernetes v1.37.0 en containerd 2.3.4...
+* Configurando CNI CNI ...
+* Verifying Kubernetes components...
+  - Using image gcr.io/k8s-minikube/storage-provisioner:v5
+* Complementos habilitados: storage-provisioner, default-storageclass
+* kubectl not found. If you need it, try: 'minikube kubectl -- get pods -A'
+* Done! kubectl is now configured to use "tpfinal-tercero" cluster and "default" namespace by default
+* metrics-server is an addon maintained by Kubernetes. For any concerns contact minikube on GitHub.
+You can view the list of minikube maintainers at: https://github.com/kubernetes/minikube/blob/master/OWNERS
+  - Using image registry.k8s.io/metrics-server/metrics-server:v0.9.0
+* The 'metrics-server' addon is enabled
+* ingress is an addon maintained by Kubernetes. For any concerns contact minikube on GitHub.
+You can view the list of minikube maintainers at: https://github.com/kubernetes/minikube/blob/master/OWNERS
+  - Using image registry.k8s.io/ingress-nginx/controller:v1.15.1
+  - Using image registry.k8s.io/ingress-nginx/kube-webhook-certgen:v1.6.9
+  - Using image registry.k8s.io/ingress-nginx/kube-webhook-certgen:v1.6.9
+* Verifying ingress addon...
+* The 'ingress' addon is enabled
+
+[3/9] Construyendo imágenes y cargándolas en Minikube
+DEPRECATED: The legacy builder is deprecated and will be removed in a future release.
+            Install the buildx component to build images with BuildKit:
+            https://docs.docker.com/go/buildx/
+
+Sending build context to Docker daemon  17.31MB
+Step 1/12 : FROM python:3.11-slim
+ ---> a8a3e0a84b0d
+Step 2/12 : ENV PYTHONDONTWRITEBYTECODE=1     PYTHONUNBUFFERED=1
+ ---> Using cache
+ ---> d4ccaef72149
+Step 3/12 : WORKDIR /app/backend/flask/final_project
+ ---> Using cache
+ ---> d34edfd65894
+Step 4/12 : COPY backend/flask/final_project/requirements.txt ./
+ ---> Using cache
+ ---> c09d9ad89e9f
+Step 5/12 : RUN pip install --no-cache-dir -r requirements.txt
+ ---> Using cache
+ ---> e521c12bb68d
+Step 6/12 : COPY backend/flask/final_project/ ./
+ ---> 13153fc01b1b
+Step 7/12 : RUN useradd --system --uid 1001 --no-create-home flask
+ ---> Running in babc7597f842
+useradd warning: flask's uid 1001 is greater than SYS_UID_MAX 999
+ ---> Removed intermediate container babc7597f842
+ ---> c9a4e791c207
+Step 8/12 : USER flask
+ ---> Running in a41cee1c0364
+ ---> Removed intermediate container a41cee1c0364
+ ---> fadb6e300f0c
+Step 9/12 : ENV FLASK_APP=main:app
+ ---> Running in 360e776d5984
+ ---> Removed intermediate container 360e776d5984
+ ---> c1237bc528eb
+Step 10/12 : ENV FLASK_PORT=5000
+ ---> Running in 58a1554d02ff
+ ---> Removed intermediate container 58a1554d02ff
+ ---> e3dca23ea41a
+Step 11/12 : EXPOSE 5000
+ ---> Running in 7d6150bcf0d9
+ ---> Removed intermediate container 7d6150bcf0d9
+ ---> c6141dcf756e
+Step 12/12 : CMD ["sh", "-c", "flask db upgrade && python main.py"]
+ ---> Running in a1bc10f6366b
+ ---> Removed intermediate container a1bc10f6366b
+ ---> 8edc01b21397
+Successfully built 8edc01b21397
+Successfully tagged terrasense-back:local
+Revisión: 89517031be1ead063cc66712e09061daa3e57d25 (front-v1.0.0)
+Imagen:   terrasense-front:1.0.0
+DEPRECATED: The legacy builder is deprecated and will be removed in a future release.
+            Install the buildx component to build images with BuildKit:
+            https://docs.docker.com/go/buildx/
+
+Sending build context to Docker daemon  6.941MB
+Step 1/30 : ARG NODE_VERSION=22
+Step 2/30 : FROM node:${NODE_VERSION}-alpine AS base
+ ---> c10474645fd3
+Step 3/30 : WORKDIR /app
+ ---> Using cache
+ ---> 205af1040641
+Step 4/30 : FROM base AS deps
+ ---> 205af1040641
+Step 5/30 : COPY frontend/dashboard/package.json frontend/dashboard/package-lock.json ./
+ ---> Using cache
+ ---> 3800761d71b4
+Step 6/30 : RUN npm ci
+ ---> Using cache
+ ---> 19084db8e95c
+Step 7/30 : FROM base AS builder
+ ---> 205af1040641
+Step 8/30 : COPY --from=deps /app/node_modules ./node_modules
+ ---> Using cache
+ ---> c198d168c0a3
+Step 9/30 : COPY frontend/dashboard/ ./
+ ---> Using cache
+ ---> 32487a73dc31
+Step 10/30 : ARG NEXT_PUBLIC_API_URL=http://localhost:5000/api
+ ---> Using cache
+ ---> 327a69d94a9d
+Step 11/30 : ENV NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
+ ---> Using cache
+ ---> d6b6156d14fa
+Step 12/30 : ARG APP_VERSION=""
+ ---> Using cache
+ ---> 39635a591693
+Step 13/30 : RUN node -e 'const v = require("./package.json").version; const e = process.env.APP_VERSION;   if (e && e !== v) { console.error(`APP_VERSION=${e} no coincide con package.json (${v})`); process.exit(1); }   console.log(`Versión del panel: ${v}`);'
+ ---> Using cache
+ ---> 94803ff0d7ef
+Step 14/30 : ENV NEXT_TELEMETRY_DISABLED=1
+ ---> Using cache
+ ---> d65e1e1f59b7
+Step 15/30 : RUN npm run build
+ ---> Using cache
+ ---> b6de8ffb596a
+Step 16/30 : FROM base AS runner
+ ---> 205af1040641
+Step 17/30 : ARG APP_VERSION=""
+ ---> Using cache
+ ---> c3289d6158d1
+Step 18/30 : ARG GIT_SHA=""
+ ---> Using cache
+ ---> 03824db73e2d
+Step 19/30 : LABEL org.opencontainers.image.title="terrasense-front"       org.opencontainers.image.version="${APP_VERSION}"       org.opencontainers.image.revision="${GIT_SHA}"       org.opencontainers.image.source="https://github.com/EnzoFernandezz11/software-quality-0x43"
+ ---> Using cache
+ ---> e34ad546ef85
+Step 20/30 : ENV NODE_ENV=production
+ ---> Using cache
+ ---> b1d6a311330b
+Step 21/30 : ENV NEXT_TELEMETRY_DISABLED=1
+ ---> Using cache
+ ---> 80e2a2ef73b3
+Step 22/30 : RUN addgroup --system --gid 1001 nodejs   && adduser --system --uid 1001 --ingroup nodejs nextjs
+ ---> Using cache
+ ---> 3b25e36a6ced
+Step 23/30 : COPY --from=builder /app/public ./public
+ ---> Using cache
+ ---> c00d45a4b4a2
+Step 24/30 : COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+ ---> Using cache
+ ---> 0cabe35fc94b
+Step 25/30 : COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+ ---> Using cache
+ ---> 94c75fafdc67
+Step 26/30 : USER nextjs
+ ---> Using cache
+ ---> b5eebf5e64c4
+Step 27/30 : EXPOSE 3000
+ ---> Using cache
+ ---> 1a76870e1027
+Step 28/30 : ENV PORT=3000
+ ---> Using cache
+ ---> 7a9842d6c7a2
+Step 29/30 : ENV HOSTNAME=0.0.0.0
+ ---> Using cache
+ ---> 7637bec5f777
+Step 30/30 : CMD ["node", "server.js"]
+ ---> Using cache
+ ---> ffec615e6796
+Successfully built ffec615e6796
+Successfully tagged terrasense-front:1.0.0
+fecha:        2026-11-18T17:30:10-03:00
+ref:          front-v1.0.0
+git_sha:      89517031be1ead063cc66712e09061daa3e57d25
+commit:       8951703 feat(front): marca de versión 1.0.0 y build reproducible (#21)
+imagen:       terrasense-front:1.0.0
+image_id:     sha256:ffec615e6796af3146b54defbce6127b1e324a906b85cd36dfe4084ed230df25
+api_url:      http://api.terrasense.local/api
+dockerfile:   docker/nextjs.Dockerfile (en 89517031be1ead063cc66712e09061daa3e57d25)
+docker:       29.1.3
+minikube:     no cargada (usar --load)
+labels:
+  org.opencontainers.image.revision=89517031be1ead063cc66712e09061daa3e57d25
+  org.opencontainers.image.source=https://github.com/EnzoFernandezz11/software-quality-0x43
+  org.opencontainers.image.title=terrasense-front
+  org.opencontainers.image.version=1.0.0
+
+
+Registro: tp-final/evidencias/reportes/imagenes/registro-1.0.0.txt
+Build:    tp-final/evidencias/reportes/imagenes/build-1.0.0.txt
+Revisión: acdca2896a16239c60d0fea21b6816a66b16857a (front-v1.1.0)
+Imagen:   terrasense-front:1.1.0
+DEPRECATED: The legacy builder is deprecated and will be removed in a future release.
+            Install the buildx component to build images with BuildKit:
+            https://docs.docker.com/go/buildx/
+
+Sending build context to Docker daemon  6.948MB
+Step 1/30 : ARG NODE_VERSION=22
+Step 2/30 : FROM node:${NODE_VERSION}-alpine AS base
+ ---> c10474645fd3
+Step 3/30 : WORKDIR /app
+ ---> Using cache
+ ---> 205af1040641
+Step 4/30 : FROM base AS deps
+ ---> 205af1040641
+Step 5/30 : COPY frontend/dashboard/package.json frontend/dashboard/package-lock.json ./
+ ---> Using cache
+ ---> 785ec0862683
+Step 6/30 : RUN npm ci
+ ---> Using cache
+ ---> 7d83a9b00a81
+Step 7/30 : FROM base AS builder
+ ---> 205af1040641
+Step 8/30 : COPY --from=deps /app/node_modules ./node_modules
+ ---> Using cache
+ ---> 1bef2f2df794
+Step 9/30 : COPY frontend/dashboard/ ./
+ ---> Using cache
+ ---> f54baa0daf6d
+Step 10/30 : ARG NEXT_PUBLIC_API_URL=http://localhost:5000/api
+ ---> Using cache
+ ---> 96b5bed22118
+Step 11/30 : ENV NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
+ ---> Using cache
+ ---> ca8b15b7012b
+Step 12/30 : ARG APP_VERSION=""
+ ---> Using cache
+ ---> 1adc2b62245e
+Step 13/30 : RUN node -e 'const v = require("./package.json").version; const e = process.env.APP_VERSION;   if (e && e !== v) { console.error(`APP_VERSION=${e} no coincide con package.json (${v})`); process.exit(1); }   console.log(`Versión del panel: ${v}`);'
+ ---> Using cache
+ ---> e715c9a6cccd
+Step 14/30 : ENV NEXT_TELEMETRY_DISABLED=1
+ ---> Using cache
+ ---> 51a6083edba6
+Step 15/30 : RUN npm run build
+ ---> Using cache
+ ---> 503e75dc002d
+Step 16/30 : FROM base AS runner
+ ---> 205af1040641
+Step 17/30 : ARG APP_VERSION=""
+ ---> Using cache
+ ---> c3289d6158d1
+Step 18/30 : ARG GIT_SHA=""
+ ---> Using cache
+ ---> 03824db73e2d
+Step 19/30 : LABEL org.opencontainers.image.title="terrasense-front"       org.opencontainers.image.version="${APP_VERSION}"       org.opencontainers.image.revision="${GIT_SHA}"       org.opencontainers.image.source="https://github.com/EnzoFernandezz11/software-quality-0x43"
+ ---> Using cache
+ ---> 1b644e539731
+Step 20/30 : ENV NODE_ENV=production
+ ---> Using cache
+ ---> 2184966ba6d8
+Step 21/30 : ENV NEXT_TELEMETRY_DISABLED=1
+ ---> Using cache
+ ---> 3ad027c215cd
+Step 22/30 : RUN addgroup --system --gid 1001 nodejs   && adduser --system --uid 1001 --ingroup nodejs nextjs
+ ---> Using cache
+ ---> 515d41f02aca
+Step 23/30 : COPY --from=builder /app/public ./public
+ ---> Using cache
+ ---> 82f3a89d4da5
+Step 24/30 : COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+ ---> Using cache
+ ---> 26a75a21f911
+Step 25/30 : COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+ ---> Using cache
+ ---> fee5b869352d
+Step 26/30 : USER nextjs
+ ---> Using cache
+ ---> 04190b39f12b
+Step 27/30 : EXPOSE 3000
+ ---> Using cache
+ ---> b65d727a3232
+Step 28/30 : ENV PORT=3000
+ ---> Using cache
+ ---> d65cb5159321
+Step 29/30 : ENV HOSTNAME=0.0.0.0
+ ---> Using cache
+ ---> a940ef222feb
+Step 30/30 : CMD ["node", "server.js"]
+ ---> Using cache
+ ---> 52c210ceec01
+Successfully built 52c210ceec01
+Successfully tagged terrasense-front:1.1.0
+fecha:        2026-11-18T17:30:20-03:00
+ref:          front-v1.1.0
+git_sha:      acdca2896a16239c60d0fea21b6816a66b16857a
+commit:       acdca28 feat(front): versión candidata 1.1.0 con cambio visual (#21)
+imagen:       terrasense-front:1.1.0
+image_id:     sha256:52c210ceec0131afcc6bbf6bd8bf664b7a18c34bdd31ce196aa36221e99019ab
+api_url:      http://api.terrasense.local/api
+dockerfile:   docker/nextjs.Dockerfile (en acdca2896a16239c60d0fea21b6816a66b16857a)
+docker:       29.1.3
+minikube:     no cargada (usar --load)
+labels:
+  org.opencontainers.image.revision=acdca2896a16239c60d0fea21b6816a66b16857a
+  org.opencontainers.image.source=https://github.com/EnzoFernandezz11/software-quality-0x43
+  org.opencontainers.image.title=terrasense-front
+  org.opencontainers.image.version=1.1.0
+
+
+Registro: tp-final/evidencias/reportes/imagenes/registro-1.1.0.txt
+Build:    tp-final/evidencias/reportes/imagenes/build-1.1.0.txt
+Cargando terrasense-back:local en Minikube...
+Cargando terrasense-front:1.0.0 en Minikube...
+Cargando terrasense-front:1.1.0 en Minikube...
+
+[4/9] Namespace, ConfigMap y Secret
+namespace/terrasense created
+configmap/terrasense-config created
+secret/terrasense-secrets created
+
+[5/9] Base de datos (StatefulSet + PVC)
+service/db created
+statefulset.apps/db created
+Waiting for 1 pods to be ready...
+partitioned roll out complete: 1 new pods have been updated...
+
+[6/9] Migraciones (Job)
+job.batch/db-migrate created
+job.batch/db-migrate condition met
+
+[7/9] API y HPA
+deployment.apps/back created
+service/back created
+Waiting for deployment "back" rollout to finish: 0 of 2 updated replicas are available...
+Waiting for deployment "back" rollout to finish: 1 of 2 updated replicas are available...
+deployment "back" successfully rolled out
+horizontalpodautoscaler.autoscaling/back created
+
+[8/9] Dashboard estable y canary, e Ingress
+deployment.apps/front-stable created
+service/front-stable created
+deployment.apps/front-canary created
+service/front-canary created
+Waiting for deployment "front-stable" rollout to finish: 0 of 2 updated replicas are available...
+Waiting for deployment "front-stable" rollout to finish: 1 of 2 updated replicas are available...
+deployment "front-stable" successfully rolled out
+deployment "front-canary" successfully rolled out
+deployment "ingress-nginx-controller" successfully rolled out
+ingress.networking.k8s.io/terrasense-api created
+ingress.networking.k8s.io/terrasense-ingress created
+ingress.networking.k8s.io/terrasense-ingress-canary created
+
+[9/9] DNS local (/etc/hosts) y verificación
+SKIP_HOSTS=1. Para resolver los dominios, ejecutá:
+  sudo sed -i.bak '/terrasense\.local/d' /etc/hosts && echo '192.168.67.2 api.terrasense.local terrasense.local' | sudo tee -a /etc/hosts
+OK  http://api.terrasense.local/health
+OK  http://api.terrasense.local/health/ready
+OK  http://terrasense.local/dashboard (X-Canary: never) -> X-App-Version 1.0.0
+OK  http://terrasense.local/dashboard (X-Canary: always) -> X-App-Version 1.1.0
+
+NAME                            READY   STATUS      RESTARTS   AGE   IP            NODE              NOMINATED NODE   READINESS GATES   TRACK    VERSION
+back-5f8f749ddf-c25lr           1/1     Running     0          25s   10.244.0.9    tpfinal-tercero   <none>           <none>                     
+back-5f8f749ddf-mtr82           1/1     Running     0          25s   10.244.0.10   tpfinal-tercero   <none>           <none>                     
+db-0                            1/1     Running     0          46s   10.244.0.7    tpfinal-tercero   <none>           <none>                     
+db-migrate-gnspv                0/1     Completed   0          32s   10.244.0.8    tpfinal-tercero   <none>           <none>                     
+front-canary-665495b56-52qfg    1/1     Running     0          17s   10.244.0.13   tpfinal-tercero   <none>           <none>            canary   1.1.0
+front-canary-665495b56-vnlgm    1/1     Running     0          17s   10.244.0.14   tpfinal-tercero   <none>           <none>            canary   1.1.0
+front-stable-5677c57859-frrnj   1/1     Running     0          17s   10.244.0.12   tpfinal-tercero   <none>           <none>            stable   1.0.0
+front-stable-5677c57859-js7vt   1/1     Running     0          17s   10.244.0.11   tpfinal-tercero   <none>           <none>            stable   1.0.0
+
+NAME                   TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
+service/back           ClusterIP   10.109.101.53   <none>        5000/TCP   25s
+service/db             ClusterIP   10.103.209.34   <none>        5432/TCP   46s
+service/front-canary   ClusterIP   10.103.161.75   <none>        3000/TCP   17s
+service/front-stable   ClusterIP   10.105.57.1     <none>        3000/TCP   17s
+
+NAME                                                  CLASS   HOSTS                  ADDRESS   PORTS   AGE
+ingress.networking.k8s.io/terrasense-api              nginx   api.terrasense.local             80      5s
+ingress.networking.k8s.io/terrasense-ingress          nginx   terrasense.local                 80      5s
+ingress.networking.k8s.io/terrasense-ingress-canary   nginx   terrasense.local                 80      4s
+
+Peso canary: 0 %
+
+Listo:
+  Dashboard: http://terrasense.local/dashboard   (incógnito o borrar la cookie terrasense-front para volver a sortear)
+  API:       http://api.terrasense.local/health  ·  Swagger: http://api.terrasense.local/apidocs/
+  Rollout:   bash tp-final/rollout/rollout.sh estado | peso <n> | promover | rollback
+  kubectl:   alias k='minikube -p tpfinal-tercero kubectl -- --context=tpfinal-tercero -n terrasense'
+  Apagar:    minikube stop -p tpfinal-tercero   (conserva datos)   ·   Borrar todo: minikube delete -p tpfinal-tercero
+exit=0
+2026-11-18T17:31:50-03:00

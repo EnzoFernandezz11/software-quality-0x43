@@ -27,7 +27,7 @@ El estrés A/B se realizó al 50 %, durante dos minutos por nivel ([JSON](../evi
 | 40 | 2.402 / 2.399 | 40,008 | 4,14 / 4,44 |
 | 80 | 4.836 / 4.765 | 80,008 | 3,57 / 3,74 |
 
-Los datos son favorables para que Garba evalúe la promoción dentro de la carga ensayada. Se midió la respuesta HTTP del documento del frontend; la navegación en Chromium aporta una comprobación separada de datos y assets, no una medición completa de experiencia real. La decisión y el cierre de #22 no se ejecutaron: el peso quedó en 50 %.
+Los datos son favorables para que el responsable del rollout (#22) evalúe la promoción dentro de la carga ensayada. Se midió la respuesta HTTP del documento del frontend; la navegación en Chromium aporta una comprobación separada de datos y assets, no una medición completa de experiencia real. En este perfil no se promovió ni se revirtió y el peso quedó en 50 %. La promoción se aplicó después en el perfil `terrasense` ([bitácora, etapa 3](../rollout/bitacora.md#etapa-3--promoción)).
 
 El video del HPA dura 2:48 y está acelerado a 1,25×, indicado en pantalla. Las fallas fueron 1.399 HTTP 503 y 141 HTTP 502; la carga prevista no se sostuvo completamente. La observación no demuestra cumplimiento de SLO ni una causa única de los errores. El ensayo de HPA es contexto del backend compartido y no demuestra capacidad para 10.000 sensores; consultar también el ensayo de capacidad [#13](../../tp-k8s/README.md).
 

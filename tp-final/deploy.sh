@@ -14,6 +14,16 @@
 #   MINIKUBE_MEMORY   RAM del nodo en MiB al crearlo (default: 6144)
 #   SKIP_BUILD=1      no construye imágenes (usa las que ya están en Minikube)
 #   SKIP_HOSTS=1      no toca /etc/hosts (solo muestra el comando a ejecutar)
+#   ESTADO            final (default) o inicial:
+#                       final   aplica los YAML tal como están versionados: el estado
+#                               después del rollout (estable con la 1.1.0, canary con
+#                               0 réplicas y peso 0). La 1.0.0 no se levanta.
+#                       inicial lleva los YAML al estado ANTES del rollout y lo aplica:
+#                               estable con VERSION_ESTABLE_INICIAL (default 1.0.0), canary
+#                               con la candidata y las mismas réplicas que la estable, peso 0.
+#                               Sirve para recorrer el rollout con rollout.sh: al promover,
+#                               los YAML vuelven al estado final versionado. Para descartar
+#                               el cambio sin recorrerlo: git restore tp-final/k8s
 #
 # Siempre opera sobre el contexto del perfil de Minikube: nunca sobre otro clúster.
 # Si encuentra el despliegue del TP4 (Deployment `front` e Ingress con la API),
@@ -40,6 +50,36 @@ step() { printf '\n\033[1m[%s] %s\033[0m\n' "$1" "$2"; }
 
 # Versión declarada en un Deployment del front (la del tag de la imagen).
 image_version() { sed -nE 's|^ *image: terrasense-front:([0-9][0-9A-Za-z.-]*) *$|\1|p' "$1"; }
+
+# ESTADO=inicial: los YAML pasan al estado previo al rollout. Se editan los archivos
+# (no una copia) porque rollout.sh lee las versiones de los YAML para promover y
+# porque el repo tiene que describir lo que corre en el clúster (Anexo A.7).
+ESTADO="${ESTADO:-final}"
+case "$ESTADO" in
+    final) ;;
+    inicial)
+        INITIAL_STABLE="${VERSION_ESTABLE_INICIAL:-1.0.0}"
+        if ! [[ "$INITIAL_STABLE" =~ ^[0-9][0-9A-Za-z.-]*$ ]]; then
+            echo "VERSION_ESTABLE_INICIAL inválida: $INITIAL_STABLE" >&2
+            exit 1
+        fi
+        if [ "$INITIAL_STABLE" = "$(image_version "$K8S_DIR/canary/deployment.yaml")" ]; then
+            echo "La estable inicial y la candidata son la misma versión ($INITIAL_STABLE)." >&2
+            exit 1
+        fi
+        STABLE_REPLICAS="$(sed -nE '0,/^  replicas: [0-9]+/s/^  replicas: ([0-9]+)$/\1/p' "$K8S_DIR/stable/deployment.yaml")"
+        sed -i -E "s|^( *image: terrasense-front:)[0-9][0-9A-Za-z.-]*|\1${INITIAL_STABLE}|; s|^( *version: )\"[^\"]+\"|\1\"${INITIAL_STABLE}\"|" \
+            "$K8S_DIR/stable/deployment.yaml"
+        sed -i -E "0,/^  replicas: [0-9]+/s//  replicas: ${STABLE_REPLICAS}/" "$K8S_DIR/canary/deployment.yaml"
+        sed -i -E 's|(nginx\.ingress\.kubernetes\.io/canary-weight: )"[0-9]+"|\1"0"|' "$K8S_DIR/canary/ingress-canary.yaml"
+        echo "ESTADO=inicial: tp-final/k8s/ queda en el estado previo al rollout (git diff tp-final/k8s lo muestra)."
+        ;;
+    *)
+        echo "ESTADO debe ser final o inicial (recibido: $ESTADO)." >&2
+        exit 1
+        ;;
+esac
+
 STABLE_VERSION="$(image_version "$K8S_DIR/stable/deployment.yaml")"
 CANARY_VERSION="$(image_version "$K8S_DIR/canary/deployment.yaml")"
 if [ -z "$STABLE_VERSION" ] || [ -z "$CANARY_VERSION" ]; then
@@ -254,6 +294,10 @@ fi
 echo "  Dashboard: http://${FRONT_HOST}/dashboard   (incógnito o borrar la cookie terrasense-front para volver a sortear)"
 echo "  API:       http://${API_HOST}/health  ·  Swagger: http://${API_HOST}/apidocs/"
 echo "  Rollout:   bash tp-final/rollout/rollout.sh estado | peso <n> | promover | rollback"
+if [ "$ESTADO" = "final" ] && [ "$(kn get deployment front-canary -o jsonpath='{.spec.replicas}')" = "0" ]; then
+    echo "  Estado final del rollout (solo $STABLE_VERSION). Para levantar las dos versiones y recorrerlo:"
+    echo "             ESTADO=inicial bash tp-final/deploy.sh"
+fi
 echo "  kubectl:   alias k='minikube -p $PROFILE kubectl -- --context=$PROFILE -n $NS'"
 echo "  Apagar:    minikube stop -p $PROFILE   (conserva datos)   ·   Borrar todo: minikube delete -p $PROFILE"
 [ "$ok" = "1" ]

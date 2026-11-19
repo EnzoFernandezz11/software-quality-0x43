@@ -1,6 +1,6 @@
 # Captura OBS: ensayo HPA
 
-[Grabación real de terminal](../../videos/hpa-escala.mp4) realizada el 18 de noviembre de 2026 en el perfil aislado `terrasense-tp23`. El recorte conserva el intervalo 00:40–04:10 del archivo original, se reproduce a 1,25× y no contiene audio; dura 2 min 48 s. La banda superior indica la aceleración. El original permanece intacto fuera del repositorio.
+[Grabación real de terminal](../../videos/hpa-escala.mp4) realizada el 18 de noviembre de 2026 en el perfil aislado `terrasense-tp23`. El recorte conserva el intervalo 00:40–04:10 del archivo original, se reproduce a 1,25× y no contiene audio; dura 2 min 48 s. La banda superior indica la aceleración. El original permanece intacto fuera del repositorio. Para la presentación se derivó [hpa-escala.gif](../../videos/hpa-escala.gif): la mitad izquierda del cuadro (donde están el HPA, los pods y k6) a 2 cuadros por segundo, con la misma velocidad de 1,25× y el resumen final de k6 fijo 4 s antes de repetir.
 
 El panel superior muestra HPA y pods con hora local UTC−3; el inferior muestra k6. Al inicio había 2 pods listos. Durante la carga se observaron pods temporalmente no listos y el HPA pasó a 6 réplicas; a las 14:48:16 se registraron los 6 pods listos. Se aplicó `e2-spike.js` con rampa de 5 s hasta 100 iteraciones/s, meseta de 3 min y bajada de 5 s. El objetivo no implica tasa conseguida.
 
