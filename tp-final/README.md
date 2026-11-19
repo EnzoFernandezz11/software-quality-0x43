@@ -131,7 +131,7 @@ Valentín no escribió los manifiestos del canary y verificó las instrucciones 
 
 | Dato | Valor |
 |---|---|
-| Revisión probada | `dd7e0a8` (`develop` después de #32) más el cambio de `deploy.sh` de esta entrega (`ESTADO=inicial`) |
+| Revisión probada | `dd7e0a8` (`develop` después de #32) con el `deploy.sh` de esta entrega (`ESTADO=inicial`), que quedó commiteado sin cambios en [`a3f4eef`](https://github.com/EnzoFernandezz11/software-quality-0x43/commit/a3f4eef94a90424e0c08d0f2ee7e3dcee91aad0c). Entre lo probado y la entrega solo cambian documentación, evidencia, videos y la presentación: ningún manifiesto, Dockerfile ni script además de `deploy.sh` |
 | Comando | `MINIKUBE_PROFILE=tpfinal-tercero SKIP_HOSTS=1 ESTADO=inicial bash tp-final/deploy.sh` |
 | Resultado | OK en 3 min (17:28:51 → 17:31:50, con caché de Docker). Construyó `front-v1.0.0` y `front-v1.1.0`; 2/2 pods de cada versión, los tres Ingress y las cuatro verificaciones en OK: `/health`, `/health/ready`, `X-Canary: never` → `1.0.0` y `X-Canary: always` → `1.1.0`. [Salida completa](evidencias/reportes/reproduccion/deploy-limpio.txt) |
 | Recorrido del rollout | Peso 10: 25 de 200 requests a la `1.1.0` (12,5 %). Peso 50: 111 de 200 (55,5 %). Promoción: 200 de 200 con `1.1.0`, y los YAML quedaron idénticos a los versionados. Son muestras rápidas de verificación, no las etapas medidas. [Salida](evidencias/reportes/reproduccion/rollout-limpio.txt) |
