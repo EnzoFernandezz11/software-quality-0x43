@@ -22,7 +22,7 @@ Requisitos: Docker, Minikube, curl, git y Node (lo usa `build-front.sh` para lee
 git clone https://github.com/EnzoFernandezz11/software-quality-0x43.git
 cd software-quality-0x43
 git fetch --tags
-bash tp-final/deploy.sh
+ESTADO=inicial bash tp-final/deploy.sh
 ```
 
 El script hace todo en orden:
@@ -38,7 +38,16 @@ Si el perfil todavía tiene el despliegue del TP4, el script lo migra: borra el 
 
 **Probado** el 2026-11-18 en un perfil de Minikube nuevo (`MINIKUBE_PROFILE=tpfinal-limpio SKIP_HOSTS=1`), con `build-front.sh` de #27. Construyó `front-v1.0.0` (`8951703`) y `front-v1.1.0` (`acdca28`), y las cuatro verificaciones dieron OK (API `/health` y `/health/ready`, front `1.0.0` y `1.1.0`). Valentín repite la prueba como tercero sobre la revisión integrada (#24).
 
-Al terminar, el canary queda **desplegado con peso 0**: nadie lo ve salvo con el header o la cookie. Si se re-ejecuta `deploy.sh` después del rollout, aplica el estado que dicen los YAML, es decir, el estado final del rollout.
+**Qué estado levanta.** Los YAML versionados describen el clúster **después** del rollout: `front-stable` con la `1.1.0`, `front-canary` con 0 réplicas y peso 0. Por eso hay dos modos:
+
+| Comando | Qué queda corriendo | Para qué |
+|---|---|---|
+| `ESTADO=inicial bash tp-final/deploy.sh` | `front-stable` con `1.0.0` (2 pods), `front-canary` con `1.1.0` (2 pods) y peso 0 | Ver las dos versiones y recorrer el rollout con `rollout.sh` (camino recomendado para reproducir el TP) |
+| `bash tp-final/deploy.sh` | Solo la `1.1.0`, tal como quedó al promover | Levantar el estado final sin recorrer el rollout |
+
+`ESTADO=inicial` construye las dos imágenes y reescribe tres líneas de `tp-final/k8s/` (imagen y label de la estable, réplicas del canary y peso), porque el repo tiene que describir lo que corre en el clúster y `rollout.sh promover` lee las versiones de esos archivos. Al terminar el recorrido con `rollout.sh promover`, los YAML vuelven a ser idénticos a los versionados. Para descartar el cambio sin recorrerlo: `git restore tp-final/k8s`. `rollout.sh` agrega líneas a `tp-final/evidencias/reportes/rollout/eventos.txt`; si no se quiere conservar esa corrida, también `git restore` sobre ese archivo.
+
+En los dos modos el canary queda **con peso 0**: nadie lo ve salvo con el header o la cookie.
 
 ## Operar el rollout
 

@@ -35,4 +35,4 @@ K6_WEB_DASHBOARD=true K6_WEB_DASHBOARD_HOST=127.0.0.1 K6_WEB_DASHBOARD_PORT=5665
 
 Repartos: [10 % JSON](reparto-10.json), [HTML](reparto-10.html); [50 % JSON](reparto-50.json), [HTML](reparto-50.html). Estrés: [JSON](estres.json), [HTML](estres.html). [Salida de navegación](navegacion-50.txt). Los tres HTML se abrieron y muestran las gráficas; algunos rótulos de ejes se recortan visualmente en la exportación de k6. Los JSON son la fuente de cifras por versión y nivel.
 
-Al terminar la medición se observó peso canary **50 %**. No se realizó promoción ni rollback; el cierre operativo corresponde al responsable de #22.
+Al terminar la medición se observó peso canary **50 %**. No se realizó promoción ni rollback en este perfil; la promoción se aplicó después en el perfil `terrasense` ([bitácora, etapa 3](../../../rollout/bitacora.md#etapa-3--promoción)).
